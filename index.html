@@ -128,11 +128,19 @@
   .card-venue { font-size: 12px; color: var(--accent2); font-weight: 600; letter-spacing: 0.02em; margin-bottom: 8px; }
   .card-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 12px; min-height: 38px; }
   .card-open {
-    display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
-    letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent);
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 12px 18px; border-radius: 999px;
+    background: var(--accent); color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    transition: background 0.2s ease, box-shadow 0.2s ease;
   }
   .card-open::after { content: '→'; transition: transform 0.2s; }
+  .card:hover .card-open { background: #93380f; box-shadow: 0 6px 16px rgba(181,69,29,0.35); }
   .card:hover .card-open::after { transform: translateX(4px); }
+  @media (prefers-color-scheme: dark) {
+    .card-open { color: #16140F; }
+    .card:hover .card-open { background: #F0A176; box-shadow: 0 6px 16px rgba(224,133,90,0.3); }
+  }
 
   footer {
     max-width: 1180px; margin: 0 auto; padding: 0 24px 64px; text-align: center;
