@@ -3,315 +3,301 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Георгий & Анастасия • 3 октября</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<title>Каталог свадебных приглашений — 26 стилей</title>
+<meta name="description" content="Каталог примеров свадебных пригласительных: 26 готовых стилей на выбор, часть — под конкретные площадки Краснодарского края.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --blush: #F2E4DC; --rose: #C9877A; --sage: #8A9E84;
-    --ivory: #FAF7F4; --ink: #2C2420; --gold: #B89A6A;
+    --bg: #FAF8F5; --surface: #FFFFFF; --ink: #201C18; --muted: #756D64;
+    --line: #E7E1D8; --accent: #B5451B; --accent2: #C9A84C;
+    --chip-bg: #F1ECE3; --chip-active: #201C18; --chip-active-text: #FAF8F5;
+    --shadow: 0 10px 30px rgba(32,28,24,0.08);
   }
-  body { background: var(--ivory); color: var(--ink); font-family: 'Jost', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; cursor: none; }
-
-  /* Custom petal cursor */
-  #cursor {
-    width: 20px; height: 20px; position: fixed; pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%); transition: transform 0.1s;
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16140F; --surface: #1E1B15; --ink: #F2EEE6; --muted: #A79E90;
+      --line: #332E25; --accent: #E0855A; --accent2: #E8C97A;
+      --chip-bg: #2A251D; --chip-active: #F2EEE6; --chip-active-text: #16140F;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
   }
-
-  /* Canvas for falling petals */
-  #petals-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-
-  .corner { position: fixed; width: 180px; height: 180px; opacity: 0.3; pointer-events: none; z-index: 1; }
-  .corner-tl { top: 0; left: 0; }
-  .corner-tr { top: 0; right: 0; transform: scaleX(-1); }
-  .corner-bl { bottom: 0; left: 0; transform: scaleY(-1); }
-  .corner-br { bottom: 0; right: 0; transform: scale(-1); }
-
-  .page {
-    position: relative; z-index: 2;
-    max-width: 680px; margin: 0 auto; padding: 60px 24px 80px; text-align: center;
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: 'Manrope', sans-serif; font-weight: 400;
+    min-height: 100vh;
   }
 
-  /* Fade-in on load */
-  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
-  .fade-in.visible { opacity: 1; transform: translateY(0); }
-
-  /* Typewriter for tag */
-  .tag {
-    font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--rose); margin-bottom: 32px; min-height: 1.4em; display: block;
+  /* ── Header ── */
+  header {
+    max-width: 1180px; margin: 0 auto; padding: 72px 24px 40px; text-align: center;
   }
-
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 18px;
+  }
   h1 {
-    font-family: 'Cormorant Garamond', serif; font-weight: 300;
-    font-size: clamp(52px, 12vw, 88px); line-height: 1; letter-spacing: -0.01em; color: var(--ink);
+    font-family: 'Cormorant Garamond', serif; font-weight: 600;
+    font-size: clamp(36px, 6vw, 58px); line-height: 1.1; letter-spacing: -0.01em;
   }
-  h1 .amp { display: block; font-style: italic; color: var(--rose); font-size: 0.55em; line-height: 1.3; margin: 4px 0; }
-
-  /* SVG handwritten underline */
-  .name-underline { display: block; margin: 0 auto; overflow: visible; }
-  .underline-path { stroke: var(--rose); stroke-width: 2; fill: none; stroke-dasharray: 300; stroke-dashoffset: 300; transition: stroke-dashoffset 1.4s ease 0.8s; }
-  .underline-path.draw { stroke-dashoffset: 0; }
-
-  .divider { display: flex; align-items: center; gap: 16px; margin: 36px auto; max-width: 300px; }
-  .divider-line { flex: 1; height: 1px; background: var(--gold); opacity: 0.5; }
-  .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
-
-  .date-wrap { position: relative; padding: 20px 0; margin-bottom: 40px; }
-  .date-big {
-    font-family: 'Cormorant Garamond', serif; font-size: clamp(64px, 18vw, 120px); font-weight: 300;
-    color: var(--rose); line-height: 1; opacity: 0.1; position: absolute; left: 50%;
-    transform: translateX(-50%); white-space: nowrap; pointer-events: none; user-select: none;
+  h1 em { font-style: italic; font-weight: 400; color: var(--accent); }
+  .lead {
+    max-width: 560px; margin: 20px auto 0; font-size: 16px; line-height: 1.7; color: var(--muted); font-weight: 300;
   }
-  .date-label { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; color: var(--ink); position: relative; z-index: 1; }
-
-  .invite-text { font-size: 15px; line-height: 1.9; color: var(--ink); opacity: 0.75; max-width: 420px; margin: 0 auto 40px; }
-
-  .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin: 40px 0; }
-  .detail-card {
-    background: var(--blush); border-radius: 4px; padding: 28px 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  .count {
+    display: inline-block; margin-top: 24px; font-size: 12px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted); border: 1px solid var(--line);
+    padding: 8px 20px; border-radius: 999px;
   }
-  .detail-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(201,135,122,0.15); }
-  .detail-icon { font-size: 22px; margin-bottom: 10px; display: block; }
-  .detail-title { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--rose); margin-bottom: 6px; }
-  .detail-value { font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--ink); line-height: 1.4; }
+  .count strong { color: var(--ink); font-weight: 600; }
 
-  .rsvp-section { margin-top: 48px; }
-  .rsvp-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; }
-  .rsvp-btn {
-    display: inline-block; padding: 14px 44px; background: var(--rose); color: #fff;
-    font-family: 'Jost', sans-serif; font-size: 13px; letter-spacing: 0.15em;
-    text-transform: uppercase; text-decoration: none; border-radius: 2px; transition: all 0.3s;
-    position: relative; overflow: hidden;
+  /* ── Filters ── */
+  .filter-group {
+    max-width: 1180px; margin: 0 auto; padding: 0 24px 18px;
   }
-  .rsvp-btn::after {
-    content: '🌸'; position: absolute; right: -30px; top: 50%; transform: translateY(-50%);
-    font-size: 18px; transition: right 0.3s;
+  .filter-label {
+    text-align: center; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
   }
-  .rsvp-btn:hover { background: #b5736a; padding-right: 60px; }
-  .rsvp-btn:hover::after { right: 14px; }
-
-  .timer { display: flex; justify-content: center; gap: 28px; margin: 48px 0 0; }
-  .timer-unit { text-align: center; }
-  .timer-num {
-    font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300;
-    color: var(--rose); line-height: 1; min-width: 60px; display: block;
+  .filters {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
   }
-  .timer-txt { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); opacity: 0.5; margin-top: 4px; }
+  .filter-group:last-of-type { padding-bottom: 48px; }
+  .chip {
+    font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 500;
+    background: var(--chip-bg); color: var(--ink); border: 1px solid transparent;
+    padding: 10px 20px; border-radius: 999px; cursor: pointer; transition: all 0.2s;
+  }
+  .chip:hover { border-color: var(--accent); }
+  .chip.active { background: var(--chip-active); color: var(--chip-active-text); }
 
-  .footer { margin-top: 60px; font-size: 12px; color: var(--ink); opacity: 0.35; letter-spacing: 0.1em; }
+  /* ── Grid ── */
+  .grid {
+    max-width: 1180px; margin: 0 auto; padding: 0 24px 100px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 32px;
+  }
 
-  /* Scroll reveal */
-  .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.shown { opacity: 1; transform: translateY(0); }
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface); border-radius: 20px; padding: 20px;
+    box-shadow: var(--shadow); transition: transform 0.35s ease, box-shadow 0.35s ease;
+    opacity: 0; transform: translateY(24px);
+  }
+  .card.shown { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(32,28,24,0.16); }
+  .card.hide { display: none; }
 
-  @media (max-width: 480px) { .details-grid { grid-template-columns: 1fr; } .corner { width: 100px; height: 100px; } body { cursor: auto; } #cursor { display: none; } }
-  @media (prefers-reduced-motion: reduce) { .fade-in, .reveal { transition: none; opacity: 1; transform: none; } }
+  .phone {
+    position: relative; width: 100%; aspect-ratio: 260 / 500; overflow: hidden;
+    border-radius: 22px; background: var(--line); margin-bottom: 18px;
+    box-shadow: inset 0 0 0 6px var(--surface), inset 0 0 0 8px var(--line);
+  }
+  .phone iframe {
+    position: absolute; top: 0; left: 0; width: 390px; height: 750px;
+    border: 0; transform: scale(0.6667); transform-origin: top left; pointer-events: none;
+    background: var(--surface);
+  }
+  .phone::after {
+    content: ''; position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+    width: 60px; height: 5px; border-radius: 3px; background: rgba(0,0,0,0.25); z-index: 2;
+  }
+  .phone-skeleton {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted);
+    background: linear-gradient(100deg, var(--line) 30%, var(--surface) 50%, var(--line) 70%);
+    background-size: 240% 100%; animation: shimmer 1.6s ease-in-out infinite;
+  }
+  @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+  @media (prefers-reduced-motion: reduce) { .phone-skeleton { animation: none; } }
+
+  .card-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+  .card-venue { font-size: 12px; color: var(--accent2); font-weight: 600; letter-spacing: 0.02em; margin-bottom: 8px; }
+  .card-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 12px; min-height: 38px; }
+  .card-open {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent);
+  }
+  .card-open::after { content: '→'; transition: transform 0.2s; }
+  .card:hover .card-open::after { transform: translateX(4px); }
+
+  footer {
+    max-width: 1180px; margin: 0 auto; padding: 0 24px 64px; text-align: center;
+    font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 32px;
+  }
+
+  @media (max-width: 480px) {
+    header { padding: 48px 20px 32px; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { transition: none; opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Petal cursor -->
-<svg id="cursor" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <ellipse cx="10" cy="10" rx="5" ry="9" fill="#C9877A" opacity="0.7" transform="rotate(-30 10 10)"/>
-  <ellipse cx="10" cy="10" rx="5" ry="9" fill="#8A9E84" opacity="0.5" transform="rotate(30 10 10)"/>
-</svg>
+<header>
+  <p class="eyebrow">Каталог примеров</p>
+  <h1>Пригласительные <em>на любой вкус</em></h1>
+  <p class="lead">26 готовых дизайнов свадебных приглашений — часть подобрана под конкретные площадки Краснодарского края: стиль и анимация подстроены под место проведения. Выберите то, что откликается — каждый пример открывается отдельной страницей с обратным отсчётом, деталями события и кнопкой подтверждения.</p>
+  <div class="count"><strong id="visible-count">26</strong> из 26 стилей</div>
+</header>
 
-<!-- Falling petals canvas -->
-<canvas id="petals-canvas"></canvas>
-
-<!-- Corner botanical ornaments -->
-<svg class="corner corner-tl" viewBox="0 0 180 180" fill="none">
-  <path d="M10,170 Q10,10 170,10" stroke="#C9877A" stroke-width="1.2" fill="none"/>
-  <path d="M10,170 Q50,90 95,65" stroke="#8A9E84" stroke-width="1" fill="none"/>
-  <path d="M10,170 Q70,130 120,90" stroke="#8A9E84" stroke-width="0.8" fill="none"/>
-  <circle cx="95" cy="65" r="10" fill="#C9877A" opacity="0.45"/>
-  <circle cx="62" cy="108" r="7" fill="#8A9E84" opacity="0.45"/>
-  <circle cx="120" cy="90" r="8" fill="#C9877A" opacity="0.35"/>
-  <ellipse cx="92" cy="52" rx="13" ry="8" fill="#8A9E84" opacity="0.55" transform="rotate(-40 92 52)"/>
-  <ellipse cx="58" cy="96" rx="11" ry="7" fill="#8A9E84" opacity="0.45" transform="rotate(-20 58 96)"/>
-  <ellipse cx="118" cy="78" rx="12" ry="6" fill="#C9877A" opacity="0.3" transform="rotate(-60 118 78)"/>
-  <circle cx="38" cy="138" r="5" fill="#B89A6A" opacity="0.3"/>
-  <circle cx="148" cy="38" r="4" fill="#B89A6A" opacity="0.3"/>
-</svg>
-<svg class="corner corner-tr" viewBox="0 0 180 180" fill="none">
-  <path d="M10,170 Q10,10 170,10" stroke="#C9877A" stroke-width="1.2" fill="none"/>
-  <path d="M10,170 Q50,90 95,65" stroke="#8A9E84" stroke-width="1" fill="none"/>
-  <circle cx="95" cy="65" r="10" fill="#C9877A" opacity="0.45"/>
-  <ellipse cx="92" cy="52" rx="13" ry="8" fill="#8A9E84" opacity="0.55" transform="rotate(-40 92 52)"/>
-</svg>
-<svg class="corner corner-bl" viewBox="0 0 180 180" fill="none">
-  <path d="M10,170 Q10,10 170,10" stroke="#C9877A" stroke-width="1.2" fill="none"/>
-  <path d="M10,170 Q50,90 95,65" stroke="#8A9E84" stroke-width="1" fill="none"/>
-  <circle cx="95" cy="65" r="10" fill="#C9877A" opacity="0.45"/>
-</svg>
-<svg class="corner corner-br" viewBox="0 0 180 180" fill="none">
-  <path d="M10,170 Q10,10 170,10" stroke="#C9877A" stroke-width="1.2" fill="none"/>
-  <path d="M10,170 Q50,90 95,65" stroke="#8A9E84" stroke-width="1" fill="none"/>
-  <circle cx="95" cy="65" r="10" fill="#C9877A" opacity="0.45"/>
-</svg>
-
-<div class="page">
-  <span class="tag fade-in" id="typewriter"></span>
-
-  <h1 class="fade-in" style="transition-delay:0.3s">
-    Георгий
-    <span class="amp">&amp;</span>
-    Анастасия
-  </h1>
-
-  <!-- SVG handwritten underline -->
-  <svg class="name-underline" width="320" height="18" viewBox="0 0 320 18">
-    <path class="underline-path" id="uline" d="M10,12 Q80,4 160,10 Q240,16 310,8"/>
-  </svg>
-
-  <div class="divider reveal">
-    <div class="divider-line"></div>
-    <div class="divider-dot"></div>
-    <div class="divider-line"></div>
+<div class="filter-group">
+  <p class="filter-label">Настроение</p>
+  <div class="filters" id="filters-mood">
+    <button class="chip active" data-group="mood" data-tag="all">Все</button>
+    <button class="chip" data-group="mood" data-tag="light">Светлые</button>
+    <button class="chip" data-group="mood" data-tag="dark">Тёмные</button>
+    <button class="chip" data-group="mood" data-tag="luxury">Роскошные</button>
+    <button class="chip" data-group="mood" data-tag="nature">Природные</button>
+    <button class="chip" data-group="mood" data-tag="bold">Смелые</button>
+    <button class="chip" data-group="mood" data-tag="romantic">Романтичные</button>
+    <button class="chip" data-group="mood" data-tag="modern">Современные</button>
   </div>
-
-  <div class="date-wrap reveal">
-    <span class="date-big">03</span>
-    <p class="date-label">3 октября 2026 года</p>
-  </div>
-
-  <p class="invite-text reveal">
-    Мы счастливы пригласить вас разделить с нами<br>
-    один из самых важных дней в нашей жизни —<br>
-    день, когда мы становимся семьёй.
-  </p>
-
-  <div class="details-grid reveal">
-    <div class="detail-card">
-      <span class="detail-icon">⏰</span>
-      <p class="detail-title">Начало</p>
-      <p class="detail-value">15:00</p>
-    </div>
-    <div class="detail-card">
-      <span class="detail-icon">📍</span>
-      <p class="detail-title">Место</p>
-      <p class="detail-value">Ресторан «Берег»<br>ул. Набережная, 12</p>
-    </div>
-    <div class="detail-card">
-      <span class="detail-icon">👗</span>
-      <p class="detail-title">Дресс-код</p>
-      <p class="detail-value">Нежные тона,<br>вечерний стиль</p>
-    </div>
-    <div class="detail-card">
-      <span class="detail-icon">🌸</span>
-      <p class="detail-title">Цвет торжества</p>
-      <p class="detail-value">Пудровый розовый<br>и зелень</p>
-    </div>
-  </div>
-
-  <div class="timer reveal" id="timer">
-    <div class="timer-unit"><span class="timer-num" id="t-days">00</span><span class="timer-txt">дней</span></div>
-    <div class="timer-unit"><span class="timer-num" id="t-hours">00</span><span class="timer-txt">часов</span></div>
-    <div class="timer-unit"><span class="timer-num" id="t-mins">00</span><span class="timer-txt">минут</span></div>
-    <div class="timer-unit"><span class="timer-num" id="t-secs">00</span><span class="timer-txt">секунд</span></div>
-  </div>
-
-  <div class="rsvp-section reveal">
-    <p class="rsvp-label">Подтвердите присутствие до 20 сентября</p>
-    <a href="https://t.me/" class="rsvp-btn">Я приду</a>
-  </div>
-
-  <p class="footer reveal">С любовью, Георгий &amp; Анастасия</p>
 </div>
 
+<div class="filter-group">
+  <p class="filter-label">Место проведения</p>
+  <div class="filters" id="filters-venue">
+    <button class="chip active" data-group="venue" data-tag="all">Все</button>
+    <button class="chip" data-group="venue" data-tag="restaurant">Ресторан</button>
+    <button class="chip" data-group="venue" data-tag="vineyard">Винодельня</button>
+    <button class="chip" data-group="venue" data-tag="mountain">Горы</button>
+    <button class="chip" data-group="venue" data-tag="sea">Море</button>
+    <button class="chip" data-group="venue" data-tag="farm">Хутор</button>
+    <button class="chip" data-group="venue" data-tag="plantation">Плантация</button>
+    <button class="chip" data-group="venue" data-tag="garden">Сад</button>
+    <button class="chip" data-group="venue" data-tag="city">Город</button>
+    <button class="chip" data-group="venue" data-tag="field">Поле</button>
+  </div>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  Каждое приглашение — самостоятельная HTML-страница. Часть примеров подобрана под конкретные площадки Краснодарского края — стиль и анимация меняются вместе с местом проведения. Откройте понравившийся вариант, чтобы посмотреть его целиком и в реальном размере.
+</footer>
+
 <script>
-// ── Petal cursor ──
-const cursorEl = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cursorEl.style.left = e.clientX + 'px';
-  cursorEl.style.top = e.clientY + 'px';
+const INVITES = [
+  { file: 'wedding-style1-romantic.html',    title: 'Романтика',            venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Пудровые тона, падающие лепестки, рукописный акцент.', tags: ['light','romantic','nature'] },
+  { file: 'wedding-style2-luxury.html',      title: 'Люкс',                 venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Тёмное золото, звёздное небо, премиальная типографика.', tags: ['dark','luxury'] },
+  { file: 'wedding-style3-minimal.html',     title: 'Минимализм',           venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Светлый сплит-макет, синий акцент, чистые линии.', tags: ['light','modern'] },
+  { file: 'wedding-style4-autumn.html',      title: 'Осень',                venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Крафтовая карточка, кружащиеся листья, тёплая палитра.', tags: ['nature','romantic'] },
+  { file: 'wedding-style5-retro.html',       title: 'Ретро',                venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Халфтон-фон, горчичный и терракота, плотная сетка.', tags: ['bold','modern'] },
+  { file: 'wedding-style6-boho.html',        title: 'Бохо',                 venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Макраме, сухие пампасы, парящие перья.', tags: ['nature','romantic'] },
+  { file: 'wedding-style7-winter.html',      title: 'Зима',                 venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Тёмно-синий и серебро, живой снегопад на canvas.', tags: ['dark','luxury'] },
+  { file: 'wedding-style8-tropical.html',    title: 'Тропики',              venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Бирюза и коралл, пальмы, блики на воде.', tags: ['light','bold','nature'] },
+  { file: 'wedding-style9-glam.html',        title: 'Гламур',               venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Чёрное золото, сияющая фольга, золотые пайетки.', tags: ['dark','luxury','bold'] },
+  { file: 'wedding-style10-scandi.html',     title: 'Скандинавский минимализм', venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Тёплый беж, эвкалипт, очень много воздуха.', tags: ['light','modern','nature'] },
+  { file: 'wedding-style11-oriental.html',   title: 'Восточная роскошь',    venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Бордо и золото, мандала, арабесковый орнамент.', tags: ['dark','luxury','bold'] },
+  { file: 'wedding-style12-watercolor.html', title: 'Акварель',             venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Пастельные разводы, рукописный шрифт, воздушность.', tags: ['light','romantic'] },
+  { file: 'wedding-style13-gothic.html',     title: 'Тёмный романтизм',     venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Бордо и чёрный, мерцающие свечи, кружевной узор.', tags: ['dark','romantic'] },
+  { file: 'wedding-style14-geometric.html',  title: 'Гео-модерн',           venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Баухаус-формы, смелые акценты, асимметрия.', tags: ['bold','modern'] },
+  { file: 'wedding-style15-nautical.html',   title: 'Морской бриз',         venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Тёмно-синий и белый, канаты, живые волны.', tags: ['light','bold'] },
+  { file: 'wedding-style16-spring-garden.html', title: 'Весенний сад',      venue: 'Ресторан «Берег»', venueTag: 'restaurant', desc: 'Свежая зелень, бабочки, полевые цветы.', tags: ['light','nature','romantic'] },
+
+  { file: 'wedding-style17-winery.html',     title: 'Винодельня',           venue: 'Винодельня «Дом Лозы» · Новороссийск', venueTag: 'vineyard', desc: 'Закат над виноградниками, тёплая терракота, вьющаяся лоза.', tags: ['nature','romantic','luxury'] },
+  { file: 'wedding-style18-mountain-lodge.html', title: 'Горный лодж',      venue: 'Турбаза «Эдельвейс» · Красная Поляна', venueTag: 'mountain', desc: 'Дерево, силуэты вершин, тёплый свет очага.', tags: ['nature','modern'] },
+  { file: 'wedding-style19-beach-gelendzhik.html', title: 'Закат на пляже', venue: 'Пляж «Тихая бухта» · Геленджик', venueTag: 'sea', desc: 'Розово-оранжевый закат, силуэты гор, чайки над прибоем.', tags: ['light','romantic','nature'] },
+  { file: 'wedding-style20-yacht-club.html', title: 'Яхт-клуб',             venue: 'Яхт-клуб «Марина Sochi» · Сочи', venueTag: 'sea', desc: 'Белый, тёмно-синий и латунь — вечер в марине.', tags: ['dark','luxury','modern'] },
+  { file: 'wedding-style21-cossack-farm.html', title: 'Казачий хутор',      venue: 'Хутор «Вольная станица» · Кубань', venueTag: 'farm', desc: 'Кубанская вышивка, пшеничные колосья, тёплое дерево.', tags: ['nature','bold'] },
+  { file: 'wedding-style22-tea-plantation.html', title: 'Чайная плантация', venue: 'Плантация «Мацеста» · Сочи', venueTag: 'plantation', desc: 'Туман над рядами чайных кустов, дзен-минимализм.', tags: ['nature','modern'] },
+  { file: 'wedding-style23-orchard-blossom.html', title: 'Цветущий сад',    venue: 'Сад «Яблоневый цвет» · Апшеронский р-н', venueTag: 'garden', desc: 'Ряды цветущих яблонь, розово-белые лепестки.', tags: ['light','romantic','nature'] },
+  { file: 'wedding-style24-krasnodar-mansion.html', title: 'Старинный особняк', venue: 'Особняк «Дом на Красной» · Краснодар', venueTag: 'city', desc: 'Кованые узоры, сепия старой фотокарточки, латунь.', tags: ['dark','luxury','romantic'] },
+  { file: 'wedding-style25-lake-kardyvach.html', title: 'Горное озеро',     venue: 'Турбаза «Кардывач» · оз. Кардывач, Сочи', venueTag: 'mountain', desc: 'Зеркальная гладь озера, туман, тишина заповедника.', tags: ['nature','modern'] },
+  { file: 'wedding-style26-sunflower-field.html', title: 'Поле подсолнухов', venue: 'Поле «Кубанское раздолье» · степи Кубани', venueTag: 'field', desc: 'Бескрайнее жёлтое поле, летний зной, простор.', tags: ['light','bold','nature'] },
+];
+
+const grid = document.getElementById('grid');
+
+INVITES.forEach(inv => {
+  const a = document.createElement('a');
+  a.className = 'card';
+  a.href = inv.file;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.dataset.tags = inv.tags.join(',');
+  a.dataset.venue = inv.venueTag;
+  a.innerHTML = `
+    <div class="phone">
+      <div class="phone-skeleton">загрузка…</div>
+      <iframe data-src="${inv.file}" loading="lazy" title="Превью: ${inv.title}"></iframe>
+    </div>
+    <p class="card-title">${inv.title}</p>
+    <p class="card-venue">${inv.venue}</p>
+    <p class="card-desc">${inv.desc}</p>
+    <span class="card-open">Открыть в реальном размере</span>
+  `;
+  grid.appendChild(a);
 });
 
-// ── Falling petals canvas ──
-const canvas = document.getElementById('petals-canvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+// ── Lazy-load iframes (queued, a few at a time so slow connections don't
+//    have to fight over the browser's per-origin connection limit for fonts) ──
+const LOAD_CONCURRENCY = 4;
+const loadQueue = [];
+let loadingCount = 0;
 
-const COLORS = ['#C9877A','#E8C4BC','#8A9E84','#F2E4DC','#B89A6A'];
-const petals = Array.from({length: 28}, () => ({
-  x: Math.random() * canvas.width,
-  y: Math.random() * canvas.height - canvas.height,
-  size: Math.random() * 8 + 5,
-  color: COLORS[Math.floor(Math.random() * COLORS.length)],
-  speed: Math.random() * 1.2 + 0.4,
-  drift: Math.random() * 1.5 - 0.75,
-  angle: Math.random() * Math.PI * 2,
-  spin: (Math.random() - 0.5) * 0.04,
-  opacity: Math.random() * 0.45 + 0.25,
-}));
-
-function drawPetal(p) {
-  ctx.save();
-  ctx.translate(p.x, p.y);
-  ctx.rotate(p.angle);
-  ctx.globalAlpha = p.opacity;
-  ctx.fillStyle = p.color;
-  ctx.beginPath();
-  ctx.ellipse(0, 0, p.size * 0.5, p.size, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.restore();
+function pumpQueue() {
+  while (loadingCount < LOAD_CONCURRENCY && loadQueue.length) {
+    const card = loadQueue.shift();
+    const iframe = card.querySelector('iframe[data-src]');
+    if (!iframe) continue;
+    loadingCount++;
+    iframe.src = iframe.dataset.src;
+    iframe.removeAttribute('data-src');
+    iframe.addEventListener('load', () => {
+      const sk = card.querySelector('.phone-skeleton');
+      if (sk) sk.remove();
+      loadingCount--;
+      pumpQueue();
+    }, { once: true });
+  }
 }
 
-function animatePetals() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  petals.forEach(p => {
-    p.y += p.speed;
-    p.x += p.drift;
-    p.angle += p.spin;
-    if (p.y > canvas.height + 20) {
-      p.y = -20; p.x = Math.random() * canvas.width;
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('shown');
+      loadQueue.push(e.target);
+      io.unobserve(e.target);
+      pumpQueue();
     }
-    drawPetal(p);
   });
-  requestAnimationFrame(animatePetals);
-}
-animatePetals();
+}, { threshold: 0.1, rootMargin: '400px' });
 
-// ── Typewriter ──
-const text = 'Приглашение на торжество';
-let i = 0;
-const tw = document.getElementById('typewriter');
-tw.classList.add('visible');
-function typeNext() {
-  if (i < text.length) { tw.textContent += text[i++]; setTimeout(typeNext, 60); }
-}
-typeNext();
+document.querySelectorAll('.card').forEach(c => io.observe(c));
 
-// ── Fade-in on load ──
-document.querySelectorAll('.fade-in').forEach((el, idx) => {
-  setTimeout(() => el.classList.add('visible'), idx * 200 + 100);
+// ── Filters (two independent dimensions: настроение + место, combined with AND) ──
+const countEl = document.getElementById('visible-count');
+const activeFilter = { mood: 'all', venue: 'all' };
+
+function applyFilters() {
+  let visible = 0;
+  document.querySelectorAll('.card').forEach(card => {
+    const tags = card.dataset.tags.split(',');
+    const venue = card.dataset.venue;
+    const moodMatch = activeFilter.mood === 'all' || tags.includes(activeFilter.mood);
+    const venueMatch = activeFilter.venue === 'all' || venue === activeFilter.venue;
+    const match = moodMatch && venueMatch;
+    card.classList.toggle('hide', !match);
+    if (match) visible++;
+  });
+  countEl.textContent = visible;
+}
+
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const group = chip.dataset.group;
+    document.querySelectorAll(`.chip[data-group="${group}"]`).forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter[group] = chip.dataset.tag;
+    applyFilters();
+  });
 });
-
-// ── SVG underline draw ──
-setTimeout(() => document.getElementById('uline').classList.add('draw'), 600);
-
-// ── Scroll reveal ──
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('shown'); });
-}, { threshold: 0.15 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-// ── Timer ──
-const wedding = new Date('2026-10-03T15:00:00');
-function tick() {
-  const diff = wedding - new Date();
-  if (diff <= 0) { document.getElementById('timer').innerHTML = '<p style="font-family:Cormorant Garamond,serif;font-size:24px;color:#C9877A;font-style:italic">Сегодня наш день! 🌸</p>'; return; }
-  document.getElementById('t-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
-  document.getElementById('t-hours').textContent = String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
-  document.getElementById('t-mins').textContent  = String(Math.floor(diff%3600000/60000)).padStart(2,'0');
-  document.getElementById('t-secs').textContent  = String(Math.floor(diff%60000/1000)).padStart(2,'0');
-}
-tick(); setInterval(tick, 1000);
 </script>
 </body>
 </html>
