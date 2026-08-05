@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G&A · 03.10</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --bg: #FFFFFF; --ink: #111111; --accent: #2D5BE3; --light: #F5F5F5; --border: #E0E0E0; --muted: #888; }
+
+  body { background: var(--bg); color: var(--ink); font-family: 'Inter', sans-serif; font-weight: 300; min-height: 100vh; }
+
+  .layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+
+  /* LEFT */
+  .left {
+    position: sticky; top: 0; height: 100vh; background: var(--ink);
+    display: flex; flex-direction: column; justify-content: space-between;
+    padding: 48px 40px; overflow: hidden;
+  }
+  .left-tag { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+  .left-center { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+  /* Progress line on left edge */
+  .progress-line {
+    position: absolute; left: 0; top: 0; width: 3px; background: var(--accent);
+    transition: height 0.1s linear; height: 0%;
+  }
+
+  .big-date {
+    font-family: 'DM Serif Display', serif; font-size: clamp(72px, 10vw, 140px);
+    color: rgba(255,255,255,0.05); line-height: 0.9; user-select: none;
+    position: absolute; bottom: 80px; right: -10px; writing-mode: vertical-rl; letter-spacing: -0.02em;
+  }
+
+  .names { position: relative; z-index: 1; }
+  .name {
+    font-family: 'DM Serif Display', serif; font-size: clamp(36px, 5vw, 62px);
+    color: #fff; line-height: 1.05; display: block;
+    opacity: 0; transform: translateX(-20px); transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .name.visible { opacity: 1; transform: translateX(0); }
+
+  .amp-line { display: flex; align-items: center; gap: 16px; margin: 12px 0; }
+  .amp-dash { flex: 1; height: 1px; background: rgba(255,255,255,0.15); }
+  .amp-char { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--accent); font-size: 28px; }
+
+  .left-date { position: relative; z-index: 1; }
+  .left-date-num { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+  .left-date-full { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 20px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+
+  /* RIGHT */
+  .right { padding: 64px 48px; display: flex; flex-direction: column; gap: 48px; }
+
+  .section-label { font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+
+  .invite-text { font-size: 18px; line-height: 1.7; color: var(--ink); font-weight: 200; }
+  .invite-text strong { font-weight: 400; color: var(--accent); }
+
+  /* Typewriter cursor */
+  .tw-cursor { border-right: 2px solid var(--accent); animation: blink 0.8s infinite; display: inline-block; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+
+  .info-list { list-style: none; }
+  .info-item {
+    display: flex; align-items: flex-start; gap: 20px;
+    padding: 20px 0; border-bottom: 1px solid var(--border);
+    opacity: 0; transform: translateX(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .info-item:first-child { border-top: 1px solid var(--border); }
+  .info-item.shown { opacity: 1; transform: translateX(0); }
+  .info-item:hover { background: var(--light); margin: 0 -48px; padding-left: 48px; padding-right: 48px; }
+  .info-key { font-size: 11px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); min-width: 80px; padding-top: 2px; }
+  .info-val { font-size: 16px; font-weight: 300; line-height: 1.4; }
+
+  /* Timer */
+  .timer-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+  .t-cell {
+    background: var(--light); padding: 20px 8px; text-align: center;
+    position: relative; overflow: hidden; transition: background 0.3s;
+  }
+  .t-cell::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .t-cell:hover::after { transform: scaleX(1); }
+  .t-cell:hover { background: #EEF2FF; }
+  .t-num { font-family: 'DM Serif Display', serif; font-size: 36px; color: var(--ink); line-height: 1; transition: color 0.15s; }
+  .t-num.flip { color: var(--accent); }
+  .t-lbl { font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+  /* RSVP */
+  .rsvp-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .rsvp-yes, .rsvp-no {
+    padding: 16px; font-size: 13px; font-weight: 400; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; text-align: center;
+    cursor: pointer; transition: all 0.2s; border: none; font-family: 'Inter', sans-serif;
+  }
+  .rsvp-yes { background: var(--accent); color: #fff; }
+  .rsvp-yes:hover { background: #1a45cc; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(45,91,227,0.3); }
+  .rsvp-no { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+  .rsvp-no:hover { border-color: var(--ink); color: var(--ink); }
+  .rsvp-deadline { font-size: 12px; color: var(--muted); margin-top: 12px; letter-spacing: 0.05em; }
+
+  .right-footer { padding-top: 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
+
+  @media (max-width: 640px) {
+    .layout { grid-template-columns: 1fr; }
+    .left { position: relative; height: auto; min-height: 50vh; }
+    .big-date { display: none; }
+    .right { padding: 40px 24px; }
+    .info-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .name, .info-item { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+<div class="layout">
+  <div class="left">
+    <div class="progress-line" id="prog"></div>
+    <p class="left-tag">Свадебное приглашение</p>
+    <div class="left-center">
+      <div class="names">
+        <span class="name" id="name1">Георгий</span>
+        <div class="amp-line">
+          <div class="amp-dash"></div>
+          <span class="amp-char">&amp;</span>
+          <div class="amp-dash"></div>
+        </div>
+        <span class="name" id="name2">Анастасия</span>
+      </div>
+    </div>
+    <div class="left-date">
+      <p class="left-date-num">03 · 10 · 2026</p>
+      <p class="left-date-full">3 октября</p>
+    </div>
+    <div class="big-date">03.10</div>
+  </div>
+
+  <div class="right" id="right-panel">
+    <div>
+      <p class="section-label">Приглашение</p>
+      <p class="invite-text" id="invite-p"></p>
+    </div>
+
+    <div>
+      <p class="section-label">Детали</p>
+      <ul class="info-list" id="info-list">
+        <li class="info-item"><span class="info-key">Дата</span><span class="info-val">3 октября 2026, пятница</span></li>
+        <li class="info-item"><span class="info-key">Время</span><span class="info-val">15:00 — сбор гостей</span></li>
+        <li class="info-item"><span class="info-key">Место</span><span class="info-val">Ресторан «Берег»<br>ул. Набережная, 12</span></li>
+        <li class="info-item"><span class="info-key">Стиль</span><span class="info-val">Вечерний, нейтральные тона</span></li>
+      </ul>
+    </div>
+
+    <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+      <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+      </div>
+      <p style="text-align:center;margin:10px 0 0;">
+        <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+      </p>
+    </div>
+
+    <div>
+      <p class="section-label">Обратный отсчёт</p>
+      <div class="timer-grid">
+        <div class="t-cell"><div class="t-num" id="td">00</div><div class="t-lbl">дней</div></div>
+        <div class="t-cell"><div class="t-num" id="th">00</div><div class="t-lbl">часов</div></div>
+        <div class="t-cell"><div class="t-num" id="tm">00</div><div class="t-lbl">минут</div></div>
+        <div class="t-cell"><div class="t-num" id="ts">00</div><div class="t-lbl">секунд</div></div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-label">Ваш ответ</p>
+      <div class="rsvp-choices">
+        <a href="https://t.me/" class="rsvp-yes">Буду на торжестве</a>
+        <a href="https://t.me/" class="rsvp-no">Не смогу прийти</a>
+      </div>
+      <p class="rsvp-deadline">Ответьте, пожалуйста, до 20 сентября</p>
+    </div>
+
+    <p class="right-footer">Георгий &amp; Анастасия, 2026</p>
+  </div>
+</div>
+
+<script>
+// ── Name slide-in ──
+setTimeout(() => document.getElementById('name1').classList.add('visible'), 300);
+setTimeout(() => document.getElementById('name2').classList.add('visible'), 600);
+
+// ── Typewriter for invite text ──
+const inviteText = 'Мы рады пригласить вас на торжество по случаю нашей свадьбы. Этот день станет особенным именно потому, что вы будете рядом.';
+const inviteEl = document.getElementById('invite-p');
+inviteEl.innerHTML = '<span class="tw-cursor"> </span>';
+let ti = 0;
+function typeInvite() {
+  if (ti < inviteText.length) {
+    inviteEl.innerHTML = inviteText.slice(0, ++ti) + '<span class="tw-cursor"> </span>';
+    setTimeout(typeInvite, ti < 40 ? 40 : 20);
+  } else {
+    inviteEl.innerHTML = inviteText.replace('торжество', '<strong>торжество</strong>');
+  }
+}
+setTimeout(typeInvite, 800);
+
+// ── Scroll progress line ──
+const right = document.getElementById('right-panel');
+const prog = document.getElementById('prog');
+right.addEventListener('scroll', () => {
+  const pct = right.scrollTop / (right.scrollHeight - right.clientHeight) * 100;
+  prog.style.height = pct + '%';
+});
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  prog.style.height = pct + '%';
+});
+
+// ── Info items slide-in ──
+const infoObs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('shown'), i * 100); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.info-item').forEach(el => infoObs.observe(el));
+
+// ── Timer with flip color ──
+const w = new Date('2026-10-03T15:00:00');
+let prev = {};
+function tick() {
+  const d = w - new Date(); if (d <= 0) return;
+  const vals = {
+    td: String(Math.floor(d/86400000)).padStart(2,'0'),
+    th: String(Math.floor(d%86400000/3600000)).padStart(2,'0'),
+    tm: String(Math.floor(d%3600000/60000)).padStart(2,'0'),
+    ts: String(Math.floor(d%60000/1000)).padStart(2,'0'),
+  };
+  Object.entries(vals).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (prev[id] !== val) {
+      el.classList.add('flip');
+      setTimeout(() => el.classList.remove('flip'), 150);
+      el.textContent = val;
+      prev[id] = val;
+    }
+  });
+}
+tick(); setInterval(tick, 1000);
+</script>
+</body>
+</html>

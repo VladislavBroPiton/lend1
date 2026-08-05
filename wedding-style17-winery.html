@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --terracotta: #C1652F;
+    --terracotta-deep: #9C4A22;
+    --bordeaux: #6B1E30;
+    --bordeaux-deep: #451020;
+    --ochre: #D9A441;
+    --ochre-light: #F0CB78;
+    --cream: #FBF1E0;
+    --cream-deep: #F3E1BE;
+    --ink: #3B2116;
+    --leaf: #7C8A4C;
+    --leaf-dark: #565F30;
+    --grape-deep: #5A2340;
+    --grape-mid: #7C2F4E;
+    --gold-glint: #F3C464;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    color: var(--cream);
+    /* базовая заливка на весь документ — гарантирует, что фон покрывает
+       страницу целиком, даже если она длиннее одного экрана */
+    background-image: linear-gradient(180deg, #E8A24E 0%, #D6813C 18%, var(--terracotta) 38%, #93382F 62%, var(--bordeaux-deep) 88%, #2E0C18 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+
+  /* ── закатное небо ── */
+  .sky {
+    position: fixed; inset: 0; z-index: 0;
+    background-image:
+      radial-gradient(circle at 50% 16%, rgba(255,229,168,0.95) 0%, rgba(240,180,90,0.4) 24%, rgba(240,180,90,0) 58%),
+      linear-gradient(180deg, #E8A24E 0%, #D6813C 18%, var(--terracotta) 38%, #93382F 62%, var(--bordeaux-deep) 88%, #2E0C18 100%);
+    background-size: 100% 100%, 140% 140%;
+    background-position: 50% 0%, 50% 10%;
+    animation: skyDrift 46s ease-in-out infinite alternate;
+  }
+  @keyframes skyDrift {
+    from { background-position: 50% 0%, 40% 0%; }
+    to   { background-position: 50% 0%, 60% 30%; }
+  }
+  .sun {
+    position: fixed; top: 13%; left: 50%; width: 190px; height: 190px; z-index: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,236,196,0.95) 0%, rgba(255,213,140,0.6) 40%, rgba(255,180,90,0) 72%);
+    filter: blur(2px);
+    animation: sunBreathe 6.5s ease-in-out infinite;
+  }
+  @keyframes sunBreathe { 0%,100% { transform: translate(-50%,-50%) scale(1); opacity: 0.9; } 50% { transform: translate(-50%,-50%) scale(1.08); opacity: 1; } }
+
+  /* ── силуэт холмов и рядов виноградника ── */
+  .hills { position: fixed; left: 0; right: 0; bottom: -2px; width: 100%; z-index: 1; pointer-events: none; }
+
+  /* ── частицы: золотистые огни и падающие листья лозы ── */
+  #glow-canvas { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+
+  /* ── угловые лозы ── */
+  .corner { position: fixed; width: 148px; height: 148px; z-index: 2; pointer-events: none; opacity: 0.92; filter: drop-shadow(0 2px 6px rgba(69,16,32,0.25)); }
+  .corner-tl { top: -4px; left: -4px; }
+  .corner-tr { top: -4px; right: -4px; transform: scaleX(-1); }
+  .corner-bl { bottom: -4px; left: -4px; transform: scaleY(-1); }
+  .corner-br { bottom: -4px; right: -4px; transform: scale(-1,-1); }
+  .leaf-sway { transform-box: fill-box; transform-origin: 50% 85%; animation: leafSway 4.2s ease-in-out infinite; }
+  .leaf-sway.d2 { animation-duration: 3.6s; animation-delay: -1.1s; }
+  .leaf-sway.d3 { animation-duration: 4.8s; animation-delay: -2.3s; }
+  @keyframes leafSway { 0%,100% { transform: rotate(-6deg); } 50% { transform: rotate(7deg); } }
+  .grape-sway { transform-box: fill-box; transform-origin: 50% 0%; animation: grapeSway 5.4s ease-in-out infinite; }
+  .grape-sway.d2 { animation-duration: 6.1s; animation-delay: -2s; }
+  @keyframes grapeSway { 0%,100% { transform: rotate(-3.5deg); } 50% { transform: rotate(3.5deg); } }
+  .tendril-curl { transform-box: fill-box; transform-origin: 0% 100%; animation: tendrilCurl 5s ease-in-out infinite; }
+  @keyframes tendrilCurl { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(5deg); } }
+
+  .page { position: relative; z-index: 3; max-width: 640px; margin: 0 auto; padding: 60px 24px 84px; text-align: center; }
+
+  .tag {
+    display: inline-block; background: rgba(59,33,22,0.35); border: 1px solid rgba(243,225,190,0.4);
+    color: var(--cream); font-family: 'Montserrat', sans-serif;
+    font-size: 10.5px; letter-spacing: 0.26em; text-transform: uppercase;
+    padding: 8px 22px; border-radius: 20px; margin-bottom: 34px; backdrop-filter: blur(3px);
+    opacity: 0; animation: dropIn 0.8s ease 0.2s forwards;
+  }
+  @keyframes dropIn { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+
+  h1 {
+    font-style: italic; font-weight: 500;
+    font-size: clamp(40px, 10vw, 74px); color: var(--cream); line-height: 1.12;
+    text-shadow: 0 3px 18px rgba(45,10,18,0.45);
+    opacity: 0; animation: riseIn 1s ease 0.45s forwards;
+  }
+  .amp {
+    display: inline-block; font-family: 'Pinyon Script', cursive; font-style: normal;
+    font-size: 1.5em; color: var(--ochre-light); padding: 0 8px; transform: translateY(6px);
+  }
+
+  .divider { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 28px auto; max-width: 300px; opacity: 0; animation: riseIn 0.9s ease 0.75s forwards; }
+  .divider .vine-line { flex: 1; height: 10px; }
+  .divider .cluster-icon { font-size: 21px; animation: iconSway 3.6s ease-in-out infinite; transform-origin: top center; display: inline-block; }
+  @keyframes iconSway { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+  .venue-note {
+    font-style: italic; font-size: 17px; line-height: 1.8; max-width: 440px; margin: 0 auto 40px;
+    color: var(--cream); text-shadow: 0 2px 14px rgba(45,10,18,0.55);
+    opacity: 0; animation: riseIn 0.9s ease 0.95s forwards;
+  }
+  .venue-note b { color: var(--ochre-light); font-weight: 600; }
+
+  .timer-inline { display: flex; align-items: flex-start; justify-content: center; gap: 6px; margin: 0 0 44px; opacity: 0; animation: riseIn 0.9s ease 1.1s forwards; }
+  .tu { text-align: center; min-width: 56px; }
+  .tu-num { font-size: 46px; font-style: italic; font-weight: 500; color: var(--cream); line-height: 1; display: block; transition: transform 0.15s; text-shadow: 0 2px 12px rgba(45,10,18,0.5); }
+  .tu-num.bump { transform: scale(1.16); color: var(--ochre-light); }
+  .tu-sep { font-size: 40px; color: var(--ochre-light); opacity: 0.6; padding-top: 2px; }
+  .tu-lbl { font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-deep); opacity: 0.8; margin-top: 4px; }
+
+  .card {
+    background: linear-gradient(180deg, rgba(251,241,224,0.96), rgba(243,225,190,0.94));
+    border: 1px solid rgba(156,74,34,0.25);
+    border-radius: 22px; padding: 44px 30px 34px; margin: 0 0 44px;
+    position: relative; box-shadow: 0 18px 46px rgba(30,6,14,0.35);
+    color: var(--ink);
+    opacity: 0; animation: riseIn 0.9s ease 1.3s forwards;
+  }
+  .card::before {
+    content: '🍇'; position: absolute; top: -22px; left: 50%; transform: translateX(-50%);
+    font-size: 36px; filter: drop-shadow(0 3px 6px rgba(0,0,0,0.25));
+    animation: iconSway 4.4s ease-in-out infinite;
+  }
+  .card-date { font-size: clamp(50px, 12vw, 80px); font-style: italic; font-weight: 500; color: var(--bordeaux); line-height: 1; }
+  .card-date-text { font-family: 'Montserrat', sans-serif; font-size: 13.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta-deep); margin: 8px 0 26px; }
+  .card-details { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 6px; }
+  .cd { background: rgba(255,255,255,0.45); border: 1px solid rgba(107,30,48,0.14); border-radius: 14px; padding: 16px; text-align: left; transition: background 0.2s, transform 0.2s; }
+  .cd:hover { background: rgba(255,255,255,0.8); transform: translateY(-2px); }
+  .cd-icon { font-size: 19px; margin-bottom: 6px; }
+  .cd-label { font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bordeaux); opacity: 0.8; margin-bottom: 4px; }
+  .cd-value { font-size: 15.5px; color: var(--ink); line-height: 1.42; }
+
+  .rsvp-note { font-style: italic; font-size: 16px; color: var(--cream-deep); opacity: 0.9; margin-bottom: 18px; text-shadow: 0 2px 10px rgba(45,10,18,0.5); }
+  .rsvp-wrap { opacity: 0; animation: riseIn 0.9s ease 1.45s forwards; }
+  .rsvp-btn {
+    display: inline-block; background: linear-gradient(135deg, var(--terracotta), var(--bordeaux));
+    color: var(--cream); padding: 16px 46px;
+    font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none; border-radius: 30px; transition: all 0.35s ease;
+    box-shadow: 0 12px 30px rgba(30,6,14,0.4);
+    position: relative; overflow: hidden; border: 1px solid rgba(243,225,190,0.35);
+  }
+  .rsvp-btn::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.16); transform: skewX(-15deg) translateX(-120%); transition: transform 0.45s ease; }
+  .rsvp-btn:hover { letter-spacing: 0.2em; box-shadow: 0 16px 36px rgba(30,6,14,0.5); transform: translateY(-2px); }
+  .rsvp-btn:hover::before { transform: skewX(-15deg) translateX(220%); }
+
+  .ground { display: flex; justify-content: center; margin-top: 52px; gap: 12px; font-size: 25px; opacity: 0.9; }
+  .g-bounce { display: inline-block; animation: floatUp var(--fl) ease-in-out infinite alternate; }
+  @keyframes floatUp { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-9px) rotate(6deg); } }
+
+  .footer-text { margin-top: 20px; font-style: italic; font-size: 14px; color: var(--cream-deep); opacity: 0.65; }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.shown { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 560px) {
+    .corner { width: 100px; height: 100px; }
+    .card-details { grid-template-columns: 1fr; }
+    .tu-num { font-size: 33px; }
+    .tu-sep { font-size: 30px; }
+    .tu { min-width: 46px; }
+    .sun { width: 130px; height: 130px; top: 10%; }
+    .page { padding: 48px 18px 70px; }
+  }
+  @media (max-width: 380px) {
+    .corner-bl, .corner-br { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, h1, .venue-note, .tag, .divider, .card, .timer-inline, .rsvp-wrap { opacity: 1 !important; transform: none !important; }
+    .sky { background-position: 50% 0%, 50% 10% !important; }
+  }
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<div class="sun"></div>
+
+<svg class="hills" viewBox="0 0 1440 300" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0,150 C180,110 340,170 520,140 C700,110 820,160 1000,130 C1180,100 1300,150 1440,120 L1440,300 L0,300 Z" fill="#6B1E30" opacity="0.55"/>
+  <path d="M0,190 C160,160 320,205 500,180 C680,155 840,200 1020,175 C1200,150 1320,190 1440,170 L1440,300 L0,300 Z" fill="#451020" opacity="0.75"/>
+  <path d="M0,225 C200,205 380,240 560,220 C740,200 900,235 1080,215 C1260,195 1360,225 1440,215 L1440,300 L0,300 Z" fill="#2E0C18"/>
+  <g stroke="#7C2F4E" stroke-width="1.4" opacity="0.4" fill="none">
+    <path d="M40,235 C160,220 260,245 380,232"/>
+    <path d="M60,250 C180,236 280,258 400,246"/>
+    <path d="M760,232 C880,218 980,240 1100,228"/>
+    <path d="M780,247 C900,234 1000,254 1120,242"/>
+  </g>
+  <g fill="#2E0C18">
+    <ellipse cx="120" cy="205" rx="4" ry="20"/>
+    <ellipse cx="1310" cy="195" rx="4.5" ry="24"/>
+    <ellipse cx="1370" cy="205" rx="3.5" ry="17"/>
+  </g>
+</svg>
+
+<canvas id="glow-canvas"></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="grape-leaf" viewBox="0 0 40 40">
+    <path d="M20 4 C25 9 35 11 34 20 C33 27 26 28 24 32 C29 34 28 39 23 39 C20 35 17 35 14 39 C9 39 8 34 13 32 C11 28 4 27 5 20 C6 11 15 9 20 4 Z"/>
+    <path d="M20 6 L20 24 M20 24 L11 20 M20 24 L29 20 M20 24 L14 34 M20 24 L26 34" stroke="rgba(0,0,0,0.18)" stroke-width="0.7" fill="none"/>
+  </symbol>
+  <symbol id="grape-cluster" viewBox="0 0 26 36">
+    <line x1="13" y1="0" x2="13" y2="6" stroke="#4A2E1A" stroke-width="1.5"/>
+    <circle cx="13" cy="10" r="4.1"/>
+    <circle cx="7" cy="16" r="4.1"/>
+    <circle cx="19" cy="16" r="4.1"/>
+    <circle cx="13" cy="19" r="4.1"/>
+    <circle cx="4" cy="23" r="3.9"/>
+    <circle cx="10" cy="25" r="4.1"/>
+    <circle cx="16" cy="25" r="4.1"/>
+    <circle cx="22" cy="23" r="3.9"/>
+    <circle cx="13" cy="29.5" r="3.9"/>
+    <circle cx="10.5" cy="14.3" r="1" fill="#F3C464" opacity="0.75"/>
+    <circle cx="8.3" cy="23.3" r="0.9" fill="#F3C464" opacity="0.7"/>
+  </symbol>
+  <symbol id="tendril" viewBox="0 0 30 30">
+    <path d="M2 28 C 14 24, 18 12, 8 6 C 2 2, -3 9, 2 14 C 6 18, 13 15, 11 10" fill="none" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="vine-corner" viewBox="0 0 160 160">
+    <path d="M12 12 C 34 24, 50 50, 58 80 C 66 110, 96 126, 142 140" fill="none" stroke="#57612F" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+    <path d="M30 34 C 40 40, 44 50, 40 60" fill="none" stroke="#57612F" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <path d="M76 96 C 86 92, 98 98, 104 108" fill="none" stroke="#57612F" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+    <use href="#tendril" x="4" y="0" width="26" height="26" class="tendril-curl" stroke="#7C8A4C" opacity="0.85"/>
+    <use href="#tendril" x="86" y="86" width="24" height="24" class="tendril-curl d2" stroke="#7C8A4C" opacity="0.8"/>
+    <g class="leaf-sway" fill="#7C8A4C" transform="translate(20,18) rotate(-35) scale(0.85)"><use href="#grape-leaf" width="40" height="40"/></g>
+    <g class="leaf-sway d2" fill="#8B9A56" transform="translate(48,66) rotate(18) scale(0.95)"><use href="#grape-leaf" width="40" height="40"/></g>
+    <g class="leaf-sway d3" fill="#657038" transform="translate(96,118) rotate(-15) scale(0.78)"><use href="#grape-leaf" width="40" height="40"/></g>
+    <g class="grape-sway" fill="#5A2340" transform="translate(38,44) rotate(8) scale(0.62)"><use href="#grape-cluster" width="26" height="36"/></g>
+    <g class="grape-sway d2" fill="#7C2F4E" transform="translate(88,110) rotate(-6) scale(0.7)"><use href="#grape-cluster" width="26" height="36"/></g>
+  </symbol>
+</svg>
+
+<svg class="corner corner-tl" aria-hidden="true"><use href="#vine-corner"/></svg>
+<svg class="corner corner-tr" aria-hidden="true"><use href="#vine-corner"/></svg>
+<svg class="corner corner-bl" aria-hidden="true"><use href="#vine-corner"/></svg>
+<svg class="corner corner-br" aria-hidden="true"><use href="#vine-corner"/></svg>
+
+<div class="page">
+  <div class="tag">Закат среди виноградников · 2026</div>
+
+  <h1>Георгий<br><span class="amp">&amp;</span><br>Анастасия</h1>
+
+  <div class="divider">
+    <svg class="vine-line" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 0, 50 5 T 100 5" stroke="#F0CB78" stroke-width="1.4" fill="none" opacity="0.65"/></svg>
+    <span class="cluster-icon">🍇</span>
+    <svg class="vine-line" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 25 10, 50 5 T 100 5" stroke="#F0CB78" stroke-width="1.4" fill="none" opacity="0.65"/></svg>
+  </div>
+
+  <p class="venue-note">
+    Торжество пройдёт <b>среди виноградников на закате</b> — на винодельне «Дом Лозы»,
+    где ряды золотой лозы встречают вечернее солнце Кубани.
+    Приглашаем разделить с нами этот тёплый вечер.
+  </p>
+
+  <div class="timer-inline reveal">
+    <div class="tu"><span class="tu-num" id="td">00</span><span class="tu-lbl">дней</span></div>
+    <span class="tu-sep">:</span>
+    <div class="tu"><span class="tu-num" id="th">00</span><span class="tu-lbl">часов</span></div>
+    <span class="tu-sep">:</span>
+    <div class="tu"><span class="tu-num" id="tm">00</span><span class="tu-lbl">минут</span></div>
+    <span class="tu-sep">:</span>
+    <div class="tu"><span class="tu-num" id="ts">00</span><span class="tu-lbl">секунд</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-date">3</div>
+    <p class="card-date-text">Октября · Пятница · 2026</p>
+    <div class="card-details">
+      <div class="cd"><div class="cd-icon">🌇</div><p class="cd-label">Начало</p><p class="cd-value">17:00 — на закате<br>над виноградниками</p></div>
+      <div class="cd"><div class="cd-icon">📍</div><p class="cd-label">Место</p><p class="cd-value">Винодельня «Дом Лозы»<br>ст. Раевская, Новороссийск</p></div>
+      <div class="cd"><div class="cd-icon">👔</div><p class="cd-label">Дресс-код</p><p class="cd-value">Элегантный кэжуал,<br>тёплые винные тона: терракота, бордо, охра</p></div>
+      <div class="cd"><div class="cd-icon">🍷</div><p class="cd-label">Атмосфера</p><p class="cd-value">Дегустация вина<br>среди виноградных рядов</p></div>
+    </div>
+  </div>
+
+  <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=37.6050,44.8100&z=13&l=map&pt=37.6050,44.8100,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Винодельня «Дом Лозы»" style="display:block;border:0;"></iframe>
+    </div>
+    <p style="text-align:center;margin:10px 0 0;">
+      <a href="https://yandex.ru/maps/?ll=37.6050,44.8100&z=13&pt=37.6050,44.8100,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+    </p>
+  </div>
+
+  <div class="rsvp-wrap reveal">
+    <p class="rsvp-note">Просим подтвердить присутствие до 20 сентября</p>
+    <a href="https://t.me/" class="rsvp-btn" target="_blank" rel="noopener">🍇 Буду на празднике</a>
+  </div>
+
+  <div class="ground">
+    <span class="g-bounce" style="--fl:2.1s">🍇</span>
+    <span class="g-bounce" style="--fl:2.6s;animation-delay:0.3s">🍷</span>
+    <span class="g-bounce" style="--fl:1.9s;animation-delay:0.6s">🍃</span>
+    <span class="g-bounce" style="--fl:2.4s;animation-delay:0.2s">🌇</span>
+    <span class="g-bounce" style="--fl:2.2s;animation-delay:0.5s">🍇</span>
+  </div>
+  <p class="footer-text">До встречи на закате, Георгий &amp; Анастасия</p>
+</div>
+
+<script>
+// учёт предпочтения "меньше анимации"
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ── золотистые огни заката и падающие листья лозы ──
+const canvas = document.getElementById('glow-canvas');
+const ctx = canvas.getContext('2d');
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+const embers = Array.from({ length: 26 }, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  r: 1 + Math.random() * 2.4,
+  vy: -(0.12 + Math.random() * 0.3),
+  vx: (Math.random() - 0.5) * 0.2,
+  drift: Math.random() * Math.PI * 2,
+  driftSpeed: 0.008 + Math.random() * 0.018,
+  alpha: 0.2 + Math.random() * 0.4,
+}));
+
+const leaves = Array.from({ length: 12 }, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * -window.innerHeight,
+  vy: 0.35 + Math.random() * 0.5,
+  size: 8 + Math.random() * 8,
+  rot: Math.random() * Math.PI * 2,
+  vr: (Math.random() - 0.5) * 0.02,
+  drift: Math.random() * Math.PI * 2,
+  driftSpeed: 0.01 + Math.random() * 0.015,
+  hue: Math.random() > 0.5 ? '#C1652F' : '#7C2F4E',
+}));
+
+function drawScene() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  embers.forEach(m => {
+    const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 4);
+    grad.addColorStop(0, `rgba(243,196,100,${m.alpha})`);
+    grad.addColorStop(1, 'rgba(243,196,100,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(m.x, m.y, m.r * 4, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  leaves.forEach(l => {
+    ctx.save();
+    ctx.translate(l.x, l.y);
+    ctx.rotate(l.rot);
+    ctx.fillStyle = l.hue;
+    ctx.globalAlpha = 0.55;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, l.size * 0.6, l.size, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  });
+}
+
+function stepScene() {
+  embers.forEach(m => {
+    m.drift += m.driftSpeed;
+    m.x += m.vx + Math.sin(m.drift) * 0.25;
+    m.y += m.vy;
+    if (m.y < -10) { m.y = window.innerHeight + 10; m.x = Math.random() * window.innerWidth; }
+  });
+  leaves.forEach(l => {
+    l.drift += l.driftSpeed;
+    l.x += Math.sin(l.drift) * 0.5;
+    l.y += l.vy;
+    l.rot += l.vr;
+    if (l.y > window.innerHeight + 20) { l.y = -20; l.x = Math.random() * window.innerWidth; }
+  });
+  drawScene();
+  if (!reduceMotion) requestAnimationFrame(stepScene);
+}
+if (reduceMotion) { drawScene(); } else { stepScene(); }
+
+// ── появление блоков при прокрутке ──
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('shown'); }), { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── обратный отсчёт ──
+const weddingDate = new Date('2026-10-03T17:00:00');
+let prev = {};
+function tick() {
+  const diff = weddingDate - new Date();
+  if (diff <= 0) {
+    ['td','th','tm','ts'].forEach(id => document.getElementById(id).textContent = '00');
+    return;
+  }
+  const vals = {
+    td: String(Math.floor(diff / 86400000)).padStart(2, '0'),
+    th: String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0'),
+    tm: String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0'),
+    ts: String(Math.floor((diff % 60000) / 1000)).padStart(2, '0'),
+  };
+  Object.entries(vals).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (prev[id] !== val) {
+      if (!reduceMotion) { el.classList.add('bump'); setTimeout(() => el.classList.remove('bump'), 150); }
+      el.textContent = val;
+      prev[id] = val;
+    }
+  });
+}
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>

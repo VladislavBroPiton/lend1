@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Marcellus+SC&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine-950:#2a0509;
+    --wine-900:#3d0a10;
+    --wine-800:#5a0f18;
+    --wine-700:#7a1420;
+    --wine-600:#8f1a26;
+    --gold-100:#fbeec2;
+    --gold-300:#f3d78a;
+    --gold-400:#e8bf5b;
+    --gold-500:#d4af37;
+    --gold-600:#b3892a;
+    --ink:#f7ecd8;
+    --ink-dim:#e6d3ae;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--wine-950);
+    color:var(--ink);
+    font-family:'Cormorant Garamond', serif;
+    overflow-x:hidden;
+  }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:28px 14px;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(212,175,55,0.10), transparent 45%),
+      radial-gradient(ellipse at 85% 90%, rgba(212,175,55,0.10), transparent 50%),
+      radial-gradient(ellipse at 50% 50%, var(--wine-900) 0%, var(--wine-950) 75%);
+  }
+
+  /* ===== Мерцающая пыль (canvas) ===== */
+  #sparkles{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  /* ===== Основная карточка ===== */
+  .invitation{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:640px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.15)),
+      linear-gradient(160deg, var(--wine-800) 0%, var(--wine-900) 55%, var(--wine-950) 100%);
+    border-radius:6px;
+    box-shadow:
+      0 0 0 1px rgba(212,175,55,0.35),
+      0 30px 80px -20px rgba(0,0,0,0.75),
+      0 0 120px rgba(212,175,55,0.06) inset;
+    padding:14px;
+  }
+
+  /* Внешняя тонкая золотая рамка */
+  .frame-outer{
+    position:relative;
+    border:1px solid rgba(212,175,55,0.55);
+    border-radius:4px;
+    padding:10px;
+  }
+
+  /* Орнаментальная SVG-рамка на углах */
+  .corner{
+    position:absolute;
+    width:88px;
+    height:88px;
+    z-index:3;
+    opacity:0.95;
+    filter:drop-shadow(0 0 6px rgba(212,175,55,0.25));
+  }
+  .corner svg{ width:100%; height:100%; display:block; }
+  .corner.tl{ top:-2px; left:-2px; }
+  .corner.tr{ top:-2px; right:-2px; transform:scaleX(-1); }
+  .corner.bl{ bottom:-2px; left:-2px; transform:scaleY(-1); }
+  .corner.br{ bottom:-2px; right:-2px; transform:scale(-1,-1); }
+
+  .frame-inner{
+    position:relative;
+    border:1px solid rgba(212,175,55,0.28);
+    border-radius:3px;
+    padding:46px 30px 38px;
+    text-align:center;
+    overflow:hidden;
+  }
+
+  /* Тонкий повторяющийся арабесковый паттерн фоном */
+  .pattern-bg{
+    position:absolute;
+    inset:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%23d4af37' stroke-width='0.6' opacity='0.35'><path d='M60 6 C80 6 90 26 90 40 C90 60 70 66 60 66 C50 66 30 60 30 40 C30 26 40 6 60 6 Z'/><path d='M60 66 C80 66 90 86 90 100 C90 114 70 114 60 114 C50 114 30 114 30 100 C30 86 40 66 60 66 Z'/><circle cx='60' cy='40' r='6'/><circle cx='60' cy='94' r='6'/><path d='M0 60 C14 40 34 40 34 60 C34 80 14 80 0 60 Z'/><path d='M120 60 C106 40 86 40 86 60 C86 80 106 80 120 60 Z'/></g></svg>");
+    background-size:120px 120px;
+    opacity:0.5;
+    pointer-events:none;
+  }
+
+  /* Вращающаяся мандала-медальон вверху */
+  .medallion{
+    position:relative;
+    width:104px;
+    height:104px;
+    margin:0 auto 6px;
+  }
+  .medallion svg{
+    width:100%;
+    height:100%;
+    animation:spin 60s linear infinite;
+    transform-origin:50% 50%;
+  }
+  .medallion .center-dot{
+    position:absolute;
+    top:50%; left:50%;
+    width:10px; height:10px;
+    background:radial-gradient(circle, var(--gold-100), var(--gold-500));
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    box-shadow:0 0 12px 3px rgba(232,191,91,0.6);
+    animation:pulse 3.4s ease-in-out infinite;
+  }
+
+  @keyframes spin{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:0.7; transform:translate(-50%,-50%) scale(1); }
+    50%{ opacity:1; transform:translate(-50%,-50%) scale(1.35); }
+  }
+  @keyframes shimmer{
+    0%,100%{ opacity:0.55; }
+    50%{ opacity:1; }
+  }
+
+  .eyebrow{
+    position:relative;
+    font-family:'Montserrat', sans-serif;
+    font-size:12px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:var(--gold-400);
+    margin:2px 0 18px;
+    animation:shimmer 4s ease-in-out infinite;
+  }
+
+  .names{
+    position:relative;
+    font-family:'Cormorant SC', serif;
+    font-weight:600;
+    font-size:clamp(42px, 9vw, 68px);
+    line-height:1.05;
+    color:var(--gold-100);
+    text-shadow:0 0 22px rgba(212,175,55,0.28);
+    margin:0;
+  }
+
+  .amp{
+    display:inline-block;
+    font-family:'Marcellus SC', serif;
+    color:var(--gold-500);
+    font-size:0.7em;
+    margin:0 10px;
+    position:relative;
+    top:-2px;
+  }
+
+  .subtitle{
+    font-family:'Montserrat', sans-serif;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin:14px 0 26px;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin:0 auto 26px;
+    max-width:280px;
+  }
+  .divider .line{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold-500), transparent);
+  }
+  .divider .diamond{
+    width:9px; height:9px;
+    background:var(--gold-500);
+    transform:rotate(45deg);
+    box-shadow:0 0 8px rgba(212,175,55,0.6);
+  }
+
+  .invite-text{
+    font-size:19px;
+    line-height:1.7;
+    color:var(--ink);
+    max-width:440px;
+    margin:0 auto 30px;
+    font-style:italic;
+    font-weight:500;
+  }
+
+  /* ===== Обратный отсчёт ===== */
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:wrap;
+    margin:0 auto 32px;
+  }
+  .cd-item{
+    width:74px;
+    padding:12px 4px 10px;
+    background:linear-gradient(160deg, rgba(212,175,55,0.10), rgba(0,0,0,0.25));
+    border:1px solid rgba(212,175,55,0.4);
+    border-radius:6px;
+    position:relative;
+  }
+  .cd-item::before{
+    content:'';
+    position:absolute;
+    inset:3px;
+    border:1px solid rgba(212,175,55,0.18);
+    border-radius:3px;
+    pointer-events:none;
+  }
+  .cd-num{
+    font-family:'Cormorant SC', serif;
+    font-size:30px;
+    font-weight:600;
+    color:var(--gold-300);
+    line-height:1;
+  }
+  .cd-label{
+    font-family:'Montserrat', sans-serif;
+    font-size:9px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    margin-top:6px;
+    display:block;
+  }
+
+  /* ===== Детали события ===== */
+  .details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    text-align:center;
+    margin:0 auto 30px;
+    max-width:460px;
+  }
+  .detail{
+    padding:16px 10px;
+    border-top:1px solid rgba(212,175,55,0.3);
+    border-bottom:1px solid rgba(212,175,55,0.3);
+  }
+  .detail-icon{
+    font-size:20px;
+    color:var(--gold-500);
+    margin-bottom:8px;
+    display:block;
+  }
+  .detail-title{
+    font-family:'Montserrat', sans-serif;
+    font-size:10.5px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--gold-400);
+    margin-bottom:6px;
+  }
+  .detail-text{
+    font-size:16.5px;
+    color:var(--ink);
+    line-height:1.5;
+  }
+
+  .dresscode{
+    font-size:15px;
+    color:var(--ink-dim);
+    max-width:440px;
+    margin:0 auto 30px;
+    line-height:1.7;
+  }
+  .dresscode b{
+    color:var(--gold-300);
+    font-weight:600;
+  }
+  .swatches{
+    display:inline-flex;
+    gap:8px;
+    vertical-align:middle;
+    margin-left:8px;
+  }
+  .swatch{
+    width:14px; height:14px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,0.4);
+    display:inline-block;
+  }
+
+  .rsvp{
+    margin-top:6px;
+  }
+  .rsvp-note{
+    font-size:14.5px;
+    color:var(--ink-dim);
+    margin-bottom:16px;
+  }
+  .rsvp-btn{
+    display:inline-block;
+    font-family:'Montserrat', sans-serif;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--wine-950);
+    background:linear-gradient(160deg, var(--gold-100), var(--gold-500) 55%, var(--gold-600));
+    padding:15px 46px;
+    border-radius:2px;
+    font-weight:600;
+    box-shadow:0 8px 24px -8px rgba(212,175,55,0.5), 0 0 0 1px rgba(255,255,255,0.15) inset;
+    transition:transform .25s ease, box-shadow .25s ease;
+    position:relative;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px -8px rgba(212,175,55,0.7), 0 0 0 1px rgba(255,255,255,0.2) inset;
+  }
+
+  .footer-note{
+    margin-top:34px;
+    font-family:'Montserrat', sans-serif;
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:rgba(230,211,174,0.55);
+  }
+
+  /* ===== Адаптивность ===== */
+  @media (max-width: 480px){
+    .invitation{ max-width:100%; }
+    .frame-inner{ padding:40px 16px 30px; }
+    .names{ font-size:clamp(34px, 12vw, 52px); }
+    .amp{ margin:0 4px; }
+    .invite-text{ font-size:17px; }
+    .cd-item{ width:64px; padding:10px 2px 8px; }
+    .cd-num{ font-size:24px; }
+    .details{ grid-template-columns:1fr; gap:14px; max-width:320px; }
+    .corner{ width:56px; height:56px; }
+    .rsvp-btn{ padding:14px 34px; font-size:12px; letter-spacing:2px; }
+  }
+
+  /* ===== Уважение к prefers-reduced-motion ===== */
+  @media (prefers-reduced-motion: reduce){
+    .medallion svg{ animation:none; }
+    .medallion .center-dot{ animation:none; opacity:1; }
+    .eyebrow{ animation:none; }
+    .rsvp-btn{ transition:none; }
+    #sparkles{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="sparkles"></canvas>
+
+<div class="invitation">
+  <div class="frame-outer">
+
+    <div class="corner tl"><svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2 C2 40 2 70 40 86" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M2 2 C40 2 70 2 86 40" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M6 30 C6 16 16 6 30 6" fill="none" stroke="#f3d78a" stroke-width="1" opacity="0.7"/>
+      <circle cx="6" cy="6" r="3.4" fill="#d4af37"/>
+      <path d="M14 46 C24 46 30 38 30 28 C30 20 24 14 16 14" fill="none" stroke="#d4af37" stroke-width="1"/>
+      <circle cx="46" cy="14" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+      <circle cx="14" cy="46" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+    </svg></div>
+
+    <div class="corner tr"><svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2 C2 40 2 70 40 86" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M2 2 C40 2 70 2 86 40" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M6 30 C6 16 16 6 30 6" fill="none" stroke="#f3d78a" stroke-width="1" opacity="0.7"/>
+      <circle cx="6" cy="6" r="3.4" fill="#d4af37"/>
+      <path d="M14 46 C24 46 30 38 30 28 C30 20 24 14 16 14" fill="none" stroke="#d4af37" stroke-width="1"/>
+      <circle cx="46" cy="14" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+      <circle cx="14" cy="46" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+    </svg></div>
+
+    <div class="corner bl"><svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2 C2 40 2 70 40 86" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M2 2 C40 2 70 2 86 40" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M6 30 C6 16 16 6 30 6" fill="none" stroke="#f3d78a" stroke-width="1" opacity="0.7"/>
+      <circle cx="6" cy="6" r="3.4" fill="#d4af37"/>
+      <path d="M14 46 C24 46 30 38 30 28 C30 20 24 14 16 14" fill="none" stroke="#d4af37" stroke-width="1"/>
+      <circle cx="46" cy="14" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+      <circle cx="14" cy="46" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+    </svg></div>
+
+    <div class="corner br"><svg viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2 C2 40 2 70 40 86" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M2 2 C40 2 70 2 86 40" fill="none" stroke="#d4af37" stroke-width="1.4" opacity="0.85"/>
+      <path d="M6 30 C6 16 16 6 30 6" fill="none" stroke="#f3d78a" stroke-width="1" opacity="0.7"/>
+      <circle cx="6" cy="6" r="3.4" fill="#d4af37"/>
+      <path d="M14 46 C24 46 30 38 30 28 C30 20 24 14 16 14" fill="none" stroke="#d4af37" stroke-width="1"/>
+      <circle cx="46" cy="14" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+      <circle cx="14" cy="46" r="2.6" fill="#e8bf5b" opacity="0.8"/>
+    </svg></div>
+
+    <div class="frame-inner">
+      <div class="pattern-bg"></div>
+
+      <div class="medallion">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#d4af37" stroke-width="1">
+            <circle cx="50" cy="50" r="46" opacity="0.5"/>
+            <circle cx="50" cy="50" r="38" opacity="0.7"/>
+            <g opacity="0.85">
+              <path d="M50 12 C58 24 58 32 50 38 C42 32 42 24 50 12 Z"/>
+              <path d="M50 88 C58 76 58 68 50 62 C42 68 42 76 50 88 Z"/>
+              <path d="M12 50 C24 42 32 42 38 50 C32 58 24 58 12 50 Z"/>
+              <path d="M88 50 C76 42 68 42 62 50 C68 58 76 58 88 50 Z"/>
+              <path d="M22 22 C32 28 34 34 30 40 C24 36 20 30 22 22 Z"/>
+              <path d="M78 22 C68 28 66 34 70 40 C76 36 80 30 78 22 Z"/>
+              <path d="M22 78 C32 72 34 66 30 60 C24 64 20 70 22 78 Z"/>
+              <path d="M78 78 C68 72 66 66 70 60 C76 64 80 70 78 78 Z"/>
+            </g>
+            <circle cx="50" cy="50" r="14" opacity="0.9"/>
+          </g>
+        </svg>
+        <div class="center-dot"></div>
+      </div>
+
+      <p class="eyebrow">Приглашаем на торжество</p>
+
+      <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
+
+      <p class="subtitle">Свадебное торжество</p>
+
+      <div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+      <p class="invite-text">
+        С любовью и трепетом приглашаем разделить с нами один из самых прекрасных дней нашей жизни —
+        день, когда две судьбы соединятся в одну.
+      </p>
+
+      <div class="countdown" id="countdown">
+        <div class="cd-item"><span class="cd-num" id="cd-days">00</span><span class="cd-label">дней</span></div>
+        <div class="cd-item"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">часов</span></div>
+        <div class="cd-item"><span class="cd-num" id="cd-minutes">00</span><span class="cd-label">минут</span></div>
+        <div class="cd-item"><span class="cd-num" id="cd-seconds">00</span><span class="cd-label">секунд</span></div>
+      </div>
+
+      <div class="details">
+        <div class="detail">
+          <span class="detail-icon">&#10022;</span>
+          <div class="detail-title">Дата и время</div>
+          <div class="detail-text">3 октября 2026<br>пятница, 15:00</div>
+        </div>
+        <div class="detail">
+          <span class="detail-icon">&#10022;</span>
+          <div class="detail-title">Место</div>
+          <div class="detail-text">Ресторан «Берег»<br>ул. Набережная, 12</div>
+        </div>
+      </div>
+
+      <p class="dresscode">
+        Дресс-код: <b>торжественный</b>, насыщенные тона
+        <span class="swatches">
+          <span class="swatch" style="background:#7a1420;"></span>
+          <span class="swatch" style="background:#d4af37;"></span>
+          <span class="swatch" style="background:#0f5b41;"></span>
+        </span>
+        <br>бордовый, золото, изумрудный
+      </p>
+
+      <div class="divider"><span class="line"></span><span class="diamond"></span><span class="line"></span></div>
+
+      <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+        <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+        <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+        </div>
+        <p style="text-align:center;margin:10px 0 0;">
+          <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+        </p>
+      </div>
+
+      <div class="rsvp">
+        <p class="rsvp-note">Просим подтвердить присутствие до 20 сентября</p>
+        <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener">Подтвердить визит</a>
+      </div>
+
+      <p class="footer-note">Георгий &amp; Анастасия — 03.10.2026</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ===== Обратный отсчёт ===== */
+  var weddingDate = new Date('2026-10-03T15:00:00');
+
+  var elDays = document.getElementById('cd-days');
+  var elHours = document.getElementById('cd-hours');
+  var elMinutes = document.getElementById('cd-minutes');
+  var elSeconds = document.getElementById('cd-seconds');
+
+  function pad(n){ return String(n).padStart(2, '0'); }
+
+  function updateCountdown(){
+    var now = new Date();
+    var diff = weddingDate.getTime() - now.getTime();
+
+    if (diff <= 0){
+      elDays.textContent = '00';
+      elHours.textContent = '00';
+      elMinutes.textContent = '00';
+      elSeconds.textContent = '00';
+      return;
+    }
+
+    var totalSeconds = Math.floor(diff / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+
+    elDays.textContent = pad(days);
+    elHours.textContent = pad(hours);
+    elMinutes.textContent = pad(minutes);
+    elSeconds.textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ===== Мерцающая золотая пыль на canvas ===== */
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('sparkles');
+
+  if (canvas && !reduceMotion){
+    var ctx = canvas.getContext('2d');
+    var particles = [];
+    var w, h, dpr;
+
+    function resize(){
+      dpr = window.devicePixelRatio || 1;
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function createParticles(){
+      var count = Math.min(70, Math.floor((w * h) / 18000));
+      particles = [];
+      for (var i = 0; i < count; i++){
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 1.6 + 0.4,
+          baseAlpha: Math.random() * 0.5 + 0.15,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.4 + 0.15,
+          drift: (Math.random() - 0.5) * 0.15
+        });
+      }
+    }
+
+    var t = 0;
+    function draw(){
+      t += 0.016;
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < particles.length; i++){
+        var p = particles[i];
+        var alpha = p.baseAlpha * (0.5 + 0.5 * Math.sin(t * p.speed + p.phase));
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(232, 191, 91, ' + alpha.toFixed(3) + ')';
+        ctx.fill();
+
+        p.y -= p.speed * 0.12;
+        p.x += p.drift;
+        if (p.y < -5){
+          p.y = h + 5;
+          p.x = Math.random() * w;
+        }
+        if (p.x < -5) p.x = w + 5;
+        if (p.x > w + 5) p.x = -5;
+      }
+      requestAnimationFrame(draw);
+    }
+
+    resize();
+    createParticles();
+    requestAnimationFrame(draw);
+
+    var resizeTimer;
+    window.addEventListener('resize', function(){
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function(){
+        resize();
+        createParticles();
+      }, 200);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>

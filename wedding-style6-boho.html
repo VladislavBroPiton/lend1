@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Marck+Script&family=Manrope:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --terracotta: #C1694F;
+    --terracotta-dark: #A24E39;
+    --rose: #D9A9A0;
+    --rose-dark: #C98B82;
+    --sand: #E9DCC3;
+    --sand-dark: #DCC9A6;
+    --cream: #FBF3E6;
+    --sage: #9CA986;
+    --rope: #8B6152;
+    --ink: #4A3728;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    background-image:
+      repeating-linear-gradient(45deg, rgba(74,55,40,0.02) 0px, rgba(74,55,40,0.02) 1px, transparent 1px, transparent 5px),
+      repeating-linear-gradient(-45deg, rgba(74,55,40,0.015) 0px, rgba(74,55,40,0.015) 1px, transparent 1px, transparent 5px);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  #petal-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+  /* ───────── Macrame fringe banner ───────── */
+  .fringe-wrap { position: relative; z-index: 1; width: 100%; overflow: hidden; line-height: 0; }
+  .fringe-wrap svg { display: block; width: 100%; height: auto; }
+
+  /* ───────── Layout grid ───────── */
+  .page-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 200px 1fr;
+    max-width: 1120px; margin: 0 auto;
+  }
+
+  .side-botanical {
+    position: relative;
+    background: linear-gradient(180deg, var(--sand) 0%, var(--sand-dark) 100%);
+    min-height: 100%;
+    overflow: hidden;
+  }
+  .side-label {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    writing-mode: vertical-rl;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: 0.35em;
+    color: var(--terracotta-dark);
+    opacity: 0.75;
+    white-space: nowrap;
+  }
+  .pampas-top, .pampas-bottom { position: absolute; left: 50%; transform: translateX(-50%); width: 140px; opacity: 0.9; }
+  .pampas-top { top: 24px; }
+  .pampas-bottom { bottom: 24px; transform: translateX(-50%) rotate(180deg) scaleX(-1); }
+  .pampas-sway { transform-origin: bottom center; animation: sway 6s ease-in-out infinite; }
+  @keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+
+  main.content { padding: 56px 28px 90px; max-width: 720px; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--terracotta-dark); margin-bottom: 28px;
+    opacity: 0; animation: driftIn 0.9s ease 0.2s forwards;
+  }
+  .eyebrow::before, .eyebrow::after { content: ''; width: 30px; height: 1px; background: var(--terracotta); opacity: 0.6; }
+
+  @keyframes driftIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes riseIn { from { opacity: 0; transform: translateY(30px) rotate(-1deg); } to { opacity: 1; transform: translateY(0) rotate(0); } }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: clamp(46px, 8vw, 84px);
+    line-height: 1.05;
+    color: var(--ink);
+    opacity: 0; animation: riseIn 1s ease 0.45s forwards;
+  }
+  h1 .amp {
+    font-family: 'Marck Script', cursive;
+    font-weight: 400;
+    color: var(--terracotta);
+    font-size: 0.62em;
+    display: inline-block;
+    margin: 0 6px;
+  }
+
+  .script-line {
+    font-family: 'Marck Script', cursive;
+    font-size: 26px;
+    color: var(--rope);
+    margin: 20px 0 8px;
+    max-width: 460px;
+    opacity: 0; animation: driftIn 0.9s ease 0.75s forwards;
+  }
+  .lead {
+    font-size: 16px; line-height: 1.8; color: var(--ink); opacity: 0.85;
+    max-width: 480px; margin: 0 0 48px;
+    opacity: 0; animation: driftIn 0.9s ease 0.95s forwards;
+  }
+
+  /* ───────── Scattered detail cards ───────── */
+  .scatter {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 18px; margin: 0 0 56px;
+  }
+  .scard {
+    background: var(--cream);
+    border: 1px solid rgba(74,55,40,0.12);
+    padding: 22px 20px;
+    box-shadow: 0 8px 24px rgba(74,55,40,0.08);
+    opacity: 0; transform: translateY(28px) rotate(var(--rot, 0deg));
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: var(--d, 0s);
+  }
+  .scard.shown { opacity: 1; transform: translateY(0) rotate(var(--rot, 0deg)); }
+  .scard:nth-child(1) { --rot: -1.4deg; --d: 0s; }
+  .scard:nth-child(2) { --rot: 1.1deg; --d: 0.1s; }
+  .scard:nth-child(3) { --rot: 0.8deg; --d: 0.2s; }
+  .scard:nth-child(4) { --rot: -1deg; --d: 0.3s; }
+  .scard:hover { transform: translateY(-4px) rotate(0deg); box-shadow: 0 14px 30px rgba(74,55,40,0.14); transition-delay: 0s; }
+  .scard-icon { font-size: 22px; margin-bottom: 10px; }
+  .scard-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--terracotta-dark); margin-bottom: 6px; }
+  .scard-value { font-family: 'Cormorant Garamond', serif; font-size: 19px; line-height: 1.35; color: var(--ink); }
+
+  /* ───────── Macrame ring timer ───────── */
+  .ring-section { position: relative; display: flex; justify-content: center; margin: 20px 0 64px; }
+  .ring-wrap { position: relative; width: 100%; max-width: 380px; }
+  .ring-wrap svg { display: block; width: 100%; height: auto; }
+  .timer-overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px; padding-bottom: 8%;
+  }
+  .timer-title { font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--rope); opacity: 0.8; margin-bottom: 6px; }
+  .timer-row { display: flex; gap: 10px; }
+  .tu { text-align: center; }
+  .tu-num { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(26px, 6vw, 38px); color: var(--terracotta-dark); line-height: 1; display: block; transition: transform 0.15s; }
+  .tu-num.bump { transform: scale(1.18); }
+  .tu-lbl { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--rope); opacity: 0.75; margin-top: 3px; }
+
+  /* ───────── RSVP block (offset) ───────── */
+  .rsvp-section { display: flex; justify-content: flex-end; }
+  .rsvp-card {
+    position: relative; max-width: 340px; width: 100%;
+    background: var(--terracotta); color: var(--cream);
+    padding: 34px 30px; text-align: center;
+    transform: rotate(1.2deg);
+    box-shadow: 0 16px 34px rgba(162,78,57,0.28);
+    opacity: 0; transform-origin: center;
+  }
+  .rsvp-card.shown { animation: riseIn 0.8s ease forwards; }
+  .rsvp-ribbon {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%) rotate(-2deg);
+    background: var(--sage); color: var(--cream); font-size: 10px; letter-spacing: 0.16em;
+    text-transform: uppercase; padding: 6px 16px;
+  }
+  .rsvp-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 24px; margin: 14px 0 10px; }
+  .rsvp-note { font-size: 13px; line-height: 1.6; opacity: 0.92; margin-bottom: 20px; }
+  .rsvp-btn {
+    display: inline-block; background: var(--cream); color: var(--terracotta-dark);
+    padding: 13px 34px; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500; transition: all 0.3s;
+  }
+  .rsvp-btn:hover { background: var(--sand); letter-spacing: 0.2em; }
+
+  .footer-note {
+    text-align: center; margin-top: 60px; font-family: 'Marck Script', cursive;
+    font-size: 20px; color: var(--rope); opacity: 0.7;
+  }
+
+  /* ───────── Reveal helper ───────── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.shown { opacity: 1; transform: translateY(0); }
+
+  /* ───────── Responsive ───────── */
+  @media (max-width: 860px) {
+    .page-grid { grid-template-columns: 1fr; }
+    .side-botanical { display: flex; align-items: center; justify-content: center; min-height: 96px; padding: 12px 0; }
+    .side-label { position: static; transform: none; writing-mode: horizontal-tb; font-size: 15px; letter-spacing: 0.3em; }
+    .pampas-top, .pampas-bottom { position: static; transform: none; width: 60px; }
+    .pampas-bottom { transform: scaleX(-1); }
+    .side-botanical > div:first-child, .side-botanical > div:last-child { margin: 0 10px; }
+    main.content { padding: 40px 20px 70px; }
+  }
+
+  @media (max-width: 560px) {
+    h1 { font-size: clamp(38px, 11vw, 56px); }
+    .scatter { grid-template-columns: 1fr; }
+    .rsvp-section { justify-content: center; }
+    .rsvp-card { transform: rotate(0.6deg); }
+    .script-line { font-size: 22px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition-duration: 0.2s !important; }
+    .reveal, .scard, .rsvp-card, h1, .script-line, .lead, .eyebrow { opacity: 1 !important; transform: none !important; }
+    #petal-canvas { display: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="petal-canvas"></canvas>
+
+<div class="fringe-wrap">
+  <svg viewBox="0 0 800 90" preserveAspectRatio="none" width="100%" height="90">
+    <defs>
+      <pattern id="macramePattern" width="40" height="90" patternUnits="userSpaceOnUse">
+        <line x1="20" y1="0" x2="20" y2="34" stroke="#8B6152" stroke-width="2" opacity="0.75"/>
+        <circle cx="20" cy="40" r="6" fill="none" stroke="#8B6152" stroke-width="2" opacity="0.75"/>
+        <line x1="20" y1="46" x2="11" y2="78" stroke="#8B6152" stroke-width="2" opacity="0.75"/>
+        <line x1="20" y1="46" x2="29" y2="78" stroke="#8B6152" stroke-width="2" opacity="0.75"/>
+        <circle cx="11" cy="80" r="2.4" fill="#C1694F" opacity="0.85"/>
+        <circle cx="29" cy="80" r="2.4" fill="#C1694F" opacity="0.85"/>
+      </pattern>
+    </defs>
+    <rect width="800" height="90" fill="url(#macramePattern)"/>
+  </svg>
+</div>
+
+<div class="page-grid">
+  <aside class="side-botanical">
+    <div class="pampas-top pampas-sway">
+      <svg viewBox="0 0 100 200" width="100%">
+        <line x1="30" y1="200" x2="34" y2="70" stroke="#8B6152" stroke-width="2"/>
+        <line x1="55" y1="200" x2="52" y2="55" stroke="#8B6152" stroke-width="2"/>
+        <line x1="70" y1="200" x2="66" y2="90" stroke="#8B6152" stroke-width="2"/>
+        <g stroke="#D9A9A0" stroke-width="1.4" opacity="0.9">
+          <line x1="34" y1="70" x2="18" y2="55"/><line x1="34" y1="70" x2="50" y2="52"/>
+          <line x1="34" y1="80" x2="16" y2="68"/><line x1="34" y1="80" x2="52" y2="66"/>
+          <line x1="34" y1="90" x2="18" y2="82"/><line x1="34" y1="90" x2="50" y2="80"/>
+        </g>
+        <g stroke="#C1694F" stroke-width="1.4" opacity="0.85">
+          <line x1="52" y1="55" x2="36" y2="40"/><line x1="52" y1="55" x2="68" y2="38"/>
+          <line x1="52" y1="66" x2="34" y2="54"/><line x1="52" y1="66" x2="70" y2="52"/>
+          <line x1="52" y1="77" x2="36" y2="68"/><line x1="52" y1="77" x2="68" y2="66"/>
+        </g>
+        <g stroke="#9CA986" stroke-width="1.4" opacity="0.85">
+          <line x1="66" y1="90" x2="50" y2="76"/><line x1="66" y1="90" x2="82" y2="74"/>
+          <line x1="66" y1="100" x2="48" y2="90"/><line x1="66" y1="100" x2="84" y2="88"/>
+        </g>
+      </svg>
+    </div>
+    <div class="side-label">Богемная свадьба · 2026</div>
+    <div class="pampas-bottom pampas-sway">
+      <svg viewBox="0 0 100 200" width="100%">
+        <line x1="30" y1="200" x2="34" y2="70" stroke="#8B6152" stroke-width="2"/>
+        <line x1="55" y1="200" x2="52" y2="55" stroke="#8B6152" stroke-width="2"/>
+        <g stroke="#D9A9A0" stroke-width="1.4" opacity="0.9">
+          <line x1="34" y1="70" x2="18" y2="55"/><line x1="34" y1="70" x2="50" y2="52"/>
+          <line x1="34" y1="80" x2="16" y2="68"/><line x1="34" y1="80" x2="52" y2="66"/>
+        </g>
+        <g stroke="#C1694F" stroke-width="1.4" opacity="0.85">
+          <line x1="52" y1="55" x2="36" y2="40"/><line x1="52" y1="55" x2="68" y2="38"/>
+          <line x1="52" y1="66" x2="34" y2="54"/><line x1="52" y1="66" x2="70" y2="52"/>
+        </g>
+      </svg>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="eyebrow">Мы женимся</div>
+
+    <h1>Георгий<span class="amp">&amp;</span>Анастасия</h1>
+
+    <p class="script-line">приглашают разделить с ними этот день</p>
+    <p class="lead">Тёплый вечер, сухие травы в вазах, гирлянды света и близкие люди рядом —
+      будем очень рады видеть именно вас на нашей свадьбе.</p>
+
+    <div class="scatter">
+      <div class="scard"><div class="scard-icon">📅</div><div class="scard-label">Дата</div><div class="scard-value">3 октября 2026<br>пятница</div></div>
+      <div class="scard"><div class="scard-icon">⏰</div><div class="scard-label">Начало</div><div class="scard-value">15:00</div></div>
+      <div class="scard"><div class="scard-icon">📍</div><div class="scard-label">Место</div><div class="scard-value">Ресторан «Берег»<br>ул. Набережная, 12</div></div>
+      <div class="scard"><div class="scard-icon">🌾</div><div class="scard-label">Дресс-код</div><div class="scard-value">Тёплые природные тона, лёгкие ткани</div></div>
+    </div>
+
+    <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+      <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+      </div>
+      <p style="text-align:center;margin:10px 0 0;">
+        <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+      </p>
+    </div>
+
+    <div class="ring-section reveal">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 300 300">
+          <circle cx="150" cy="150" r="128" fill="none" stroke="#8B6152" stroke-width="2" stroke-dasharray="1 9" opacity="0.7"/>
+          <circle cx="150" cy="150" r="118" fill="none" stroke="#C1694F" stroke-width="1.4" opacity="0.55"/>
+          <g opacity="0.8">
+            <line x1="150" y1="278" x2="140" y2="298" stroke="#8B6152" stroke-width="2"/>
+            <line x1="150" y1="278" x2="160" y2="298" stroke="#8B6152" stroke-width="2"/>
+            <circle cx="140" cy="300" r="2.4" fill="#C1694F"/>
+            <circle cx="160" cy="300" r="2.4" fill="#C1694F"/>
+          </g>
+        </svg>
+        <div class="timer-overlay">
+          <div class="timer-title">До встречи осталось</div>
+          <div class="timer-row">
+            <div class="tu"><span class="tu-num" id="td">00</span><span class="tu-lbl">дн</span></div>
+            <div class="tu"><span class="tu-num" id="th">00</span><span class="tu-lbl">ч</span></div>
+            <div class="tu"><span class="tu-num" id="tm">00</span><span class="tu-lbl">мин</span></div>
+            <div class="tu"><span class="tu-num" id="ts">00</span><span class="tu-lbl">сек</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rsvp-section">
+      <div class="rsvp-card reveal">
+        <div class="rsvp-ribbon">RSVP</div>
+        <p class="rsvp-title">Будете с нами?</p>
+        <p class="rsvp-note">Пожалуйста, подтвердите присутствие<br>до 20 сентября 2026 года</p>
+        <a href="https://t.me/" class="rsvp-btn">Подтвердить участие</a>
+      </div>
+    </div>
+
+    <p class="footer-note">С любовью, Георгий и Анастасия</p>
+  </main>
+</div>
+
+<script>
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── Floating feathers / dried petals on canvas ──
+  if (!prefersReducedMotion) {
+    const canvas = document.getElementById('petal-canvas');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const PALETTE = ['#C1694F', '#D9A9A0', '#E9DCC3', '#9CA986', '#C98B82'];
+    const items = Array.from({ length: 16 }, () => ({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      size: 10 + Math.random() * 12,
+      color: PALETTE[Math.floor(Math.random() * PALETTE.length)],
+      vx: 0.25 + Math.random() * 0.5,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.015,
+      bobPhase: Math.random() * Math.PI * 2,
+      bobSpeed: 0.008 + Math.random() * 0.012,
+      opacity: 0.45 + Math.random() * 0.35,
+    }));
+
+    function drawFeather(f) {
+      ctx.save();
+      ctx.translate(f.x, f.y);
+      ctx.rotate(f.angle);
+      ctx.globalAlpha = f.opacity;
+      ctx.strokeStyle = f.color;
+      ctx.fillStyle = f.color;
+      ctx.lineWidth = 1;
+      // quill
+      ctx.beginPath();
+      ctx.moveTo(0, -f.size);
+      ctx.lineTo(0, f.size);
+      ctx.stroke();
+      // barbs
+      for (let i = -f.size; i <= f.size; i += f.size / 4) {
+        ctx.beginPath();
+        ctx.moveTo(0, i);
+        ctx.lineTo(f.size * 0.5, i - f.size * 0.15);
+        ctx.moveTo(0, i);
+        ctx.lineTo(-f.size * 0.5, i - f.size * 0.15);
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      items.forEach(f => {
+        f.bobPhase += f.bobSpeed;
+        f.x += f.vx;
+        f.y += Math.sin(f.bobPhase) * 0.5;
+        f.angle += f.spin;
+        if (f.x > canvas.width + 30) { f.x = -30; f.y = Math.random() * canvas.height; }
+        drawFeather(f);
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // ── Scroll reveal ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('shown'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal, .scard').forEach(el => obs.observe(el));
+
+  // ── Countdown timer ──
+  const weddingDate = new Date('2026-10-03T15:00:00');
+  let prevValues = {};
+  function tick() {
+    const diff = weddingDate - new Date();
+    if (diff <= 0) return;
+    const values = {
+      td: String(Math.floor(diff / 86400000)).padStart(2, '0'),
+      th: String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0'),
+      tm: String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0'),
+      ts: String(Math.floor((diff % 60000) / 1000)).padStart(2, '0'),
+    };
+    Object.entries(values).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (prevValues[id] !== val) {
+        el.classList.add('bump');
+        setTimeout(() => el.classList.remove('bump'), 150);
+        el.textContent = val;
+        prevValues[id] = val;
+      }
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>

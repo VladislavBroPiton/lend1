@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-deep:#060c1a;
+    --navy:#0d1b30;
+    --navy-light:#16294a;
+    --ice:#9fd3e8;
+    --ice-soft:#cfeaf5;
+    --silver:#c7d0dd;
+    --silver-bright:#eef2f7;
+    --snow:#f7fafc;
+    --gold-hint:#e3d9c2;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:
+      radial-gradient(ellipse at 20% -10%, rgba(159,211,232,0.10), transparent 55%),
+      radial-gradient(ellipse at 85% 110%, rgba(199,208,221,0.08), transparent 50%),
+      linear-gradient(180deg, var(--navy-deep) 0%, var(--navy) 45%, var(--navy-light) 100%);
+    color:var(--silver-bright);
+    font-family:'Montserrat', sans-serif;
+    overflow-x:hidden;
+  }
+
+  body{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+  }
+
+  /* ---------- фоновые слои (снег, звёзды, иней) ---------- */
+
+  #snowCanvas{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:1;
+    pointer-events:none;
+  }
+
+  .stars{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:var(--silver-bright);
+    border-radius:50%;
+    opacity:.6;
+    animation:twinkle 4.5s ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:.15; transform:scale(1);}
+    50%{opacity:.9; transform:scale(1.6);}
+  }
+
+  .frost-corner{
+    position:fixed;
+    z-index:2;
+    pointer-events:none;
+    opacity:.5;
+    filter:drop-shadow(0 0 6px rgba(159,211,232,0.25));
+  }
+  .frost-corner.tl{top:-10px;left:-10px; width:180px;}
+  .frost-corner.br{bottom:-10px;right:-10px; width:180px; transform:rotate(180deg);}
+
+  /* ---------- парящие декоративные снежинки ---------- */
+
+  .floaters{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:2;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .floaters svg{
+    position:absolute;
+    opacity:.35;
+    animation:drift-rotate linear infinite;
+  }
+  @keyframes drift-rotate{
+    from{transform:rotate(0deg) translateY(0);}
+    to{transform:rotate(360deg) translateY(-14px);}
+  }
+
+  /* ---------- основной контейнер ---------- */
+
+  .wrap{
+    position:relative;
+    z-index:3;
+    width:100%;
+    max-width:640px;
+    margin:0 auto;
+    padding:56px 20px 80px;
+  }
+
+  .card{
+    background:linear-gradient(180deg, rgba(22,41,74,0.55), rgba(6,12,26,0.55));
+    border:1px solid rgba(199,208,221,0.28);
+    border-radius:6px;
+    padding:56px 44px 48px;
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    box-shadow:0 0 0 1px rgba(159,211,232,0.06), 0 30px 80px rgba(0,0,0,0.45), inset 0 0 60px rgba(159,211,232,0.04);
+    position:relative;
+    text-align:center;
+  }
+
+  .card::before,
+  .card::after{
+    content:"";
+    position:absolute;
+    width:34px; height:34px;
+    border:1px solid rgba(199,208,221,0.5);
+  }
+  .card::before{top:14px;left:14px;border-right:none;border-bottom:none;}
+  .card::after{bottom:14px;right:14px;border-left:none;border-top:none;}
+
+  .snowflake-mark{
+    width:34px;
+    height:34px;
+    margin:0 auto 18px;
+    opacity:.85;
+  }
+
+  .kicker{
+    font-family:'Montserrat', sans-serif;
+    font-weight:300;
+    font-size:12px;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    color:var(--ice-soft);
+    margin:0 0 22px;
+  }
+
+  .names{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(40px, 9vw, 68px);
+    line-height:1.08;
+    margin:0;
+    color:var(--snow);
+    letter-spacing:1px;
+  }
+  .names .amp{
+    display:block;
+    font-style:italic;
+    font-weight:400;
+    font-size:.55em;
+    color:var(--ice);
+    margin:6px 0;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:28px auto;
+    max-width:320px;
+  }
+  .divider .line{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(199,208,221,0.7), transparent);
+  }
+  .divider svg{width:16px;height:16px;flex:none;opacity:.85;}
+
+  .lead{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:19px;
+    line-height:1.7;
+    color:var(--silver-bright);
+    max-width:440px;
+    margin:0 auto 8px;
+  }
+
+  .date-line{
+    font-family:'Montserrat', sans-serif;
+    font-weight:400;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--ice-soft);
+    margin-top:18px;
+  }
+
+  /* ---------- обратный отсчёт ---------- */
+
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:38px 0 6px;
+    flex-wrap:wrap;
+  }
+  .count-cell{
+    width:78px;
+    padding:16px 0 12px;
+    background:rgba(159,211,232,0.06);
+    border:1px solid rgba(199,208,221,0.3);
+    border-radius:4px;
+    position:relative;
+  }
+  .count-cell::after{
+    content:"";
+    position:absolute;
+    inset:4px;
+    border:1px solid rgba(199,208,221,0.12);
+    pointer-events:none;
+  }
+  .count-num{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:32px;
+    color:var(--snow);
+    line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .count-label{
+    display:block;
+    margin-top:8px;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--silver);
+  }
+
+  .countdown-caption{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--silver);
+    opacity:.75;
+    margin-bottom:6px;
+  }
+
+  /* ---------- детали события ---------- */
+
+  .details{
+    margin-top:44px;
+    display:grid;
+    gap:22px;
+  }
+  .detail-row{
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:16px;
+    align-items:start;
+    text-align:left;
+    padding:16px 18px;
+    border:1px solid rgba(199,208,221,0.2);
+    border-radius:4px;
+    background:rgba(6,12,26,0.25);
+  }
+  .detail-row svg{width:22px;height:22px;margin-top:2px;color:var(--ice);}
+  .detail-title{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--ice-soft);
+    margin:0 0 4px;
+  }
+  .detail-text{
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    color:var(--snow);
+    margin:0;
+    line-height:1.4;
+  }
+  .detail-sub{
+    font-family:'Montserrat', sans-serif;
+    font-size:13px;
+    color:var(--silver);
+    margin:4px 0 0;
+    line-height:1.5;
+  }
+
+  /* ---------- RSVP ---------- */
+
+  .rsvp{
+    margin-top:46px;
+  }
+  .rsvp p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    font-style:italic;
+    color:var(--silver-bright);
+    margin:0 0 22px;
+  }
+  .rsvp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 38px;
+    font-family:'Montserrat', sans-serif;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--navy-deep);
+    background:linear-gradient(135deg, var(--silver-bright), var(--ice-soft));
+    border-radius:2px;
+    box-shadow:0 8px 24px rgba(159,211,232,0.22);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(159,211,232,0.32);
+  }
+  .rsvp-deadline{
+    margin-top:16px;
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--silver);
+    opacity:.7;
+  }
+
+  .footer-mark{
+    margin-top:50px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--silver);
+    opacity:.65;
+    letter-spacing:1px;
+  }
+
+  /* ---------- адаптив ---------- */
+
+  @media (max-width:520px){
+    .wrap{padding:32px 12px 56px;}
+    .card{padding:40px 20px 36px;}
+    .count-cell{width:66px;padding:12px 0 10px;}
+    .count-num{font-size:26px;}
+    .detail-row{grid-template-columns:26px 1fr;gap:12px;padding:14px;}
+    .names{font-size:clamp(34px,12vw,52px);}
+  }
+
+  @media (max-width:360px){
+    .countdown{gap:8px;}
+    .count-cell{width:58px;}
+  }
+
+  /* ---------- уважение к prefers-reduced-motion ---------- */
+
+  @media (prefers-reduced-motion: reduce){
+    .star, .floaters svg, .rsvp-btn{
+      animation:none !important;
+      transition:none !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <canvas id="snowCanvas" aria-hidden="true"></canvas>
+  <div class="stars" id="starsLayer" aria-hidden="true"></div>
+  <div class="floaters" id="floatersLayer" aria-hidden="true"></div>
+
+  <svg class="frost-corner tl" viewBox="0 0 180 180" fill="none" aria-hidden="true">
+    <path d="M0 0 L180 0" stroke="#c7d0dd" stroke-width="1" opacity=".3"/>
+    <path d="M0 0 L0 180" stroke="#c7d0dd" stroke-width="1" opacity=".3"/>
+    <path d="M0 40 Q40 40 40 0" stroke="#9fd3e8" stroke-width="1" opacity=".4"/>
+    <path d="M0 90 Q90 90 90 0" stroke="#9fd3e8" stroke-width="1" opacity=".25"/>
+  </svg>
+  <svg class="frost-corner br" viewBox="0 0 180 180" fill="none" aria-hidden="true">
+    <path d="M0 0 L180 0" stroke="#c7d0dd" stroke-width="1" opacity=".3"/>
+    <path d="M0 0 L0 180" stroke="#c7d0dd" stroke-width="1" opacity=".3"/>
+    <path d="M0 40 Q40 40 40 0" stroke="#9fd3e8" stroke-width="1" opacity=".4"/>
+    <path d="M0 90 Q90 90 90 0" stroke="#9fd3e8" stroke-width="1" opacity=".25"/>
+  </svg>
+
+  <div class="wrap">
+    <div class="card">
+
+      <svg class="snowflake-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g stroke="#cfeaf5" stroke-width="2.5" stroke-linecap="round">
+          <line x1="50" y1="8" x2="50" y2="92"/>
+          <line x1="8" y1="50" x2="92" y2="50"/>
+          <line x1="18" y1="18" x2="82" y2="82"/>
+          <line x1="82" y1="18" x2="18" y2="82"/>
+          <path d="M50 8 L42 20 M50 8 L58 20"/>
+          <path d="M50 92 L42 80 M50 92 L58 80"/>
+          <path d="M8 50 L20 42 M8 50 L20 58"/>
+          <path d="M92 50 L80 42 M92 50 L80 58"/>
+        </g>
+      </svg>
+
+      <p class="kicker">Приглашение на свадьбу</p>
+
+      <h1 class="names">
+        Георгий
+        <span class="amp">&amp;</span>
+        Анастасия
+      </h1>
+
+      <div class="divider" aria-hidden="true">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L12 22 M2 12 L22 12 M5 5 L19 19 M19 5 L5 19" stroke="#c7d0dd" stroke-width="1"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+
+      <p class="lead">
+        Среди тишины и первого снега мы хотим разделить самый важный день нашей жизни с теми, кто нам дорог.
+      </p>
+      <p class="date-line">3 октября 2026 · пятница · 15:00</p>
+
+      <div class="countdown-caption">До торжества остаётся</div>
+      <div class="countdown" id="countdown">
+        <div class="count-cell"><div class="count-num" id="cd-days">00</div><span class="count-label">дней</span></div>
+        <div class="count-cell"><div class="count-num" id="cd-hours">00</div><span class="count-label">часов</span></div>
+        <div class="count-cell"><div class="count-num" id="cd-minutes">00</div><span class="count-label">минут</span></div>
+        <div class="count-cell"><div class="count-num" id="cd-seconds">00</div><span class="count-label">секунд</span></div>
+      </div>
+
+      <div class="divider" aria-hidden="true" style="margin-top:40px;">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L12 22 M2 12 L22 12 M5 5 L19 19 M19 5 L5 19" stroke="#c7d0dd" stroke-width="1"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+
+      <div class="details">
+        <div class="detail-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+          <div>
+            <p class="detail-title">Дата и время</p>
+            <p class="detail-text">3 октября 2026, пятница</p>
+            <p class="detail-sub">Начало торжества — в 15:00</p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21s7-7.5 7-12a7 7 0 1 0-14 0c0 4.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          <div>
+            <p class="detail-title">Место проведения</p>
+            <p class="detail-text">Ресторан «Берег»</p>
+            <p class="detail-sub">ул. Набережная, 12</p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 3 7v6c0 5 4 8.5 9 9 5-.5 9-4 9-9V7l-9-5z"/></svg>
+          <div>
+            <p class="detail-title">Дресс-код</p>
+            <p class="detail-text">Элегантный зимний</p>
+            <p class="detail-sub">Холодные тона: серебро, синий, белый</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+        <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+        <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+        </div>
+        <p style="text-align:center;margin:10px 0 0;">
+          <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+        </p>
+      </div>
+
+      <div class="rsvp">
+        <p>Будем счастливы разделить этот вечер с вами —<br>пожалуйста, подтвердите присутствие.</p>
+        <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener">
+          Подтвердить участие
+        </a>
+        <p class="rsvp-deadline">Ответ ждём до 20 сентября</p>
+      </div>
+
+      <p class="footer-mark">Георгий &amp; Анастасия · с любовью ждём встречи</p>
+
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= обратный отсчёт ================= */
+
+  var targetDate = new Date('2026-10-03T15:00:00');
+
+  var elDays = document.getElementById('cd-days');
+  var elHours = document.getElementById('cd-hours');
+  var elMinutes = document.getElementById('cd-minutes');
+  var elSeconds = document.getElementById('cd-seconds');
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function updateCountdown(){
+    var now = new Date();
+    var diff = targetDate.getTime() - now.getTime();
+
+    if (diff <= 0){
+      elDays.textContent = '00';
+      elHours.textContent = '00';
+      elMinutes.textContent = '00';
+      elSeconds.textContent = '00';
+      return;
+    }
+
+    var totalSeconds = Math.floor(diff / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+
+    elDays.textContent = pad(days);
+    elHours.textContent = pad(hours);
+    elMinutes.textContent = pad(minutes);
+    elSeconds.textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ================= мерцающие звёзды ================= */
+
+  var starsLayer = document.getElementById('starsLayer');
+  var starCount = window.innerWidth < 520 ? 40 : 70;
+
+  for (var i = 0; i < starCount; i++){
+    var star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = (Math.random() * 100) + '%';
+    star.style.top = (Math.random() * 100) + '%';
+    var size = (Math.random() * 2 + 1).toFixed(1);
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.animationDuration = (3 + Math.random() * 4).toFixed(1) + 's';
+    star.style.animationDelay = (Math.random() * 5).toFixed(1) + 's';
+    starsLayer.appendChild(star);
+  }
+
+  /* ================= парящие декоративные снежинки (SVG) ================= */
+
+  var floatersLayer = document.getElementById('floatersLayer');
+  var floaterSvg =
+    '<svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+    '<g stroke="#e8edf2" stroke-width="3" stroke-linecap="round">' +
+    '<line x1="50" y1="8" x2="50" y2="92"/><line x1="8" y1="50" x2="92" y2="50"/>' +
+    '<line x1="18" y1="18" x2="82" y2="82"/><line x1="82" y1="18" x2="18" y2="82"/>' +
+    '</g></svg>';
+
+  var floaterCount = window.innerWidth < 520 ? 5 : 9;
+
+  for (var j = 0; j < floaterCount; j++){
+    var wrapper = document.createElement('div');
+    wrapper.innerHTML = floaterSvg;
+    var svgEl = wrapper.firstChild;
+    var fsize = Math.random() * 22 + 12;
+    svgEl.style.width = fsize + 'px';
+    svgEl.style.height = fsize + 'px';
+    svgEl.style.left = (Math.random() * 100) + '%';
+    svgEl.style.top = (Math.random() * 100) + '%';
+    svgEl.style.animationDuration = (14 + Math.random() * 16) + 's';
+    floatersLayer.appendChild(svgEl);
+  }
+
+  /* ================= canvas: падающий снег ================= */
+
+  var canvas = document.getElementById('snowCanvas');
+  var ctx = canvas.getContext('2d');
+  var width, height;
+  var flakes = [];
+  var FLAKE_COUNT = window.innerWidth < 520 ? 55 : 110;
+
+  function resize(){
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  function makeFlake(){
+    return {
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 2.6 + 0.8,
+      speedY: Math.random() * 0.7 + 0.25,
+      speedX: Math.random() * 0.5 - 0.25,
+      opacity: Math.random() * 0.6 + 0.25,
+      sway: Math.random() * Math.PI * 2,
+      swaySpeed: Math.random() * 0.02 + 0.005
+    };
+  }
+
+  function initFlakes(){
+    flakes = [];
+    for (var i = 0; i < FLAKE_COUNT; i++){
+      flakes.push(makeFlake());
+    }
+  }
+
+  function drawStaticSnow(){
+    resize();
+    initFlakes();
+    ctx.clearRect(0, 0, width, height);
+    for (var i = 0; i < flakes.length; i++){
+      var f = flakes[i];
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255,255,255,' + f.opacity + ')';
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function animateSnow(){
+    ctx.clearRect(0, 0, width, height);
+
+    for (var i = 0; i < flakes.length; i++){
+      var f = flakes[i];
+      f.y += f.speedY;
+      f.sway += f.swaySpeed;
+      f.x += f.speedX + Math.sin(f.sway) * 0.35;
+
+      if (f.y > height + 5){
+        f.y = -5;
+        f.x = Math.random() * width;
+      }
+      if (f.x > width + 5) f.x = -5;
+      if (f.x < -5) f.x = width + 5;
+
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255,255,255,' + f.opacity + ')';
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(animateSnow);
+  }
+
+  window.addEventListener('resize', function(){
+    resize();
+    initFlakes();
+  });
+
+  if (reduceMotion){
+    drawStaticSnow();
+  } else {
+    resize();
+    initFlakes();
+    animateSnow();
+  }
+
+})();
+</script>
+
+</body>
+</html>

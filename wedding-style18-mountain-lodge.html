@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#182a37;
+    --sky-mid:#3c4f56;
+    --sky-glow:#f0a05f;
+    --sky-glow-soft:#f7c98c;
+    --wood-dark:#1e130a;
+    --wood:#3c2718;
+    --wood-mid:#573922;
+    --wood-light:#7a5230;
+    --brass:#c9974f;
+    --brass-bright:#e8c37e;
+    --pine-dark:#16261c;
+    --pine:#2c4232;
+    --pine-light:#4c6a52;
+    --cream:#f3e8d3;
+    --cream-soft:#fbf4e6;
+    --ember:#e8763f;
+    --ember-bright:#ffb066;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:
+      radial-gradient(circle at 50% 14%, rgba(240,160,95,0.30), transparent 46%),
+      linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 34%, var(--wood-mid) 66%, var(--wood-dark) 100%);
+    color:var(--cream-soft);
+    font-family:'Montserrat', sans-serif;
+    overflow-x:hidden;
+  }
+
+  body{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+  }
+
+  /* ---------- горные силуэты (параллакс) ---------- */
+
+  .ridges{
+    position:fixed;
+    left:0;
+    width:100%;
+    z-index:1;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .ridges svg{
+    display:block;
+    width:120%;
+    margin-left:-10%;
+  }
+
+  .ridge-back{ bottom:34vh; opacity:.55; animation:driftA 46s ease-in-out infinite; }
+  .ridge-mid{  bottom:20vh; opacity:.8;  animation:driftB 34s ease-in-out infinite; }
+  .ridge-front{bottom:0;    opacity:1;   animation:driftA 60s ease-in-out infinite reverse; }
+
+  @keyframes driftA{
+    0%,100%{ transform:translateX(-2%); }
+    50%{ transform:translateX(1.5%); }
+  }
+  @keyframes driftB{
+    0%,100%{ transform:translateX(1%); }
+    50%{ transform:translateX(-2%); }
+  }
+
+  /* ---------- туман и искры очага (canvas) ---------- */
+
+  #mistCanvas{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:2;
+    pointer-events:none;
+  }
+
+  .embers{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:2;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .ember{
+    position:absolute;
+    bottom:-10px;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:radial-gradient(circle, var(--ember-bright), var(--ember) 60%, transparent 75%);
+    box-shadow:0 0 6px 1px rgba(232,118,63,0.6);
+    animation:rise linear infinite;
+  }
+  @keyframes rise{
+    0%{ transform:translate(0,0) scale(1); opacity:0; }
+    8%{ opacity:.9; }
+    50%{ transform:translate(var(--sway,12px), -52vh) scale(.85); }
+    100%{ transform:translate(calc(var(--sway,12px) * -1), -104vh) scale(.3); opacity:0; }
+  }
+
+  /* ---------- тёплое свечение очага ---------- */
+
+  .hearth-glow{
+    position:fixed;
+    left:50%;
+    bottom:-18vh;
+    width:80vw;
+    height:60vh;
+    max-width:900px;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse at 50% 100%, rgba(232,118,63,0.28), transparent 65%);
+    z-index:2;
+    pointer-events:none;
+    animation:flicker 5s ease-in-out infinite;
+  }
+  @keyframes flicker{
+    0%,100%{ opacity:.75; }
+    30%{ opacity:1; }
+    45%{ opacity:.6; }
+    60%{ opacity:.95; }
+    80%{ opacity:.7; }
+  }
+
+  /* ---------- еловые ветви по углам ---------- */
+
+  .pine-corner{
+    position:fixed;
+    z-index:4;
+    pointer-events:none;
+    width:150px;
+    filter:drop-shadow(0 6px 10px rgba(0,0,0,0.4));
+    transform-origin:top center;
+  }
+  .pine-corner.tl{ top:-14px; left:-18px; animation:sway 7s ease-in-out infinite; }
+  .pine-corner.tr{ top:-14px; right:-18px; transform:scaleX(-1); animation:sway 8s ease-in-out infinite .4s; }
+
+  @keyframes sway{
+    0%,100%{ transform:rotate(-2.5deg); }
+    50%{ transform:rotate(2deg); }
+  }
+  .pine-corner.tr{ animation-name:swayR; }
+  @keyframes swayR{
+    0%,100%{ transform:scaleX(-1) rotate(-2.5deg); }
+    50%{ transform:scaleX(-1) rotate(2deg); }
+  }
+
+  /* ---------- основной контейнер ---------- */
+
+  .wrap{
+    position:relative;
+    z-index:5;
+    width:100%;
+    max-width:640px;
+    margin:0 auto;
+    padding:56px 20px 80px;
+  }
+
+  .card{
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,0.08) 0px, rgba(0,0,0,0.08) 1px, transparent 1px, transparent 34px),
+      linear-gradient(180deg, rgba(63,41,23,0.93), rgba(28,17,8,0.95));
+    border:1px solid rgba(201,151,79,0.35);
+    border-radius:8px;
+    padding:56px 44px 48px;
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+    box-shadow:0 0 0 1px rgba(0,0,0,0.3), 0 30px 80px rgba(0,0,0,0.55), inset 0 0 70px rgba(0,0,0,0.35);
+    position:relative;
+    text-align:center;
+  }
+
+  .card::before,
+  .card::after{
+    content:"";
+    position:absolute;
+    width:36px; height:36px;
+    border:2px solid var(--brass);
+    opacity:.65;
+  }
+  .card::before{top:12px;left:12px;border-right:none;border-bottom:none;}
+  .card::after{bottom:12px;right:12px;border-left:none;border-top:none;}
+
+  .plaid-ribbon{
+    height:8px;
+    margin:0 auto 28px;
+    max-width:180px;
+    background:
+      repeating-linear-gradient(90deg, rgba(201,151,79,0.55) 0 3px, transparent 3px 14px),
+      repeating-linear-gradient(0deg, rgba(44,66,50,0.55) 0 3px, transparent 3px 14px),
+      var(--wood-mid);
+    border-radius:2px;
+    opacity:.8;
+  }
+
+  .peak-mark{
+    width:56px;
+    height:56px;
+    margin:0 auto 16px;
+    opacity:.92;
+  }
+
+  .kicker{
+    font-family:'Montserrat', sans-serif;
+    font-weight:300;
+    font-size:12px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:var(--brass-bright);
+    margin:0 0 20px;
+  }
+
+  .names{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(40px, 9vw, 66px);
+    line-height:1.08;
+    margin:0;
+    color:var(--cream-soft);
+    letter-spacing:1px;
+  }
+  .names .amp{
+    display:block;
+    font-style:italic;
+    font-weight:400;
+    font-size:.55em;
+    color:var(--brass-bright);
+    margin:6px 0;
+  }
+
+  .venue-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin:16px auto 0;
+    font-family:'Montserrat', sans-serif;
+    font-size:12.5px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--pine-light);
+    background:rgba(44,66,50,0.35);
+    border:1px solid rgba(76,106,82,0.5);
+    padding:7px 16px;
+    border-radius:20px;
+  }
+  .venue-tag svg{width:14px;height:14px;flex:none;}
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    margin:30px auto;
+    max-width:320px;
+  }
+  .divider .line{
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, transparent, rgba(201,151,79,0.65), transparent);
+  }
+  .divider svg{width:18px;height:18px;flex:none;opacity:.9;}
+
+  .lead{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:400;
+    font-size:19px;
+    line-height:1.7;
+    color:var(--cream-soft);
+    max-width:460px;
+    margin:0 auto 8px;
+  }
+
+  .date-line{
+    font-family:'Montserrat', sans-serif;
+    font-weight:400;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--brass-bright);
+    margin-top:18px;
+  }
+
+  /* ---------- обратный отсчёт ---------- */
+
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:38px 0 6px;
+    flex-wrap:wrap;
+  }
+  .count-cell{
+    width:78px;
+    padding:16px 0 12px;
+    background:rgba(201,151,79,0.08);
+    border:1px solid rgba(201,151,79,0.35);
+    border-radius:5px;
+    position:relative;
+  }
+  .count-cell::after{
+    content:"";
+    position:absolute;
+    inset:4px;
+    border:1px solid rgba(201,151,79,0.15);
+    pointer-events:none;
+    border-radius:2px;
+  }
+  .count-num{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:32px;
+    color:var(--cream-soft);
+    line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .count-label{
+    display:block;
+    margin-top:8px;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+
+  .countdown-caption{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--brass);
+    opacity:.85;
+    margin-bottom:6px;
+  }
+
+  /* ---------- детали события ---------- */
+
+  .details{
+    margin-top:44px;
+    display:grid;
+    gap:22px;
+  }
+  .detail-row{
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:16px;
+    align-items:start;
+    text-align:left;
+    padding:16px 18px;
+    border:1px solid rgba(201,151,79,0.22);
+    border-radius:5px;
+    background:rgba(30,19,10,0.4);
+  }
+  .detail-row svg{width:22px;height:22px;margin-top:2px;color:var(--brass-bright);}
+  .detail-title{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--brass-bright);
+    margin:0 0 4px;
+  }
+  .detail-text{
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    color:var(--cream-soft);
+    margin:0;
+    line-height:1.4;
+  }
+  .detail-sub{
+    font-family:'Montserrat', sans-serif;
+    font-size:13px;
+    color:#cbb99c;
+    margin:4px 0 0;
+    line-height:1.5;
+  }
+
+  /* ---------- RSVP ---------- */
+
+  .rsvp{
+    margin-top:46px;
+  }
+  .rsvp p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    font-style:italic;
+    color:var(--cream-soft);
+    margin:0 0 22px;
+  }
+  .rsvp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:15px 38px;
+    font-family:'Montserrat', sans-serif;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--wood-dark);
+    background:linear-gradient(135deg, var(--brass-bright), var(--brass));
+    border-radius:3px;
+    box-shadow:0 8px 24px rgba(201,151,79,0.28);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn svg{width:16px;height:16px;}
+  .rsvp-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(201,151,79,0.4);
+  }
+  .rsvp-deadline{
+    margin-top:16px;
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--brass);
+    opacity:.8;
+  }
+
+  .footer-mark{
+    margin-top:50px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:15px;
+    color:#cbb99c;
+    opacity:.75;
+    letter-spacing:1px;
+  }
+
+  /* ---------- адаптив ---------- */
+
+  @media (max-width:520px){
+    .wrap{padding:32px 12px 56px;}
+    .card{padding:40px 20px 36px;}
+    .count-cell{width:66px;padding:12px 0 10px;}
+    .count-num{font-size:26px;}
+    .detail-row{grid-template-columns:26px 1fr;gap:12px;padding:14px;}
+    .names{font-size:clamp(34px,12vw,50px);}
+    .pine-corner{width:100px;}
+  }
+
+  @media (max-width:360px){
+    .countdown{gap:8px;}
+    .count-cell{width:58px;}
+    .pine-corner{width:78px;}
+  }
+
+  /* ---------- уважение к prefers-reduced-motion ---------- */
+
+  @media (prefers-reduced-motion: reduce){
+    .ridge-back, .ridge-mid, .ridge-front,
+    .pine-corner.tl, .pine-corner.tr,
+    .hearth-glow, .ember, .rsvp-btn{
+      animation:none !important;
+      transition:none !important;
+    }
+    .hearth-glow{opacity:.7;}
+  }
+</style>
+</head>
+<body>
+
+  <canvas id="mistCanvas" aria-hidden="true"></canvas>
+  <div class="embers" id="embersLayer" aria-hidden="true"></div>
+  <div class="hearth-glow" aria-hidden="true"></div>
+
+  <div class="ridges" aria-hidden="true">
+    <svg class="ridge-back" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <polygon points="0,240 130,150 230,205 340,95 460,180 560,70 690,165 800,110 930,195 1050,120 1190,185 1310,140 1440,200 1440,320 0,320"
+        fill="#7d94a0"/>
+      <polygon points="450,180 460,180 470,192" fill="#e8e2d6" opacity=".7"/>
+      <polygon points="550,70 560,70 572,88" fill="#e8e2d6" opacity=".7"/>
+      <polygon points="920,195 930,195 942,208" fill="#e8e2d6" opacity=".6"/>
+    </svg>
+    <svg class="ridge-mid" viewBox="0 0 1440 300" preserveAspectRatio="none">
+      <polygon points="0,230 100,140 220,200 320,110 430,190 540,95 660,185 780,120 900,200 1020,130 1150,195 1280,150 1440,210 1440,300 0,300"
+        fill="#3c5445"/>
+      <polygon points="315,110 330,110 342,125" fill="#dfe6d8" opacity=".55"/>
+      <polygon points="530,95 545,95 558,112" fill="#dfe6d8" opacity=".55"/>
+    </svg>
+    <svg class="ridge-front" viewBox="0 0 1440 280" preserveAspectRatio="none">
+      <polygon points="0,210 90,130 200,190 300,100 410,175 520,90 640,170 760,105 880,190 1000,120 1130,180 1260,140 1440,195 1440,280 0,280"
+        fill="#1c130a"/>
+    </svg>
+  </div>
+
+  <svg class="pine-corner tl" viewBox="0 0 100 140" fill="none" aria-hidden="true">
+    <path d="M50 8 C42 30 30 34 20 46 C34 42 40 40 50 34 C40 46 26 52 14 66 C32 60 42 56 50 50 C42 66 26 74 12 92 C34 84 46 78 52 70 C50 90 40 104 30 120"
+      stroke="#3f5c48" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="24" cy="100" rx="7" ry="11" fill="#5c3a22" transform="rotate(-18 24 100)"/>
+    <ellipse cx="46" cy="112" rx="6" ry="9.5" fill="#6b4527" transform="rotate(10 46 112)"/>
+  </svg>
+  <svg class="pine-corner tr" viewBox="0 0 100 140" fill="none" aria-hidden="true">
+    <path d="M50 8 C42 30 30 34 20 46 C34 42 40 40 50 34 C40 46 26 52 14 66 C32 60 42 56 50 50 C42 66 26 74 12 92 C34 84 46 78 52 70 C50 90 40 104 30 120"
+      stroke="#3f5c48" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <ellipse cx="24" cy="100" rx="7" ry="11" fill="#5c3a22" transform="rotate(-18 24 100)"/>
+    <ellipse cx="46" cy="112" rx="6" ry="9.5" fill="#6b4527" transform="rotate(10 46 112)"/>
+  </svg>
+
+  <div class="wrap">
+    <div class="card">
+
+      <svg class="peak-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 78 L32 32 L46 54 L62 20 L94 78 Z" stroke="#c9974f" stroke-width="2.5" stroke-linejoin="round" fill="none"/>
+        <path d="M56 32 L62 20 L68 32 Z" fill="#f3e8d3" opacity=".85"/>
+        <path d="M26 44 L32 32 L38 44 Z" fill="#f3e8d3" opacity=".7"/>
+        <path d="M50 2 L44 12 H50 L44 20 H56 L50 12 H56 Z" fill="#2c4232"/>
+        <rect x="47" y="20" width="6" height="6" fill="#3c2718"/>
+      </svg>
+
+      <p class="kicker">Приглашение на свадьбу</p>
+
+      <h1 class="names">
+        Георгий
+        <span class="amp">&amp;</span>
+        Анастасия
+      </h1>
+
+      <div class="venue-tag">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 20 L9 8 L13 14 L16 9 L21 20 Z"/></svg>
+        Турбаза «Эдельвейс» · Красная Поляна
+      </div>
+
+      <div class="plaid-ribbon" aria-hidden="true"></div>
+
+      <p class="lead">
+        Среди хвойного воздуха и вершин Кавказских гор мы хотим встретить самый тёплый день нашей жизни — рядом с теми, кто нам дорог. Приезжайте туда, где горы касаются неба, а вечером в очаге потрескивают дрова.
+      </p>
+      <p class="date-line">3 октября 2026 · пятница · 14:00</p>
+
+      <div class="countdown-caption">До нашего дня в горах</div>
+      <div class="countdown" id="countdown">
+        <div class="count-cell"><div class="count-num" id="cd-days">00</div><span class="count-label">дней</span></div>
+        <div class="count-cell"><div class="count-num" id="cd-hours">00</div><span class="count-label">часов</span></div>
+        <div class="count-cell"><div class="count-num" id="cd-minutes">00</div><span class="count-label">минут</span></div>
+        <div class="count-cell"><div class="count-num" id="cd-seconds">00</div><span class="count-label">секунд</span></div>
+      </div>
+
+      <div class="divider" aria-hidden="true" style="margin-top:40px;">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="none">
+          <path d="M12 2 L6 10 H10 L5 17 H19 L14 10 H18 Z" fill="#4c6a52"/>
+          <rect x="10.5" y="17" width="3" height="4" fill="#5c3a22"/>
+        </svg>
+        <span class="line"></span>
+      </div>
+
+      <div class="details">
+        <div class="detail-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+          <div>
+            <p class="detail-title">Дата и время</p>
+            <p class="detail-text">3 октября 2026, пятница</p>
+            <p class="detail-sub">Церемония начнётся в 14:00, на открытом воздухе у подножия хребта</p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 20 L9 8 L13 14 L16 9 L21 20 Z"/><circle cx="9" cy="5" r="1.3" fill="currentColor" stroke="none"/></svg>
+          <div>
+            <p class="detail-title">Место проведения</p>
+            <p class="detail-text">Горная турбаза «Эдельвейс»</p>
+            <p class="detail-sub">Красная Поляна, Сочи · склон хребта Аибга</p>
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M4 10h16M4 14h16M10 4v16M14 4v16"/></svg>
+          <div>
+            <p class="detail-title">Дресс-код</p>
+            <p class="detail-text">Тёплый кэжуал-шик</p>
+            <p class="detail-sub">Натуральные ткани, приглушённые тона. Вечером в горах прохладно — захватите тёплую накидку или плед</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+        <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+        <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+          <iframe src="https://yandex.ru/map-widget/v1/?ll=40.2036,43.6768&z=13&l=map&pt=40.2036,43.6768,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Турбаза «Эдельвейс»" style="display:block;border:0;"></iframe>
+        </div>
+        <p style="text-align:center;margin:10px 0 0;">
+          <a href="https://yandex.ru/maps/?ll=40.2036,43.6768&z=13&pt=40.2036,43.6768,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+        </p>
+      </div>
+
+      <div class="rsvp">
+        <p>Будем рады видеть вас в кругу гор и тёплого света очага —<br>пожалуйста, подтвердите присутствие.</p>
+        <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 3 3 10.5 10 13 12 20 14.5 15 21 3Z"/><path d="M10 13 21 3"/></svg>
+          Подтвердить участие
+        </a>
+        <p class="rsvp-deadline">Ответ ждём до 20 сентября</p>
+      </div>
+
+      <p class="footer-mark">Георгий &amp; Анастасия · с теплом ждём встречи в горах</p>
+
+    </div>
+  </div>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ================= обратный отсчёт ================= */
+
+  var targetDate = new Date('2026-10-03T14:00:00');
+
+  var elDays = document.getElementById('cd-days');
+  var elHours = document.getElementById('cd-hours');
+  var elMinutes = document.getElementById('cd-minutes');
+  var elSeconds = document.getElementById('cd-seconds');
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function updateCountdown(){
+    var now = new Date();
+    var diff = targetDate.getTime() - now.getTime();
+
+    if (diff <= 0){
+      elDays.textContent = '00';
+      elHours.textContent = '00';
+      elMinutes.textContent = '00';
+      elSeconds.textContent = '00';
+      return;
+    }
+
+    var totalSeconds = Math.floor(diff / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+
+    elDays.textContent = pad(days);
+    elHours.textContent = pad(hours);
+    elMinutes.textContent = pad(minutes);
+    elSeconds.textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ================= искры очага (DOM) ================= */
+
+  var embersLayer = document.getElementById('embersLayer');
+
+  if (!reduceMotion){
+    var emberCount = window.innerWidth < 520 ? 14 : 24;
+    for (var i = 0; i < emberCount; i++){
+      var ember = document.createElement('div');
+      ember.className = 'ember';
+      var leftPos = 30 + Math.random() * 40; /* концентрируем ближе к центру, у очага */
+      ember.style.left = leftPos + '%';
+      var size = (Math.random() * 3 + 2.5).toFixed(1);
+      ember.style.width = size + 'px';
+      ember.style.height = size + 'px';
+      ember.style.setProperty('--sway', (Math.random() * 40 - 20).toFixed(0) + 'px');
+      ember.style.animationDuration = (7 + Math.random() * 6).toFixed(1) + 's';
+      ember.style.animationDelay = (Math.random() * 8).toFixed(1) + 's';
+      embersLayer.appendChild(ember);
+    }
+  }
+
+  /* ================= canvas: лёгкий туман в долине ================= */
+
+  var canvas = document.getElementById('mistCanvas');
+  var ctx = canvas.getContext('2d');
+  var width, height;
+  var puffs = [];
+  var PUFF_COUNT = window.innerWidth < 520 ? 7 : 12;
+
+  function resize(){
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  }
+
+  function makePuff(){
+    var y = height * (0.55 + Math.random() * 0.4);
+    return {
+      x: Math.random() * width,
+      y: y,
+      r: 90 + Math.random() * 160,
+      speed: 0.06 + Math.random() * 0.12,
+      opacity: 0.03 + Math.random() * 0.05,
+      dir: Math.random() < 0.5 ? 1 : -1
+    };
+  }
+
+  function initPuffs(){
+    puffs = [];
+    for (var i = 0; i < PUFF_COUNT; i++){
+      puffs.push(makePuff());
+    }
+  }
+
+  function drawPuffs(){
+    ctx.clearRect(0, 0, width, height);
+    for (var i = 0; i < puffs.length; i++){
+      var p = puffs[i];
+      var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      grad.addColorStop(0, 'rgba(243,232,211,' + p.opacity + ')');
+      grad.addColorStop(1, 'rgba(243,232,211,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function animatePuffs(){
+    for (var i = 0; i < puffs.length; i++){
+      var p = puffs[i];
+      p.x += p.speed * p.dir;
+      if (p.x > width + p.r) p.x = -p.r;
+      if (p.x < -p.r) p.x = width + p.r;
+    }
+    drawPuffs();
+    requestAnimationFrame(animatePuffs);
+  }
+
+  window.addEventListener('resize', function(){
+    resize();
+    initPuffs();
+    if (reduceMotion) drawPuffs();
+  });
+
+  resize();
+  initPuffs();
+
+  if (reduceMotion){
+    drawPuffs();
+  } else {
+    animatePuffs();
+  }
+
+})();
+</script>
+
+</body>
+</html>

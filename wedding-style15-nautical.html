@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#05132a;
+    --navy-900:#0a1f3d;
+    --navy-800:#0f2a52;
+    --navy-700:#153563;
+    --navy-600:#1c4278;
+    --white:#f7f9fc;
+    --off-white:#dfe6f0;
+    --rope:#c9a66b;
+    --rope-dark:#9c7a45;
+    --rope-light:#e2c592;
+    --shadow:0 20px 45px rgba(2,10,25,.45);
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    font-family:'Montserrat', sans-serif;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(30,60,110,.55), transparent 55%),
+      linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 45%, var(--navy-800) 100%);
+    color:var(--white);
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Playfair Display', serif;
+    margin:0;
+  }
+
+  a{color:inherit;}
+
+  /* ---------- Верхняя гирлянда флажков (сигнальные флаги) ---------- */
+  .flag-line{
+    position:relative;
+    width:100%;
+    padding-top:14px;
+    display:flex;
+    justify-content:center;
+    z-index:2;
+  }
+  .flag-rope{
+    position:absolute;
+    top:14px; left:0; right:0;
+    height:3px;
+    background:repeating-linear-gradient(90deg, var(--rope) 0 10px, var(--rope-dark) 10px 20px);
+    opacity:.8;
+  }
+  .flags{
+    display:flex;
+    gap:26px;
+    padding:0 18px;
+    max-width:640px;
+    width:100%;
+    justify-content:space-between;
+  }
+  .flag{
+    width:0; height:0;
+    margin-top:2px;
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-top:24px solid var(--white);
+    opacity:.9;
+    transform-origin:top center;
+    animation:sway 3.6s ease-in-out infinite;
+  }
+  .flag:nth-child(even){border-top-color:var(--navy-600);animation-delay:.4s;}
+  .flag:nth-child(3n){border-top-color:var(--rope);animation-delay:.8s;}
+  .flag:nth-child(4n){animation-delay:1.2s;}
+
+  @keyframes sway{
+    0%,100%{transform:rotate(-6deg);}
+    50%{transform:rotate(6deg);}
+  }
+
+  /* ---------- Герой-блок ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px 190px;
+    overflow:hidden;
+  }
+
+  .anchor-wrap{
+    width:74px;
+    margin-bottom:18px;
+    transform-origin:50% 8%;
+    animation:anchor-swing 4.5s ease-in-out infinite;
+  }
+  .hang-rope{
+    width:3px;
+    height:22px;
+    margin:0 auto;
+    background:repeating-linear-gradient(180deg, var(--rope) 0 5px, var(--rope-dark) 5px 10px);
+  }
+  .anchor-wrap svg{
+    width:100%;
+    height:auto;
+    color:var(--off-white);
+    filter:drop-shadow(0 6px 14px rgba(0,0,0,.4));
+  }
+
+  @keyframes anchor-swing{
+    0%,100%{transform:rotate(-5deg);}
+    50%{transform:rotate(5deg);}
+  }
+
+  .pre-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    letter-spacing:.12em;
+    font-size:19px;
+    color:var(--off-white);
+    margin-bottom:10px;
+  }
+
+  .names{
+    font-size:clamp(42px, 9vw, 78px);
+    line-height:1.05;
+    font-weight:600;
+    letter-spacing:.01em;
+    text-shadow:0 6px 30px rgba(0,0,0,.35);
+  }
+  .names .amp{
+    font-style:italic;
+    color:var(--rope-light);
+    padding:0 10px;
+    font-weight:500;
+  }
+
+  .subtitle{
+    margin-top:18px;
+    font-size:17px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--off-white);
+  }
+
+  .stripe-band{
+    margin-top:26px;
+    width:150px;
+    height:16px;
+    border-radius:3px;
+    background:repeating-linear-gradient(180deg, var(--white) 0 5px, var(--navy-700) 5px 10px);
+    box-shadow:0 4px 10px rgba(0,0,0,.35);
+  }
+
+  .venue-note{
+    margin-top:22px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    max-width:420px;
+    color:var(--off-white);
+  }
+  .venue-note b{color:var(--white);}
+
+  /* ---------- Волны на канвасе ---------- */
+  #waves{
+    position:absolute;
+    left:0; bottom:0;
+    width:100%;
+    height:190px;
+    display:block;
+  }
+
+  /* ---------- Секции ---------- */
+  section{
+    position:relative;
+    padding:70px 20px;
+    max-width:900px;
+    margin:0 auto;
+  }
+
+  .section-title{
+    text-align:center;
+    font-size:clamp(28px, 5vw, 38px);
+    margin-bottom:14px;
+  }
+  .section-sub{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    color:var(--off-white);
+    max-width:520px;
+    margin:0 auto 46px;
+  }
+
+  .rope-divider{
+    width:100%;
+    max-width:900px;
+    margin:0 auto;
+    height:10px;
+    border-radius:8px;
+    background:repeating-linear-gradient(45deg, var(--rope) 0 8px, var(--rope-dark) 8px 16px);
+    box-shadow:inset 0 2px 3px rgba(0,0,0,.35), 0 3px 6px rgba(0,0,0,.3);
+    position:relative;
+  }
+  .rope-divider::before, .rope-divider::after{
+    content:"";
+    position:absolute;
+    top:50%; transform:translateY(-50%);
+    width:22px; height:22px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, var(--rope-light), var(--rope-dark));
+    box-shadow:0 3px 6px rgba(0,0,0,.4);
+  }
+  .rope-divider::before{left:-4px;}
+  .rope-divider::after{right:-4px;}
+
+  /* ---------- Обратный отсчёт ---------- */
+  .countdown-grid{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+  }
+  .count-box{
+    background:linear-gradient(180deg, var(--navy-700), var(--navy-800));
+    border:2px solid var(--rope-dark);
+    border-radius:16px;
+    width:112px;
+    padding:20px 8px 16px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .count-box::before{
+    content:"";
+    position:absolute;
+    inset:6px;
+    border:1px solid rgba(247,249,252,.18);
+    border-radius:11px;
+    pointer-events:none;
+  }
+  .count-box span{
+    display:block;
+    font-family:'Playfair Display', serif;
+    font-size:38px;
+    font-weight:700;
+    color:var(--white);
+    font-variant-numeric:tabular-nums;
+  }
+  .count-box label{
+    display:block;
+    margin-top:6px;
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--off-white);
+  }
+
+  /* ---------- Детали события (иллюминаторы) ---------- */
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:34px;
+  }
+  .detail-card{
+    text-align:center;
+  }
+  .porthole{
+    width:120px;
+    height:120px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 35% 30%, var(--navy-600), var(--navy-900) 75%);
+    border:7px solid var(--off-white);
+    box-shadow:
+      0 0 0 4px var(--navy-700),
+      0 0 0 6px var(--rope-dark),
+      var(--shadow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+  }
+  .detail-card h3{
+    font-size:21px;
+    margin-bottom:10px;
+    letter-spacing:.02em;
+  }
+  .detail-card p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    line-height:1.5;
+    color:var(--off-white);
+    margin:0;
+  }
+
+  /* ---------- RSVP ---------- */
+  .rsvp{
+    text-align:center;
+  }
+  .rsvp-date{
+    display:inline-block;
+    margin:6px 0 34px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--rope-light);
+    border-top:1px solid rgba(247,249,252,.25);
+    border-bottom:1px solid rgba(247,249,252,.25);
+    padding:8px 0;
+  }
+  .rsvp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    background:linear-gradient(180deg, var(--rope-light), var(--rope-dark));
+    color:var(--navy-950);
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    font-size:15px;
+    padding:16px 34px;
+    border-radius:40px;
+    box-shadow:0 12px 26px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.5);
+    border:2px solid var(--navy-950);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .rsvp-btn .ring{
+    width:20px;height:20px;
+    border:3px solid var(--navy-950);
+    border-radius:50%;
+    position:relative;
+    flex:none;
+  }
+  .rsvp-btn .ring::after{
+    content:"";
+    position:absolute;
+    left:50%; top:100%;
+    width:2px; height:6px;
+    background:var(--navy-950);
+    transform:translateX(-50%);
+  }
+
+  /* ---------- Подвал ---------- */
+  footer{
+    text-align:center;
+    padding:50px 20px 60px;
+    color:var(--off-white);
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    font-style:italic;
+  }
+  footer .anchor-mini{
+    width:26px;
+    margin:0 auto 14px;
+    opacity:.7;
+  }
+  footer .anchor-mini svg{width:100%;height:auto;color:var(--off-white);}
+
+  /* ---------- Адаптивность ---------- */
+  @media (max-width:640px){
+    .hero{padding:30px 16px 150px;}
+    #waves{height:140px;}
+    section{padding:52px 16px;}
+    .details-grid{grid-template-columns:1fr;gap:44px;}
+    .flags{gap:14px;}
+    .flag{border-left-width:11px;border-right-width:11px;border-top-width:18px;}
+    .count-box{width:80px;padding:14px 4px 12px;}
+    .count-box span{font-size:27px;}
+    .rope-divider::before,.rope-divider::after{width:16px;height:16px;}
+  }
+
+  /* ---------- Уважение к prefers-reduced-motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .anchor-wrap,.flag{animation:none !important;}
+    .rsvp-btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="flag-line">
+    <div class="flag-rope"></div>
+    <div class="flags">
+      <div class="flag"></div>
+      <div class="flag"></div>
+      <div class="flag"></div>
+      <div class="flag"></div>
+      <div class="flag"></div>
+      <div class="flag"></div>
+      <div class="flag"></div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="anchor-wrap">
+      <div class="hang-rope"></div>
+      <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="16" r="10" stroke="currentColor" stroke-width="6"/>
+        <line x1="50" y1="26" x2="50" y2="96" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <line x1="26" y1="44" x2="74" y2="44" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <path d="M50 96 C 50 118, 28 126, 15 110" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <path d="M50 96 C 50 118, 72 126, 85 110" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <path d="M15 110 L6 101 M15 110 L25 104" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+        <path d="M85 110 L94 101 M85 110 L75 104" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <p class="pre-title">Приглашаем разделить с нами</p>
+    <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
+    <p class="subtitle">3 октября 2026 · пятница · 15:00</p>
+    <div class="stripe-band"></div>
+    <p class="venue-note">Встречаемся на самой кромке воды — в ресторане <b>«Берег»</b>, ул. Набережная, 12</p>
+
+    <canvas id="waves"></canvas>
+  </header>
+
+  <div class="rope-divider"></div>
+
+  <section id="countdown">
+    <h2 class="section-title">До отплытия остаётся</h2>
+    <p class="section-sub">Считаем часы до момента, когда бросим якорь вместе</p>
+    <div class="countdown-grid">
+      <div class="count-box"><span id="days">00</span><label>дней</label></div>
+      <div class="count-box"><span id="hours">00</span><label>часов</label></div>
+      <div class="count-box"><span id="minutes">00</span><label>минут</label></div>
+      <div class="count-box"><span id="seconds">00</span><label>секунд</label></div>
+    </div>
+  </section>
+
+  <div class="rope-divider"></div>
+
+  <section id="details">
+    <h2 class="section-title">Детали события</h2>
+    <p class="section-sub">Курс проложен — остаётся лишь подняться на борт праздника</p>
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="porthole">⚓</div>
+        <h3>Когда</h3>
+        <p>3 октября 2026, пятница<br>начало в 15:00</p>
+      </div>
+      <div class="detail-card">
+        <div class="porthole">🌊</div>
+        <h3>Где</h3>
+        <p>Ресторан «Берег»<br>ул. Набережная, 12</p>
+      </div>
+      <div class="detail-card">
+        <div class="porthole">🧭</div>
+        <h3>Дресс-код</h3>
+        <p>Морской стиль<br>сине-белая гамма, casual chic</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+    </div>
+    <p style="text-align:center;margin:10px 0 0;">
+      <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+    </p>
+  </div>
+
+  <div class="rope-divider"></div>
+
+  <section class="rsvp">
+    <h2 class="section-title">Ждём вас на борту!</h2>
+    <p class="rsvp-date">Пожалуйста, подтвердите присутствие до 20 сентября</p>
+    <div>
+      <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener noreferrer">
+        <span class="ring"></span> Подтвердить участие
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="anchor-mini">
+      <svg viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="16" r="10" stroke="currentColor" stroke-width="6"/>
+        <line x1="50" y1="26" x2="50" y2="96" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <line x1="26" y1="44" x2="74" y2="44" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <path d="M50 96 C 50 118, 28 126, 15 110" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+        <path d="M50 96 C 50 118, 72 126, 85 110" stroke="currentColor" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+    </div>
+    С любовью, Георгий и Анастасия
+  </footer>
+
+<script>
+  // ---------- Обратный отсчёт до свадьбы ----------
+  (function(){
+    var target = new Date('2026-10-03T15:00:00');
+    var elDays = document.getElementById('days');
+    var elHours = document.getElementById('hours');
+    var elMinutes = document.getElementById('minutes');
+    var elSeconds = document.getElementById('seconds');
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+
+    function update(){
+      var now = new Date();
+      var diff = target - now;
+
+      if (diff <= 0){
+        elDays.textContent = '00';
+        elHours.textContent = '00';
+        elMinutes.textContent = '00';
+        elSeconds.textContent = '00';
+        return;
+      }
+
+      var totalSeconds = Math.floor(diff / 1000);
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+
+      elDays.textContent = pad(days);
+      elHours.textContent = pad(hours);
+      elMinutes.textContent = pad(minutes);
+      elSeconds.textContent = pad(seconds);
+    }
+
+    update();
+    setInterval(update, 1000);
+  })();
+
+  // ---------- Анимация волн на канвасе ----------
+  (function(){
+    var canvas = document.getElementById('waves');
+    var ctx = canvas.getContext('2d');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h, t = 0;
+
+    var layers = [
+      { amp: 10, len: 0.012, speed: 0.020, offset: 0.0, color: 'rgba(15, 42, 82, 0.55)'  },
+      { amp: 14, len: 0.016, speed: 0.028, offset: 1.5, color: 'rgba(21, 53, 99, 0.65)'  },
+      { amp: 9,  len: 0.020, speed: 0.035, offset: 3.0, color: 'rgba(223, 230, 240, 0.35)' },
+      { amp: 16, len: 0.010, speed: 0.014, offset: 4.5, color: 'rgba(5, 19, 42, 0.85)'  }
+    ];
+
+    function resize(){
+      var rect = canvas.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function drawWave(layer, phase){
+      ctx.beginPath();
+      ctx.moveTo(0, h);
+      for (var x = 0; x <= w; x += 6){
+        var y = h - 40 - layer.amp - Math.sin(x * layer.len + phase + layer.offset) * layer.amp;
+        ctx.lineTo(x, y);
+      }
+      ctx.lineTo(w, h);
+      ctx.closePath();
+      ctx.fillStyle = layer.color;
+      ctx.fill();
+    }
+
+    function render(){
+      ctx.clearRect(0, 0, w, h);
+      for (var i = 0; i < layers.length; i++){
+        drawWave(layers[i], t * layers[i].speed);
+      }
+    }
+
+    function loop(){
+      t += 1;
+      render();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', function(){
+      resize();
+      render();
+    });
+
+    resize();
+
+    if (reduceMotion){
+      render();
+    } else {
+      loop();
+    }
+  })();
+</script>
+
+</body>
+</html>

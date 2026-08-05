@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-950:#0e1a17;
+    --sky-900:#132621;
+    --forest-950:#0c1712;
+    --forest-900:#15271f;
+    --forest-800:#1e3729;
+    --forest-700:#2c4a37;
+    --mist-700:#4b6b64;
+    --mist-500:#7c9d94;
+    --mist-300:#aec2ba;
+    --fog-200:#d8e3dd;
+    --fog-100:#eef2ee;
+    --cold-blue-700:#33525c;
+    --cold-blue-500:#5f8590;
+    --ochre-500:#b9884f;
+    --ochre-300:#d9b57e;
+    --ivory:#f4f1e8;
+    --shadow:0 20px 45px rgba(4,10,8,.5);
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    font-family:'Manrope', sans-serif;
+    background:linear-gradient(180deg, var(--sky-950) 0%, var(--forest-950) 100%);
+    color:var(--fog-100);
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{
+    font-family:'Cormorant Garamond', serif;
+    margin:0;
+    font-weight:600;
+  }
+
+  a{color:inherit;}
+
+  /* ---------- Верхняя кромка леса ---------- */
+  .top-fringe{
+    position:relative;
+    width:100%;
+    height:34px;
+    overflow:hidden;
+    z-index:3;
+    color:var(--forest-800);
+    opacity:.9;
+  }
+  .top-fringe svg{width:100%;height:100%;display:block;}
+
+  /* ---------- Герой-блок ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 20px;
+    overflow:hidden;
+  }
+
+  .scene{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+
+  .sun-glow{
+    position:absolute;
+    top:8%;
+    left:50%;
+    width:340px;
+    height:340px;
+    transform:translateX(-50%);
+    background:radial-gradient(circle, rgba(217,181,126,.35), rgba(217,181,126,0) 70%);
+    filter:blur(6px);
+    animation:breathe 8s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{opacity:.55;transform:translateX(-50%) scale(1);}
+    50%{opacity:.9;transform:translateX(-50%) scale(1.08);}
+  }
+
+  .range{
+    position:absolute;
+    left:-2%;
+    width:104%;
+  }
+  .range-back{
+    bottom:36%;
+    height:38%;
+    color:var(--mist-500);
+    opacity:.55;
+    filter:blur(.6px);
+  }
+  .range-front{
+    bottom:33%;
+    height:42%;
+    color:var(--forest-800);
+    opacity:.96;
+  }
+  .range svg{width:100%;height:100%;display:block;}
+
+  .water{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:34%;
+    overflow:hidden;
+    background:linear-gradient(180deg, var(--cold-blue-700) 0%, var(--sky-900) 75%, var(--forest-950) 100%);
+  }
+  .reflection{
+    position:absolute;
+    left:-2%;
+    width:104%;
+    transform:scaleY(-1);
+  }
+  .reflection.back{
+    top:-2%;
+    height:60%;
+    color:var(--mist-500);
+    opacity:.28;
+    filter:blur(2.5px);
+  }
+  .reflection.front{
+    top:8%;
+    height:70%;
+    color:var(--forest-800);
+    opacity:.4;
+    filter:blur(2px);
+  }
+  .reflection svg{width:100%;height:100%;display:block;}
+
+  .water-shimmer{
+    position:absolute;
+    inset:0;
+    background:repeating-linear-gradient(96deg, rgba(238,242,238,.10) 0 2px, transparent 2px 46px);
+    mix-blend-mode:screen;
+    animation:shimmer-move 7s linear infinite;
+  }
+  @keyframes shimmer-move{
+    from{background-position:0 0;}
+    to{background-position:260px 0;}
+  }
+
+  #fog-canvas{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    mix-blend-mode:screen;
+  }
+
+  .pines{
+    position:absolute;
+    left:0;right:0;bottom:0;
+    height:16%;
+    color:var(--forest-950);
+    z-index:2;
+  }
+  .pines svg{width:100%;height:100%;display:block;}
+
+  .pine-tree{
+    position:absolute;
+    bottom:2%;
+    width:34px;
+    height:64px;
+    color:var(--forest-950);
+    transform-origin:bottom center;
+    animation:sway 6.5s ease-in-out infinite;
+    z-index:3;
+  }
+  .pine-tree svg{width:100%;height:100%;display:block;filter:drop-shadow(0 6px 8px rgba(0,0,0,.35));}
+  @keyframes sway{
+    0%,100%{transform:rotate(-1.6deg);}
+    50%{transform:rotate(1.6deg);}
+  }
+
+  /* ---------- Текстовый блок героя ---------- */
+  .hero-content{
+    position:relative;
+    z-index:4;
+    max-width:640px;
+    padding:44px 34px 40px;
+    border-radius:22px;
+    background:rgba(12,23,18,.34);
+    backdrop-filter:blur(7px);
+    -webkit-backdrop-filter:blur(7px);
+    box-shadow:var(--shadow);
+    border:1px solid rgba(238,242,238,.12);
+  }
+
+  .pre-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    letter-spacing:.1em;
+    font-size:19px;
+    color:var(--mist-300);
+    margin-bottom:12px;
+  }
+
+  .names{
+    font-size:clamp(42px, 9vw, 80px);
+    line-height:1.05;
+    letter-spacing:.01em;
+    text-shadow:0 6px 26px rgba(0,0,0,.5);
+  }
+  .names .amp{
+    font-style:italic;
+    color:var(--ochre-300);
+    padding:0 12px;
+    font-weight:500;
+  }
+
+  .subtitle{
+    margin-top:18px;
+    font-size:16px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--mist-300);
+  }
+
+  .divider-line{
+    margin:24px auto 0;
+    width:110px;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--ochre-300), transparent);
+    position:relative;
+  }
+  .divider-line::before{
+    content:"";
+    position:absolute;
+    left:50%;top:50%;
+    width:6px;height:6px;
+    transform:translate(-50%,-50%) rotate(45deg);
+    background:var(--ochre-300);
+  }
+
+  .venue-note{
+    margin-top:22px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.55;
+    color:var(--fog-200);
+  }
+  .venue-note b{color:var(--ivory);font-weight:600;}
+
+  /* ---------- Секции ---------- */
+  section{
+    position:relative;
+    padding:74px 20px;
+    max-width:920px;
+    margin:0 auto;
+  }
+
+  .section-title{
+    text-align:center;
+    font-size:clamp(28px, 5vw, 40px);
+    margin-bottom:14px;
+    color:var(--ivory);
+  }
+  .section-sub{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    color:var(--mist-300);
+    max-width:540px;
+    margin:0 auto 48px;
+  }
+
+  .mist-divider{
+    position:relative;
+    max-width:920px;
+    margin:0 auto;
+    height:2px;
+    background:linear-gradient(90deg, transparent, var(--mist-500), transparent);
+    opacity:.5;
+  }
+  .mist-divider::before{
+    content:"";
+    position:absolute;
+    left:50%;top:50%;
+    width:70px;height:70px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(124,157,148,.35), transparent 70%);
+    filter:blur(4px);
+  }
+  .mist-divider .mark{
+    position:absolute;
+    left:50%;top:50%;
+    transform:translate(-50%,-50%);
+    width:22px;
+    color:var(--forest-700);
+    background:var(--forest-950);
+    padding:4px;
+    border-radius:50%;
+  }
+
+  /* ---------- Обратный отсчёт ---------- */
+  .countdown-grid{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:18px;
+  }
+  .count-box{
+    background:linear-gradient(180deg, var(--forest-700), var(--forest-900));
+    border:1px solid rgba(216,227,221,.2);
+    border-radius:16px;
+    width:112px;
+    padding:20px 8px 16px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .count-box::before{
+    content:"";
+    position:absolute;
+    inset:6px;
+    border:1px solid rgba(216,227,221,.14);
+    border-radius:11px;
+    pointer-events:none;
+  }
+  .count-box span{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-size:40px;
+    font-weight:600;
+    color:var(--ivory);
+    font-variant-numeric:tabular-nums;
+  }
+  .count-box label{
+    display:block;
+    margin-top:6px;
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--mist-300);
+  }
+
+  /* ---------- Детали события ---------- */
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:34px;
+  }
+  .detail-card{
+    text-align:center;
+  }
+  .medallion{
+    width:112px;
+    height:112px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--mist-500), var(--forest-900) 78%);
+    border:3px solid var(--fog-200);
+    box-shadow:0 0 0 4px var(--forest-800), var(--shadow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+  }
+  .detail-card h3{
+    font-size:22px;
+    margin-bottom:10px;
+    letter-spacing:.01em;
+    color:var(--ivory);
+  }
+  .detail-card p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    line-height:1.55;
+    color:var(--fog-200);
+    margin:0;
+  }
+
+  /* ---------- RSVP ---------- */
+  .rsvp{
+    text-align:center;
+  }
+  .rsvp-date{
+    display:inline-block;
+    margin:6px 0 34px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--ochre-300);
+    border-top:1px solid rgba(216,227,221,.25);
+    border-bottom:1px solid rgba(216,227,221,.25);
+    padding:8px 0;
+  }
+  .rsvp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+    background:linear-gradient(180deg, var(--ochre-300), var(--ochre-500));
+    color:var(--forest-950);
+    font-weight:700;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    font-size:15px;
+    padding:16px 34px;
+    border-radius:40px;
+    box-shadow:0 12px 26px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.4);
+    border:2px solid var(--forest-950);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 30px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.4);
+  }
+  .rsvp-btn svg{width:18px;height:18px;flex:none;}
+
+  /* ---------- Подвал ---------- */
+  footer{
+    text-align:center;
+    padding:50px 20px 60px;
+    color:var(--mist-300);
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    font-style:italic;
+  }
+  footer .footer-pine{
+    width:26px;
+    margin:0 auto 14px;
+    color:var(--mist-500);
+    opacity:.8;
+  }
+  footer .footer-pine svg{width:100%;height:auto;}
+
+  /* ---------- Адаптивность ---------- */
+  @media (max-width:640px){
+    .hero{padding:30px 14px;}
+    .hero-content{padding:34px 22px 30px;}
+    section{padding:54px 16px;}
+    .details-grid{grid-template-columns:1fr;gap:44px;}
+    .count-box{width:80px;padding:14px 4px 12px;}
+    .count-box span{font-size:27px;}
+    .pine-tree{width:24px;height:46px;}
+    .sun-glow{width:220px;height:220px;}
+  }
+
+  /* ---------- Уважение к prefers-reduced-motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .sun-glow,.pine-tree,.water-shimmer{animation:none !important;}
+    .rsvp-btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- переиспользуемые формы (силуэты) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="mtn-back" viewBox="0 0 1200 400">
+        <path d="M0,260 L80,190 L160,230 L260,120 L360,205 L460,80 L560,190 L660,140 L760,220 L860,110 L960,200 L1060,150 L1150,215 L1200,180 L1200,400 L0,400 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="mtn-front" viewBox="0 0 1200 400">
+        <path d="M0,320 L60,260 L140,300 L230,210 L300,270 L400,180 L470,250 L560,200 L650,260 L730,190 L820,255 L900,210 L990,270 L1080,230 L1160,280 L1200,250 L1200,400 L0,400 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="pine" viewBox="0 0 40 70">
+        <rect x="17" y="55" width="6" height="15" fill="currentColor"/>
+        <path d="M20 0 L34 26 L28 26 L38 46 L30 46 L40 62 L0 62 L10 46 L2 46 L12 26 L6 26 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="treeline" viewBox="0 0 1200 70" preserveAspectRatio="none">
+        <path d="M0,70 L0,43 L26,60 L52,38 L78,20 L104,46 L130,48 L156,11 L182,11 L208,45 L234,39 L260,14 L286,37 L312,60 L338,43 L364,22 L390,47 L416,54 L442,17 L468,10 L494,42 L520,38 L546,11 L572,29 L598,60 L624,45 L650,23 L676,48 L702,60 L728,24 L754,11 L780,40 L806,39 L832,9 L858,22 L884,58 L910,46 L936,22 L962,46 L988,60 L1014,31 L1040,13 L1066,40 L1092,42 L1118,9 L1144,15 L1170,52 L1196,45 L1200,70 Z" fill="currentColor"/>
+      </symbol>
+      <symbol id="leaf-icon" viewBox="0 0 24 24">
+        <path d="M4 20c0-9 6-15 16-16-1 10-7 16-16 16z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M6 18C10 13 13 10 18 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="top-fringe">
+    <svg viewBox="0 0 1200 70" preserveAspectRatio="none"><use href="#treeline"/></svg>
+  </div>
+
+  <header class="hero">
+    <div class="scene">
+      <div class="sun-glow"></div>
+
+      <div class="range range-back"><svg viewBox="0 0 1200 400" preserveAspectRatio="none"><use href="#mtn-back"/></svg></div>
+      <div class="range range-front"><svg viewBox="0 0 1200 400" preserveAspectRatio="none"><use href="#mtn-front"/></svg></div>
+
+      <div class="water">
+        <div class="reflection back"><svg viewBox="0 0 1200 400" preserveAspectRatio="none"><use href="#mtn-back"/></svg></div>
+        <div class="reflection front"><svg viewBox="0 0 1200 400" preserveAspectRatio="none"><use href="#mtn-front"/></svg></div>
+        <div class="water-shimmer"></div>
+      </div>
+
+      <canvas id="fog-canvas"></canvas>
+
+      <div class="pines">
+        <svg viewBox="0 0 1200 70" preserveAspectRatio="none"><use href="#treeline"/></svg>
+      </div>
+      <div class="pine-tree" style="left:8%; animation-delay:0s;"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></div>
+      <div class="pine-tree" style="left:20%; height:52px; width:28px; animation-delay:1.2s;"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></div>
+      <div class="pine-tree" style="left:76%; animation-delay:.6s;"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></div>
+      <div class="pine-tree" style="left:90%; height:50px; width:26px; animation-delay:1.8s;"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></div>
+    </div>
+
+    <div class="hero-content">
+      <p class="pre-title">Среди хвои и тишины заповедника</p>
+      <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
+      <p class="subtitle">3 октября 2026 · пятница · 11:00</p>
+      <div class="divider-line"></div>
+      <p class="venue-note">У подножия хребта, там, где озеро <b>Кардывач</b> замирает зеркалом, а тишина заповедника слышна отчётливее любых слов, — приглашаем вас разделить с нами этот день.</p>
+    </div>
+  </header>
+
+  <section id="countdown">
+    <h2 class="section-title">До нашего дня остаётся</h2>
+    <p class="section-sub">Пока над водой ещё стелется утренний туман, а горный воздух свеж и прозрачен — считаем часы вместе с вами</p>
+    <div class="countdown-grid">
+      <div class="count-box"><span id="days">00</span><label>дней</label></div>
+      <div class="count-box"><span id="hours">00</span><label>часов</label></div>
+      <div class="count-box"><span id="minutes">00</span><label>минут</label></div>
+      <div class="count-box"><span id="seconds">00</span><label>секунд</label></div>
+    </div>
+  </section>
+
+  <div class="mist-divider"><span class="mark"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></span></div>
+
+  <section id="details">
+    <h2 class="section-title">Детали дня в сердце заповедника</h2>
+    <p class="section-sub">Немного практичного — чтобы дорога к озеру и сам праздник прошли легко</p>
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="medallion">🌄</div>
+        <h3>Когда</h3>
+        <p>3 октября 2026, пятница<br>начало в 11:00, пока туман ещё держится над водой</p>
+      </div>
+      <div class="detail-card">
+        <div class="medallion">📍</div>
+        <h3>Где</h3>
+        <p>Эко-турбаза «Кардывач»<br>Кавказский биосферный заповедник, окрестности Сочи</p>
+      </div>
+      <div class="detail-card">
+        <div class="medallion">🥾</div>
+        <h3>Дресс-код</h3>
+        <p>Эко-стиль, натуральные ткани<br>приглушённые тона и удобная обувь — нас ждёт горная тропа</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="mist-divider"><span class="mark"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></span></div>
+
+  <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=40.5975,43.5069&z=12&l=map&pt=40.5975,43.5069,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Турбаза «Кардывач»" style="display:block;border:0;"></iframe>
+    </div>
+    <p style="text-align:center;margin:10px 0 0;">
+      <a href="https://yandex.ru/maps/?ll=40.5975,43.5069&z=12&pt=40.5975,43.5069,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+    </p>
+  </div>
+
+  <section class="rsvp">
+    <h2 class="section-title">Будем ждать вас у озера</h2>
+    <p class="rsvp-date">Пожалуйста, подтвердите присутствие до 20 сентября — дорога в заповедник требует немного планирования</p>
+    <div>
+      <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24"><use href="#leaf-icon"/></svg> Подтвердить участие
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-pine"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></div>
+    С любовью и благодарностью за тишину этих мест — Георгий и Анастасия
+  </footer>
+
+<script>
+  // ---------- Обратный отсчёт до свадьбы ----------
+  (function(){
+    var target = new Date('2026-10-03T11:00:00');
+    var elDays = document.getElementById('days');
+    var elHours = document.getElementById('hours');
+    var elMinutes = document.getElementById('minutes');
+    var elSeconds = document.getElementById('seconds');
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+
+    function update(){
+      var now = new Date();
+      var diff = target - now;
+
+      if (diff <= 0){
+        elDays.textContent = '00';
+        elHours.textContent = '00';
+        elMinutes.textContent = '00';
+        elSeconds.textContent = '00';
+        return;
+      }
+
+      var totalSeconds = Math.floor(diff / 1000);
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+
+      elDays.textContent = pad(days);
+      elHours.textContent = pad(hours);
+      elMinutes.textContent = pad(minutes);
+      elSeconds.textContent = pad(seconds);
+    }
+
+    update();
+    setInterval(update, 1000);
+  })();
+
+  // ---------- Туман над озером (canvas) ----------
+  (function(){
+    var canvas = document.getElementById('fog-canvas');
+    var ctx = canvas.getContext('2d');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h;
+
+    var blobs = [
+      { yFactor:.42, r:220, speed:.09,  opacity:.16 },
+      { yFactor:.55, r:160, speed:-.13, opacity:.13 },
+      { yFactor:.62, r:260, speed:.06,  opacity:.11 },
+      { yFactor:.50, r:140, speed:-.17, opacity:.15 },
+      { yFactor:.68, r:190, speed:.11,  opacity:.10 }
+    ];
+
+    function resize(){
+      var rect = canvas.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      blobs.forEach(function(b, i){
+        b.x = (w / blobs.length) * i + Math.random() * w * 0.3;
+      });
+    }
+
+    function drawBlob(b){
+      var x = ((b.x % (w + b.r * 2)) + (w + b.r * 2)) % (w + b.r * 2) - b.r;
+      var y = h * b.yFactor;
+      var grad = ctx.createRadialGradient(x, y, 0, x, y, b.r);
+      grad.addColorStop(0, 'rgba(216,227,221,' + b.opacity + ')');
+      grad.addColorStop(1, 'rgba(216,227,221,0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.ellipse(x, y, b.r, b.r * 0.45, 0, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function render(){
+      ctx.clearRect(0, 0, w, h);
+      blobs.forEach(drawBlob);
+    }
+
+    function loop(){
+      blobs.forEach(function(b){ b.x += b.speed; });
+      render();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', function(){
+      resize();
+      render();
+    });
+
+    resize();
+
+    if (reduceMotion){
+      render();
+    } else {
+      loop();
+    }
+  })();
+</script>
+
+</body>
+</html>

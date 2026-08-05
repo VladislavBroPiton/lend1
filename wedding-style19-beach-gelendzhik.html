@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&amp;family=Nunito:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-top:#211840;
+    --sky-2:#4a2b57;
+    --sky-3:#a9435f;
+    --sky-4:#e37a53;
+    --sky-5:#ffbd7a;
+    --sea:#2f5866;
+    --sea-deep:#12262f;
+    --mountain-far:#5c4864;
+    --mountain-near:#241d33;
+    --pebble-a:#a99483;
+    --pebble-b:#8a7869;
+    --pebble-c:#c9b6a4;
+    --cream:#fff3e6;
+    --ink:#2c2130;
+    --gold:#ffb268;
+    --gold-dark:#e88a4a;
+    --shadow:0 20px 45px rgba(20,10,20,.35);
+  }
+
+  *{ box-sizing:border-box; }
+
+  html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    font-family:'Nunito', sans-serif;
+    color:var(--cream);
+    overflow-x:hidden;
+    background:var(--sky-top);
+  }
+
+  .stage{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    background:linear-gradient(180deg,
+      var(--sky-top) 0%,
+      var(--sky-2) 24%,
+      var(--sky-3) 46%,
+      var(--sky-4) 62%,
+      var(--sky-5) 74%,
+      var(--sea) 76%,
+      var(--sea-deep) 100%);
+  }
+
+  /* ---------- солнце у горизонта ---------- */
+  .sun{
+    position:absolute;
+    top:58%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:190px;
+    height:190px;
+    border-radius:50%;
+    background:radial-gradient(circle at 45% 40%, #fff6df 0%, var(--gold) 45%, rgba(232,138,74,0) 72%);
+    z-index:1;
+    animation:sunGlow 6s ease-in-out infinite;
+  }
+  @keyframes sunGlow{
+    0%,100%{ opacity:.9; transform:translate(-50%,-50%) scale(1); }
+    50%{ opacity:1; transform:translate(-50%,-50%) scale(1.06); }
+  }
+
+  /* ---------- мерцание солнечной дорожки на воде ---------- */
+  .glitter-layer{
+    position:absolute;
+    left:0; top:0;
+    width:100%;
+    height:100%;
+    z-index:2;
+    pointer-events:none;
+  }
+
+  /* ---------- дымка над горами ---------- */
+  .haze{
+    position:absolute;
+    left:0;
+    bottom:22%;
+    width:100%;
+    height:16%;
+    background:linear-gradient(180deg, rgba(255,189,122,0) 0%, rgba(255,189,122,.28) 100%);
+    z-index:2;
+    animation:hazeDrift 9s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes hazeDrift{
+    0%,100%{ opacity:.6; }
+    50%{ opacity:1; }
+  }
+
+  /* ---------- силуэты гор Кавказского побережья ---------- */
+  .mountains{
+    position:absolute;
+    left:0;
+    bottom:16%;
+    width:100%;
+    z-index:3;
+    line-height:0;
+  }
+  .mountains svg{ width:100%; height:auto; display:block; }
+  .mountains.far{ bottom:19%; opacity:.85; }
+  .mountains.near{ bottom:15%; }
+
+  /* ---------- чайки ---------- */
+  .gulls{
+    position:absolute;
+    inset:0;
+    z-index:4;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .gull{
+    position:absolute;
+    width:46px;
+    height:20px;
+  }
+  .gull svg{ width:100%; height:100%; display:block; }
+  .wing-up, .wing-down{
+    fill:none;
+    stroke:rgba(42,26,38,.62);
+    stroke-width:2.4;
+    stroke-linecap:round;
+  }
+  .wing-down{ opacity:0; }
+  .gull .wing-up{ animation:flapUp .7s ease-in-out infinite; }
+  .gull .wing-down{ animation:flapDown .7s ease-in-out infinite; }
+  @keyframes flapUp{ 0%,100%{ opacity:1; } 50%{ opacity:0; } }
+  @keyframes flapDown{ 0%,100%{ opacity:0; } 50%{ opacity:1; } }
+
+  .gull-1{ top:18%; left:-8%; animation:fly1 26s linear infinite; }
+  .gull-2{ top:26%; left:-8%; width:34px; height:15px; opacity:.85; animation:fly2 32s linear infinite 3s; }
+  .gull-3{ top:14%; left:-8%; width:30px; height:13px; opacity:.7; animation:fly3 38s linear infinite 9s; }
+  .gull-4{ top:33%; left:-8%; width:40px; height:18px; opacity:.9; animation:fly1 30s linear infinite 16s; }
+
+  @keyframes fly1{
+    0%{ transform:translate(0,0); }
+    25%{ transform:translate(35vw,-18px); }
+    50%{ transform:translate(65vw,6px); }
+    75%{ transform:translate(90vw,-14px); }
+    100%{ transform:translate(125vw,0); }
+  }
+  @keyframes fly2{
+    0%{ transform:translate(0,4px); }
+    30%{ transform:translate(40vw,-20px); }
+    60%{ transform:translate(78vw,2px); }
+    100%{ transform:translate(125vw,-10px); }
+  }
+  @keyframes fly3{
+    0%{ transform:translate(0,-6px); }
+    35%{ transform:translate(45vw,10px); }
+    70%{ transform:translate(85vw,-16px); }
+    100%{ transform:translate(125vw,4px); }
+  }
+
+  /* ---------- контент ---------- */
+  .content{
+    position:relative;
+    z-index:6;
+    width:100%;
+    max-width:640px;
+    padding:64px 24px 30px;
+    text-align:center;
+  }
+
+  .kicker{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    font-size:13px;
+    color:var(--cream);
+    opacity:.9;
+    margin-bottom:10px;
+  }
+
+  h1.names{
+    font-family:'Marcellus', serif;
+    font-size:clamp(46px, 9vw, 78px);
+    line-height:1.08;
+    margin:0;
+    color:#fff8ef;
+    text-shadow:0 6px 26px rgba(20,10,15,.4);
+    letter-spacing:.01em;
+  }
+
+  .amp{
+    display:inline-block;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    color:var(--gold);
+    font-size:.62em;
+    margin:0 10px;
+    vertical-align:middle;
+  }
+
+  .subtitle{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--cream);
+    opacity:.92;
+    margin-top:10px;
+    letter-spacing:.03em;
+  }
+
+  .divider{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    margin:26px 0;
+    color:var(--gold);
+  }
+  .divider svg{ width:110px; height:14px; }
+  .divider span{ font-size:15px; letter-spacing:.3em; text-transform:uppercase; opacity:.8; }
+
+  /* ---------- карточка приглашения ---------- */
+  .invite-card{
+    background:rgba(20,14,24,.32);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,246,230,.25);
+    border-radius:26px;
+    padding:32px 28px;
+    box-shadow:var(--shadow);
+    margin:0 0 30px;
+  }
+
+  .invite-text{
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.75;
+    color:var(--cream);
+    margin:0;
+  }
+  .invite-text strong{ color:var(--gold); }
+
+  /* ---------- обратный отсчёт ---------- */
+  .countdown-title{
+    font-size:13px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:.85;
+    margin-bottom:14px;
+    font-weight:700;
+  }
+
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:34px;
+  }
+
+  .cd-cell{
+    background:rgba(255,246,230,.12);
+    border:1px solid rgba(255,246,230,.3);
+    backdrop-filter:blur(4px);
+    border-radius:16px;
+    padding:14px 10px;
+    min-width:76px;
+    box-shadow:0 10px 22px rgba(10,5,15,.25);
+  }
+  .cd-num{
+    font-family:'Nunito', sans-serif;
+    font-weight:800;
+    font-size:30px;
+    color:#fff8ef;
+    display:block;
+    font-variant-numeric:tabular-nums;
+  }
+  .cd-label{
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--gold);
+    opacity:.9;
+  }
+
+  /* ---------- блок деталей ---------- */
+  .details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:34px;
+    text-align:left;
+  }
+  .detail-box{
+    background:rgba(255,246,230,.1);
+    border:1px solid rgba(255,246,230,.28);
+    border-radius:20px;
+    padding:18px;
+  }
+  .detail-box.full{ grid-column:1 / -1; }
+  .detail-icon{ font-size:22px; margin-bottom:6px; display:block; }
+  .detail-label{
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--gold);
+    font-weight:800;
+    margin-bottom:4px;
+    text-shadow:0 1px 2px rgba(20,10,15,.85), 0 0 8px rgba(20,10,15,.4);
+  }
+  .detail-value{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    color:var(--cream);
+    line-height:1.4;
+  }
+  .detail-value span.small{
+    display:block;
+    font-size:14px;
+    opacity:.8;
+    margin-top:2px;
+  }
+
+  /* ---------- RSVP ---------- */
+  .rsvp-text{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    margin-bottom:16px;
+    color:var(--cream);
+    opacity:.95;
+  }
+  .rsvp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:linear-gradient(135deg, var(--gold), var(--gold-dark));
+    color:#2c1a12;
+    font-family:'Nunito', sans-serif;
+    font-weight:800;
+    font-size:16px;
+    letter-spacing:.03em;
+    text-decoration:none;
+    padding:16px 36px;
+    border-radius:50px;
+    box-shadow:0 14px 28px rgba(232,138,74,.4);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 18px 34px rgba(232,138,74,.5);
+  }
+  .rsvp-btn:active{ transform:translateY(0) scale(.99); }
+
+  .footer-note{
+    font-size:13px;
+    color:var(--cream);
+    opacity:.75;
+    letter-spacing:.05em;
+    margin-top:10px;
+  }
+
+  /* ---------- прибой и галечный берег ---------- */
+  .shore-wrap{
+    position:relative;
+    width:100%;
+    margin-top:auto;
+    z-index:5;
+    line-height:0;
+  }
+  #surfCanvas{
+    display:block;
+    width:100%;
+    height:150px;
+  }
+  .pebbles{
+    width:100%;
+    height:22px;
+    background-image:
+      radial-gradient(ellipse 7px 4px at 8% 60%, var(--pebble-c), transparent 70%),
+      radial-gradient(ellipse 9px 5px at 22% 40%, var(--pebble-a), transparent 70%),
+      radial-gradient(ellipse 6px 4px at 37% 65%, var(--pebble-b), transparent 70%),
+      radial-gradient(ellipse 8px 5px at 52% 45%, var(--pebble-c), transparent 70%),
+      radial-gradient(ellipse 7px 4px at 66% 62%, var(--pebble-a), transparent 70%),
+      radial-gradient(ellipse 9px 5px at 80% 42%, var(--pebble-b), transparent 70%),
+      radial-gradient(ellipse 6px 4px at 93% 60%, var(--pebble-c), transparent 70%);
+    background-color:var(--sea-deep);
+  }
+
+  /* ---------- адаптивность ---------- */
+  @media (max-width: 520px){
+    .content{ padding:46px 16px 24px; }
+    h1.names{ font-size:clamp(38px, 12vw, 56px); }
+    .details{ grid-template-columns:1fr; }
+    .cd-cell{ min-width:62px; padding:10px 6px; }
+    .cd-num{ font-size:23px; }
+    .sun{ width:130px; height:130px; }
+    #surfCanvas{ height:110px; }
+    .gull{ transform:scale(.85); }
+  }
+
+  /* ---------- уважение к prefers-reduced-motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    .sun, .haze, .gull, .wing-up, .wing-down, .rsvp-btn{
+      animation:none !important;
+      transition:none !important;
+    }
+    .wing-up{ opacity:1; }
+    .wing-down{ opacity:0; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div class="sun" aria-hidden="true"></div>
+  <div class="haze" aria-hidden="true"></div>
+  <canvas class="glitter-layer" id="glitterCanvas" aria-hidden="true"></canvas>
+
+  <!-- дальний план гор -->
+  <div class="mountains far" aria-hidden="true">
+    <svg viewBox="0 0 1200 220" preserveAspectRatio="none">
+      <path d="M0,220 L0,140 C60,100 120,150 180,110 C240,70 300,130 360,95 C420,60 470,120 540,90 C610,60 660,110 720,80 C780,50 840,100 900,75 C960,50 1020,95 1080,70 C1120,55 1160,90 1200,80 L1200,220 Z" fill="var(--mountain-far)"/>
+    </svg>
+  </div>
+
+  <!-- ближний план гор -->
+  <div class="mountains near" aria-hidden="true">
+    <svg viewBox="0 0 1200 180" preserveAspectRatio="none">
+      <path d="M0,180 L0,120 C80,90 140,130 210,100 C270,75 330,115 400,85 C470,55 520,105 600,80 C670,58 730,100 800,75 C870,50 930,95 1000,70 C1060,50 1120,85 1200,65 L1200,180 Z" fill="var(--mountain-near)"/>
+    </svg>
+  </div>
+
+  <!-- чайки -->
+  <div class="gulls" aria-hidden="true">
+    <div class="gull gull-1">
+      <svg viewBox="0 0 60 24">
+        <path class="wing-up" d="M2,16 Q15,2 30,14 Q45,2 58,16"/>
+        <path class="wing-down" d="M2,10 Q15,20 30,12 Q45,20 58,10"/>
+      </svg>
+    </div>
+    <div class="gull gull-2">
+      <svg viewBox="0 0 60 24">
+        <path class="wing-up" d="M2,16 Q15,2 30,14 Q45,2 58,16"/>
+        <path class="wing-down" d="M2,10 Q15,20 30,12 Q45,20 58,10"/>
+      </svg>
+    </div>
+    <div class="gull gull-3">
+      <svg viewBox="0 0 60 24">
+        <path class="wing-up" d="M2,16 Q15,2 30,14 Q45,2 58,16"/>
+        <path class="wing-down" d="M2,10 Q15,20 30,12 Q45,20 58,10"/>
+      </svg>
+    </div>
+    <div class="gull gull-4">
+      <svg viewBox="0 0 60 24">
+        <path class="wing-up" d="M2,16 Q15,2 30,14 Q45,2 58,16"/>
+        <path class="wing-down" d="M2,10 Q15,20 30,12 Q45,20 58,10"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="kicker">Приглашаем встретить закат вместе</div>
+
+    <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
+    <p class="subtitle">на берегу Чёрного моря мы скажем друг другу «да»</p>
+
+    <div class="divider">
+      <svg viewBox="0 0 120 14"><path d="M0 7 Q15 0 30 7 T60 7 T90 7 T120 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+      <span>22.08</span>
+      <svg viewBox="0 0 120 14"><path d="M0 7 Q15 14 30 7 T60 7 T90 7 T120 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    </div>
+
+    <div class="invite-card">
+      <p class="invite-text">
+        Когда солнце коснётся горизонта над Чёрным морем,<br>
+        а галечный берег окрасится в розовое золото —<br>
+        мы станем мужем и женой.<br>
+        Будем счастливы разделить этот закат<br>
+        с вами <strong>3 октября 2026 года</strong>.
+      </p>
+    </div>
+
+    <div class="countdown-title">до заката остаётся</div>
+    <div class="countdown" id="countdown">
+      <div class="cd-cell"><span class="cd-num" id="cd-days">00</span><span class="cd-label">дней</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">часов</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-minutes">00</span><span class="cd-label">минут</span></div>
+      <div class="cd-cell"><span class="cd-num" id="cd-seconds">00</span><span class="cd-label">секунд</span></div>
+    </div>
+
+    <div class="details">
+      <div class="detail-box">
+        <span class="detail-icon">🌅</span>
+        <div class="detail-label">Дата и время</div>
+        <div class="detail-value">3 октября 2026<span class="small">пятница, начало в 18:30</span></div>
+      </div>
+      <div class="detail-box">
+        <span class="detail-icon">👗</span>
+        <div class="detail-label">Дресс-код</div>
+        <div class="detail-value">Лёгкий летний, светлые тона<span class="small">без каблуков — берег галечный</span></div>
+      </div>
+      <div class="detail-box full">
+        <span class="detail-icon">📍</span>
+        <div class="detail-label">Место проведения</div>
+        <div class="detail-value">Пляж «Тихая бухта»<span class="small">набережная Геленджика, Черноморское побережье</span></div>
+      </div>
+    </div>
+
+    <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+      <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=38.0756,44.5622&z=14&l=map&pt=38.0756,44.5622,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Пляж «Тихая бухта»" style="display:block;border:0;"></iframe>
+      </div>
+      <p style="text-align:center;margin:10px 0 0;">
+        <a href="https://yandex.ru/maps/?ll=38.0756,44.5622&z=14&pt=38.0756,44.5622,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+      </p>
+    </div>
+
+    <div class="rsvp">
+      <p class="rsvp-text">Пожалуйста, подтвердите присутствие<br>до 20 сентября</p>
+      <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener">
+        <span>🕊️</span> Подтвердить участие
+      </a>
+      <div class="footer-note">будем рады встретить закат вместе с вами</div>
+    </div>
+  </div>
+
+  <div class="shore-wrap">
+    <canvas id="surfCanvas" aria-hidden="true"></canvas>
+    <div class="pebbles" aria-hidden="true"></div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- обратный отсчёт ---------- */
+  var weddingDate = new Date('2026-10-03T18:30:00');
+
+  var elDays = document.getElementById('cd-days');
+  var elHours = document.getElementById('cd-hours');
+  var elMinutes = document.getElementById('cd-minutes');
+  var elSeconds = document.getElementById('cd-seconds');
+
+  function pad(n){ return String(n).padStart(2, '0'); }
+
+  function updateCountdown(){
+    var now = new Date();
+    var diff = weddingDate - now;
+
+    if (diff <= 0){
+      elDays.textContent = '00';
+      elHours.textContent = '00';
+      elMinutes.textContent = '00';
+      elSeconds.textContent = '00';
+      return;
+    }
+
+    var totalSeconds = Math.floor(diff / 1000);
+    var days = Math.floor(totalSeconds / 86400);
+    var hours = Math.floor((totalSeconds % 86400) / 3600);
+    var minutes = Math.floor((totalSeconds % 3600) / 60);
+    var seconds = totalSeconds % 60;
+
+    elDays.textContent = pad(days);
+    elHours.textContent = pad(hours);
+    elMinutes.textContent = pad(minutes);
+    elSeconds.textContent = pad(seconds);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ---------- солнечная дорожка на воде (тёплые блики) ---------- */
+  var glitterCanvas = document.getElementById('glitterCanvas');
+  if (glitterCanvas && glitterCanvas.getContext && !reduceMotion){
+    var gctx = glitterCanvas.getContext('2d');
+    var sparkles = [];
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    function resizeGlitter(){
+      glitterCanvas.width = window.innerWidth * dpr;
+      glitterCanvas.height = window.innerHeight * dpr;
+      glitterCanvas.style.width = window.innerWidth + 'px';
+      glitterCanvas.style.height = window.innerHeight + 'px';
+      gctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function makeSparkle(){
+      var bandTop = window.innerHeight * 0.60;
+      var bandHeight = window.innerHeight * 0.20;
+      var cx = window.innerWidth * 0.5;
+      var spread = window.innerWidth * 0.10;
+      return {
+        x: cx + (Math.random() - 0.5) * spread * 2,
+        y: bandTop + Math.random() * bandHeight,
+        r: 0.6 + Math.random() * 1.8,
+        baseAlpha: 0.25 + Math.random() * 0.5,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.02 + Math.random() * 0.03
+      };
+    }
+
+    function initSparkles(){
+      var count = Math.min(70, Math.floor(window.innerWidth / 14));
+      sparkles = [];
+      for (var i = 0; i < count; i++){ sparkles.push(makeSparkle()); }
+    }
+
+    resizeGlitter();
+    initSparkles();
+    window.addEventListener('resize', function(){
+      resizeGlitter();
+      initSparkles();
+    });
+
+    var t = 0;
+    function tickGlitter(){
+      t += 1;
+      gctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+      for (var i = 0; i < sparkles.length; i++){
+        var s = sparkles[i];
+        var alpha = s.baseAlpha * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
+        gctx.beginPath();
+        gctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        gctx.fillStyle = 'rgba(255, 214, 160,' + alpha.toFixed(3) + ')';
+        gctx.fill();
+      }
+      requestAnimationFrame(tickGlitter);
+    }
+    requestAnimationFrame(tickGlitter);
+  }
+
+  /* ---------- прибой у галечного берега ---------- */
+  var surfCanvas = document.getElementById('surfCanvas');
+  if (surfCanvas && surfCanvas.getContext){
+    var sctx = surfCanvas.getContext('2d');
+    var sdpr = Math.min(window.devicePixelRatio || 1, 2);
+    var sw, sh, st = 0;
+
+    var layers = [
+      { amp: 8,  len: 0.018, speed: 0.03,  offset: 0.0, color: 'rgba(47, 88, 102, 0.55)' },
+      { amp: 11, len: 0.014, speed: 0.022, offset: 2.1, color: 'rgba(18, 38, 47, 0.7)'   },
+      { amp: 6,  len: 0.024, speed: 0.04,  offset: 4.2, color: 'rgba(230, 236, 232, 0.35)' },
+      { amp: 13, len: 0.011, speed: 0.017, offset: 1.0, color: 'rgba(18, 38, 47, 0.92)'  }
+    ];
+
+    function resizeSurf(){
+      var rect = surfCanvas.getBoundingClientRect();
+      sw = rect.width;
+      sh = rect.height;
+      surfCanvas.width = sw * sdpr;
+      surfCanvas.height = sh * sdpr;
+      sctx.setTransform(sdpr, 0, 0, sdpr, 0, 0);
+    }
+
+    function drawWave(layer, phase){
+      sctx.beginPath();
+      sctx.moveTo(0, sh);
+      for (var x = 0; x <= sw; x += 6){
+        var y = sh - 30 - layer.amp - Math.sin(x * layer.len + phase + layer.offset) * layer.amp;
+        sctx.lineTo(x, y);
+      }
+      sctx.lineTo(sw, sh);
+      sctx.closePath();
+      sctx.fillStyle = layer.color;
+      sctx.fill();
+    }
+
+    function renderSurf(){
+      sctx.clearRect(0, 0, sw, sh);
+      for (var i = 0; i < layers.length; i++){
+        drawWave(layers[i], st * layers[i].speed);
+      }
+    }
+
+    function loopSurf(){
+      st += 1;
+      renderSurf();
+      requestAnimationFrame(loopSurf);
+    }
+
+    window.addEventListener('resize', function(){
+      resizeSurf();
+      renderSurf();
+    });
+
+    resizeSurf();
+
+    if (reduceMotion){
+      renderSurf();
+    } else {
+      loopSurf();
+    }
+  }
+})();
+</script>
+</body>
+</html>

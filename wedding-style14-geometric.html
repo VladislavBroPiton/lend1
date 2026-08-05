@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F3EBD8;
+    --cream-2:#EAE0C4;
+    --navy:#161F3D;
+    --navy-2:#212C52;
+    --terracotta:#C6512E;
+    --ochre:#E0A73A;
+    --ink:#161F3D;
+    --line:3px;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Manrope', sans-serif;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Unbounded', sans-serif;
+    margin:0;
+    line-height:1.05;
+  }
+
+  a{ color:inherit; }
+
+  section, header, footer{ position:relative; }
+
+  .section-label{
+    font-family:'Unbounded', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:clamp(.85rem, 1.4vw, 1.05rem);
+    display:inline-block;
+    padding:.5em 1em;
+    border:var(--line) solid var(--navy);
+    background:var(--cream);
+  }
+  .section-label.light{ border-color:var(--navy); }
+  .section-label.on-dark{ background:var(--navy); color:var(--cream); border-color:var(--cream); }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .9s ease, transform .9s ease;
+  }
+  .reveal.in-view{ opacity:1; transform:translateY(0); }
+
+  /* ---------- generic shapes ---------- */
+  .shape{ position:absolute; pointer-events:none; }
+  .circle{ border-radius:50%; }
+  .triangle{
+    width:0; height:0;
+    background:transparent !important;
+  }
+
+  @keyframes floatY{
+    0%,100%{ transform:translateY(0) rotate(var(--r,0deg)); }
+    50%{ transform:translateY(-18px) rotate(var(--r,0deg)); }
+  }
+  @keyframes floatX{
+    0%,100%{ transform:translateX(0); }
+    50%{ transform:translateX(16px); }
+  }
+  @keyframes spinSlow{
+    from{ transform:rotate(0deg); }
+    to{ transform:rotate(360deg); }
+  }
+  @keyframes drawLine{
+    from{ transform:scaleX(0); }
+    to{ transform:scaleX(1); }
+  }
+  @keyframes popIn{
+    from{ opacity:0; transform:scale(.4); }
+    to{ opacity:1; transform:scale(1); }
+  }
+  @keyframes pulseRing{
+    0%,100%{ transform:scale(1); opacity:.9; }
+    50%{ transform:scale(1.08); opacity:.55; }
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:6rem 1.5rem 4rem;
+    overflow:hidden;
+    border-bottom:var(--line) solid var(--navy);
+  }
+
+  .hero-shapes{ position:absolute; inset:0; z-index:0; }
+
+  .hero-shapes .circle-big{
+    width:min(46vw,480px); height:min(46vw,480px);
+    background:var(--ochre);
+    top:-10%; left:-12%;
+    animation:floatY 9s ease-in-out infinite;
+    --r:0deg;
+  }
+  .hero-shapes .circle-outline{
+    width:180px; height:180px;
+    border:var(--line) solid var(--navy);
+    right:8%; top:12%;
+    animation:spinSlow 26s linear infinite;
+  }
+  .hero-shapes .triangle-terracotta{
+    right:-4%; bottom:-6%;
+    border-left:190px solid transparent;
+    border-right:190px solid transparent;
+    border-bottom:300px solid var(--terracotta);
+    animation:floatY 11s ease-in-out infinite reverse;
+    --r:-6deg;
+  }
+  .hero-shapes .bar{
+    height:var(--line);
+    background:var(--navy);
+    transform-origin:left center;
+    animation:drawLine 1.4s ease forwards;
+  }
+  .hero-shapes .bar-1{ width:34%; top:22%; left:0; animation-delay:.2s; }
+  .hero-shapes .bar-2{ width:20%; bottom:18%; right:0; animation-delay:.6s; }
+  .hero-shapes .dot{
+    width:22px; height:22px;
+    background:var(--navy);
+    left:6%; bottom:26%;
+    animation:popIn .6s ease .9s both, floatX 7s ease-in-out infinite 1.5s;
+  }
+
+  .hero-inner{ position:relative; z-index:1; max-width:960px; text-align:center; }
+
+  .eyebrow{
+    font-family:'Unbounded', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:.3em;
+    font-size:clamp(.7rem,1.6vw,.95rem);
+    font-weight:600;
+    margin:0 0 1.6rem;
+  }
+
+  .names{
+    font-size:clamp(2.8rem, 9vw, 6.4rem);
+    font-weight:900;
+    letter-spacing:-.01em;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+    gap:.15em .4em;
+  }
+  .names .amp{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:1.05em; height:1.05em;
+    background:var(--terracotta);
+    color:var(--cream);
+    border-radius:50%;
+    font-size:.55em;
+    transform:translateY(.05em);
+  }
+
+  .hero-date{
+    margin-top:2rem;
+    font-weight:700;
+    font-size:clamp(1rem,2.4vw,1.4rem);
+    letter-spacing:.04em;
+    padding:.5em 1.2em;
+    border:var(--line) solid var(--navy);
+    display:inline-block;
+    background:var(--cream);
+  }
+
+  /* ================= COUNTDOWN ================= */
+  .countdown{
+    background:var(--navy);
+    color:var(--cream);
+    padding:5rem 1.5rem 6rem;
+    text-align:center;
+    border-bottom:var(--line) solid var(--navy);
+    overflow:hidden;
+  }
+  .countdown .section-label{ background:var(--navy); color:var(--cream); border-color:var(--cream); margin-bottom:3.2rem; }
+
+  .countdown-shapes{ position:absolute; inset:0; z-index:0; }
+  .countdown-shapes .ring{
+    width:260px; height:260px;
+    border:var(--line) solid var(--ochre);
+    left:-90px; bottom:-90px;
+    animation:pulseRing 6s ease-in-out infinite;
+  }
+  .countdown-shapes .triangle-ochre{
+    top:-40px; right:6%;
+    border-left:70px solid transparent;
+    border-right:70px solid transparent;
+    border-bottom:120px solid var(--ochre);
+    animation:floatY 8s ease-in-out infinite;
+    --r:8deg;
+  }
+
+  .countdown-grid{
+    position:relative; z-index:1;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:1.4rem;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .count-box{
+    background:var(--cream);
+    color:var(--navy);
+    width:150px;
+    padding:1.6rem .5rem 1.3rem;
+    border:var(--line) solid var(--cream);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.3rem;
+  }
+  .count-box.box-1{ background:var(--ochre); transform:translateY(-14px); }
+  .count-box.box-2{ background:var(--cream); transform:translateY(10px); }
+  .count-box.box-3{ background:var(--terracotta); color:var(--cream); transform:translateY(-6px); }
+  .count-box.box-4{ background:var(--cream); transform:translateY(18px); }
+
+  .num{
+    font-family:'Unbounded', sans-serif;
+    font-weight:800;
+    font-size:clamp(2.2rem,5vw,3.2rem);
+    font-variant-numeric:tabular-nums;
+  }
+  .lbl{
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.16em;
+    font-weight:700;
+  }
+
+  /* ================= DETAILS ================= */
+  .details{
+    padding:6rem 1.5rem 5rem;
+    background:var(--cream);
+    border-bottom:var(--line) solid var(--navy);
+  }
+  .details-inner{ max-width:1080px; margin:0 auto; }
+  .details .section-label{ margin-bottom:3rem; }
+
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:1.4rem;
+  }
+  .card{
+    border:var(--line) solid var(--navy);
+    padding:2.2rem 1.8rem;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+  }
+  .card h3{
+    font-size:clamp(1.3rem,2.6vw,1.7rem);
+    font-weight:700;
+  }
+  .card p{ margin:0; font-size:1rem; line-height:1.55; font-weight:500; }
+
+  .card-date{ grid-column:span 3; background:var(--navy); color:var(--cream); transform:translateY(-8px); }
+  .card-place{ grid-column:span 3; background:var(--cream); color:var(--navy); }
+  .card-dress{ grid-column:span 4; background:var(--ochre); color:var(--navy); margin-top:-1.2rem; }
+  .card-spacer{ grid-column:span 2; }
+
+  .card-icon{ width:46px; height:46px; }
+  .card-icon svg{ width:100%; height:100%; display:block; }
+
+  /* ================= RSVP ================= */
+  .rsvp{
+    background:var(--terracotta);
+    color:var(--cream);
+    text-align:center;
+    padding:6rem 1.5rem;
+    overflow:hidden;
+    border-bottom:var(--line) solid var(--navy);
+  }
+  .rsvp-shapes{ position:absolute; inset:0; z-index:0; }
+  .rsvp-shapes .circle-navy{
+    width:220px; height:220px;
+    background:var(--navy);
+    right:-70px; top:-70px;
+    animation:floatY 10s ease-in-out infinite;
+    --r:0deg;
+  }
+  .rsvp-shapes .triangle-cream{
+    left:4%; bottom:-10px;
+    border-left:80px solid transparent;
+    border-right:80px solid transparent;
+    border-bottom:140px solid var(--cream);
+    opacity:.9;
+    animation:floatY 9s ease-in-out infinite reverse;
+    --r:4deg;
+  }
+
+  .rsvp-inner{ position:relative; z-index:1; max-width:640px; margin:0 auto; }
+  .rsvp h2{
+    font-size:clamp(2.4rem,7vw,4rem);
+    font-weight:900;
+    letter-spacing:-.02em;
+    margin-bottom:1.2rem;
+  }
+  .rsvp p{
+    font-size:clamp(1rem,2.2vw,1.2rem);
+    font-weight:600;
+    margin:0 0 2.4rem;
+  }
+  .rsvp p strong{ font-weight:800; text-decoration:underline; text-underline-offset:.2em; }
+
+  .rsvp-btn{
+    display:inline-block;
+    font-family:'Unbounded', sans-serif;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    font-size:1rem;
+    text-decoration:none;
+    color:var(--terracotta);
+    background:var(--cream);
+    border:var(--line) solid var(--navy);
+    padding:1.1em 2.4em;
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+  }
+  .rsvp-btn:hover, .rsvp-btn:focus-visible{
+    background:var(--navy);
+    color:var(--cream);
+    transform:translate(-4px,-4px);
+  }
+
+  /* ================= FOOTER ================= */
+  .site-footer{
+    background:var(--cream);
+    padding:3.5rem 1.5rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:1rem;
+  }
+  .monogram{
+    width:96px; height:96px;
+    border:var(--line) solid var(--navy);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Unbounded', sans-serif;
+    font-weight:800;
+    font-size:1.3rem;
+    gap:.2em;
+  }
+  .monogram span{ color:var(--terracotta); }
+  .footer-note{
+    font-size:.85rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    font-weight:600;
+    color:var(--navy-2);
+  }
+
+  /* ================= MOBILE ================= */
+  @media (max-width:720px){
+    .hero{ padding:5rem 1.2rem 3rem; }
+    .hero-shapes .circle-big{ width:60vw; height:60vw; }
+    .hero-shapes .triangle-terracotta{
+      border-left-width:120px; border-right-width:120px; border-bottom-width:190px;
+    }
+    .countdown-grid{ gap:1rem; }
+    .count-box{ width:42%; transform:none !important; padding:1.2rem .3rem 1rem; }
+    .details-grid{ grid-template-columns:1fr; }
+    .card-date, .card-place, .card-dress{ grid-column:1 / -1; transform:none; margin-top:0; }
+    .rsvp{ padding:4.5rem 1.2rem; }
+  }
+
+  /* ================= REDUCED MOTION ================= */
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    *{
+      animation-duration:0.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.001ms !important;
+      scroll-behavior:auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <header class="hero" id="hero">
+    <div class="hero-shapes" aria-hidden="true">
+      <div class="shape circle circle-big"></div>
+      <div class="shape circle circle-outline"></div>
+      <div class="shape triangle triangle-terracotta"></div>
+      <div class="shape bar bar-1"></div>
+      <div class="shape bar bar-2"></div>
+      <div class="shape dot"></div>
+    </div>
+    <div class="hero-inner">
+      <p class="eyebrow">Приглашение на свадьбу</p>
+      <h1 class="names">
+        <span>Георгий</span>
+        <span class="amp">&amp;</span>
+        <span>Анастасия</span>
+      </h1>
+      <p class="hero-date">3 октября 2026 · пятница · 15:00</p>
+    </div>
+  </header>
+
+  <section class="countdown" id="countdown">
+    <div class="countdown-shapes" aria-hidden="true">
+      <div class="shape circle ring"></div>
+      <div class="shape triangle triangle-ochre"></div>
+    </div>
+    <h2 class="section-label reveal">До торжества осталось</h2>
+    <div class="countdown-grid">
+      <div class="count-box box-1 reveal">
+        <span class="num" id="cd-days">00</span>
+        <span class="lbl">дней</span>
+      </div>
+      <div class="count-box box-2 reveal">
+        <span class="num" id="cd-hours">00</span>
+        <span class="lbl">часов</span>
+      </div>
+      <div class="count-box box-3 reveal">
+        <span class="num" id="cd-mins">00</span>
+        <span class="lbl">минут</span>
+      </div>
+      <div class="count-box box-4 reveal">
+        <span class="num" id="cd-secs">00</span>
+        <span class="lbl">секунд</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="details" id="details">
+    <div class="details-inner">
+      <h2 class="section-label reveal">Детали события</h2>
+      <div class="details-grid">
+        <article class="card card-date reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+          </div>
+          <h3>Когда</h3>
+          <p>3 октября 2026 года<br>Пятница, начало в 15:00</p>
+        </article>
+        <article class="card card-place reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 46 46"><polygon points="23,4 42,40 4,40" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+          </div>
+          <h3>Где</h3>
+          <p>Ресторан «Берег»<br>ул. Набережная, 12</p>
+        </article>
+        <article class="card card-dress reveal">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 46 46"><rect x="6" y="6" width="34" height="34" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+          </div>
+          <h3>Дресс-код</h3>
+          <p>Современный стиль,<br>смелые цветовые акценты</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+    </div>
+    <p style="text-align:center;margin:10px 0 0;">
+      <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+    </p>
+  </div>
+
+  <section class="rsvp" id="rsvp">
+    <div class="rsvp-shapes" aria-hidden="true">
+      <div class="shape circle circle-navy"></div>
+      <div class="shape triangle triangle-cream"></div>
+    </div>
+    <div class="rsvp-inner">
+      <h2 class="reveal">RSVP</h2>
+      <p class="reveal">Пожалуйста, подтвердите присутствие до <strong>20 сентября</strong></p>
+      <a class="rsvp-btn reveal" href="https://t.me/" target="_blank" rel="noopener noreferrer">Подтвердить участие</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="monogram">Г<span>&amp;</span>А</div>
+    <p class="footer-note">3 октября 2026 · Ресторан «Берег»</p>
+  </footer>
+
+<script>
+  (function(){
+    "use strict";
+
+    /* ---------- обратный отсчёт ---------- */
+    var target = new Date('2026-10-03T15:00:00');
+
+    var elDays = document.getElementById('cd-days');
+    var elHours = document.getElementById('cd-hours');
+    var elMins = document.getElementById('cd-mins');
+    var elSecs = document.getElementById('cd-secs');
+
+    function pad(n){
+      n = Math.max(0, n);
+      return n < 10 ? '0' + n : String(n);
+    }
+
+    var timerId = null;
+
+    function updateCountdown(){
+      var now = new Date();
+      var diff = target.getTime() - now.getTime();
+
+      if(diff <= 0){
+        elDays.textContent = '00';
+        elHours.textContent = '00';
+        elMins.textContent = '00';
+        elSecs.textContent = '00';
+        if(timerId){ clearInterval(timerId); }
+        return;
+      }
+
+      var totalSeconds = Math.floor(diff / 1000);
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+
+      elDays.textContent = pad(days);
+      elHours.textContent = pad(hours);
+      elMins.textContent = pad(minutes);
+      elSecs.textContent = pad(seconds);
+    }
+
+    updateCountdown();
+    timerId = setInterval(updateCountdown, 1000);
+
+    /* ---------- появление блоков при прокрутке ---------- */
+    document.addEventListener('DOMContentLoaded', function(){
+      var reveals = document.querySelectorAll('.reveal');
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if(reduceMotion || !('IntersectionObserver' in window)){
+        reveals.forEach(function(el){ el.classList.add('in-view'); });
+        return;
+      }
+
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      reveals.forEach(function(el){ observer.observe(el); });
+    });
+  })();
+</script>
+</body>
+</html>

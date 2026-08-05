@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Г + А · 03.10.25</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5E6C8;
+    --mustard: #D4A017;
+    --terracotta: #C0522A;
+    --olive: #5A6B2A;
+    --navy: #1C2B4A;
+    --cream: #FBF4E4;
+    --ink: #1C1810;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Retro halftone dots bg */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(28,43,74,0.06) 1px, transparent 1px);
+    background-size: 18px 18px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 48px 24px 72px;
+  }
+
+  /* Header band */
+  .header-band {
+    background: var(--navy);
+    padding: 14px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+  }
+  .hb-text {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .hb-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--mustard);
+  }
+
+  /* Giant name block */
+  .hero {
+    background: var(--terracotta);
+    padding: 48px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+
+  .hero-names {
+    font-family: 'Abril Fatface', serif;
+    font-size: clamp(52px, 13vw, 100px);
+    color: var(--cream);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+  .hero-names .plus {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.22em;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    color: var(--mustard);
+    margin: 12px 0;
+  }
+
+  .hero-sub {
+    margin-top: 24px;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* Content area */
+  .content {
+    background: var(--cream);
+    padding: 40px 32px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1.5px solid var(--navy);
+    margin-bottom: 32px;
+  }
+  .col-block {
+    padding: 24px 20px;
+    border-right: 1.5px solid var(--navy);
+  }
+  .col-block:last-child { border-right: none; }
+  .col-block:nth-child(n+3) { border-top: 1.5px solid var(--navy); }
+
+  .cb-num {
+    font-family: 'Abril Fatface', serif;
+    font-size: 40px;
+    color: var(--terracotta);
+    line-height: 1;
+    display: block;
+  }
+  .cb-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    opacity: 0.45;
+    margin: 6px 0 4px;
+  }
+  .cb-val {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .invite-block {
+    border-left: 4px solid var(--mustard);
+    padding: 20px 24px;
+    margin: 0 0 32px;
+    background: rgba(212,160,23,0.07);
+  }
+  .invite-block p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink);
+    opacity: 0.8;
+  }
+
+  /* Timer — retro segments */
+  .timer-section {
+    background: var(--navy);
+    padding: 28px 24px;
+    margin: 0 0 32px;
+  }
+  .timer-title {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .timer-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+  .t-seg {
+    text-align: center;
+    flex: 1;
+    max-width: 80px;
+  }
+  .t-num {
+    font-family: 'Abril Fatface', serif;
+    font-size: 38px;
+    color: var(--mustard);
+    line-height: 1;
+    display: block;
+  }
+  .t-lbl {
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+  }
+  .t-colon {
+    font-family: 'Abril Fatface', serif;
+    font-size: 32px;
+    color: rgba(255,255,255,0.2);
+    line-height: 1.1;
+    padding-top: 4px;
+  }
+
+  /* RSVP */
+  .rsvp-block { text-align: center; }
+  .rsvp-tag {
+    display: inline-block;
+    background: var(--olive);
+    color: #fff;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    margin-bottom: 16px;
+  }
+  .rsvp-note {
+    font-size: 14px;
+    color: var(--ink);
+    opacity: 0.6;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .rsvp-btn {
+    display: inline-block;
+    background: var(--terracotta);
+    color: #fff;
+    padding: 16px 48px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .rsvp-btn:hover { background: #a8451f; }
+
+  /* Footer band */
+  .footer-band {
+    background: var(--navy);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .fb-name {
+    font-family: 'Abril Fatface', serif;
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 0.05em;
+  }
+  .fb-date {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--mustard);
+  }
+
+  @media (max-width: 480px) {
+    .two-col { grid-template-columns: 1fr; }
+    .col-block { border-right: none; border-bottom: 1.5px solid var(--navy); }
+    .col-block:last-child { border-bottom: none; }
+    .header-band, .footer-band { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header band -->
+  <div class="header-band">
+    <span class="hb-text">Свадебное торжество</span>
+    <div class="hb-dot"></div>
+    <span class="hb-text">03 · 10 · 2026</span>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-eyebrow">Вы приглашены на свадьбу</p>
+    <div class="hero-names">
+      Георгий
+      <span class="plus">✦ и ✦</span>
+      Анастасия
+    </div>
+    <p class="hero-sub">Пятница, 3 октября 2026</p>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <div class="invite-block">
+      <p>Дорогой гость, мы искренне рады пригласить вас разделить с нами этот особенный день. Ваше присутствие сделает наш праздник по-настоящему незабываемым.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="col-block">
+        <span class="cb-num">15:00</span>
+        <p class="cb-label">Начало</p>
+        <p class="cb-val">Сбор гостей</p>
+      </div>
+      <div class="col-block">
+        <span class="cb-num" style="font-size:24px;padding-top:8px">Берег</span>
+        <p class="cb-label">Ресторан</p>
+        <p class="cb-val">Набережная, 12</p>
+      </div>
+      <div class="col-block">
+        <span class="cb-num" style="font-size:22px;padding-top:10px">Элегантный</span>
+        <p class="cb-label">Дресс-код</p>
+        <p class="cb-val">Вечерний стиль</p>
+      </div>
+      <div class="col-block">
+        <span class="cb-num" style="font-size:22px;padding-top:10px">20 сент.</span>
+        <p class="cb-label">RSVP до</p>
+        <p class="cb-val">Подтвердите</p>
+      </div>
+    </div>
+
+    <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+      <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+      </div>
+      <p style="text-align:center;margin:10px 0 0;">
+        <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+      </p>
+    </div>
+
+    <!-- Timer -->
+    <div class="timer-section">
+      <p class="timer-title">До свадьбы осталось</p>
+      <div class="timer-row">
+        <div class="t-seg"><span class="t-num" id="td">00</span><span class="t-lbl">дней</span></div>
+        <div class="t-colon">:</div>
+        <div class="t-seg"><span class="t-num" id="th">00</span><span class="t-lbl">часов</span></div>
+        <div class="t-colon">:</div>
+        <div class="t-seg"><span class="t-num" id="tm">00</span><span class="t-lbl">минут</span></div>
+        <div class="t-colon">:</div>
+        <div class="t-seg"><span class="t-num" id="ts">00</span><span class="t-lbl">секунд</span></div>
+      </div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="rsvp-block">
+      <span class="rsvp-tag">Ваш ответ</span>
+      <p class="rsvp-note">Пожалуйста, сообщите нам<br>о вашем присутствии до 20 сентября</p>
+      <a href="https://t.me/" class="rsvp-btn">→ Подтвердить</a>
+    </div>
+  </div>
+
+  <!-- Footer band -->
+  <div class="footer-band">
+    <span class="fb-name">Г &amp; А</span>
+    <span class="fb-date">03 · 10 · 2026</span>
+  </div>
+
+</div>
+
+<script>
+  const w = new Date('2026-10-03T15:00:00');
+  function tick() {
+    const d = w - new Date();
+    if (d <= 0) return;
+    document.getElementById('td').textContent = String(Math.floor(d/86400000)).padStart(2,'0');
+    document.getElementById('th').textContent = String(Math.floor(d%86400000/3600000)).padStart(2,'0');
+    document.getElementById('tm').textContent = String(Math.floor(d%3600000/60000)).padStart(2,'0');
+    document.getElementById('ts').textContent = String(Math.floor(d%60000/1000)).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+</script>
+</body>
+</html>

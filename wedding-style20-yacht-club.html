@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-950:#050b16;
+    --navy-900:#081327;
+    --navy-800:#0d1c38;
+    --navy-700:#132a4d;
+    --navy-600:#1a3a66;
+    --white:#f7f5ef;
+    --champagne:#e9dab3;
+    --brass:#c9a86a;
+    --brass-dark:#8f7040;
+    --brass-light:#f2e2b8;
+    --shadow:0 24px 55px rgba(2,6,14,.55);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    font-family:'Montserrat', sans-serif;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% 0%, rgba(26,58,102,.5), transparent 60%),
+      radial-gradient(ellipse 700px 400px at 50% 100%, rgba(201,168,106,.08), transparent 65%),
+      linear-gradient(180deg, var(--navy-950) 0%, var(--navy-900) 40%, var(--navy-950) 100%);
+    color:var(--white);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  h1,h2,h3{font-family:'Playfair Display', serif; margin:0; font-weight:600;}
+  a{color:inherit;}
+
+  /* ---------- Тонкая латунная рамка на весь экран ---------- */
+  .page-frame{
+    position:fixed;
+    inset:16px;
+    border:1px solid rgba(201,168,106,.32);
+    pointer-events:none;
+    z-index:60;
+  }
+  .page-frame::before{
+    content:"";
+    position:absolute;
+    inset:6px;
+    border:1px solid rgba(201,168,106,.14);
+  }
+  .corner{
+    position:absolute;
+    width:26px;
+    height:26px;
+    border-color:var(--brass);
+    opacity:.85;
+  }
+  .corner.tl{top:-1px;left:-1px;border-top:1px solid var(--brass);border-left:1px solid var(--brass);}
+  .corner.tr{top:-1px;right:-1px;border-top:1px solid var(--brass);border-right:1px solid var(--brass);}
+  .corner.bl{bottom:-1px;left:-1px;border-bottom:1px solid var(--brass);border-left:1px solid var(--brass);}
+  .corner.br{bottom:-1px;right:-1px;border-bottom:1px solid var(--brass);border-right:1px solid var(--brass);}
+
+  /* ---------- Герой ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:70px 24px 210px;
+    overflow:hidden;
+  }
+
+  .hero-inner{
+    position:relative;
+    z-index:3;
+    max-width:640px;
+    text-align:center;
+    animation:deck-sway 7s ease-in-out infinite;
+    transform-origin:50% 100%;
+  }
+  @keyframes deck-sway{
+    0%,100%{transform:rotate(-.35deg) translateY(0);}
+    50%{transform:rotate(.35deg) translateY(-3px);}
+  }
+
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    margin-bottom:26px;
+  }
+
+  /* ---------- Силуэт яхты + отражение ---------- */
+  .yacht-wrap{
+    position:relative;
+    width:190px;
+    margin:0 auto 22px;
+  }
+  .yacht-wrap svg{display:block;width:100%;height:auto;}
+  .yacht-main{color:var(--champagne);filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));}
+  .yacht-reflection{
+    position:absolute;
+    top:96%;
+    left:0;
+    width:100%;
+    transform:scaleY(-1);
+    color:var(--brass);
+    opacity:.28;
+    filter:blur(1.6px);
+    -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), transparent 78%);
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), transparent 78%);
+  }
+
+  .pre-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:20px;
+    letter-spacing:.05em;
+    color:var(--white);
+    opacity:.85;
+    margin-bottom:8px;
+  }
+
+  .names{
+    font-size:clamp(44px, 9vw, 82px);
+    line-height:1.05;
+    letter-spacing:.01em;
+    text-shadow:0 8px 34px rgba(0,0,0,.4);
+  }
+  .names .amp{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--brass);
+    padding:0 14px;
+  }
+  .names-reflection{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:clamp(44px, 9vw, 82px);
+    line-height:1.05;
+    color:var(--brass);
+    opacity:.16;
+    transform:scaleY(-1);
+    filter:blur(2px);
+    margin-top:-4px;
+    -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 72%);
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 72%);
+    user-select:none;
+    pointer-events:none;
+  }
+
+  .subtitle{
+    margin-top:22px;
+    font-size:16px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--champagne);
+  }
+
+  .brass-rule{
+    width:88px;
+    height:1px;
+    margin:26px auto;
+    background:linear-gradient(90deg, transparent, var(--brass), transparent);
+    position:relative;
+  }
+  .brass-rule::before{
+    content:"";
+    position:absolute;
+    left:50%; top:50%;
+    width:6px;height:6px;
+    background:var(--brass);
+    transform:translate(-50%,-50%) rotate(45deg);
+  }
+
+  .venue-note{
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    line-height:1.6;
+    color:var(--white);
+    opacity:.88;
+    max-width:440px;
+    margin:0 auto;
+  }
+  .venue-note b{color:var(--brass-light); font-weight:500;}
+
+  /* ---------- Огни марины + канвас с отражениями на воде ---------- */
+  .horizon-lights{
+    position:absolute;
+    left:0; right:0;
+    bottom:214px;
+    display:flex;
+    justify-content:space-around;
+    padding:0 12%;
+    z-index:2;
+    pointer-events:none;
+  }
+  .horizon-lights span{
+    width:5px;height:5px;
+    border-radius:50%;
+    background:var(--brass-light);
+    box-shadow:0 0 8px 2px rgba(242,226,184,.7);
+    animation:twinkle 3.2s ease-in-out infinite;
+  }
+  .horizon-lights span:nth-child(odd){animation-duration:4.1s;}
+  .horizon-lights span:nth-child(3n){animation-delay:.8s;}
+  .horizon-lights span:nth-child(4n){animation-delay:1.6s; background:var(--white); box-shadow:0 0 8px 2px rgba(247,245,239,.6);}
+  .horizon-lights span:nth-child(5n){animation-delay:2.2s;}
+
+  @keyframes twinkle{
+    0%,100%{opacity:.35; transform:scale(.85);}
+    50%{opacity:1; transform:scale(1.15);}
+  }
+
+  #water{
+    position:absolute;
+    left:0; bottom:0;
+    width:100%;
+    height:220px;
+    display:block;
+    z-index:1;
+  }
+
+  /* ---------- Секции ---------- */
+  section{
+    position:relative;
+    padding:74px 24px;
+    max-width:920px;
+    margin:0 auto;
+    z-index:2;
+  }
+
+  .section-title{
+    text-align:center;
+    font-size:clamp(28px, 5vw, 38px);
+    margin-bottom:14px;
+  }
+  .section-sub{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--champagne);
+    opacity:.85;
+    max-width:520px;
+    margin:0 auto 50px;
+  }
+
+  .divider{
+    width:100%;
+    max-width:280px;
+    margin:0 auto;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--brass), transparent);
+    opacity:.5;
+  }
+
+  /* ---------- Обратный отсчёт ---------- */
+  .countdown-grid{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .count-box{
+    background:linear-gradient(165deg, var(--navy-700), var(--navy-900));
+    border:1px solid rgba(201,168,106,.45);
+    border-radius:4px;
+    width:114px;
+    padding:22px 8px 18px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .count-box::before{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:1px solid rgba(233,218,179,.16);
+    pointer-events:none;
+  }
+  .count-box span{
+    display:block;
+    font-family:'Playfair Display', serif;
+    font-size:38px;
+    font-weight:700;
+    color:var(--brass-light);
+    font-variant-numeric:tabular-nums;
+  }
+  .count-box label{
+    display:block;
+    margin-top:8px;
+    font-size:10.5px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--white);
+    opacity:.7;
+  }
+
+  /* ---------- Детали события ---------- */
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:36px;
+  }
+  .detail-card{text-align:center;}
+  .plate{
+    width:70px;
+    height:70px;
+    margin:0 auto 22px;
+    border-radius:12px;
+    background:linear-gradient(160deg, var(--navy-600), var(--navy-950));
+    border:1px solid var(--brass);
+    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .plate svg{width:30px;height:30px;color:var(--brass-light);}
+  .detail-card h3{
+    font-size:19px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+    color:var(--champagne);
+  }
+  .detail-card p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.55;
+    color:var(--white);
+    opacity:.88;
+    margin:0;
+  }
+  .detail-card p.note{
+    margin-top:8px;
+    font-size:15.5px;
+    font-style:italic;
+    opacity:.65;
+  }
+
+  /* ---------- RSVP ---------- */
+  .rsvp{text-align:center;}
+  .rsvp-date{
+    display:inline-block;
+    margin:6px 0 36px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--brass-light);
+    border-top:1px solid rgba(233,218,179,.25);
+    border-bottom:1px solid rgba(233,218,179,.25);
+    padding:10px 0;
+  }
+  .rsvp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    background:linear-gradient(180deg, var(--brass-light), var(--brass-dark));
+    color:var(--navy-950);
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:14px;
+    padding:17px 38px;
+    border-radius:2px;
+    box-shadow:0 14px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.5);
+    border:1px solid var(--navy-950);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 34px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .rsvp-btn svg{width:16px;height:16px;}
+
+  /* ---------- Подвал ---------- */
+  footer{
+    text-align:center;
+    padding:56px 24px 70px;
+    color:var(--champagne);
+    opacity:.75;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:18px;
+  }
+  footer .rule-mini{
+    width:44px;height:1px;
+    margin:0 auto 16px;
+    background:var(--brass);
+    opacity:.6;
+  }
+
+  /* ---------- Адаптивность ---------- */
+  @media (max-width:640px){
+    .page-frame{inset:9px;}
+    .hero{padding:56px 18px 170px;}
+    #water{height:170px;}
+    .horizon-lights{bottom:164px; padding:0 8%;}
+    section{padding:56px 18px;}
+    .details-grid{grid-template-columns:1fr;gap:44px;}
+    .count-box{width:76px;padding:16px 4px 14px;}
+    .count-box span{font-size:26px;}
+    .yacht-wrap{width:150px;}
+  }
+
+  /* ---------- Уважение к prefers-reduced-motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .hero-inner{animation:none !important;}
+    .horizon-lights span{animation:none !important; opacity:.75;}
+    .rsvp-btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="page-frame" aria-hidden="true">
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+  </div>
+
+  <header class="hero">
+
+    <div class="horizon-lights" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <canvas id="water"></canvas>
+
+    <div class="hero-inner">
+      <p class="eyebrow">Вечер в марине · Сочи</p>
+
+      <div class="yacht-wrap" aria-hidden="true">
+        <svg class="yacht-main" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="100" y1="8" x2="100" y2="58" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M100 12 C 122 26, 124 46, 100 56 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M100 20 C 90 32, 90 46, 100 55" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <path d="M22 68 C 55 80, 145 80, 178 68 L 165 60 C 130 66, 70 66, 35 60 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <line x1="8" y1="68" x2="192" y2="68" stroke="currentColor" stroke-width="1" opacity=".45"/>
+        </svg>
+        <svg class="yacht-reflection" viewBox="0 0 200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="100" y1="8" x2="100" y2="58" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M100 12 C 122 26, 124 46, 100 56 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M22 68 C 55 80, 145 80, 178 68 L 165 60 C 130 66, 70 66, 35 60 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <p class="pre-title">Приглашаем разделить с нами</p>
+      <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
+      <div class="names-reflection" aria-hidden="true">Георгий &amp; Анастасия</div>
+
+      <p class="subtitle">3 октября 2026 · пятница · 19:00</p>
+      <div class="brass-rule"></div>
+      <p class="venue-note">Встречаемся вечером в <b>яхт-клубе «Марина Sochi»</b> на Имеретинской набережной — когда зажигаются огни марины и их отражения ложатся на тёмную воду.</p>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <section id="countdown">
+    <h2 class="section-title">До вечера на воде</h2>
+    <p class="section-sub">Считаем время до момента, когда мы поднимем бокалы на палубе</p>
+    <div class="countdown-grid">
+      <div class="count-box"><span id="days">00</span><label>дней</label></div>
+      <div class="count-box"><span id="hours">00</span><label>часов</label></div>
+      <div class="count-box"><span id="minutes">00</span><label>минут</label></div>
+      <div class="count-box"><span id="seconds">00</span><label>секунд</label></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="details">
+    <h2 class="section-title">Детали вечера</h2>
+    <p class="section-sub">Всё готово к приёму — остаётся лишь подняться на набережную марины</p>
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="plate">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M24 14v11l8 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Когда</h3>
+        <p>3 октября 2026, пятница<br>начало в 19:00</p>
+      </div>
+      <div class="detail-card">
+        <div class="plate">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 6c-8 0-14 6.2-14 14 0 10.4 14 22 14 22s14-11.6 14-22c0-7.8-6-14-14-14z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="24" cy="20" r="5" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <h3>Где</h3>
+        <p>Яхт-клуб «Марина Sochi»<br>Имеретинская набережная, Сочи</p>
+      </div>
+      <div class="detail-card">
+        <div class="plate">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 15 L20 23 L6 31 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <path d="M42 15 L28 23 L42 31 Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <rect x="19" y="18" width="10" height="10" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <h3>Дресс-код</h3>
+        <p>Белый вечерний, nautical chic</p>
+        <p class="note">Обувь без каблука-шпильки — вечер пройдёт у воды и на палубе</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=39.9532,43.4028&z=14&l=map&pt=39.9532,43.4028,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Яхт-клуб «Марина Sochi»" style="display:block;border:0;"></iframe>
+    </div>
+    <p style="text-align:center;margin:10px 0 0;">
+      <a href="https://yandex.ru/maps/?ll=39.9532,43.4028&z=14&pt=39.9532,43.4028,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section class="rsvp">
+    <h2 class="section-title">Ждём вас в марине</h2>
+    <p class="rsvp-date">Пожалуйста, подтвердите присутствие до 20 сентября</p>
+    <div>
+      <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 4L2.5 11.5l6 2.2M21 4l-3.2 16-6.3-5M21 4L9.8 14.8m0 0l-1.3 5.7 3.4-3.2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        Подтвердить участие
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="rule-mini"></div>
+    С любовью, Георгий и Анастасия
+  </footer>
+
+<script>
+  // ---------- Обратный отсчёт до свадьбы ----------
+  (function(){
+    var target = new Date('2026-10-03T19:00:00');
+    var elDays = document.getElementById('days');
+    var elHours = document.getElementById('hours');
+    var elMinutes = document.getElementById('minutes');
+    var elSeconds = document.getElementById('seconds');
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+
+    function update(){
+      var now = new Date();
+      var diff = target - now;
+
+      if (diff <= 0){
+        elDays.textContent = '00';
+        elHours.textContent = '00';
+        elMinutes.textContent = '00';
+        elSeconds.textContent = '00';
+        return;
+      }
+
+      var totalSeconds = Math.floor(diff / 1000);
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+
+      elDays.textContent = pad(days);
+      elHours.textContent = pad(hours);
+      elMinutes.textContent = pad(minutes);
+      elSeconds.textContent = pad(seconds);
+    }
+
+    update();
+    setInterval(update, 1000);
+  })();
+
+  // ---------- Отражения огней марины на тёмной воде ----------
+  (function(){
+    var canvas = document.getElementById('water');
+    var ctx = canvas.getContext('2d');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h, t = 0;
+
+    var streaks = [];
+    var count = 9;
+    for (var i = 0; i < count; i++){
+      streaks.push({
+        xr: (i + 0.5) / count,
+        width: 3 + (i % 3) * 2.5,
+        phase: i * 1.7,
+        speed: 0.012 + (i % 4) * 0.006,
+        brass: i % 2 === 0
+      });
+    }
+
+    function resize(){
+      var rect = canvas.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function render(){
+      ctx.clearRect(0, 0, w, h);
+
+      // фон тёмной воды
+      var bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, 'rgba(5,11,22,0)');
+      bg.addColorStop(0.12, 'rgba(8,19,38,0.85)');
+      bg.addColorStop(1, 'rgba(3,7,15,1)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
+
+      // мерцающие отражения огней
+      for (var i = 0; i < streaks.length; i++){
+        var s = streaks[i];
+        var flicker = 0.5 + 0.5 * Math.sin(t * s.speed + s.phase);
+        var jitter = Math.sin(t * 0.01 + s.phase) * 5;
+        var x = s.xr * w + jitter;
+
+        var grad = ctx.createLinearGradient(0, 0, 0, h);
+        var color = s.brass ? '233,218,179' : '247,245,239';
+        grad.addColorStop(0, 'rgba(' + color + ',0)');
+        grad.addColorStop(0.16, 'rgba(' + color + ',' + (0.16 + 0.18 * flicker) + ')');
+        grad.addColorStop(0.55, 'rgba(' + color + ',' + (0.06 + 0.08 * flicker) + ')');
+        grad.addColorStop(1, 'rgba(' + color + ',0)');
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(x - s.width / 2, 0, s.width, h);
+      }
+    }
+
+    function loop(){
+      t += 1;
+      render();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', function(){
+      resize();
+      render();
+    });
+
+    resize();
+
+    if (reduceMotion){
+      render();
+    } else {
+      loop();
+    }
+  })();
+</script>
+
+</body>
+</html>

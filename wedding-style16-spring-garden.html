@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green-deep: #4B6B43;
+    --green-leaf: #7FA36B;
+    --green-soft: #8CB47A;
+    --sage: #C6D6B8;
+    --cream: #FBF8EE;
+    --sun: #FBEFC2;
+    --lavender: #C9B7DD;
+    --blush: #F3BCB2;
+    --buttercup: #F4D77E;
+    --sky: #BFE1F0;
+    --ink: #3E4B33;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background: radial-gradient(ellipse 900px 500px at 50% -8%, var(--sun) 0%, rgba(251,239,194,0) 60%),
+                linear-gradient(180deg, #FDFBF2 0%, #F6F9EE 32%, #ECF3E2 62%, #E2EEDA 100%);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* morning light / pollen canvas */
+  #pollen-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+  /* corner branch decorations */
+  .corner { position: fixed; width: 150px; height: 150px; z-index: 2; pointer-events: none; opacity: 0.92; filter: drop-shadow(0 2px 6px rgba(75,107,67,0.08)); }
+  .corner-tl { top: -6px; left: -6px; }
+  .corner-tr { top: -6px; right: -6px; transform: scaleX(-1); }
+  .corner-bl { bottom: -6px; left: -6px; transform: scaleY(-1); }
+  .corner-br { bottom: -6px; right: -6px; transform: scale(-1,-1); }
+
+  /* butterflies */
+  .butterfly { position: fixed; top: 0; left: 0; z-index: 3; pointer-events: none; will-change: transform; }
+  .bf-svg { display: block; }
+  .wing { transform-box: fill-box; transform-origin: center; }
+  .wl { transform-origin: 100% 50%; animation: flapL 0.42s ease-in-out infinite alternate; }
+  .wr { transform-origin: 0% 50%; animation: flapR 0.42s ease-in-out infinite alternate; }
+  @keyframes flapL { from { transform: scaleX(1); } to { transform: scaleX(0.35); } }
+  @keyframes flapR { from { transform: scaleX(1); } to { transform: scaleX(0.35); } }
+
+  .bf1 { animation: fly1 16s linear infinite; }
+  .bf2 { animation: fly2 21s linear infinite; animation-delay: -4s; }
+  .bf3 { animation: fly3 19s linear infinite; animation-delay: -9s; }
+  .bf4 { animation: fly4 24s linear infinite; animation-delay: -13s; }
+
+  @keyframes fly1 {
+    0%   { transform: translate(-10vw, 78vh) rotate(-6deg); opacity: 0; }
+    6%   { opacity: 1; }
+    22%  { transform: translate(22vw, 52vh) rotate(10deg); }
+    40%  { transform: translate(40vw, 66vh) rotate(-8deg); }
+    58%  { transform: translate(62vw, 40vh) rotate(12deg); }
+    76%  { transform: translate(85vw, 58vh) rotate(-6deg); }
+    94%  { opacity: 1; }
+    100% { transform: translate(112vw, 34vh) rotate(8deg); opacity: 0; }
+  }
+  @keyframes fly2 {
+    0%   { transform: translate(108vw, 22vh) rotate(180deg); opacity: 0; }
+    6%   { opacity: 1; }
+    24%  { transform: translate(78vw, 46vh) rotate(160deg); }
+    42%  { transform: translate(55vw, 28vh) rotate(200deg); }
+    60%  { transform: translate(34vw, 50vh) rotate(170deg); }
+    78%  { transform: translate(12vw, 30vh) rotate(190deg); }
+    94%  { opacity: 1; }
+    100% { transform: translate(-12vw, 44vh) rotate(180deg); opacity: 0; }
+  }
+  @keyframes fly3 {
+    0%   { transform: translate(-8vw, 30vh) rotate(4deg) scale(0.8); opacity: 0; }
+    6%   { opacity: 1; }
+    30%  { transform: translate(28vw, 18vh) rotate(-10deg) scale(0.8); }
+    50%  { transform: translate(50vw, 34vh) rotate(8deg) scale(0.8); }
+    70%  { transform: translate(72vw, 14vh) rotate(-6deg) scale(0.8); }
+    94%  { opacity: 1; }
+    100% { transform: translate(105vw, 26vh) rotate(6deg) scale(0.8); opacity: 0; }
+  }
+  @keyframes fly4 {
+    0%   { transform: translate(104vw, 70vh) rotate(174deg) scale(1.1); opacity: 0; }
+    6%   { opacity: 1; }
+    28%  { transform: translate(70vw, 84vh) rotate(150deg) scale(1.1); }
+    48%  { transform: translate(48vw, 62vh) rotate(196deg) scale(1.1); }
+    68%  { transform: translate(24vw, 80vh) rotate(160deg) scale(1.1); }
+    94%  { opacity: 1; }
+    100% { transform: translate(-10vw, 66vh) rotate(180deg) scale(1.1); opacity: 0; }
+  }
+
+  .page { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 64px 24px 80px; text-align: center; }
+
+  .season-tag {
+    display: inline-block; background: var(--green-deep); color: var(--cream);
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    padding: 7px 20px; border-radius: 20px; margin-bottom: 34px;
+    opacity: 0; animation: dropIn 0.8s ease 0.2s forwards;
+  }
+  @keyframes dropIn { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes bloomIn { from { opacity: 0; transform: translateY(26px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(38px, 9.5vw, 70px); color: var(--green-deep); line-height: 1.14;
+    opacity: 0; animation: bloomIn 1s ease 0.5s forwards;
+  }
+  .amp {
+    display: inline-block; font-family: 'Mrs Saint Delafield', cursive; font-style: normal;
+    font-size: 1.35em; color: var(--blush); padding: 0 6px; transform: translateY(4px) rotate(-4deg);
+  }
+
+  .divider { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 26px auto; max-width: 300px; opacity: 0; animation: bloomIn 0.9s ease 0.8s forwards; }
+  .divider .vine { flex: 1; height: 8px; }
+  .divider .flower-icon { font-size: 20px; animation: sway 3.4s ease-in-out infinite; transform-origin: center 80%; display: inline-block; }
+  @keyframes sway { 0%,100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+
+  .poem {
+    font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.85;
+    color: var(--ink); opacity: 0; max-width: 420px; margin: 0 auto 42px;
+    animation: bloomIn 0.9s ease 1s forwards;
+  }
+
+  .card {
+    background: rgba(255,255,255,0.55); backdrop-filter: blur(2px);
+    border: 1px solid rgba(127,163,107,0.35);
+    border-radius: 22px; padding: 42px 30px; margin: 0 0 42px;
+    position: relative; box-shadow: 0 10px 34px rgba(75,107,67,0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    opacity: 0; animation: bloomIn 0.9s ease 1.15s forwards;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 16px 44px rgba(75,107,67,0.18); }
+  .card::before {
+    content: '🌿'; position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+    font-size: 34px; filter: drop-shadow(0 3px 5px rgba(0,0,0,0.12));
+    animation: sway 4s ease-in-out 1s infinite; transform-origin: top center;
+  }
+
+  .card-date { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 12vw, 78px); font-style: italic; font-weight: 500; color: var(--green-deep); line-height: 1; }
+  .card-date-text { font-size: 14px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--green-leaf); margin: 8px 0 26px; }
+  .card-details { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 22px; }
+  .cd { background: rgba(255,255,255,0.55); border: 1px solid rgba(198,214,184,0.6); border-radius: 14px; padding: 16px; text-align: left; transition: background 0.2s, transform 0.2s; }
+  .cd:hover { background: rgba(255,255,255,0.85); transform: translateY(-2px); }
+  .cd-icon { font-size: 19px; margin-bottom: 6px; }
+  .cd-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green-deep); opacity: 0.75; margin-bottom: 4px; }
+  .cd-value { font-family: 'Cormorant Garamond', serif; font-size: 15.5px; color: var(--ink); line-height: 1.42; }
+
+  .timer-inline { display: flex; align-items: flex-start; justify-content: center; gap: 6px; margin: 44px 0; opacity: 0; animation: bloomIn 0.9s ease 1.3s forwards; }
+  .tu { text-align: center; min-width: 54px; }
+  .tu-num { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-style: italic; font-weight: 500; color: var(--green-deep); line-height: 1; display: block; transition: transform 0.15s; }
+  .tu-num.bump { transform: scale(1.16); color: var(--blush); }
+  .tu-sep { font-family: 'Cormorant Garamond', serif; font-size: 40px; color: var(--green-leaf); opacity: 0.45; padding-top: 2px; }
+  .tu-lbl { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--green-deep); opacity: 0.65; margin-top: 4px; }
+
+  .rsvp-note { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--ink); opacity: 0.75; margin-bottom: 18px; }
+  .rsvp-wrap { opacity: 0; animation: bloomIn 0.9s ease 1.45s forwards; }
+  .rsvp-btn {
+    display: inline-block; background: linear-gradient(135deg, var(--green-leaf), var(--green-deep));
+    color: #fff; padding: 15px 46px;
+    font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none; border-radius: 30px; transition: all 0.35s ease;
+    box-shadow: 0 10px 26px rgba(75,107,67,0.28);
+    position: relative; overflow: hidden;
+  }
+  .rsvp-btn::before { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.18); transform: skewX(-15deg) translateX(-120%); transition: transform 0.45s ease; }
+  .rsvp-btn:hover { letter-spacing: 0.2em; box-shadow: 0 14px 32px rgba(75,107,67,0.36); transform: translateY(-2px); }
+  .rsvp-btn:hover::before { transform: skewX(-15deg) translateX(220%); }
+
+  .ground { display: flex; justify-content: center; margin-top: 50px; gap: 10px; font-size: 26px; opacity: 0.85; }
+  .g-bounce { display: inline-block; animation: floatUp var(--fl) ease-in-out infinite alternate; }
+  @keyframes floatUp { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-9px) rotate(6deg); } }
+
+  .footer-text { margin-top: 18px; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--ink); opacity: 0.45; }
+
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.shown { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 560px) {
+    .corner { width: 96px; height: 96px; }
+    .card-details { grid-template-columns: 1fr; }
+    .tu-num { font-size: 32px; }
+    .tu-sep { font-size: 30px; }
+    .tu { min-width: 44px; }
+  }
+  @media (max-width: 380px) {
+    .corner-bl, .corner-br { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, h1, .poem, .season-tag, .divider, .card, .timer-inline, .rsvp-wrap { opacity: 1 !important; transform: none !important; }
+    .butterfly { display: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="pollen-canvas"></canvas>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="branch-spring" viewBox="0 0 150 150">
+    <path d="M14 14 C 40 30, 55 55, 60 80 C 65 108, 90 120, 128 132" fill="none" stroke="#5E7F52" stroke-width="3" stroke-linecap="round" opacity="0.75"/>
+    <path d="M33 38 C 44 44, 49 55, 46 66" fill="none" stroke="#5E7F52" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+    <path d="M74 94 C 85 91, 96 98, 101 109" fill="none" stroke="#5E7F52" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+    <ellipse cx="30" cy="30" rx="10" ry="5" fill="#7FA36B" transform="rotate(-40 30 30)" opacity="0.85"/>
+    <ellipse cx="46" cy="62" rx="9" ry="4.5" fill="#8CB47A" transform="rotate(25 46 62)" opacity="0.85"/>
+    <ellipse cx="90" cy="104" rx="10" ry="5" fill="#7FA36B" transform="rotate(-25 90 104)" opacity="0.85"/>
+    <ellipse cx="68" cy="86" rx="8" ry="4" fill="#8CB47A" transform="rotate(60 68 86)" opacity="0.8"/>
+    <ellipse cx="112" cy="120" rx="9" ry="4.5" fill="#7FA36B" transform="rotate(-15 112 120)" opacity="0.8"/>
+    <g transform="translate(18,16)">
+      <ellipse rx="6" ry="3" fill="#C9B7DD" opacity="0.9"/>
+      <ellipse rx="6" ry="3" fill="#C9B7DD" opacity="0.9" transform="rotate(72)"/>
+      <ellipse rx="6" ry="3" fill="#C9B7DD" opacity="0.9" transform="rotate(144)"/>
+      <ellipse rx="6" ry="3" fill="#C9B7DD" opacity="0.9" transform="rotate(216)"/>
+      <ellipse rx="6" ry="3" fill="#C9B7DD" opacity="0.9" transform="rotate(288)"/>
+      <circle r="3" fill="#F4D77E"/>
+    </g>
+    <g transform="translate(50,60) scale(0.9)">
+      <ellipse rx="6" ry="3" fill="#F3BCB2" opacity="0.9"/>
+      <ellipse rx="6" ry="3" fill="#F3BCB2" opacity="0.9" transform="rotate(72)"/>
+      <ellipse rx="6" ry="3" fill="#F3BCB2" opacity="0.9" transform="rotate(144)"/>
+      <ellipse rx="6" ry="3" fill="#F3BCB2" opacity="0.9" transform="rotate(216)"/>
+      <ellipse rx="6" ry="3" fill="#F3BCB2" opacity="0.9" transform="rotate(288)"/>
+      <circle r="3" fill="#F4D77E"/>
+    </g>
+    <g transform="translate(104,116) scale(0.8)">
+      <ellipse rx="6" ry="3" fill="#BFE1F0" opacity="0.9"/>
+      <ellipse rx="6" ry="3" fill="#BFE1F0" opacity="0.9" transform="rotate(72)"/>
+      <ellipse rx="6" ry="3" fill="#BFE1F0" opacity="0.9" transform="rotate(144)"/>
+      <ellipse rx="6" ry="3" fill="#BFE1F0" opacity="0.9" transform="rotate(216)"/>
+      <ellipse rx="6" ry="3" fill="#BFE1F0" opacity="0.9" transform="rotate(288)"/>
+      <circle r="3" fill="#F4D77E"/>
+    </g>
+    <circle cx="44" cy="46" r="2.1" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="43.3" cy="45.3" r="0.6" fill="#FFFFFF"/>
+    <circle cx="80" cy="70" r="1.7" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="118" cy="126" r="1.9" fill="#FFFFFF" opacity="0.85"/>
+  </symbol>
+</svg>
+
+<svg class="corner corner-tl" aria-hidden="true"><use href="#branch-spring"/></svg>
+<svg class="corner corner-tr" aria-hidden="true"><use href="#branch-spring"/></svg>
+<svg class="corner corner-bl" aria-hidden="true"><use href="#branch-spring"/></svg>
+<svg class="corner corner-br" aria-hidden="true"><use href="#branch-spring"/></svg>
+
+<div class="butterfly bf1"><svg class="bf-svg" viewBox="0 0 60 40" width="40" height="27">
+  <path class="wing wl" d="M28 20 C 8 -4, -16 4, 4 20 C -16 36, 8 44, 28 20 Z" fill="#C9B7DD"/>
+  <path class="wing wr" d="M32 20 C 52 -4, 76 4, 56 20 C 76 36, 52 44, 32 20 Z" fill="#F3BCB2"/>
+  <ellipse cx="30" cy="20" rx="2.1" ry="8.5" fill="#4B3A2A"/>
+</svg></div>
+<div class="butterfly bf2"><svg class="bf-svg" viewBox="0 0 60 40" width="34" height="23">
+  <path class="wing wl" d="M28 20 C 8 -4, -16 4, 4 20 C -16 36, 8 44, 28 20 Z" fill="#BFE1F0"/>
+  <path class="wing wr" d="M32 20 C 52 -4, 76 4, 56 20 C 76 36, 52 44, 32 20 Z" fill="#F4D77E"/>
+  <ellipse cx="30" cy="20" rx="2.1" ry="8.5" fill="#4B3A2A"/>
+</svg></div>
+<div class="butterfly bf3"><svg class="bf-svg" viewBox="0 0 60 40" width="30" height="20">
+  <path class="wing wl" d="M28 20 C 8 -4, -16 4, 4 20 C -16 36, 8 44, 28 20 Z" fill="#F3BCB2"/>
+  <path class="wing wr" d="M32 20 C 52 -4, 76 4, 56 20 C 76 36, 52 44, 32 20 Z" fill="#C9B7DD"/>
+  <ellipse cx="30" cy="20" rx="2" ry="8" fill="#4B3A2A"/>
+</svg></div>
+<div class="butterfly bf4"><svg class="bf-svg" viewBox="0 0 60 40" width="44" height="30">
+  <path class="wing wl" d="M28 20 C 8 -4, -16 4, 4 20 C -16 36, 8 44, 28 20 Z" fill="#F4D77E"/>
+  <path class="wing wr" d="M32 20 C 52 -4, 76 4, 56 20 C 76 36, 52 44, 32 20 Z" fill="#BFE1F0"/>
+  <ellipse cx="30" cy="20" rx="2.2" ry="9" fill="#4B3A2A"/>
+</svg></div>
+
+<div class="page">
+  <div class="season-tag">Весенний сад · 2026</div>
+
+  <h1>Георгий<br><span class="amp">&amp;</span><br>Анастасия</h1>
+
+  <div class="divider">
+    <svg class="vine" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0 4 Q 25 0, 50 4 T 100 4" stroke="#7FA36B" stroke-width="1.4" fill="none" opacity="0.6"/></svg>
+    <span class="flower-icon">🌷</span>
+    <svg class="vine" viewBox="0 0 100 8" preserveAspectRatio="none"><path d="M0 4 Q 25 8, 50 4 T 100 4" stroke="#7FA36B" stroke-width="1.4" fill="none" opacity="0.6"/></svg>
+  </div>
+
+  <p class="poem">
+    Роса ещё дрожит на лепестках,<br>
+    Сад пробудился в мягком свете дня.<br>
+    Позвольте пригласить вас в этот сад —<br>
+    Мы будем рады видеть вас, друзья.
+  </p>
+
+  <div class="card">
+    <div class="card-date">3</div>
+    <p class="card-date-text">Октября · Пятница · 2026</p>
+    <div class="card-details">
+      <div class="cd"><div class="cd-icon">⏰</div><p class="cd-label">Начало</p><p class="cd-value">15:00</p></div>
+      <div class="cd"><div class="cd-icon">📍</div><p class="cd-label">Место</p><p class="cd-value">Ресторан «Берег»<br>ул. Набережная, 12</p></div>
+      <div class="cd"><div class="cd-icon">🌼</div><p class="cd-label">Дресс-код</p><p class="cd-value">Светлые естественные тона,<br>цветочные акценты</p></div>
+      <div class="cd"><div class="cd-icon">🦋</div><p class="cd-label">Пожелание</p><p class="cd-value">Ваше присутствие<br>— лучший дар</p></div>
+    </div>
+  </div>
+
+  <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=16&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: Ресторан «Берег»" style="display:block;border:0;"></iframe>
+    </div>
+    <p style="text-align:center;margin:10px 0 0;">
+      <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+    </p>
+  </div>
+
+  <div class="timer-inline reveal">
+    <div class="tu"><span class="tu-num" id="td">00</span><span class="tu-lbl">дней</span></div>
+    <span class="tu-sep">:</span>
+    <div class="tu"><span class="tu-num" id="th">00</span><span class="tu-lbl">часов</span></div>
+    <span class="tu-sep">:</span>
+    <div class="tu"><span class="tu-num" id="tm">00</span><span class="tu-lbl">минут</span></div>
+    <span class="tu-sep">:</span>
+    <div class="tu"><span class="tu-num" id="ts">00</span><span class="tu-lbl">секунд</span></div>
+  </div>
+
+  <div class="rsvp-wrap">
+    <p class="rsvp-note">Просим подтвердить присутствие до 20 сентября</p>
+    <a href="https://t.me/" class="rsvp-btn" target="_blank" rel="noopener">🌷 Иду на свадьбу</a>
+  </div>
+
+  <div class="ground">
+    <span class="g-bounce" style="--fl:2.1s">🌸</span>
+    <span class="g-bounce" style="--fl:2.6s;animation-delay:0.3s">🦋</span>
+    <span class="g-bounce" style="--fl:1.9s;animation-delay:0.6s">🌿</span>
+    <span class="g-bounce" style="--fl:2.4s;animation-delay:0.2s">🌼</span>
+    <span class="g-bounce" style="--fl:2.2s;animation-delay:0.5s">🌸</span>
+  </div>
+  <p class="footer-text">С теплом, Георгий &amp; Анастасия</p>
+</div>
+
+<script>
+// reduced-motion preference
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ── Morning light / pollen canvas ──
+const canvas = document.getElementById('pollen-canvas');
+const ctx = canvas.getContext('2d');
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+const motes = Array.from({ length: 34 }, () => ({
+  x: Math.random() * window.innerWidth,
+  y: Math.random() * window.innerHeight,
+  r: 1 + Math.random() * 2.2,
+  vy: -(0.15 + Math.random() * 0.35),
+  vx: (Math.random() - 0.5) * 0.25,
+  drift: Math.random() * Math.PI * 2,
+  driftSpeed: 0.01 + Math.random() * 0.02,
+  alpha: 0.15 + Math.random() * 0.35,
+}));
+
+function drawMotes() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  motes.forEach(m => {
+    ctx.beginPath();
+    const grad = ctx.createRadialGradient(m.x, m.y, 0, m.x, m.y, m.r * 3);
+    grad.addColorStop(0, `rgba(251,239,194,${m.alpha})`);
+    grad.addColorStop(1, 'rgba(251,239,194,0)');
+    ctx.fillStyle = grad;
+    ctx.arc(m.x, m.y, m.r * 3, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function stepMotes() {
+  motes.forEach(m => {
+    m.drift += m.driftSpeed;
+    m.x += m.vx + Math.sin(m.drift) * 0.3;
+    m.y += m.vy;
+    if (m.y < -10) { m.y = window.innerHeight + 10; m.x = Math.random() * window.innerWidth; }
+  });
+  drawMotes();
+  if (!reduceMotion) requestAnimationFrame(stepMotes);
+}
+if (reduceMotion) { drawMotes(); } else { stepMotes(); }
+
+// ── Scroll reveal ──
+const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('shown'); }), { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ── Countdown timer ──
+const weddingDate = new Date('2026-10-03T15:00:00');
+let prev = {};
+function tick() {
+  const diff = weddingDate - new Date();
+  if (diff <= 0) {
+    ['td','th','tm','ts'].forEach(id => document.getElementById(id).textContent = '00');
+    return;
+  }
+  const vals = {
+    td: String(Math.floor(diff / 86400000)).padStart(2, '0'),
+    th: String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0'),
+    tm: String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0'),
+    ts: String(Math.floor((diff % 60000) / 1000)).padStart(2, '0'),
+  };
+  Object.entries(vals).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (prev[id] !== val) {
+      if (!reduceMotion) { el.classList.add('bump'); setTimeout(() => el.classList.remove('bump'), 150); }
+      el.textContent = val;
+      prev[id] = val;
+    }
+  });
+}
+tick();
+setInterval(tick, 1000);
+</script>
+</body>
+</html>
