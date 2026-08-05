@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>G&A · 03.10</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Минимализм» — Георгий и Анастасия, 3 октября 2026, Ресторан «Берег». Светлый сплит-макет, синий акцент, чистые линии.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style3-minimal.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Минимализм»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Минимализм», Ресторан «Берег». Светлый сплит-макет, синий акцент, чистые линии.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style3-minimal.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style3-minimal.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Минимализм»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Минимализм», Ресторан «Берег». Светлый сплит-макет, синий акцент, чистые линии.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style3-minimal.png">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -107,12 +120,33 @@
 
   .right-footer { padding-top: 24px; border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); letter-spacing: 0.1em; }
 
+  /* Наша история — таймлайн */
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before { content: ''; position: absolute; left: 4px; top: 4px; bottom: 4px; width: 1px; background: var(--border); }
+  .timeline-item { position: relative; padding-bottom: 26px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot { position: absolute; left: -26px; top: 3px; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px #EEF2FF; }
+  .timeline-year { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 22px; color: var(--accent); line-height: 1; }
+  .timeline-cap { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 4px 0 6px; }
+  .timeline-text { font-size: 14px; line-height: 1.6; color: var(--ink); font-weight: 300; }
+
+  /* Фотографии — плейсхолдеры */
+  .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .photo-card {
+    aspect-ratio: 1 / 1; border-radius: 6px; overflow: hidden; position: relative;
+    background: linear-gradient(135deg, #EEF2FF 0%, var(--accent) 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+  }
+  .photo-card svg { width: 28px; height: 28px; opacity: 0.95; }
+  .photo-caption { font-size: 9px; letter-spacing: 0.05em; color: #fff; text-align: center; padding: 0 8px; }
+
   @media (max-width: 640px) {
     .layout { grid-template-columns: 1fr; }
     .left { position: relative; height: auto; min-height: 50vh; }
     .big-date { display: none; }
     .right { padding: 40px 24px; }
     .info-item:hover { margin: 0; padding-left: 0; padding-right: 0; }
+    .photo-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (prefers-reduced-motion: reduce) { .name, .info-item { opacity: 1; transform: none; transition: none; } }
 </style>
@@ -149,7 +183,7 @@
     <div>
       <p class="section-label">Детали</p>
       <ul class="info-list" id="info-list">
-        <li class="info-item"><span class="info-key">Дата</span><span class="info-val">3 октября 2026, пятница</span></li>
+        <li class="info-item"><span class="info-key">Дата</span><span class="info-val">3 октября 2026, суббота</span></li>
         <li class="info-item"><span class="info-key">Время</span><span class="info-val">15:00 — сбор гостей</span></li>
         <li class="info-item"><span class="info-key">Место</span><span class="info-val">Ресторан «Берег»<br>ул. Набережная, 12</span></li>
         <li class="info-item"><span class="info-key">Стиль</span><span class="info-val">Вечерний, нейтральные тона</span></li>
@@ -164,6 +198,66 @@
       <p style="text-align:center;margin:10px 0 0;">
         <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
       </p>
+    </div>
+
+    <div>
+      <p class="section-label">Наша история</p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <p class="timeline-year">2018</p>
+          <p class="timeline-cap">Знакомство</p>
+          <p class="timeline-text">Познакомились на общей конференции — разговор затянулся до закрытия зала.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <p class="timeline-year">2020</p>
+          <p class="timeline-cap">Первое свидание</p>
+          <p class="timeline-text">Прогулка по городу и кофе, который остыл — но никто не заметил.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <p class="timeline-year">2023</p>
+          <p class="timeline-cap">Предложение</p>
+          <p class="timeline-text">Георгий сделал предложение — Анастасия ответила «да» сразу же.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <p class="timeline-year">2026</p>
+          <p class="timeline-cap">Свадьба</p>
+          <p class="timeline-text">3 октября — день, который объединит два «я» в одно «мы».</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="section-label">Фотографии</p>
+      <div class="photo-grid">
+        <div class="photo-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14 L20 9 H28 L31 14"/><circle cx="24" cy="27" r="8"/><circle cx="24" cy="27" r="3.2"/><circle cx="35" cy="19" r="1.4" fill="#fff" stroke="none"/></svg>
+          <p class="photo-caption">Здесь будут ваши фотографии</p>
+        </div>
+        <div class="photo-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14 L20 9 H28 L31 14"/><circle cx="24" cy="27" r="8"/><circle cx="24" cy="27" r="3.2"/><circle cx="35" cy="19" r="1.4" fill="#fff" stroke="none"/></svg>
+          <p class="photo-caption">Здесь будут ваши фотографии</p>
+        </div>
+        <div class="photo-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14 L20 9 H28 L31 14"/><circle cx="24" cy="27" r="8"/><circle cx="24" cy="27" r="3.2"/><circle cx="35" cy="19" r="1.4" fill="#fff" stroke="none"/></svg>
+          <p class="photo-caption">Здесь будут ваши фотографии</p>
+        </div>
+        <div class="photo-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14 L20 9 H28 L31 14"/><circle cx="24" cy="27" r="8"/><circle cx="24" cy="27" r="3.2"/><circle cx="35" cy="19" r="1.4" fill="#fff" stroke="none"/></svg>
+          <p class="photo-caption">Здесь будут ваши фотографии</p>
+        </div>
+        <div class="photo-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14 L20 9 H28 L31 14"/><circle cx="24" cy="27" r="8"/><circle cx="24" cy="27" r="3.2"/><circle cx="35" cy="19" r="1.4" fill="#fff" stroke="none"/></svg>
+          <p class="photo-caption">Здесь будут ваши фотографии</p>
+        </div>
+        <div class="photo-card">
+          <svg viewBox="0 0 48 48" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="14" width="36" height="26" rx="4"/><path d="M17 14 L20 9 H28 L31 14"/><circle cx="24" cy="27" r="8"/><circle cx="24" cy="27" r="3.2"/><circle cx="35" cy="19" r="1.4" fill="#fff" stroke="none"/></svg>
+          <p class="photo-caption">Здесь будут ваши фотографии</p>
+        </div>
+      </div>
     </div>
 
     <div>

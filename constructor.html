@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Конструктор приглашения — быстрая замена данных</title>
+<meta name="description" content="Подставьте свои имена, дату и место в любой из 36 стилей приглашений и скачайте готовый HTML-файл.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #FAF8F5; --surface: #FFFFFF; --ink: #201C18; --muted: #756D64;
+    --line: #E7E1D8; --accent: #B5451B; --accent2: #C9A84C;
+    --ok-bg: #EAF3EA; --ok-ink: #2F5A34; --warn-bg: #FBF1DE; --warn-ink: #7A5A12;
+    --shadow: 0 10px 30px rgba(32,28,24,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16140F; --surface: #1E1B15; --ink: #F2EEE6; --muted: #A79E90;
+      --line: #332E25; --accent: #E0855A; --accent2: #E8C97A;
+      --ok-bg: #1C2E1E; --ok-ink: #9FD4A6; --warn-bg: #332A14; --warn-ink: #E8C97A;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Manrope', sans-serif; font-weight: 400; min-height: 100vh; }
+
+  header { max-width: 900px; margin: 0 auto; padding: 56px 24px 8px; }
+  .back-link { font-size: 13px; color: var(--muted); text-decoration: none; }
+  .back-link:hover { color: var(--accent); }
+  .eyebrow { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin: 28px 0 14px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(30px, 5vw, 44px); line-height: 1.15; }
+  .lead { max-width: 640px; margin: 14px 0 0; font-size: 15px; line-height: 1.7; color: var(--muted); font-weight: 300; }
+
+  .notice { max-width: 900px; margin: 24px auto 0; padding: 0 24px; }
+  .notice-box { border-radius: 14px; padding: 16px 20px; font-size: 13px; line-height: 1.65; }
+  .notice-warn { background: var(--warn-bg); color: var(--warn-ink); margin-bottom: 12px; }
+  .notice-ok { background: var(--ok-bg); color: var(--ok-ink); }
+  .notice-box b { font-weight: 700; }
+
+  main { max-width: 900px; margin: 0 auto; padding: 32px 24px 100px; display: grid; gap: 28px; }
+
+  .card { background: var(--surface); border-radius: 20px; padding: 28px; box-shadow: var(--shadow); }
+  .card h2 { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; margin-bottom: 18px; }
+
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.03em; margin-bottom: 6px; color: var(--muted); }
+  input[type="text"], input[type="date"], input[type="time"], input[type="url"], select {
+    width: 100%; font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--ink);
+    background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px;
+  }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 560px) { .row2 { grid-template-columns: 1fr; } }
+  .hint { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
+
+  .generate-btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border: 0; border-radius: 999px;
+    background: var(--accent); color: #fff; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600;
+    letter-spacing: 0.03em; cursor: pointer; transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .generate-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(181,69,29,0.3); }
+  .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .status { font-size: 13px; margin-top: 14px; min-height: 18px; }
+  .status.err { color: #B5451B; }
+  .status.ok { color: var(--ok-ink); }
+
+  .result { display: none; }
+  .result.shown { display: block; }
+  .result-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 999px;
+    background: transparent; border: 1px solid var(--line); color: var(--ink); font-family: 'Manrope', sans-serif;
+    font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+  .preview-frame-wrap {
+    border-radius: 16px; overflow: hidden; border: 1px solid var(--line); height: 560px;
+  }
+  .preview-frame-wrap iframe { width: 100%; height: 100%; border: 0; }
+
+  footer { max-width: 900px; margin: 0 auto; padding: 0 24px 64px; font-size: 13px; color: var(--muted); border-top: 1px solid var(--line); padding-top: 28px; }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="back-link" href="index.html">← Назад в каталог</a>
+  <p class="eyebrow">Инструмент</p>
+  <h1>Конструктор приглашения</h1>
+  <p class="lead">Выберите один из 36 стилей, подставьте свои данные и скачайте готовый HTML-файл — его можно сразу отправлять гостям или выкладывать на хостинг.</p>
+</header>
+
+<div class="notice">
+  <div class="notice-box notice-warn">
+    <b>⚠️ Важно про даты.</b> Автоматически надёжно заменяются: имена жениха и невесты, ссылка для RSVP, срок ответа, обратный отсчёт (таймер) и большинство текстовых упоминаний даты. Но в нескольких стилях дата продублирована крупной декоративной цифрой отдельно от названия месяца — после скачивания стоит один раз пролистать файл глазами и убедиться, что везде видна новая дата. Место проведения заменяется, только если совпадает с тем, что показано в поле «Текущее место» — иначе отредактируйте его вручную в скачанном файле.
+  </div>
+  <div class="notice-box notice-ok">
+    <b>Как это работает.</b> Страница читает исходный файл выбранного стиля прямо из этой папки и подставляет ваши значения. Поэтому конструктор нужно открывать через сайт (обычный http/https-адрес, например GitHub Pages) — если открыть файл двойным кликом с диска, браузер может заблокировать чтение соседних файлов.
+  </div>
+</div>
+
+<main>
+  <section class="card">
+    <h2>1. Стиль и место</h2>
+    <div class="field">
+      <label for="styleSelect">Стиль приглашения</label>
+      <select id="styleSelect"></select>
+    </div>
+    <div class="field">
+      <label for="venueInput">Текущее место (можно изменить текст ниже)</label>
+      <input type="text" id="venueInput">
+      <p class="hint">Если оставить как есть — место не изменится. Замена сработает, только если это ровно тот текст, что уже показан в файле.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>2. Пара</h2>
+    <div class="row2">
+      <div class="field">
+        <label for="groomInput">Имя жениха</label>
+        <input type="text" id="groomInput" value="Георгий">
+      </div>
+      <div class="field">
+        <label for="brideInput">Имя невесты</label>
+        <input type="text" id="brideInput" value="Анастасия">
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>3. Дата и время</h2>
+    <div class="row2">
+      <div class="field">
+        <label for="dateInput">Дата свадьбы</label>
+        <input type="date" id="dateInput" value="2026-10-03">
+      </div>
+      <div class="field">
+        <label for="timeInput">Время начала</label>
+        <input type="time" id="timeInput">
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>4. RSVP</h2>
+    <div class="row2">
+      <div class="field">
+        <label for="telegramInput">Ссылка для подтверждения (Telegram/WhatsApp)</label>
+        <input type="url" id="telegramInput" value="https://t.me/" placeholder="https://t.me/ваш_username">
+      </div>
+      <div class="field">
+        <label for="rsvpInput">Срок ответа (текстом, как на странице)</label>
+        <input type="text" id="rsvpInput" value="20 сентября">
+      </div>
+    </div>
+    <button class="generate-btn" id="generateBtn">Сгенерировать приглашение</button>
+    <p class="status" id="statusEl"></p>
+  </section>
+
+  <section class="card result" id="resultCard">
+    <h2>Готово</h2>
+    <div class="result-actions">
+      <a class="btn-secondary" id="downloadBtn" download>⬇ Скачать HTML</a>
+      <button class="btn-secondary" id="openTabBtn" type="button">↗ Открыть в новой вкладке</button>
+    </div>
+    <div class="preview-frame-wrap">
+      <iframe id="previewFrame" title="Предпросмотр"></iframe>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Конструктор не отправляет ваши данные никуда — вся замена происходит прямо в браузере. Скачанный файл — обычная самостоятельная HTML-страница, её можно переименовать и разместить где угодно.
+</footer>
+
+<script>
+const STYLES = [
+  { file: 'wedding-style1-romantic.html', title: 'Романтика', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style2-luxury.html', title: 'Люкс', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style3-minimal.html', title: 'Минимализм', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style4-autumn.html', title: 'Осень', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style5-retro.html', title: 'Ретро', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style6-boho.html', title: 'Бохо', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style7-winter.html', title: 'Зима', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style8-tropical.html', title: 'Тропики', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style9-glam.html', title: 'Гламур', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style10-scandi.html', title: 'Скандинавский минимализм', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style11-oriental.html', title: 'Восточная роскошь', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style12-watercolor.html', title: 'Акварель', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style13-gothic.html', title: 'Тёмный романтизм', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style14-geometric.html', title: 'Гео-модерн', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style15-nautical.html', title: 'Морской бриз', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style16-spring-garden.html', title: 'Весенний сад', venue: 'Ресторан «Берег»', time: '15:00' },
+  { file: 'wedding-style17-winery.html', title: 'Винодельня', venue: 'Винодельня «Дом Лозы» · Новороссийск', time: '17:00' },
+  { file: 'wedding-style18-mountain-lodge.html', title: 'Горный лодж', venue: 'Турбаза «Эдельвейс» · Красная Поляна', time: '14:00' },
+  { file: 'wedding-style19-beach-gelendzhik.html', title: 'Закат на пляже', venue: 'Пляж «Тихая бухта» · Геленджик', time: '18:30' },
+  { file: 'wedding-style20-yacht-club.html', title: 'Яхт-клуб', venue: 'Яхт-клуб «Марина Sochi» · Сочи', time: '19:00' },
+  { file: 'wedding-style21-cossack-farm.html', title: 'Казачий хутор', venue: 'Хутор «Вольная станица» · Кубань', time: '13:00' },
+  { file: 'wedding-style22-tea-plantation.html', title: 'Чайная плантация', venue: 'Плантация «Мацеста» · Сочи', time: '12:00' },
+  { file: 'wedding-style23-orchard-blossom.html', title: 'Цветущий сад', venue: 'Сад «Яблоневый цвет» · Апшеронский р-н', time: '12:00' },
+  { file: 'wedding-style24-krasnodar-mansion.html', title: 'Старинный особняк', venue: 'Особняк «Дом на Красной» · Краснодар', time: '16:00' },
+  { file: 'wedding-style25-lake-kardyvach.html', title: 'Горное озеро', venue: 'Турбаза «Кардывач» · оз. Кардывач, Сочи', time: '11:00' },
+  { file: 'wedding-style26-sunflower-field.html', title: 'Поле подсолнухов', venue: 'Поле «Кубанское раздолье» · степи Кубани', time: '17:00' },
+  { file: 'wedding-style27-city-park.html', title: 'Городской парк', venue: 'Городской парк им. М. Горького, Краснодар', time: '16:00' },
+  { file: 'wedding-style28-galitsky-park.html', title: 'Парк Галицкого', venue: 'Парк Галицкого, Краснодар', time: '15:00' },
+  { file: 'wedding-style29-botanical-garden.html', title: 'Ботанический сад', venue: 'Ботанический сад КубГАУ, Краснодар', time: '12:00' },
+  { file: 'wedding-style30-industrial-loft.html', title: 'Индустриальный лофт', venue: 'лофт-пространство «Цех», Краснодар', time: '19:00' },
+  { file: 'wedding-style31-rooftop.html', title: 'Панорамный руфтоп', venue: 'ресторан «Высота», Краснодар', time: '19:30' },
+  { file: 'wedding-style32-river-cruise.html', title: 'Речной круиз', venue: 'теплоход «Ривер Стар», Краснодар', time: '18:00' },
+  { file: 'wedding-style33-planetarium.html', title: 'Планетарий', venue: 'планетарий «Космос», Краснодар', time: '20:00' },
+  { file: 'wedding-style34-equestrian-club.html', title: 'Конный клуб', venue: 'конный клуб «Кубанский рысак», Краснодар', time: '14:00' },
+  { file: 'wedding-style35-golf-club.html', title: 'Гольф-клуб', venue: 'гольф-клуб «Кубань Грин», Краснодар', time: '13:00' },
+  { file: 'wedding-style36-art-loft.html', title: 'Арт-пространство', venue: 'арт-пространство «Типография», Краснодар', time: '20:00' },
+];
+
+const MONTHS_GEN = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const WEEKDAYS = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+const cap = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+const styleSelect = document.getElementById('styleSelect');
+const venueInput = document.getElementById('venueInput');
+const timeInput = document.getElementById('timeInput');
+const statusEl = document.getElementById('statusEl');
+const resultCard = document.getElementById('resultCard');
+const previewFrame = document.getElementById('previewFrame');
+const downloadBtn = document.getElementById('downloadBtn');
+const openTabBtn = document.getElementById('openTabBtn');
+
+STYLES.forEach(s => {
+  const opt = document.createElement('option');
+  opt.value = s.file;
+  opt.textContent = s.title;
+  styleSelect.appendChild(opt);
+});
+
+function syncStyleDefaults() {
+  const s = STYLES.find(x => x.file === styleSelect.value);
+  venueInput.value = s.venue;
+  timeInput.value = s.time;
+}
+styleSelect.addEventListener('change', syncStyleDefaults);
+syncStyleDefaults();
+
+let currentBlobUrl = null;
+
+document.getElementById('generateBtn').addEventListener('click', async () => {
+  statusEl.textContent = 'Загружаю исходный файл…';
+  statusEl.className = 'status';
+  resultCard.classList.remove('shown');
+
+  const s = STYLES.find(x => x.file === styleSelect.value);
+  let html;
+  try {
+    const res = await fetch(s.file);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    html = await res.text();
+  } catch (e) {
+    statusEl.textContent = '✗ Не удалось прочитать файл стиля. Откройте эту страницу через http(s)-адрес сайта (не двойным кликом с диска). Ошибка: ' + e.message;
+    statusEl.className = 'status err';
+    return;
+  }
+
+  const groom = document.getElementById('groomInput').value.trim() || 'Георгий';
+  const bride = document.getElementById('brideInput').value.trim() || 'Анастасия';
+  const dateVal = document.getElementById('dateInput').value || '2026-10-03';
+  const timeVal = timeInput.value || s.time;
+  const telegram = document.getElementById('telegramInput').value.trim() || 'https://t.me/';
+  const rsvpDeadline = document.getElementById('rsvpInput').value.trim() || '20 сентября';
+  const newVenue = venueInput.value.trim();
+
+  const dateObj = new Date(dateVal + 'T00:00:00');
+  const weekday = WEEKDAYS[dateObj.getDay()];
+  const dateHuman = `${dateObj.getDate()} ${MONTHS_GEN[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
+  const isoOld = `2026-10-03T${s.time}:00`;
+  const isoNew = `${dateVal}T${timeVal}:00`;
+
+  html = html.replaceAll('Георгий', groom);
+  html = html.replaceAll('Анастасия', bride);
+  html = html.replaceAll('https://t.me/', telegram);
+  html = html.replaceAll('20 сентября', rsvpDeadline);
+  if (newVenue && newVenue !== s.venue) {
+    html = html.replaceAll(s.venue, newVenue);
+  }
+  html = html.replaceAll(isoOld, isoNew);
+  html = html.replaceAll('3 октября 2026', dateHuman);
+  html = html.replaceAll('Суббота', cap(weekday));
+  html = html.replaceAll('суббота', weekday);
+  // декоративная крупная цифра дня + отдельная строка "Месяц · День недели · Год"
+  html = html.replace(/(class="card-date">)\d+(<\/div>)/g, `$1${dateObj.getDate()}$2`);
+  html = html.replace(/(card-date-text">)[^<·]+ · [^<·]+ · \d{4}(<)/g, `$1${cap(MONTHS_GEN[dateObj.getMonth()])} · ${cap(weekday)} · ${dateObj.getFullYear()}$2`);
+
+  previewFrame.srcdoc = html;
+
+  if (currentBlobUrl) URL.revokeObjectURL(currentBlobUrl);
+  const blob = new Blob([html], { type: 'text/html' });
+  currentBlobUrl = URL.createObjectURL(blob);
+  downloadBtn.href = currentBlobUrl;
+  downloadBtn.download = `${groom}-${bride}-${s.file}`.replace(/\s+/g, '_');
+  openTabBtn.onclick = () => window.open(currentBlobUrl, '_blank');
+
+  resultCard.classList.add('shown');
+  statusEl.textContent = '✓ Готово — проверьте предпросмотр ниже.';
+  statusEl.className = 'status ok';
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+</script>
+</body>
+</html>

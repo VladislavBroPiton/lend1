@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Яхт-клуб» — Георгий и Анастасия, 3 октября 2026, Сочи. Белый, тёмно-синий и латунь — вечер в марине.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style20-yacht-club.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Яхт-клуб»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Яхт-клуб», Сочи. Белый, тёмно-синий и латунь — вечер в марине.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style20-yacht-club.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style20-yacht-club.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Яхт-клуб»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Яхт-клуб», Сочи. Белый, тёмно-синий и латунь — вечер в марине.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style20-yacht-club.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -401,6 +414,62 @@
     opacity:.6;
   }
 
+  /* ---------- Наша история ---------- */
+  .timeline{ position:relative; padding-left:4px; text-align:left; max-width:460px; margin:0 auto; }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:15px; top:4px; bottom:4px;
+    width:2px;
+    background:linear-gradient(180deg, var(--brass-light), var(--brass-dark));
+    opacity:.5;
+  }
+  .timeline-item{ position:relative; display:flex; gap:18px; margin-bottom:28px; }
+  .timeline-item:last-child{ margin-bottom:0; }
+  .timeline-dot{
+    flex:none;
+    width:32px; height:32px;
+    border-radius:50%;
+    background:linear-gradient(165deg, var(--navy-700), var(--navy-900));
+    border:2px solid var(--brass);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    box-shadow:var(--shadow);
+    position:relative; z-index:1;
+  }
+  .timeline-year{ font-family:'Playfair Display', serif; font-weight:700; font-size:22px; color:var(--brass-light); line-height:1.2; }
+  .timeline-title{ font-family:'Montserrat', sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--champagne); opacity:.9; margin:2px 0 6px; }
+  .timeline-text{ font-family:'Cormorant Garamond', serif; font-size:16.5px; line-height:1.5; color:var(--white); opacity:.85; }
+
+  /* ---------- Фотографии ---------- */
+  .gallery-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; max-width:560px; margin:0 auto; }
+  .gallery-card{
+    aspect-ratio:1 / 1;
+    border-radius:10px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    padding:10px;
+    border:1px solid rgba(201,168,106,.4);
+    box-shadow:var(--shadow);
+    position:relative;
+    color:var(--brass-light);
+  }
+  .gallery-card::before{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:1px solid rgba(233,218,179,.14);
+    pointer-events:none;
+  }
+  .gallery-card .cam{ width:26px; height:26px; opacity:.9; }
+  .gallery-card p{ font-family:'Montserrat', sans-serif; font-size:9.5px; letter-spacing:.06em; color:var(--white); opacity:.7; margin:0; line-height:1.3; }
+  .gc1{ background:linear-gradient(165deg, var(--navy-700), var(--navy-950)); }
+  .gc2{ background:linear-gradient(165deg, var(--navy-600), var(--navy-900)); }
+  .gc3{ background:linear-gradient(165deg, #24344f, var(--navy-950)); }
+  .gc4{ background:linear-gradient(165deg, var(--navy-700), #030710); }
+  .gc5{ background:linear-gradient(165deg, #1d2c48, var(--navy-950)); }
+  .gc6{ background:linear-gradient(165deg, var(--navy-600), var(--navy-950)); }
+  @media (max-width:560px){ .gallery-grid{ grid-template-columns:repeat(2, 1fr); } }
+
   /* ---------- Адаптивность ---------- */
   @media (max-width:640px){
     .page-frame{inset:9px;}
@@ -462,7 +531,7 @@
       <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
       <div class="names-reflection" aria-hidden="true">Георгий &amp; Анастасия</div>
 
-      <p class="subtitle">3 октября 2026 · пятница · 19:00</p>
+      <p class="subtitle">3 октября 2026 · суббота · 19:00</p>
       <div class="brass-rule"></div>
       <p class="venue-note">Встречаемся вечером в <b>яхт-клубе «Марина Sochi»</b> на Имеретинской набережной — когда зажигаются огни марины и их отражения ложатся на тёмную воду.</p>
     </div>
@@ -495,7 +564,7 @@
           </svg>
         </div>
         <h3>Когда</h3>
-        <p>3 октября 2026, пятница<br>начало в 19:00</p>
+        <p>3 октября 2026, суббота<br>начало в 19:00</p>
       </div>
       <div class="detail-card">
         <div class="plate">
@@ -531,6 +600,62 @@
       <a href="https://yandex.ru/maps/?ll=39.9532,43.4028&z=14&pt=39.9532,43.4028,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
     </p>
   </div>
+
+  <div class="divider"></div>
+
+  <section id="story">
+    <h2 class="section-title">Наша история</h2>
+    <p class="section-sub">Путь, который привёл нас на палубу этой марины</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="timeline-dot">⚓</span>
+        <div class="timeline-body">
+          <p class="timeline-year">2018</p>
+          <p class="timeline-title">Знакомство</p>
+          <p class="timeline-text">Познакомились на приёме в яхт-клубе тёплым сентябрьским вечером.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-dot">🌊</span>
+        <div class="timeline-body">
+          <p class="timeline-year">2020</p>
+          <p class="timeline-title">Первое свидание</p>
+          <p class="timeline-text">Первое свидание — прогулка вдоль марины и огни на воде.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-dot">✨</span>
+        <div class="timeline-body">
+          <p class="timeline-year">2023</p>
+          <p class="timeline-title">Предложение</p>
+          <p class="timeline-text">Предложение прозвучало на палубе, под огнями вечерней марины.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-dot">💍</span>
+        <div class="timeline-body">
+          <p class="timeline-year">2026</p>
+          <p class="timeline-title">Свадьба</p>
+          <p class="timeline-text">Говорим друг другу «да» там, где встречаются море и небо.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="gallery">
+    <h2 class="section-title">Фотографии</h2>
+    <p class="section-sub">Скоро здесь появятся кадры этого вечера</p>
+    <div class="gallery-grid">
+      <div class="gallery-card gc1"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+      <div class="gallery-card gc2"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+      <div class="gallery-card gc3"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+      <div class="gallery-card gc4"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+      <div class="gallery-card gc5"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+      <div class="gallery-card gc6"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+    </div>
+  </section>
 
   <div class="divider"></div>
 

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+<meta name="description" content="Свадебное приглашение в стиле «Панорамный руфтоп» — Георгий и Анастасия, 3 октября 2026, Краснодар.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style31-rooftop.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Панорамный руфтоп»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Панорамный руфтоп», Краснодар.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style31-rooftop.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style31-rooftop.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Панорамный руфтоп»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Панорамный руфтоп», Краснодар.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style31-rooftop.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@1,500;1,600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night-deep:#120e22;
+    --night-mid:#241a3f;
+    --plum:#4a2f66;
+    --dusk-rose:#b1516b;
+    --sunset:#ff8c5a;
+    --sunset-light:#ffcf82;
+    --gold:#ffd166;
+    --gold-deep:#e0a83e;
+    --glass-bd:rgba(255,255,255,.16);
+    --glass-bg:rgba(255,255,255,.07);
+    --glass-bg-2:rgba(255,255,255,.03);
+    --ink:#f5f1ff;
+    --ink-soft:rgba(245,241,255,.72);
+    --ink-faint:rgba(245,241,255,.5);
+    --metal:#c7cbd6;
+    --metal-dark:#8b8fa3;
+    --shadow: 0 20px 50px rgba(6,3,16,.5);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Manrope', sans-serif;
+    font-weight:400;
+    color:var(--ink);
+    background:var(--night-deep);
+    line-height:1.65;
+    overflow-x:hidden;
+    position:relative;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Marcellus', serif;
+    font-weight:400;
+    letter-spacing:.01em;
+  }
+  .amp{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:600;
+    color:var(--sunset-light);
+  }
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    opacity:.6;
+    margin:0 0 12px;
+    text-align:center;
+  }
+  section{
+    position:relative;
+    padding:80px 20px;
+    max-width:920px;
+    margin:0 auto;
+  }
+
+  /* ================= FIXED SKY / CITY BACKDROP ================= */
+  .skyfixed{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    overflow:hidden;
+    background:var(--night-deep);
+  }
+  .sky-gradient{
+    position:absolute;
+    left:0; right:0; top:-50%; height:200%;
+    background:linear-gradient(180deg,
+      var(--night-deep) 0%,
+      var(--night-mid) 20%,
+      var(--plum) 40%,
+      var(--dusk-rose) 56%,
+      var(--sunset) 68%,
+      var(--sunset-light) 76%,
+      var(--plum) 86%,
+      var(--night-deep) 100%);
+    background-size:100% 100%;
+    animation:skyDrift 46s ease-in-out infinite alternate;
+    opacity:.95;
+  }
+  @keyframes skyDrift{
+    0%{ transform:translateY(0); filter:hue-rotate(0deg); }
+    100%{ transform:translateY(6%); filter:hue-rotate(-8deg); }
+  }
+  .sky-glow{
+    position:absolute; left:0; right:0; bottom:28%; height:40%;
+    background:radial-gradient(ellipse 70% 100% at 50% 100%, rgba(255,166,110,.35), transparent 70%);
+    pointer-events:none;
+  }
+  .skyline{
+    position:absolute; left:0; right:0; bottom:0; width:100%; height:46%;
+    display:block;
+  }
+  .bld-far{ fill:#3a2a52; opacity:.55; }
+  .bld-near{ fill:#170f2a; opacity:1; }
+  .win{ fill:var(--gold); animation:winFlicker 4.5s ease-in-out infinite; }
+  @keyframes winFlicker{
+    0%,100%{ opacity:.25; }
+    50%{ opacity:.95; }
+  }
+  #lights{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+
+  @media (max-width:720px){
+    .skyline{ height:38%; }
+  }
+
+  /* ================= HERO ================= */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px 30px;
+    position:relative;
+  }
+  .hero-content{ position:relative; z-index:2; }
+  .rings{ font-size:24px; margin-bottom:16px; opacity:.9; filter:drop-shadow(0 0 10px rgba(255,209,102,.5)); }
+  .names{
+    font-size:clamp(44px, 9vw, 92px);
+    line-height:1.06;
+    margin:0;
+    color:var(--ink);
+    text-shadow:0 4px 30px rgba(0,0,0,.35);
+  }
+  .hero-sub{
+    margin-top:16px;
+    font-size:14px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .hero-date{
+    margin-top:8px;
+    font-size:18px;
+    letter-spacing:.03em;
+    color:var(--sunset-light);
+    font-family:'Marcellus', serif;
+  }
+  .glass-rail{
+    margin-top:38px;
+    width:min(320px, 70vw);
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--metal), transparent);
+    position:relative;
+  }
+  .glass-rail::after{
+    content:"";
+    position:absolute; left:50%; top:6px; transform:translateX(-50%);
+    width:6px; height:6px; border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 10px 2px rgba(255,209,102,.7);
+  }
+  .names-reflection{
+    margin-top:10px;
+    font-family:'Marcellus', serif;
+    font-size:clamp(20px, 4vw, 34px);
+    color:rgba(245,241,255,.16);
+    transform:scaleY(-1);
+    filter:blur(1px);
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.5), transparent 85%);
+    -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.5), transparent 85%);
+  }
+  .scroll-hint{
+    margin-top:34px;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    opacity:.5;
+  }
+  .scroll-hint::after{
+    content:"";
+    display:block;
+    width:1px; height:30px;
+    background:var(--metal);
+    margin:10px auto 0;
+    animation:lineGrow 2.2s ease-in-out infinite;
+  }
+  @keyframes lineGrow{
+    0%,100%{ transform:scaleY(.4); opacity:.3; }
+    50%{ transform:scaleY(1); opacity:.9; }
+  }
+
+  /* ================= GLASS PANEL (общий стиль карточек) ================= */
+  .glass-panel{
+    background:linear-gradient(160deg, var(--glass-bg), var(--glass-bg-2));
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--glass-bd);
+    border-radius:26px;
+    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.12);
+  }
+
+  /* ================= COUNTDOWN ================= */
+  .countdown-section{ text-align:center; }
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-top:22px;
+  }
+  .cd-item{
+    padding:20px 22px;
+    min-width:92px;
+    text-align:center;
+  }
+  .cd-num{
+    font-family:'Marcellus', serif;
+    font-size:42px;
+    color:var(--gold);
+    display:block;
+    text-shadow:0 0 18px rgba(255,209,102,.35);
+  }
+  .cd-label{
+    font-size:11px;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    opacity:.6;
+  }
+
+  /* ================= DETAILS ================= */
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    margin-top:30px;
+  }
+  .detail-card{
+    padding:32px 22px;
+    text-align:center;
+  }
+  .detail-icon{
+    width:42px;height:42px;
+    margin:0 auto 16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .detail-title{
+    font-size:11px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    opacity:.55;
+    margin:0 0 8px;
+  }
+  .detail-value{
+    font-family:'Marcellus', serif;
+    font-size:22px;
+    margin:0;
+    color:var(--ink);
+  }
+  .detail-note{
+    font-size:13px;
+    opacity:.65;
+    margin-top:6px;
+  }
+
+  /* ================= STORY ================= */
+  .story{ margin:0 auto 90px; max-width:920px; padding:64px 30px; }
+  .timeline{
+    position:relative;
+    max-width:640px;
+    margin:40px auto 0;
+    padding-left:30px;
+    border-left:2px solid rgba(255,209,102,.35);
+  }
+  .tl-item{ position:relative; margin-bottom:38px; padding-left:20px; }
+  .tl-item:last-child{ margin-bottom:0; }
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    left:-38px; top:4px;
+    width:13px; height:13px;
+    border-radius:50%;
+    background:var(--gold);
+    border:3px solid var(--night-deep);
+    box-shadow:0 0 0 2px var(--gold), 0 0 12px rgba(255,209,102,.6);
+  }
+  .tl-date{
+    font-size:12px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--sunset-light);
+    opacity:.9;
+  }
+  .tl-title{
+    font-family:'Marcellus', serif;
+    font-size:24px;
+    margin:4px 0 6px;
+    color:var(--ink);
+  }
+  .tl-text{ font-size:15px; opacity:.7; max-width:480px; }
+
+  /* ================= PHOTOS ================= */
+  .photos-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+    margin-top:30px;
+  }
+  .photo-card{
+    aspect-ratio:4/5;
+    border-radius:18px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    color:#fff;
+    text-align:center;
+    padding:16px;
+    border:1px solid rgba(255,255,255,.14);
+  }
+  .photo-card:nth-child(1){ background:linear-gradient(150deg, #241a3f, #b1516b); }
+  .photo-card:nth-child(2){ background:linear-gradient(150deg, #4a2f66, #ff8c5a); }
+  .photo-card:nth-child(3){ background:linear-gradient(150deg, #12102a, #e0a83e); }
+  .photo-card:nth-child(4){ background:linear-gradient(150deg, #b1516b, #241a3f); }
+  .photo-card:nth-child(5){ background:linear-gradient(150deg, #ff8c5a, #4a2f66); }
+  .photo-card:nth-child(6){ background:linear-gradient(150deg, #e0a83e, #12102a); }
+  .photo-cap{ font-size:12px; letter-spacing:.06em; opacity:.9; }
+
+  /* ================= RSVP ================= */
+  .rsvp{
+    text-align:center;
+    padding:64px 30px;
+    max-width:920px;
+    margin:0 auto 90px;
+  }
+  .rsvp h2{ font-size:clamp(28px,5vw,42px); margin:0 0 14px; color:var(--ink); }
+  .rsvp p{ opacity:.85; max-width:480px; margin:0 auto 28px; }
+  .rsvp-btn{
+    display:inline-block;
+    background:linear-gradient(135deg, var(--gold), var(--sunset));
+    color:#20142f;
+    text-decoration:none;
+    padding:16px 42px;
+    border-radius:40px;
+    font-size:14px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    font-weight:700;
+    transition:transform .25s ease, box-shadow .25s ease;
+    box-shadow:0 12px 30px rgba(255,140,90,.35);
+  }
+  .rsvp-btn:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(255,140,90,.45); }
+  .rsvp-deadline{
+    margin-top:22px;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    opacity:.6;
+  }
+
+  footer{
+    text-align:center;
+    padding:50px 20px 60px;
+    font-size:13px;
+    opacity:.55;
+  }
+
+  @media (max-width:720px){
+    .details-grid{ grid-template-columns:1fr; }
+    .photos-grid{ grid-template-columns:repeat(2, 1fr); }
+    section{ padding:60px 18px; }
+    .story, .rsvp{ padding:46px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration:.001ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:.001ms !important;
+    }
+    .sky-gradient{ transform:none; }
+    .win{ opacity:.7; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= ФИКСИРОВАННЫЙ ФОН: ЗАКАТ, СИЛУЭТЫ ГОРОДА, ОГНИ ================= -->
+<div class="skyfixed" aria-hidden="true">
+  <div class="sky-gradient"></div>
+  <div class="sky-glow"></div>
+  <svg class="skyline" viewBox="0 0 1440 460" preserveAspectRatio="none">
+    <g class="bld-far">
+      <rect x="0" y="230" width="90" height="230"/>
+      <rect x="330" y="300" width="60" height="160"/>
+      <rect x="470" y="200" width="90" height="260"/>
+      <rect x="690" y="270" width="70" height="190"/>
+      <rect x="900" y="180" width="120" height="280"/>
+      <rect x="1140" y="250" width="80" height="210"/>
+      <rect x="1330" y="210" width="110" height="250"/>
+    </g>
+    <g class="bld-near" id="bld-near">
+      <rect x="90" y="290" width="60" height="170"/>
+      <rect x="150" y="130" width="110" height="330"/>
+      <rect x="260" y="250" width="70" height="210"/>
+      <rect x="390" y="170" width="80" height="290"/>
+      <rect x="560" y="90" width="130" height="370"/>
+      <rect x="760" y="260" width="90" height="200"/>
+      <rect x="850" y="200" width="70" height="260"/>
+      <rect x="1020" y="290" width="60" height="170"/>
+      <rect x="1080" y="190" width="100" height="270"/>
+      <rect x="1220" y="230" width="80" height="230"/>
+    </g>
+  </svg>
+  <canvas id="lights"></canvas>
+</div>
+
+<!-- ================= ШАПКА С ИМЕНАМИ ================= -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="rings">💍</div>
+    <p class="eyebrow">Панорамный вечер на высоте</p>
+    <h1 class="names">Георгий <span class="amp">&amp;</span> Анастасия</h1>
+    <p class="hero-sub">Приглашаем встретить закат над городом</p>
+    <p class="hero-date">3 октября 2026 · суббота · ресторан «Высота», Краснодар</p>
+    <div class="glass-rail"></div>
+    <p class="names-reflection" aria-hidden="true">Георгий &amp; Анастасия</p>
+    <p class="scroll-hint">Листайте вниз</p>
+  </div>
+</header>
+
+<!-- ================= ДАТА / ОБРАТНЫЙ ОТСЧЁТ ================= -->
+<section class="countdown-section">
+  <p class="eyebrow">До нашего вечера на крыше осталось</p>
+  <div class="countdown glass-panel" id="countdown" style="display:inline-flex;">
+    <div class="cd-item"><span class="cd-num" id="cd-days">00</span><span class="cd-label">дней</span></div>
+    <div class="cd-item"><span class="cd-num" id="cd-hours">00</span><span class="cd-label">часов</span></div>
+    <div class="cd-item"><span class="cd-num" id="cd-min">00</span><span class="cd-label">минут</span></div>
+    <div class="cd-item"><span class="cd-num" id="cd-sec">00</span><span class="cd-label">секунд</span></div>
+  </div>
+</section>
+
+<!-- ================= ДЕТАЛИ СОБЫТИЯ ================= -->
+<section>
+  <p class="eyebrow">Детали события</p>
+  <div class="details-grid">
+    <div class="detail-card glass-panel">
+      <div class="detail-icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+      </div>
+      <p class="detail-title">Время</p>
+      <p class="detail-value">19:30</p>
+      <p class="detail-note">Закат и вечерние огни города</p>
+    </div>
+    <div class="detail-card glass-panel">
+      <div class="detail-icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ff8c5a" stroke-width="1.5"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-7h6v7"/><path d="M4 9h16"/></svg>
+      </div>
+      <p class="detail-title">Место</p>
+      <p class="detail-value">Ресторан «Высота»</p>
+      <p class="detail-note">Крыша делового центра, Краснодар</p>
+    </div>
+    <div class="detail-card glass-panel">
+      <div class="detail-icon">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#c7cbd6" stroke-width="1.5"><path d="M8 3l4 4 4-4"/><path d="M6 21l6-8 6 8"/><path d="M9 13l3-2 3 2"/></svg>
+      </div>
+      <p class="detail-title">Дресс-код</p>
+      <p class="detail-value">Вечерний деловой шик</p>
+      <p class="detail-note">Тёмные и металлик-тона</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= КАРТА ================= -->
+<div style="margin:40px auto;max-width:480px;padding:0 20px;">
+  <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+  <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+    <iframe src="https://yandex.ru/map-widget/v1/?ll=39.0100,45.0500&z=15&l=map&pt=39.0100,45.0500,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: ресторан «Высота»" style="display:block;border:0;"></iframe>
+  </div>
+  <p style="text-align:center;margin:10px 0 0;">
+    <a href="https://yandex.ru/maps/?ll=39.0100,45.0500&z=15&pt=39.0100,45.0500,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+  </p>
+</div>
+
+<!-- ================= НАША ИСТОРИЯ ================= -->
+<section class="story glass-panel">
+  <p class="eyebrow">Наша история</p>
+  <h2 style="text-align:center;font-size:clamp(26px,4vw,36px);margin:6px 0 0;color:var(--ink);">Город, который свёл нас вместе</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <p class="tl-date">Ноябрь 2022</p>
+      <p class="tl-title">Знакомство</p>
+      <p class="tl-text">Случайная встреча на вечеринке на крыше одного из бизнес-центров — и вид на вечерний город, от которого перехватило дыхание не только из-за высоты.</p>
+    </div>
+    <div class="tl-item">
+      <p class="tl-date">Февраль 2023</p>
+      <p class="tl-title">Первое свидание</p>
+      <p class="tl-text">Ужин с панорамным видом на огни Краснодара — с тех пор высота и закат стали нашим любимым местом для разговоров.</p>
+    </div>
+    <div class="tl-item">
+      <p class="tl-date">Январь 2026</p>
+      <p class="tl-title">Предложение</p>
+      <p class="tl-text">На той же крыше, где всё началось, — кольцо на фоне заката и простой вопрос, ответ на который был известен заранее.</p>
+    </div>
+    <div class="tl-item">
+      <p class="tl-date">3 октября 2026</p>
+      <p class="tl-title">Свадьба</p>
+      <p class="tl-text">Мы говорим друг другу «да» там, где город лежит у наших ног, а закат медленно превращается в россыпь вечерних огней.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ФОТОГРАФИИ ================= -->
+<section>
+  <p class="eyebrow">Фотографии</p>
+  <h2 style="text-align:center;font-size:clamp(26px,4vw,36px);margin:6px 0 0;color:var(--ink);">Момент за моментом</h2>
+  <div class="photos-grid">
+    <div class="photo-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.4"/></svg><span class="photo-cap">Здесь будут ваши фотографии</span></div>
+    <div class="photo-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.4"/></svg><span class="photo-cap">Здесь будут ваши фотографии</span></div>
+    <div class="photo-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.4"/></svg><span class="photo-cap">Здесь будут ваши фотографии</span></div>
+    <div class="photo-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.4"/></svg><span class="photo-cap">Здесь будут ваши фотографии</span></div>
+    <div class="photo-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.4"/></svg><span class="photo-cap">Здесь будут ваши фотографии</span></div>
+    <div class="photo-card"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.4"/></svg><span class="photo-cap">Здесь будут ваши фотографии</span></div>
+  </div>
+</section>
+
+<!-- ================= RSVP ================= -->
+<section style="padding:0 20px;">
+  <div class="rsvp glass-panel">
+    <p class="eyebrow" style="opacity:.75;">RSVP</p>
+    <h2>Будем рады видеть вас на высоте</h2>
+    <p>Пожалуйста, подтвердите присутствие, чтобы мы могли всё подготовить к вечеру над городом.</p>
+    <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener">Подтвердить в Telegram</a>
+    <p class="rsvp-deadline">Ответ до 20 сентября 2026</p>
+  </div>
+</section>
+
+<footer>
+  <p>Георгий <span class="amp">&amp;</span> Анастасия · 3 октября 2026 · ресторан «Высота», Краснодар</p>
+</footer>
+
+<script>
+  // Обратный отсчёт до 3 октября 2026, 19:30
+  (function(){
+    var target = new Date("2026-10-03T19:30:00").getTime();
+    var elDays = document.getElementById("cd-days");
+    var elHours = document.getElementById("cd-hours");
+    var elMin = document.getElementById("cd-min");
+    var elSec = document.getElementById("cd-sec");
+
+    function pad(n){ return n < 10 ? "0" + n : "" + n; }
+
+    function tick(){
+      var now = new Date().getTime();
+      var diff = target - now;
+      if (diff < 0) diff = 0;
+
+      var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      var secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      elDays.textContent = pad(days);
+      elHours.textContent = pad(hours);
+      elMin.textContent = pad(mins);
+      elSec.textContent = pad(secs);
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // Окна ближних высоток — генерируем случайно мерцающие огни внутри силуэтов зданий
+  (function(){
+    var group = document.getElementById("bld-near");
+    if (!group) return;
+    var rects = group.querySelectorAll("rect");
+    var svgNS = "http://www.w3.org/2000/svg";
+    var winGroup = document.createElementNS(svgNS, "g");
+    winGroup.setAttribute("class", "win-group");
+    group.parentNode.appendChild(winGroup);
+
+    rects.forEach(function(r){
+      var x = parseFloat(r.getAttribute("x"));
+      var y = parseFloat(r.getAttribute("y"));
+      var w = parseFloat(r.getAttribute("width"));
+      var h = parseFloat(r.getAttribute("height"));
+      var cols = Math.max(2, Math.floor(w / 16));
+      var rows = Math.max(3, Math.floor(h / 22));
+      for (var c = 0; c < cols; c++){
+        for (var row = 0; row < rows; row++){
+          if (Math.random() > 0.62) continue; // не все окна светятся
+          var wx = x + 6 + c * (w - 12) / Math.max(1, cols - 1 || 1);
+          var wy = y + 14 + row * (h - 24) / Math.max(1, rows - 1 || 1);
+          var win = document.createElementNS(svgNS, "rect");
+          win.setAttribute("x", wx.toFixed(1));
+          win.setAttribute("y", wy.toFixed(1));
+          win.setAttribute("width", 4);
+          win.setAttribute("height", 6);
+          win.setAttribute("class", "win");
+          win.style.animationDelay = (Math.random() * 5).toFixed(2) + "s";
+          win.style.animationDuration = (3 + Math.random() * 4).toFixed(2) + "s";
+          winGroup.appendChild(win);
+        }
+      }
+    });
+  })();
+
+  // Canvas: мерцающие огни города и плывущие тёплые огоньки над крышей
+  (function(){
+    var canvas = document.getElementById("lights");
+    if (!canvas) return;
+    var ctx = canvas.getContext("2d");
+    var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h, t = 0;
+
+    var dots = [];
+    var dotCount = 70;
+    for (var i = 0; i < dotCount; i++){
+      dots.push({
+        xr: Math.random(),
+        yr: 0.55 + Math.random() * 0.42,
+        r: 0.6 + Math.random() * 1.4,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.02 + Math.random() * 0.03
+      });
+    }
+
+    var embers = [];
+    var emberCount = 14;
+    for (var j = 0; j < emberCount; j++){
+      embers.push({
+        xr: Math.random(),
+        y: 0,
+        speed: 0.15 + Math.random() * 0.25,
+        drift: (Math.random() - 0.5) * 0.3,
+        size: 2 + Math.random() * 3,
+        phase: Math.random() * Math.PI * 2,
+        delay: Math.random() * 400
+      });
+    }
+
+    function resize(){
+      var rect = canvas.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      embers.forEach(function(e){ e.y = h * (0.4 + Math.random() * 0.5); });
+    }
+
+    function drawStatic(){
+      ctx.clearRect(0, 0, w, h);
+      dots.forEach(function(d){
+        var x = d.xr * w;
+        var y = d.yr * h;
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(255,209,102,0.6)";
+        ctx.arc(x, y, d.r * 1.6, 0, Math.PI * 2);
+        ctx.fill();
+      });
+    }
+
+    function render(){
+      ctx.clearRect(0, 0, w, h);
+
+      // мерцающие окна как рассеянные огни
+      for (var i = 0; i < dots.length; i++){
+        var d = dots[i];
+        var flicker = 0.4 + 0.6 * (0.5 + 0.5 * Math.sin(t * d.speed + d.phase));
+        var x = d.xr * w;
+        var y = d.yr * h;
+        ctx.beginPath();
+        var grad = ctx.createRadialGradient(x, y, 0, x, y, d.r * 5);
+        grad.addColorStop(0, "rgba(255,214,120," + (0.55 * flicker) + ")");
+        grad.addColorStop(1, "rgba(255,214,120,0)");
+        ctx.fillStyle = grad;
+        ctx.arc(x, y, d.r * 5, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // тёплые огоньки, медленно плывущие вверх над крышей
+      for (var k = 0; k < embers.length; k++){
+        var e = embers[k];
+        e.y -= e.speed;
+        if (e.y < -20){ e.y = h * (0.5 + Math.random() * 0.4); e.xr = Math.random(); }
+        var ex = e.xr * w + Math.sin(t * 0.01 + e.phase) * 14;
+        var eflicker = 0.5 + 0.5 * Math.sin(t * 0.04 + e.phase);
+        ctx.beginPath();
+        var eg = ctx.createRadialGradient(ex, e.y, 0, ex, e.y, e.size * 4);
+        eg.addColorStop(0, "rgba(255,180,120," + (0.5 * eflicker) + ")");
+        eg.addColorStop(1, "rgba(255,180,120,0)");
+        ctx.fillStyle = eg;
+        ctx.arc(ex, e.y, e.size * 4, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function loop(){
+      t += 1;
+      render();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener("resize", function(){
+      resize();
+      if (reduceMotion) drawStatic();
+    });
+
+    resize();
+    if (reduceMotion){
+      drawStatic();
+    } else {
+      loop();
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Чайная плантация» — Георгий и Анастасия, 3 октября 2026, Плантация «Мацеста», Сочи. Туман над рядами чайных кустов, дзен-минимализм.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style22-tea-plantation.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Чайная плантация»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Чайная плантация», Плантация «Мацеста», Сочи. Туман над рядами чайных кустов, дзен-минимализм.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style22-tea-plantation.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style22-tea-plantation.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Чайная плантация»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Чайная плантация», Плантация «Мацеста», Сочи. Туман над рядами чайных кустов, дзен-минимализм.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style22-tea-plantation.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
@@ -252,6 +265,45 @@
     line-height: 1.8;
   }
 
+  /* ───────── our story ───────── */
+  .story-section { background: var(--fog-bg-2); }
+  .story-title { text-align: center; margin-bottom: 56px; }
+  .story-title h2 {
+    font-family: 'Philosopher', serif; font-weight: 400; font-style: italic;
+    font-size: clamp(27px, 4vw, 34px); color: var(--ink); margin-top: 10px;
+  }
+  .timeline { position: relative; max-width: 460px; margin: 0 auto; padding-left: 28px; }
+  .timeline::before { content: ''; position: absolute; left: 5px; top: 4px; bottom: 4px; width: 1px; background: var(--line); }
+  .tl-item { position: relative; padding-bottom: 44px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: -28px; top: 3px; width: 11px; height: 11px; border-radius: 50%;
+    background: var(--mid); border: 2px solid var(--fog-bg-2); box-shadow: 0 0 0 1px var(--line);
+  }
+  .tl-year { font-family: 'Philosopher', serif; font-size: 22px; font-style: italic; color: var(--mid); margin-bottom: 6px; }
+  .tl-role { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .tl-text { font-size: 14.5px; line-height: 1.75; color: var(--ink-soft); font-weight: 300; }
+
+  /* ───────── photo gallery ───────── */
+  .gallery-section { background: var(--fog-bg); }
+  .gallery-title { text-align: center; margin-bottom: 44px; }
+  .gallery-title h2 {
+    font-family: 'Philosopher', serif; font-weight: 400; font-style: italic;
+    font-size: clamp(27px, 4vw, 34px); color: var(--ink); margin-top: 10px;
+  }
+  .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .g-card {
+    aspect-ratio: 1; border-radius: 4px; position: relative; overflow: hidden;
+    background: linear-gradient(150deg, var(--fog-bg-2), var(--line) 65%, var(--mid-light));
+    border: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+  .g-card:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(17,36,26,0.14); }
+  .g-icon { width: 28px; height: 28px; color: var(--mid); opacity: 0.85; }
+  .g-icon svg { width: 100%; height: 100%; }
+  .g-cap { font-size: 10.5px; letter-spacing: 0.05em; color: var(--muted); text-align: center; padding: 0 8px; }
+
   /* ───────── rsvp ───────── */
   .rsvp { text-align: center; background: var(--fog-bg-2); }
   .rsvp h2 {
@@ -320,6 +372,7 @@
     .countdown { grid-template-columns: repeat(2, 1fr); }
     .rsvp-btn { padding: 16px 36px; width: 100%; }
     .detail-item { padding: 28px 0; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -379,7 +432,7 @@
         <span class="name">Анастасия</span>
       </div>
 
-      <p class="hero-date reveal visible reveal-delay-2">3 октября 2026 · <span>пятница</span></p>
+      <p class="hero-date reveal visible reveal-delay-2">3 октября 2026 · <span>суббота</span></p>
       <p class="hero-sub reveal visible reveal-delay-2">Чайная плантация «Мацеста», Сочи</p>
 
       <div class="scroll-hint">
@@ -432,7 +485,7 @@
       <div class="detail-item reveal">
         <svg class="detail-icon" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.3"/><path d="M12 7v5l3.5 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
         <div class="detail-label">Дата и время</div>
-        <div class="detail-value">3 октября 2026, пятница<span class="fine">Начало в полдень — час, когда в горах ещё держится утренняя дымка</span></div>
+        <div class="detail-value">3 октября 2026, суббота<span class="fine">Начало в полдень — час, когда в горах ещё держится утренняя дымка</span></div>
       </div>
 
       <div class="detail-item reveal">
@@ -462,6 +515,60 @@
       <a href="https://yandex.ru/maps/?ll=39.8567,43.5322&z=13&pt=39.8567,43.5322,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
     </p>
   </div>
+
+  <!-- ───────── НАША ИСТОРИЯ ───────── -->
+  <section class="story-section">
+    <div class="inner">
+      <div class="story-title reveal">
+        <p class="eyebrow">Путь вдвоём</p>
+        <h2>Наша история</h2>
+      </div>
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-year">2018</div>
+          <div class="tl-role">Знакомство</div>
+          <div class="tl-text">Георгий и Анастасия встретились случайно — и разговор о путешествиях в горы затянулся далеко за полночь.</div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-year">2020</div>
+          <div class="tl-role">Первое свидание</div>
+          <div class="tl-text">Прогулка среди чайных террас в утреннем тумане — с тех пор горный воздух Сочи стал частью их истории.</div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-year">2023</div>
+          <div class="tl-role">Предложение</div>
+          <div class="tl-text">Предложение прозвучало на рассвете, когда туман только начал подниматься над рядами чайных кустов.</div>
+        </div>
+        <div class="tl-item reveal">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <div class="tl-year">2026</div>
+          <div class="tl-role">Свадьба</div>
+          <div class="tl-text">3 октября — свадьба на чайной плантации «Мацеста», там, где для них началось самое важное.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───────── ФОТОГРАФИИ ───────── -->
+  <section class="gallery-section">
+    <div class="inner">
+      <div class="gallery-title reveal">
+        <p class="eyebrow">На память</p>
+        <h2>Фотографии</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="g-card reveal"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+        <div class="g-card reveal"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+        <div class="g-card reveal"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+        <div class="g-card reveal"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+        <div class="g-card reveal"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+        <div class="g-card reveal"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+      </div>
+    </div>
+  </section>
 
   <!-- ───────── RSVP ───────── -->
   <section class="rsvp">

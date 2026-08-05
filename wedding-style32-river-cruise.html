@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий &amp; Анастасия • 3 октября</title>
+<meta name="description" content="Свадебное приглашение в стиле «Речной круиз» — Георгий и Анастасия, 3 октября 2026, Краснодар.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style32-river-cruise.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Речной круиз»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Речной круиз», Краснодар.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style32-river-cruise.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style32-river-cruise.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Речной круиз»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Речной круиз», Краснодар.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style32-river-cruise.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky-950:#1a1024;
+    --sky-900:#241531;
+    --river-950:#0d1626;
+    --river-900:#13223b;
+    --river-800:#1b2f4f;
+    --sunset-pink:#ff8f7a;
+    --sunset-orange:#ffab6f;
+    --gold:#e8b86d;
+    --gold-light:#ffdba6;
+    --cream:#fbead9;
+    --shadow:0 24px 55px rgba(10,4,16,.5);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    font-family:'Montserrat', sans-serif;
+    background:
+      radial-gradient(ellipse 900px 480px at 50% 0%, rgba(255,143,122,.16), transparent 62%),
+      radial-gradient(ellipse 700px 420px at 50% 100%, rgba(232,184,109,.08), transparent 65%),
+      linear-gradient(180deg, var(--sky-950) 0%, var(--sky-900) 42%, var(--river-950) 100%);
+    color:var(--cream);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  h1,h2,h3{font-family:'Playfair Display', serif; margin:0; font-weight:600;}
+  a{color:inherit;}
+
+  /* ---------- Герой ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:70px 24px 220px;
+    overflow:hidden;
+  }
+
+  .hero-inner{
+    position:relative;
+    z-index:3;
+    max-width:640px;
+    text-align:center;
+    animation:deck-sway 6.5s ease-in-out infinite;
+    transform-origin:50% 100%;
+  }
+  @keyframes deck-sway{
+    0%,100%{transform:rotate(-.4deg) translateY(0);}
+    50%{transform:rotate(.4deg) translateY(-4px);}
+  }
+
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    margin-bottom:26px;
+  }
+
+  /* ---------- Городской силуэт набережной ---------- */
+  .skyline{
+    position:absolute;
+    left:0; right:0;
+    bottom:216px;
+    height:70px;
+    z-index:1;
+    opacity:.55;
+    pointer-events:none;
+  }
+  .skyline svg{display:block;width:100%;height:100%;color:var(--river-800);}
+
+  .city-lights{
+    position:absolute;
+    left:0; right:0;
+    bottom:222px;
+    display:flex;
+    justify-content:space-around;
+    padding:0 10%;
+    z-index:2;
+    pointer-events:none;
+  }
+  .city-lights span{
+    width:4px;height:4px;
+    border-radius:50%;
+    background:var(--gold-light);
+    box-shadow:0 0 7px 2px rgba(255,219,166,.65);
+    animation:twinkle 3.4s ease-in-out infinite;
+  }
+  .city-lights span:nth-child(odd){animation-duration:4.2s;}
+  .city-lights span:nth-child(3n){animation-delay:.7s;}
+  .city-lights span:nth-child(4n){animation-delay:1.5s; background:var(--sunset-pink); box-shadow:0 0 7px 2px rgba(255,143,122,.55);}
+  .city-lights span:nth-child(5n){animation-delay:2.1s;}
+
+  @keyframes twinkle{
+    0%,100%{opacity:.35; transform:scale(.85);}
+    50%{opacity:1; transform:scale(1.15);}
+  }
+
+  /* ---------- Силуэт теплохода + отражение ---------- */
+  .ship-wrap{
+    position:relative;
+    width:210px;
+    margin:0 auto 22px;
+  }
+  .ship-wrap svg{display:block;width:100%;height:auto;}
+  .ship-main{color:var(--cream);filter:drop-shadow(0 8px 18px rgba(0,0,0,.4));}
+  .ship-reflection{
+    position:absolute;
+    top:88%;
+    left:0;
+    width:100%;
+    transform:scaleY(-1);
+    color:var(--sunset-orange);
+    opacity:.3;
+    filter:blur(1.6px);
+    -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), transparent 78%);
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.65), transparent 78%);
+  }
+
+  .pre-title{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:20px;
+    letter-spacing:.05em;
+    color:var(--cream);
+    opacity:.85;
+    margin-bottom:8px;
+  }
+
+  .names{
+    font-size:clamp(44px, 9vw, 82px);
+    line-height:1.05;
+    letter-spacing:.01em;
+    text-shadow:0 8px 34px rgba(0,0,0,.4);
+  }
+  .names .amp{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--sunset-orange);
+    padding:0 14px;
+  }
+  .names-reflection{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:clamp(44px, 9vw, 82px);
+    line-height:1.05;
+    color:var(--sunset-pink);
+    opacity:.18;
+    transform:scaleY(-1);
+    filter:blur(2px);
+    margin-top:-4px;
+    -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 72%);
+    mask-image:linear-gradient(to bottom, rgba(0,0,0,.55), transparent 72%);
+    user-select:none;
+    pointer-events:none;
+  }
+
+  .subtitle{
+    margin-top:22px;
+    font-size:16px;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+  }
+
+  .gold-rule{
+    width:88px;
+    height:1px;
+    margin:26px auto;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    position:relative;
+  }
+  .gold-rule::before{
+    content:"";
+    position:absolute;
+    left:50%; top:50%;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:translate(-50%,-50%) rotate(45deg);
+  }
+
+  .venue-note{
+    font-family:'Cormorant Garamond', serif;
+    font-size:20px;
+    line-height:1.6;
+    color:var(--cream);
+    opacity:.9;
+    max-width:460px;
+    margin:0 auto;
+  }
+  .venue-note b{color:var(--gold-light); font-weight:500;}
+
+  #water{
+    position:absolute;
+    left:0; bottom:0;
+    width:100%;
+    height:230px;
+    display:block;
+    z-index:1;
+  }
+
+  /* ---------- Секции ---------- */
+  section{
+    position:relative;
+    padding:74px 24px;
+    max-width:920px;
+    margin:0 auto;
+    z-index:2;
+  }
+
+  .section-title{
+    text-align:center;
+    font-size:clamp(28px, 5vw, 38px);
+    margin-bottom:14px;
+  }
+  .section-sub{
+    text-align:center;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold-light);
+    opacity:.9;
+    max-width:520px;
+    margin:0 auto 50px;
+  }
+
+  .divider{
+    width:100%;
+    max-width:280px;
+    margin:0 auto;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity:.5;
+  }
+
+  /* ---------- Обратный отсчёт ---------- */
+  .countdown-grid{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+  .count-box{
+    background:linear-gradient(165deg, var(--river-800), var(--river-950));
+    border:1px solid rgba(232,184,109,.42);
+    border-radius:4px;
+    width:114px;
+    padding:22px 8px 18px;
+    text-align:center;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .count-box::before{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:1px solid rgba(255,219,166,.14);
+    pointer-events:none;
+  }
+  .count-box span{
+    display:block;
+    font-family:'Playfair Display', serif;
+    font-size:38px;
+    font-weight:700;
+    color:var(--gold-light);
+    font-variant-numeric:tabular-nums;
+  }
+  .count-box label{
+    display:block;
+    margin-top:8px;
+    font-size:10.5px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--cream);
+    opacity:.7;
+  }
+
+  /* ---------- Детали события ---------- */
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:36px;
+  }
+  .detail-card{text-align:center;}
+  .plate{
+    width:70px;
+    height:70px;
+    margin:0 auto 22px;
+    border-radius:12px;
+    background:linear-gradient(160deg, var(--river-800), var(--sky-950));
+    border:1px solid var(--gold);
+    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .plate svg{width:30px;height:30px;color:var(--gold-light);}
+  .detail-card h3{
+    font-size:19px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+    color:var(--sunset-orange);
+  }
+  .detail-card p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:19px;
+    line-height:1.55;
+    color:var(--cream);
+    opacity:.9;
+    margin:0;
+  }
+  .detail-card p.note{
+    margin-top:8px;
+    font-size:15.5px;
+    font-style:italic;
+    opacity:.65;
+  }
+
+  /* ---------- Наша история ---------- */
+  .timeline{
+    position:relative;
+    max-width:600px;
+    margin:0 auto;
+    padding-left:26px;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:5px; top:6px; bottom:6px;
+    width:1px;
+    background:linear-gradient(180deg, var(--gold), var(--sunset-pink), transparent);
+    opacity:.55;
+  }
+  .timeline-item{
+    position:relative;
+    padding:0 0 40px 26px;
+  }
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-item::before{
+    content:"";
+    position:absolute;
+    left:-21px; top:5px;
+    width:11px;height:11px;
+    border-radius:50%;
+    background:var(--sunset-orange);
+    box-shadow:0 0 0 4px rgba(255,171,111,.18);
+  }
+  .timeline-item .t-date{
+    display:block;
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+    color:var(--gold-light);
+    opacity:.85;
+    margin-bottom:6px;
+  }
+  .timeline-item h3{
+    font-size:21px;
+    margin-bottom:8px;
+    color:var(--cream);
+  }
+  .timeline-item p{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    line-height:1.6;
+    color:var(--cream);
+    opacity:.85;
+    margin:0;
+  }
+
+  /* ---------- Фотографии ---------- */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:18px;
+  }
+  .photo-card{
+    aspect-ratio:1/1;
+    border-radius:14px;
+    background:linear-gradient(150deg, rgba(255,143,122,.32), rgba(232,184,109,.24) 45%, rgba(19,34,59,.9));
+    border:1px solid rgba(232,184,109,.35);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    box-shadow:var(--shadow);
+    padding:12px;
+    text-align:center;
+  }
+  .photo-card svg{width:34px;height:34px;color:var(--gold-light);opacity:.85;}
+  .photo-card span{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:14px;
+    color:var(--cream);
+    opacity:.72;
+    line-height:1.3;
+  }
+
+  /* ---------- RSVP ---------- */
+  .rsvp{text-align:center;}
+  .rsvp-date{
+    display:inline-block;
+    margin:6px 0 36px;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:19px;
+    color:var(--gold-light);
+    border-top:1px solid rgba(255,219,166,.25);
+    border-bottom:1px solid rgba(255,219,166,.25);
+    padding:10px 0;
+  }
+  .rsvp-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    background:linear-gradient(180deg, var(--gold-light), var(--sunset-orange));
+    color:var(--sky-950);
+    font-weight:600;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-size:14px;
+    padding:17px 38px;
+    border-radius:2px;
+    box-shadow:0 14px 30px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.5);
+    border:1px solid var(--sky-950);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 18px 34px rgba(0,0,0,.52), inset 0 1px 0 rgba(255,255,255,.5);
+  }
+  .rsvp-btn svg{width:16px;height:16px;}
+
+  /* ---------- Подвал ---------- */
+  footer{
+    text-align:center;
+    padding:56px 24px 70px;
+    color:var(--gold-light);
+    opacity:.8;
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:18px;
+  }
+  footer .rule-mini{
+    width:44px;height:1px;
+    margin:0 auto 16px;
+    background:var(--gold);
+    opacity:.6;
+  }
+
+  /* ---------- Адаптивность ---------- */
+  @media (max-width:640px){
+    .hero{padding:56px 18px 180px;}
+    #water{height:180px;}
+    .skyline{bottom:170px;}
+    .city-lights{bottom:176px; padding:0 6%;}
+    section{padding:56px 18px;}
+    .details-grid{grid-template-columns:1fr;gap:44px;}
+    .photo-grid{grid-template-columns:repeat(2, 1fr);}
+    .count-box{width:76px;padding:16px 4px 14px;}
+    .count-box span{font-size:26px;}
+    .ship-wrap{width:170px;}
+    .timeline{padding-left:20px;}
+  }
+
+  /* ---------- Уважение к prefers-reduced-motion ---------- */
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .hero-inner{animation:none !important;}
+    .city-lights span{animation:none !important; opacity:.75;}
+    .rsvp-btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+
+    <div class="skyline" aria-hidden="true">
+      <svg viewBox="0 0 800 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="30" width="40" height="40" fill="currentColor"/>
+        <rect x="42" y="18" width="26" height="52" fill="currentColor"/>
+        <rect x="72" y="36" width="34" height="34" fill="currentColor"/>
+        <rect x="110" y="24" width="20" height="46" fill="currentColor"/>
+        <rect x="134" y="40" width="46" height="30" fill="currentColor"/>
+        <rect x="184" y="14" width="18" height="56" fill="currentColor"/>
+        <rect x="206" y="32" width="30" height="38" fill="currentColor"/>
+        <rect x="240" y="8" width="16" height="62" fill="currentColor"/>
+        <polygon points="248,8 256,-2 264,8" fill="currentColor"/>
+        <rect x="260" y="38" width="40" height="32" fill="currentColor"/>
+        <rect x="304" y="26" width="24" height="44" fill="currentColor"/>
+        <rect x="332" y="42" width="52" height="28" fill="currentColor"/>
+        <rect x="388" y="20" width="18" height="50" fill="currentColor"/>
+        <rect x="410" y="34" width="30" height="36" fill="currentColor"/>
+        <rect x="444" y="10" width="20" height="60" fill="currentColor"/>
+        <rect x="468" y="40" width="44" height="30" fill="currentColor"/>
+        <rect x="516" y="24" width="22" height="46" fill="currentColor"/>
+        <rect x="542" y="36" width="36" height="34" fill="currentColor"/>
+        <rect x="582" y="16" width="18" height="54" fill="currentColor"/>
+        <rect x="604" y="30" width="28" height="40" fill="currentColor"/>
+        <rect x="636" y="44" width="50" height="26" fill="currentColor"/>
+        <rect x="690" y="22" width="20" height="48" fill="currentColor"/>
+        <rect x="714" y="38" width="34" height="32" fill="currentColor"/>
+        <rect x="752" y="28" width="48" height="42" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="city-lights" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <canvas id="water"></canvas>
+
+    <div class="hero-inner">
+      <p class="eyebrow">Речной круиз · Краснодар</p>
+
+      <div class="ship-wrap" aria-hidden="true">
+        <svg class="ship-main" viewBox="0 0 220 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 62 C 60 76, 160 76, 200 62 L 190 68 C 150 78, 70 78, 30 68 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <rect x="52" y="40" width="116" height="22" rx="3" stroke="currentColor" stroke-width="1.3"/>
+          <line x1="60" y1="48" x2="60" y2="54" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="78" y1="48" x2="78" y2="54" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="96" y1="48" x2="96" y2="54" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="114" y1="48" x2="114" y2="54" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="132" y1="48" x2="132" y2="54" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="150" y1="48" x2="150" y2="54" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <rect x="80" y="24" width="60" height="18" rx="2.5" stroke="currentColor" stroke-width="1.3"/>
+          <line x1="94" y1="30" x2="94" y2="36" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="110" y1="30" x2="110" y2="36" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="126" y1="30" x2="126" y2="36" stroke="currentColor" stroke-width="1" opacity=".6"/>
+          <line x1="150" y1="24" x2="150" y2="10" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M150 10 L166 16 L150 16 Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/>
+          <line x1="8" y1="66" x2="212" y2="66" stroke="currentColor" stroke-width="1" opacity=".4"/>
+        </svg>
+        <svg class="ship-reflection" viewBox="0 0 220 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 62 C 60 76, 160 76, 200 62 L 190 68 C 150 78, 70 78, 30 68 Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <rect x="52" y="40" width="116" height="22" rx="3" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="80" y="24" width="60" height="18" rx="2.5" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+      </div>
+
+      <p class="pre-title">Приглашаем разделить с нами</p>
+      <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
+      <div class="names-reflection" aria-hidden="true">Георгий &amp; Анастасия</div>
+
+      <p class="subtitle">3 октября 2026 · суббота · 18:00</p>
+      <div class="gold-rule"></div>
+      <p class="venue-note">Встречаем закат на воде на борту <b>теплохода «Ривер Стар»</b> — отправление с причала на набережной реки Кубань, пока небо и река окрашиваются в розовое золото.</p>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <section id="countdown">
+    <h2 class="section-title">До отправления</h2>
+    <p class="section-sub">Считаем время до момента, когда теплоход отчалит от набережной</p>
+    <div class="countdown-grid">
+      <div class="count-box"><span id="days">00</span><label>дней</label></div>
+      <div class="count-box"><span id="hours">00</span><label>часов</label></div>
+      <div class="count-box"><span id="minutes">00</span><label>минут</label></div>
+      <div class="count-box"><span id="seconds">00</span><label>секунд</label></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="details">
+    <h2 class="section-title">Детали вечера</h2>
+    <p class="section-sub">Всё готово к отплытию — остаётся лишь подняться на борт</p>
+    <div class="details-grid">
+      <div class="detail-card">
+        <div class="plate">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M24 14v11l8 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3>Когда</h3>
+        <p>3 октября 2026, суббота<br>отправление в 18:00</p>
+      </div>
+      <div class="detail-card">
+        <div class="plate">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 6c-8 0-14 6.2-14 14 0 10.4 14 22 14 22s14-11.6 14-22c0-7.8-6-14-14-14z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <circle cx="24" cy="20" r="5" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+        </div>
+        <h3>Где</h3>
+        <p>Теплоход «Ривер Стар»<br>причал на набережной реки Кубань, Краснодар</p>
+      </div>
+      <div class="detail-card">
+        <div class="plate">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 40 L14 20 C14 14 18 10 24 10 C30 10 34 14 34 20 L34 40" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+            <line x1="10" y1="40" x2="38" y2="40" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3>Дресс-код</h3>
+        <p>Элегантный кэжуал</p>
+        <p class="note">Устойчивая обувь — вечер пройдёт на палубе теплохода</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+    <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=38.9756,45.0169&z=15&l=map&pt=38.9756,45.0169,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: причал теплохода «Ривер Стар»" style="display:block;border:0;"></iframe>
+    </div>
+    <p style="text-align:center;margin:10px 0 0;">
+      <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=15&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <section id="story">
+    <h2 class="section-title">Наша история</h2>
+    <p class="section-sub">Путь, который привёл нас к этому вечеру на воде</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="t-date">Весна 2021</span>
+        <h3>Знакомство</h3>
+        <p>Случайная встреча на набережной Краснодара — и разговор, который не хотелось заканчивать.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="t-date">Лето 2022</span>
+        <h3>Первое путешествие вдвоём</h3>
+        <p>Поездка к морю показала: нам легко быть рядом в любой дороге.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="t-date">Осень 2024</span>
+        <h3>Предложение</h3>
+        <p>На закате, у воды — там же, где спустя годы мы решили сыграть свадьбу.</p>
+      </div>
+      <div class="timeline-item">
+        <span class="t-date">3 октября 2026</span>
+        <h3>Наша свадьба</h3>
+        <p>Мы приглашаем вас разделить этот вечер с нами — на борту теплохода, среди отражений заката.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section id="photos">
+    <h2 class="section-title">Фотографии</h2>
+    <p class="section-sub">Здесь появятся моменты нашего вечера на воде</p>
+    <div class="photo-grid">
+      <div class="photo-card">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="26" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="27" r="7" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="8" width="14" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Здесь будут ваши фотографии</span>
+      </div>
+      <div class="photo-card">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="26" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="27" r="7" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="8" width="14" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Здесь будут ваши фотографии</span>
+      </div>
+      <div class="photo-card">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="26" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="27" r="7" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="8" width="14" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Здесь будут ваши фотографии</span>
+      </div>
+      <div class="photo-card">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="26" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="27" r="7" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="8" width="14" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Здесь будут ваши фотографии</span>
+      </div>
+      <div class="photo-card">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="26" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="27" r="7" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="8" width="14" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Здесь будут ваши фотографии</span>
+      </div>
+      <div class="photo-card">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="26" rx="3" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="27" r="7" stroke="currentColor" stroke-width="1.6"/><rect x="17" y="8" width="14" height="6" rx="1.5" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span>Здесь будут ваши фотографии</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="rsvp">
+    <h2 class="section-title">Ждём вас на борту</h2>
+    <p class="rsvp-date">Пожалуйста, подтвердите присутствие до 20 сентября</p>
+    <div>
+      <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 4L2.5 11.5l6 2.2M21 4l-3.2 16-6.3-5M21 4L9.8 14.8m0 0l-1.3 5.7 3.4-3.2" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/></svg>
+        Подтвердить участие
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="rule-mini"></div>
+    С любовью, Георгий и Анастасия
+  </footer>
+
+<script>
+  // ---------- Обратный отсчёт до свадьбы ----------
+  (function(){
+    var target = new Date('2026-10-03T18:00:00');
+    var elDays = document.getElementById('days');
+    var elHours = document.getElementById('hours');
+    var elMinutes = document.getElementById('minutes');
+    var elSeconds = document.getElementById('seconds');
+
+    function pad(n){ return String(n).padStart(2, '0'); }
+
+    function update(){
+      var now = new Date();
+      var diff = target - now;
+
+      if (diff <= 0){
+        elDays.textContent = '00';
+        elHours.textContent = '00';
+        elMinutes.textContent = '00';
+        elSeconds.textContent = '00';
+        return;
+      }
+
+      var totalSeconds = Math.floor(diff / 1000);
+      var days = Math.floor(totalSeconds / 86400);
+      var hours = Math.floor((totalSeconds % 86400) / 3600);
+      var minutes = Math.floor((totalSeconds % 3600) / 60);
+      var seconds = totalSeconds % 60;
+
+      elDays.textContent = pad(days);
+      elHours.textContent = pad(hours);
+      elMinutes.textContent = pad(minutes);
+      elSeconds.textContent = pad(seconds);
+    }
+
+    update();
+    setInterval(update, 1000);
+  })();
+
+  // ---------- Отражения заката на речной глади ----------
+  (function(){
+    var canvas = document.getElementById('water');
+    var ctx = canvas.getContext('2d');
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w, h, t = 0;
+
+    var streaks = [];
+    var count = 10;
+    for (var i = 0; i < count; i++){
+      streaks.push({
+        xr: (i + 0.5) / count,
+        width: 4 + (i % 3) * 3,
+        phase: i * 1.6,
+        speed: 0.011 + (i % 4) * 0.006,
+        warm: i % 2 === 0
+      });
+    }
+
+    function resize(){
+      var rect = canvas.getBoundingClientRect();
+      w = rect.width;
+      h = rect.height;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function render(){
+      ctx.clearRect(0, 0, w, h);
+
+      // фон тёмной реки на закате
+      var bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, 'rgba(255,143,122,0)');
+      bg.addColorStop(0.1, 'rgba(27,47,79,0.55)');
+      bg.addColorStop(0.4, 'rgba(19,34,59,0.85)');
+      bg.addColorStop(1, 'rgba(13,22,38,1)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, w, h);
+
+      // тёплые мерцающие блики заката на воде
+      for (var i = 0; i < streaks.length; i++){
+        var s = streaks[i];
+        var flicker = 0.5 + 0.5 * Math.sin(t * s.speed + s.phase);
+        var jitter = Math.sin(t * 0.009 + s.phase) * 6;
+        var x = s.xr * w + jitter;
+
+        var grad = ctx.createLinearGradient(0, 0, 0, h);
+        var color = s.warm ? '255,171,111' : '255,219,166';
+        grad.addColorStop(0, 'rgba(' + color + ',0)');
+        grad.addColorStop(0.18, 'rgba(' + color + ',' + (0.2 + 0.2 * flicker) + ')');
+        grad.addColorStop(0.55, 'rgba(' + color + ',' + (0.07 + 0.09 * flicker) + ')');
+        grad.addColorStop(1, 'rgba(' + color + ',0)');
+
+        ctx.fillStyle = grad;
+        ctx.fillRect(x - s.width / 2, 0, s.width, h);
+      }
+    }
+
+    function loop(){
+      t += 1;
+      render();
+      requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('resize', function(){
+      resize();
+      render();
+    });
+
+    resize();
+
+    if (reduceMotion){
+      render();
+    } else {
+      loop();
+    }
+  })();
+</script>
+
+</body>
+</html>

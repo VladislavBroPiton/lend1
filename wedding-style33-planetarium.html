@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Георгий & Анастасия • 3 октября</title>
+
+<meta name="description" content="Свадебное приглашение в стиле «Планетарий» — Георгий и Анастасия, 3 октября 2026, Краснодар.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style33-planetarium.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Планетарий»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Планетарий», Краснодар.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style33-planetarium.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style33-planetarium.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Планетарий»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Планетарий», Краснодар.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style33-planetarium.png">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+
+<style>
+  :root{
+    --bg-deep:#0a0a1f;
+    --bg-indigo:#161233;
+    --bg-purple:#241640;
+    --nebula-pink:#ff8fd6;
+    --nebula-violet:#8b5cf6;
+    --nebula-blue:#4f6df5;
+    --star:#f4f2ff;
+    --silver:#cfd3e8;
+    --text-soft:#d8d6f0;
+    --accent:#c9a7ff;
+    --metal:#b9c2d0;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--bg-deep);
+    color:var(--text-soft);
+    font-family:'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    overflow-x:hidden;
+  }
+
+  #skyCanvas{
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:0;
+    display:block;
+  }
+
+  .veil{
+    position:fixed;
+    inset:0;
+    z-index:1;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(36,22,64,0) 0%, rgba(10,10,31,.55) 60%, rgba(10,10,31,.85) 100%);
+    pointer-events:none;
+  }
+
+  main{
+    position:relative;
+    z-index:2;
+  }
+
+  section{
+    max-width:720px;
+    margin:0 auto;
+    padding:70px 24px;
+  }
+
+  /* ---------- HEADER ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    padding:40px 20px;
+  }
+
+  .orbit-wrap{
+    position:relative;
+    width:min(78vw, 420px);
+    height:min(78vw, 420px);
+    margin:0 auto 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .orbit{
+    position:absolute;
+    border:1px solid rgba(201,167,255,.28);
+    border-radius:50%;
+  }
+  .orbit::after{
+    content:'';
+    position:absolute;
+    width:7px; height:7px;
+    border-radius:50%;
+    background:radial-gradient(circle, #fff 0%, var(--nebula-violet) 70%, transparent 100%);
+    box-shadow:0 0 10px 2px rgba(255,255,255,.6);
+    top:50%; left:-3px;
+    transform:translateY(-50%);
+  }
+  .orbit-1{
+    width:100%; height:70%;
+    top:15%; left:0;
+    animation:spin1 26s linear infinite;
+  }
+  .orbit-2{
+    width:78%; height:96%;
+    top:2%; left:11%;
+    animation:spin2 38s linear infinite reverse;
+  }
+  .orbit-3{
+    width:58%; height:58%;
+    top:21%; left:21%;
+    animation:spin1 18s linear infinite;
+  }
+  @keyframes spin1{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+  @keyframes spin2{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+  .hero-inner{
+    position:relative;
+    z-index:3;
+  }
+
+  .eyebrow{
+    font-size:11px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--accent);
+    opacity:.75;
+    margin:0 0 18px;
+  }
+
+  .names{
+    font-family:'Georgia', 'Times New Roman', serif;
+    font-weight:400;
+    font-size:clamp(2.4rem, 8vw, 4.4rem);
+    margin:0;
+    letter-spacing:.02em;
+    background:linear-gradient(180deg, #ffffff 0%, var(--silver) 55%, var(--accent) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    text-shadow:0 0 40px rgba(139,92,246,.35);
+  }
+
+  .amp{
+    display:inline-block;
+    font-family:'Georgia', serif;
+    font-style:italic;
+    font-size:0.75em;
+    margin:0 .18em;
+    color:var(--nebula-pink);
+    opacity:.9;
+  }
+
+  .hero-sub{
+    margin:22px 0 0;
+    font-size:14px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    opacity:.6;
+  }
+
+  .hero-date{
+    margin:6px 0 0;
+    font-size:16px;
+    letter-spacing:.08em;
+    color:var(--metal);
+  }
+
+  /* ---------- COUNTDOWN ---------- */
+  .countdown-title{
+    text-align:center;
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    opacity:.55;
+    margin:0 0 26px;
+  }
+
+  .countdown{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+
+  .count-box{
+    min-width:82px;
+    padding:18px 10px 14px;
+    border-radius:14px;
+    background:linear-gradient(160deg, rgba(139,92,246,.14), rgba(79,109,245,.06));
+    border:1px solid rgba(201,167,255,.25);
+    text-align:center;
+    backdrop-filter:blur(2px);
+  }
+
+  .count-num{
+    font-family:'Georgia', serif;
+    font-size:2rem;
+    color:#fff;
+    display:block;
+    text-shadow:0 0 18px rgba(139,92,246,.5);
+  }
+
+  .count-label{
+    font-size:10px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    opacity:.6;
+    margin-top:4px;
+    display:block;
+  }
+
+  /* ---------- SECTION HEADS ---------- */
+  .section-eyebrow{
+    text-align:center;
+    font-size:11px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--accent);
+    opacity:.65;
+    margin:0 0 10px;
+  }
+
+  .section-title{
+    text-align:center;
+    font-family:'Georgia', serif;
+    font-weight:400;
+    font-size:clamp(1.6rem, 4vw, 2.2rem);
+    color:#fff;
+    margin:0 0 40px;
+  }
+
+  .divider{
+    width:60px;
+    height:1px;
+    margin:0 auto 40px;
+    background:linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity:.6;
+  }
+
+  /* ---------- DETAILS ---------- */
+  .details-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:22px;
+  }
+
+  .detail-card{
+    padding:26px 22px;
+    border-radius:16px;
+    background:linear-gradient(160deg, rgba(36,22,64,.55), rgba(22,18,51,.55));
+    border:1px solid rgba(201,167,255,.18);
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .detail-card::before{
+    content:'';
+    position:absolute;
+    top:-40%; left:-20%;
+    width:140%; height:140%;
+    background:radial-gradient(circle, rgba(139,92,246,.10) 0%, transparent 60%);
+    pointer-events:none;
+  }
+
+  .detail-icon{
+    font-size:22px;
+    margin-bottom:10px;
+    display:block;
+  }
+
+  .detail-label{
+    font-size:10px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    opacity:.55;
+    margin:0 0 8px;
+  }
+
+  .detail-value{
+    font-size:16px;
+    color:#fff;
+    margin:0;
+    line-height:1.5;
+  }
+
+  .detail-value small{
+    display:block;
+    font-size:12px;
+    opacity:.6;
+    margin-top:4px;
+    font-weight:normal;
+  }
+
+  /* ---------- STORY TIMELINE ---------- */
+  .timeline{
+    position:relative;
+    padding-left:28px;
+  }
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left:6px; top:6px; bottom:6px;
+    width:1px;
+    background:linear-gradient(180deg, var(--accent), transparent 95%);
+    opacity:.5;
+  }
+
+  .tl-item{
+    position:relative;
+    padding-bottom:34px;
+  }
+  .tl-item:last-child{ padding-bottom:0; }
+
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-28px; top:4px;
+    width:11px; height:11px;
+    border-radius:50%;
+    background:radial-gradient(circle, #fff 0%, var(--nebula-violet) 75%);
+    box-shadow:0 0 12px 2px rgba(139,92,246,.6);
+  }
+
+  .tl-year{
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--accent);
+    opacity:.85;
+    margin:0 0 4px;
+  }
+
+  .tl-text{
+    margin:0;
+    font-size:15px;
+    color:var(--text-soft);
+    line-height:1.6;
+  }
+
+  /* ---------- PHOTOS ---------- */
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));
+    gap:16px;
+  }
+
+  .photo-slot{
+    aspect-ratio:1/1;
+    border-radius:16px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(255,143,214,.25), transparent 55%),
+      radial-gradient(circle at 75% 75%, rgba(79,109,245,.3), transparent 55%),
+      linear-gradient(160deg, #241640, #161233);
+    border:1px solid rgba(201,167,255,.2);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    text-align:center;
+    padding:10px;
+  }
+
+  .photo-slot svg{
+    width:34px; height:34px;
+    opacity:.7;
+  }
+
+  .photo-cap{
+    font-size:10.5px;
+    letter-spacing:.06em;
+    opacity:.55;
+    margin:0;
+    line-height:1.4;
+  }
+
+  /* ---------- RSVP ---------- */
+  .rsvp{
+    text-align:center;
+  }
+
+  .rsvp-text{
+    font-size:15px;
+    line-height:1.7;
+    opacity:.8;
+    max-width:460px;
+    margin:0 auto 30px;
+  }
+
+  .rsvp-btn{
+    display:inline-block;
+    padding:16px 42px;
+    border-radius:999px;
+    background:linear-gradient(120deg, var(--nebula-violet), var(--nebula-blue));
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    box-shadow:0 0 30px rgba(139,92,246,.45);
+    border:1px solid rgba(255,255,255,.2);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .rsvp-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 44px rgba(139,92,246,.65);
+  }
+
+  .rsvp-deadline{
+    margin-top:18px;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    opacity:.5;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding:50px 20px 60px;
+    position:relative;
+    z-index:2;
+  }
+
+  .footer-names{
+    font-family:'Georgia', serif;
+    font-size:1.3rem;
+    color:#fff;
+    margin:0 0 6px;
+  }
+
+  .footer-date{
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    opacity:.5;
+    margin:0;
+  }
+
+  .footer-note{
+    margin-top:20px;
+    font-size:11px;
+    opacity:.35;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .orbit-1, .orbit-2, .orbit-3{ animation:none; }
+    .rsvp-btn{ transition:none; }
+  }
+
+  @media (max-width:480px){
+    section{ padding:54px 18px; }
+    .countdown{ gap:10px; }
+    .count-box{ min-width:68px; padding:14px 6px 10px; }
+    .count-num{ font-size:1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="skyCanvas" aria-hidden="true"></canvas>
+<div class="veil" aria-hidden="true"></div>
+
+<main>
+
+  <!-- ============ HERO / HEADER ============ -->
+  <section class="hero">
+    <div class="orbit-wrap" aria-hidden="true">
+      <div class="orbit orbit-1"></div>
+      <div class="orbit orbit-2"></div>
+      <div class="orbit orbit-3"></div>
+      <div class="hero-inner">
+        <p class="eyebrow">Приглашение на свадьбу</p>
+        <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
+        <p class="hero-sub">Планетарий «Космос» · Краснодар</p>
+        <p class="hero-date">3 октября 2026 · суббота · 20:00</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COUNTDOWN ============ -->
+  <section id="countdown-section">
+    <p class="countdown-title">До начала звёздного вечера</p>
+    <div class="countdown" id="countdown">
+      <div class="count-box"><span class="count-num" id="cd-days">00</span><span class="count-label">дней</span></div>
+      <div class="count-box"><span class="count-num" id="cd-hours">00</span><span class="count-label">часов</span></div>
+      <div class="count-box"><span class="count-num" id="cd-mins">00</span><span class="count-label">минут</span></div>
+      <div class="count-box"><span class="count-num" id="cd-secs">00</span><span class="count-label">секунд</span></div>
+    </div>
+  </section>
+
+  <!-- ============ DETAILS ============ -->
+  <section>
+    <p class="section-eyebrow">Детали события</p>
+    <h2 class="section-title">Что нужно знать</h2>
+    <div class="divider"></div>
+    <div class="details-grid">
+      <div class="detail-card">
+        <span class="detail-icon">🪐</span>
+        <p class="detail-label">Место</p>
+        <p class="detail-value">Планетарий «Космос»<small>Краснодар</small></p>
+      </div>
+      <div class="detail-card">
+        <span class="detail-icon">✨</span>
+        <p class="detail-label">Время</p>
+        <p class="detail-value">20:00<small>начало звёздного шоу</small></p>
+      </div>
+      <div class="detail-card">
+        <span class="detail-icon">🌌</span>
+        <p class="detail-label">Дресс-код</p>
+        <p class="detail-value">Вечерний стиль<small>тёмные тона с металлическим акцентом</small></p>
+      </div>
+    </div>
+
+    <!-- ===== MAP BLOCK (as provided) ===== -->
+    <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+      <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=39.0350,45.0450&z=15&l=map&pt=39.0350,45.0450,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: планетарий «Космос»" style="display:block;border:0;"></iframe>
+      </div>
+      <p style="text-align:center;margin:10px 0 0;">
+        <a href="https://yandex.ru/maps/?ll=39.0350,45.0450&z=15&pt=39.0350,45.0450,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ OUR STORY ============ -->
+  <section>
+    <p class="section-eyebrow">Наша история</p>
+    <h2 class="section-title">Путь двух орбит</h2>
+    <div class="divider"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <p class="tl-year">2021 — Знакомство</p>
+        <p class="tl-text">Случайная встреча на лекции об экзопланетах — Георгий пришёл за компанию, а остался ради разговора после лекции, который затянулся на три часа.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">2022 — Первое свидание</p>
+        <p class="tl-text">Ночная прогулка и разговор о том, что во вселенной всё когда-то было одной точкой — а теперь их две орбиты пересеклись.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">2024 — Предложение</p>
+        <p class="tl-text">Анастасия сказала «да» под куполом со звёздной проекцией — там же, где сегодня будет их свадьба.</p>
+      </div>
+      <div class="tl-item">
+        <p class="tl-year">2026 — Свадьба</p>
+        <p class="tl-text">3 октября две орбиты станут одной системой — и мы приглашаем вас стать свидетелями этого момента.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PHOTOS ============ -->
+  <section>
+    <p class="section-eyebrow">Фотографии</p>
+    <h2 class="section-title">Моменты, которые будут здесь</h2>
+    <div class="divider"></div>
+    <div class="photo-grid">
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#e8e4ff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <p class="photo-cap">Здесь будут ваши фотографии</p>
+      </div>
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#e8e4ff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <p class="photo-cap">Здесь будут ваши фотографии</p>
+      </div>
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#e8e4ff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <p class="photo-cap">Здесь будут ваши фотографии</p>
+      </div>
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#e8e4ff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <p class="photo-cap">Здесь будут ваши фотографии</p>
+      </div>
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#e8e4ff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <p class="photo-cap">Здесь будут ваши фотографии</p>
+      </div>
+      <div class="photo-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#e8e4ff" stroke-width="1.4"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7l1.5-3h5L16 7"/><circle cx="12" cy="13.5" r="3.5"/></svg>
+        <p class="photo-cap">Здесь будут ваши фотографии</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RSVP ============ -->
+  <section class="rsvp">
+    <p class="section-eyebrow">RSVP</p>
+    <h2 class="section-title">Будем ждать вашего ответа</h2>
+    <div class="divider"></div>
+    <p class="rsvp-text">Пожалуйста, подтвердите своё присутствие — это поможет нам подготовить купол планетария к вашему прибытию.</p>
+    <a class="rsvp-btn" href="https://t.me/" target="_blank" rel="noopener">Подтвердить участие</a>
+    <p class="rsvp-deadline">Ответ ждём до 20 сентября 2026</p>
+  </section>
+
+</main>
+
+<footer>
+  <p class="footer-names">Георгий &amp; Анастасия</p>
+  <p class="footer-date">3 октября 2026 · Планетарий «Космос» · Краснодар</p>
+  <p class="footer-note">С любовью ко вселенной и друг к другу</p>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- COUNTDOWN ---------- */
+  var target = new Date("2026-10-03T20:00:00");
+
+  function pad(n){ return String(n).padStart(2, "0"); }
+
+  function updateCountdown(){
+    var now = new Date();
+    var diff = target - now;
+    if (diff < 0) diff = 0;
+
+    var days = Math.floor(diff / (1000*60*60*24));
+    var hours = Math.floor((diff / (1000*60*60)) % 24);
+    var mins = Math.floor((diff / (1000*60)) % 60);
+    var secs = Math.floor((diff / 1000) % 60);
+
+    var elDays = document.getElementById("cd-days");
+    var elHours = document.getElementById("cd-hours");
+    var elMins = document.getElementById("cd-mins");
+    var elSecs = document.getElementById("cd-secs");
+
+    if (elDays) elDays.textContent = pad(days);
+    if (elHours) elHours.textContent = pad(hours);
+    if (elMins) elMins.textContent = pad(mins);
+    if (elSecs) elSecs.textContent = pad(secs);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  /* ---------- SKY: stars + drifting nebula ---------- */
+  var canvas = document.getElementById("skyCanvas");
+  var ctx = canvas.getContext("2d");
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var W, H, DPR;
+  var stars = [];
+  var nebulae = [];
+
+  function resize(){
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  function buildScene(){
+    stars = [];
+    var count = Math.floor((W * H) / 2600);
+    for (var i = 0; i < count; i++){
+      stars.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: Math.random() * 1.3 + 0.3,
+        baseAlpha: Math.random() * 0.6 + 0.3,
+        phase: Math.random() * Math.PI * 2,
+        speed: Math.random() * 0.015 + 0.004
+      });
+    }
+
+    nebulae = [
+      { x: W*0.22, y: H*0.28, r: Math.max(W,H)*0.42, hue: "139,92,246", a: 0.16, dx: 0.05, dy: 0.03, t: 0 },
+      { x: W*0.78, y: H*0.62, r: Math.max(W,H)*0.38, hue: "255,143,214", a: 0.12, dx: -0.04, dy: 0.02, t: 100 },
+      { x: W*0.55, y: H*0.85, r: Math.max(W,H)*0.34, hue: "79,109,245", a: 0.14, dx: 0.03, dy: -0.04, t: 200 }
+    ];
+  }
+
+  function drawFrame(time){
+    ctx.clearRect(0, 0, W, H);
+
+    // base deep-space gradient
+    var g = ctx.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, "#120e2c");
+    g.addColorStop(0.55, "#1b1440");
+    g.addColorStop(1, "#0a0a1f");
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    // nebula blobs
+    nebulae.forEach(function(n){
+      var t = reduceMotion ? 0 : time * 0.00006 + n.t;
+      var ox = Math.sin(t) * W * 0.06 * n.dx * 10;
+      var oy = Math.cos(t * 0.8) * H * 0.06 * n.dy * 10;
+      var grad = ctx.createRadialGradient(
+        n.x + ox, n.y + oy, 0,
+        n.x + ox, n.y + oy, n.r
+      );
+      grad.addColorStop(0, "rgba(" + n.hue + "," + n.a + ")");
+      grad.addColorStop(1, "rgba(" + n.hue + ",0)");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+    });
+
+    // stars
+    stars.forEach(function(s){
+      var tw = reduceMotion ? s.baseAlpha : s.baseAlpha + Math.sin(time * s.speed + s.phase) * 0.25;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(244,242,255," + Math.max(0, Math.min(1, tw)) + ")";
+      ctx.fill();
+    });
+  }
+
+  function loop(time){
+    drawFrame(time);
+    if (!reduceMotion) requestAnimationFrame(loop);
+  }
+
+  window.addEventListener("resize", function(){
+    resize();
+    buildScene();
+    if (reduceMotion) drawFrame(0);
+  });
+
+  resize();
+  buildScene();
+
+  if (reduceMotion){
+    drawFrame(0);
+  } else {
+    requestAnimationFrame(loop);
+  }
+})();
+</script>
+
+</body>
+</html>

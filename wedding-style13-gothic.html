@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий & Анастасия • 3 октября</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Тёмный романтизм» — Георгий и Анастасия, 3 октября 2026, Ресторан «Берег». Бордо и чёрный, мерцающие свечи, кружевной узор.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style13-gothic.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Тёмный романтизм»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Тёмный романтизм», Ресторан «Берег». Бордо и чёрный, мерцающие свечи, кружевной узор.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style13-gothic.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style13-gothic.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Тёмный романтизм»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Тёмный романтизм», Ресторан «Берег». Бордо и чёрный, мерцающие свечи, кружевной узор.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style13-gothic.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -152,6 +165,38 @@
   .rsvp-note{ font-size: 11px; color: var(--muted2); margin-top: 16px; letter-spacing: 0.05em; }
   .footer{ margin-top: 68px; font-size: 11px; color: rgba(236,225,210,0.22); letter-spacing: 0.24em; text-transform: uppercase; }
 
+  /* ---------- our story timeline ---------- */
+  .story-wrap{ margin: 54px 0; }
+  .story-heading{ font-family: 'Yeseva One', serif; font-weight: 400; font-size: clamp(28px, 6vw, 40px); color: var(--gold-light); margin-bottom: 6px; }
+  .story-sub{ font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 40px; }
+
+  .g-timeline{ position: relative; max-width: 460px; margin: 0 auto; padding-left: 30px; text-align: left; }
+  .g-timeline::before{
+    content: ''; position: absolute; left: 5px; top: 4px; bottom: 4px; width: 1px;
+    background: linear-gradient(180deg, transparent, var(--gold) 12%, var(--gold) 88%, transparent);
+  }
+  .g-timeline-item{ position: relative; padding-bottom: 30px; }
+  .g-timeline-item:last-child{ padding-bottom: 0; }
+  .g-timeline-dot{
+    position: absolute; left: -30px; top: 5px; width: 10px; height: 10px; border-radius: 50%;
+    background: var(--wine-glow); box-shadow: 0 0 10px 3px rgba(179,38,74,0.5);
+  }
+  .g-timeline-year{ font-family: 'Yeseva One', serif; font-size: 23px; color: var(--gold-light); line-height: 1; }
+  .g-timeline-label{ font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted2); margin: 8px 0 6px; }
+  .g-timeline-text{ font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--muted); line-height: 1.7; }
+
+  /* ---------- gallery placeholders ---------- */
+  .gallery-wrap{ margin: 54px 0; }
+  .g-photos{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: 480px; margin: 0 auto; }
+  .g-photo{
+    aspect-ratio: 1; border-radius: 4px; border: 1px solid rgba(176,141,87,0.3);
+    background: linear-gradient(160deg, rgba(92,14,34,0.5), rgba(10,6,7,0.65) 60%, rgba(5,3,3,0.85));
+    box-shadow: inset 0 0 20px rgba(92,14,34,0.35), 0 12px 26px -14px rgba(0,0,0,0.7);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 10px;
+  }
+  .g-photo svg{ width: 28px; height: 28px; color: var(--gold-light); opacity: 0.8; }
+  .g-photo-caption{ font-size: 8.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted2); text-align: center; line-height: 1.4; }
+
   .reveal{ opacity: 0; transform: translateY(26px); transition: opacity 0.85s ease, transform 0.85s ease; }
   .reveal.shown{ opacity: 1; transform: translateY(0); }
 
@@ -162,6 +207,9 @@
     .detail{ min-width: 100%; padding: 18px 10px; }
     .detail + .detail::before{ display: none; }
     .detail + .detail{ border-top: 1px solid rgba(176,141,87,0.18); }
+    .g-photos{ grid-template-columns: repeat(2, 1fr); }
+    .g-timeline{ padding-left: 24px; }
+    .g-timeline-dot{ left: -24px; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -222,7 +270,7 @@
   </div>
 
   <p class="roman-date reveal">III · X · MMXXVI</p>
-  <p class="date-sub reveal">3 октября 2026 года, пятница</p>
+  <p class="date-sub reveal">3 октября 2026 года, суббота</p>
 
   <div class="invite-box">
     <svg class="corner-flourish cf-tl" viewBox="0 0 40 40" aria-hidden="true"><path d="M3,37 C3,16 3,3 24,3" fill="none" stroke="currentColor" stroke-width="1.2"/><path d="M3,37 C14,34 18,26 17,15" fill="none" stroke="currentColor" stroke-width="0.9" opacity="0.7"/><circle cx="24" cy="3" r="1.8" fill="currentColor"/></svg>
@@ -277,6 +325,68 @@
       <div class="tu"><span class="tu-num" id="t-h">00</span><span class="tu-txt">часов</span></div>
       <div class="tu"><span class="tu-num" id="t-m">00</span><span class="tu-txt">минут</span></div>
       <div class="tu"><span class="tu-num" id="t-s">00</span><span class="tu-txt">секунд</span></div>
+    </div>
+  </div>
+
+  <div class="story-wrap reveal">
+    <h2 class="story-heading">Наша история</h2>
+    <p class="story-sub">Путь длиной в восемь лет</p>
+    <div class="g-timeline">
+      <div class="g-timeline-item">
+        <span class="g-timeline-dot"></span>
+        <div class="g-timeline-year">2018</div>
+        <p class="g-timeline-label">Знакомство</p>
+        <p class="g-timeline-text">Свеча зажглась в темноте — и не гасла с тех пор.</p>
+      </div>
+      <div class="g-timeline-item">
+        <span class="g-timeline-dot"></span>
+        <div class="g-timeline-year">2020</div>
+        <p class="g-timeline-label">Первое свидание</p>
+        <p class="g-timeline-text">Тени сплелись под звук одного дыхания на двоих.</p>
+      </div>
+      <div class="g-timeline-item">
+        <span class="g-timeline-dot"></span>
+        <div class="g-timeline-year">2023</div>
+        <p class="g-timeline-label">Предложение</p>
+        <p class="g-timeline-text">Клятва, произнесённая шёпотом среди мерцающих огней.</p>
+      </div>
+      <div class="g-timeline-item">
+        <span class="g-timeline-dot"></span>
+        <div class="g-timeline-year">2026</div>
+        <p class="g-timeline-label">Свадьба</p>
+        <p class="g-timeline-text">Ночь, когда два сердца обвенчаются навсегда.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-wrap reveal">
+    <h2 class="story-heading">Фотографии</h2>
+    <p class="story-sub">Георгий &amp; Анастасия</p>
+    <div class="g-photos">
+      <div class="g-photo">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+        <span class="g-photo-caption">Здесь будут ваши фотографии</span>
+      </div>
+      <div class="g-photo">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+        <span class="g-photo-caption">Здесь будут ваши фотографии</span>
+      </div>
+      <div class="g-photo">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+        <span class="g-photo-caption">Здесь будут ваши фотографии</span>
+      </div>
+      <div class="g-photo">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+        <span class="g-photo-caption">Здесь будут ваши фотографии</span>
+      </div>
+      <div class="g-photo">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+        <span class="g-photo-caption">Здесь будут ваши фотографии</span>
+      </div>
+      <div class="g-photo">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+        <span class="g-photo-caption">Здесь будут ваши фотографии</span>
+      </div>
     </div>
   </div>
 

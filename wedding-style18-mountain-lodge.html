@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий & Анастасия • 3 октября</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Горный лодж» — Георгий и Анастасия, 3 октября 2026, Красная Поляна, Сочи. Дерево, силуэты вершин, тёплый свет очага.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style18-mountain-lodge.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Горный лодж»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Горный лодж», Красная Поляна, Сочи. Дерево, силуэты вершин, тёплый свет очага.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style18-mountain-lodge.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style18-mountain-lodge.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Горный лодж»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Горный лодж», Красная Поляна, Сочи. Дерево, силуэты вершин, тёплый свет очага.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style18-mountain-lodge.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -440,6 +453,65 @@
     letter-spacing:1px;
   }
 
+  /* ---------- Наша история ---------- */
+  .block-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:clamp(28px, 6vw, 36px);
+    color:var(--cream-soft);
+    text-align:center;
+    margin:0 0 28px;
+    letter-spacing:.5px;
+  }
+  .story-block{ margin-top:46px; }
+  .timeline{ position:relative; padding-left:4px; text-align:left; }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:15px; top:4px; bottom:4px;
+    width:2px;
+    background:linear-gradient(180deg, var(--brass-bright), var(--brass));
+    opacity:.5;
+  }
+  .timeline-item{ position:relative; display:flex; gap:16px; margin-bottom:22px; }
+  .timeline-item:last-child{ margin-bottom:0; }
+  .timeline-dot{
+    flex:none;
+    width:32px; height:32px;
+    border-radius:50%;
+    background:rgba(30,19,10,.7);
+    border:2px solid var(--brass);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px;
+    box-shadow:0 4px 12px rgba(0,0,0,.4);
+    position:relative; z-index:1;
+  }
+  .timeline-year{ font-family:'Cormorant Garamond', serif; font-weight:600; font-size:21px; color:var(--brass-bright); line-height:1.2; }
+  .timeline-title{ font-family:'Montserrat', sans-serif; font-size:10.5px; letter-spacing:2px; text-transform:uppercase; color:var(--brass); margin:2px 0 6px; }
+  .timeline-text{ font-family:'Cormorant Garamond', serif; font-size:16px; line-height:1.5; color:var(--cream-soft); opacity:.85; }
+
+  /* ---------- Фотографии ---------- */
+  .gallery-block{ margin-top:46px; }
+  .gallery-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; }
+  .gallery-card{
+    aspect-ratio:1 / 1;
+    border-radius:6px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    padding:10px;
+    border:1px solid rgba(201,151,79,.3);
+    box-shadow:0 10px 24px rgba(0,0,0,.4);
+    color:var(--brass-bright);
+  }
+  .gallery-card .cam{ width:26px; height:26px; opacity:.85; }
+  .gallery-card p{ font-family:'Montserrat', sans-serif; font-size:9.5px; letter-spacing:.5px; color:#cbb99c; opacity:.8; margin:0; line-height:1.3; }
+  .gc1{ background:linear-gradient(145deg, rgba(201,151,79,.22), rgba(30,19,10,.85)); }
+  .gc2{ background:linear-gradient(145deg, rgba(44,66,50,.4), rgba(30,19,10,.85)); }
+  .gc3{ background:linear-gradient(145deg, rgba(232,118,63,.22), rgba(30,19,10,.85)); }
+  .gc4{ background:linear-gradient(145deg, rgba(76,106,82,.35), rgba(30,19,10,.85)); }
+  .gc5{ background:linear-gradient(145deg, rgba(201,151,79,.3), rgba(28,17,8,.9)); }
+  .gc6{ background:linear-gradient(145deg, rgba(60,39,24,.6), rgba(30,19,10,.85)); }
+  @media (max-width:560px){ .gallery-grid{ grid-template-columns:repeat(2, 1fr); } }
+
   /* ---------- адаптив ---------- */
 
   @media (max-width:520px){
@@ -539,7 +611,7 @@
       <p class="lead">
         Среди хвойного воздуха и вершин Кавказских гор мы хотим встретить самый тёплый день нашей жизни — рядом с теми, кто нам дорог. Приезжайте туда, где горы касаются неба, а вечером в очаге потрескивают дрова.
       </p>
-      <p class="date-line">3 октября 2026 · пятница · 14:00</p>
+      <p class="date-line">3 октября 2026 · суббота · 14:00</p>
 
       <div class="countdown-caption">До нашего дня в горах</div>
       <div class="countdown" id="countdown">
@@ -563,7 +635,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
           <div>
             <p class="detail-title">Дата и время</p>
-            <p class="detail-text">3 октября 2026, пятница</p>
+            <p class="detail-text">3 октября 2026, суббота</p>
             <p class="detail-sub">Церемония начнётся в 14:00, на открытом воздухе у подножия хребта</p>
           </div>
         </div>
@@ -595,6 +667,56 @@
         <p style="text-align:center;margin:10px 0 0;">
           <a href="https://yandex.ru/maps/?ll=40.2036,43.6768&z=13&pt=40.2036,43.6768,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
         </p>
+      </div>
+
+      <div class="story-block" aria-label="Наша история">
+        <p class="block-title">Наша история</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-dot">🏔️</span>
+            <div class="timeline-body">
+              <p class="timeline-year">2018</p>
+              <p class="timeline-title">Знакомство</p>
+              <p class="timeline-text">Познакомились в горном походе — разговор у костра затянулся до утра.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot">🌲</span>
+            <div class="timeline-body">
+              <p class="timeline-year">2020</p>
+              <p class="timeline-title">Первое свидание</p>
+              <p class="timeline-text">Первое свидание — прогулка по хвойному лесу и чай у очага.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot">🔥</span>
+            <div class="timeline-body">
+              <p class="timeline-year">2023</p>
+              <p class="timeline-title">Предложение</p>
+              <p class="timeline-text">Предложение прозвучало на вершине хребта, среди облаков.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot">💍</span>
+            <div class="timeline-body">
+              <p class="timeline-year">2026</p>
+              <p class="timeline-title">Свадьба</p>
+              <p class="timeline-text">Говорим друг другу «да» там, где горы касаются неба.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-block" aria-label="Фотографии">
+        <p class="block-title">Фотографии</p>
+        <div class="gallery-grid">
+          <div class="gallery-card gc1"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+          <div class="gallery-card gc2"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+          <div class="gallery-card gc3"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+          <div class="gallery-card gc4"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+          <div class="gallery-card gc5"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+          <div class="gallery-card gc6"><svg class="cam" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg><p>Здесь будут ваши фотографии</p></div>
+        </div>
       </div>
 
       <div class="rsvp">

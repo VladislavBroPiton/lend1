@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий & Анастасия • 3 октября</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Зима» — Георгий и Анастасия, 3 октября 2026, Ресторан «Берег». Тёмно-синий и серебро, живой снегопад на canvas.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style7-winter.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Зима»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Зима», Ресторан «Берег». Тёмно-синий и серебро, живой снегопад на canvas.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style7-winter.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style7-winter.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Зима»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Зима», Ресторан «Берег». Тёмно-синий и серебро, живой снегопад на canvas.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style7-winter.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -300,6 +313,118 @@
     line-height:1.5;
   }
 
+  /* ---------- наша история ---------- */
+
+  .story-section{
+    margin-top:44px;
+  }
+  .section-kicker{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--silver);
+    opacity:.75;
+    text-align:center;
+    margin-bottom:8px;
+  }
+  .section-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:500;
+    font-size:clamp(24px,5vw,32px);
+    color:var(--snow);
+    text-align:center;
+    margin:0 0 26px;
+  }
+
+  .timeline{
+    display:grid;
+    gap:18px;
+  }
+  .timeline-row{
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:16px;
+    align-items:start;
+    text-align:left;
+    padding:16px 18px;
+    border:1px solid rgba(199,208,221,0.2);
+    border-radius:4px;
+    background:rgba(6,12,26,0.25);
+  }
+  .timeline-year-badge{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    border:1px solid rgba(199,208,221,0.4);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-size:15px;
+    color:var(--ice);
+    background:rgba(159,211,232,0.06);
+  }
+  .timeline-label{
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--ice-soft);
+    margin:0 0 4px;
+  }
+  .timeline-text{
+    font-family:'Cormorant Garamond', serif;
+    font-size:18px;
+    color:var(--snow);
+    margin:0;
+    line-height:1.4;
+  }
+  .timeline-sub{
+    font-family:'Montserrat', sans-serif;
+    font-size:13px;
+    color:var(--silver);
+    margin:4px 0 0;
+    line-height:1.5;
+  }
+
+  /* ---------- фотографии ---------- */
+
+  .photos-section{
+    margin-top:44px;
+  }
+  .photo-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+  }
+  .photo-card{
+    aspect-ratio:4/5;
+    border-radius:6px;
+    border:1px solid rgba(199,208,221,0.28);
+    background:linear-gradient(160deg, rgba(159,211,232,0.18), rgba(13,27,48,0.6));
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    box-shadow:0 10px 24px rgba(0,0,0,0.35);
+  }
+  .photo-card svg{ width:26px; height:26px; color:var(--ice); }
+  .photo-card span{
+    font-size:10px;
+    letter-spacing:.05em;
+    color:var(--silver);
+    text-align:center;
+    padding:0 8px;
+    line-height:1.4;
+  }
+
+  @media (max-width:520px){
+    .photo-grid{ grid-template-columns:repeat(2, 1fr); }
+    .timeline-row{ grid-template-columns:44px 1fr; gap:12px; padding:14px; }
+    .timeline-year-badge{ width:44px; height:44px; font-size:12px; }
+  }
+
   /* ---------- RSVP ---------- */
 
   .rsvp{
@@ -431,7 +556,7 @@
       <p class="lead">
         Среди тишины и первого снега мы хотим разделить самый важный день нашей жизни с теми, кто нам дорог.
       </p>
-      <p class="date-line">3 октября 2026 · пятница · 15:00</p>
+      <p class="date-line">3 октября 2026 · суббота · 15:00</p>
 
       <div class="countdown-caption">До торжества остаётся</div>
       <div class="countdown" id="countdown">
@@ -454,7 +579,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
           <div>
             <p class="detail-title">Дата и время</p>
-            <p class="detail-text">3 октября 2026, пятница</p>
+            <p class="detail-text">3 октября 2026, суббота</p>
             <p class="detail-sub">Начало торжества — в 15:00</p>
           </div>
         </div>
@@ -486,6 +611,58 @@
         <p style="text-align:center;margin:10px 0 0;">
           <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
         </p>
+      </div>
+
+      <div class="story-section">
+        <div class="section-kicker">Наша история</div>
+        <h2 class="section-title">Несколько зим друг для друга</h2>
+        <div class="timeline">
+          <div class="timeline-row">
+            <div class="timeline-year-badge">2018</div>
+            <div>
+              <p class="timeline-label">Знакомство</p>
+              <p class="timeline-text">Первая встреча морозным вечером</p>
+              <p class="timeline-sub">У витрины с гирляндами, за разговором, который затянулся на несколько часов</p>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-year-badge">2020</div>
+            <div>
+              <p class="timeline-label">Первое свидание</p>
+              <p class="timeline-text">Каток в свете фонарей</p>
+              <p class="timeline-sub">И чашка глинтвейна на двоих после — уже тогда стало понятно, что это надолго</p>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-year-badge">2023</div>
+            <div>
+              <p class="timeline-label">Предложение</p>
+              <p class="timeline-text">Кольцо появилось в снегопад</p>
+              <p class="timeline-sub">Под первой звездой, зажёгшейся в морозном небе</p>
+            </div>
+          </div>
+          <div class="timeline-row">
+            <div class="timeline-year-badge">2026</div>
+            <div>
+              <p class="timeline-label">Свадьба</p>
+              <p class="timeline-text">Зимний вечер, о котором мечтали</p>
+              <p class="timeline-sub">3 октября — день, когда все, кто дорог, будут рядом</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="photos-section">
+        <div class="section-kicker">Фотографии</div>
+        <h2 class="section-title">Скоро здесь появятся кадры</h2>
+        <div class="photo-grid">
+          <div class="photo-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Здесь будут ваши фотографии</span></div>
+          <div class="photo-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Здесь будут ваши фотографии</span></div>
+          <div class="photo-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Здесь будут ваши фотографии</span></div>
+          <div class="photo-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Здесь будут ваши фотографии</span></div>
+          <div class="photo-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Здесь будут ваши фотографии</span></div>
+          <div class="photo-card"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg><span>Здесь будут ваши фотографии</span></div>
+        </div>
       </div>
 
       <div class="rsvp">

@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Восточная роскошь» — Георгий и Анастасия, 3 октября 2026, Ресторан «Берег». Бордо и золото, мандала, арабесковый орнамент.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style11-oriental.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Восточная роскошь»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Восточная роскошь», Ресторан «Берег». Бордо и золото, мандала, арабесковый орнамент.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style11-oriental.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style11-oriental.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Восточная роскошь»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Восточная роскошь», Ресторан «Берег». Бордо и золото, мандала, арабесковый орнамент.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style11-oriental.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@500;600;700&family=Marcellus+SC&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -360,6 +373,105 @@
     color:rgba(230,211,174,0.55);
   }
 
+  /* ===== Наша история (таймлайн) ===== */
+  .story{ margin:40px auto; max-width:460px; padding:0 20px; }
+  .section-heading{
+    font-family:'Cormorant SC', serif;
+    font-weight:600;
+    font-size:clamp(24px, 5vw, 30px);
+    color:var(--gold-100);
+    text-align:center;
+    margin:0 0 6px;
+    text-shadow:0 0 14px rgba(212,175,55,0.22);
+  }
+  .section-kicker{
+    font-family:'Montserrat', sans-serif;
+    font-size:10.5px;
+    letter-spacing:.25em;
+    text-transform:uppercase;
+    color:var(--gold-400);
+    text-align:center;
+    margin:0 0 28px;
+    opacity:.9;
+  }
+  .timeline{
+    position:relative;
+    max-width:400px;
+    margin:0 auto;
+    padding-left:28px;
+    text-align:left;
+  }
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left:5px; top:4px; bottom:4px;
+    width:1px;
+    background:linear-gradient(180deg, transparent, var(--gold-500) 12%, var(--gold-500) 88%, transparent);
+  }
+  .timeline-item{ position:relative; padding-bottom:28px; }
+  .timeline-item:last-child{ padding-bottom:0; }
+  .timeline-dot{
+    position:absolute;
+    left:-28px; top:3px;
+    width:11px; height:11px;
+    background:radial-gradient(circle, var(--gold-100), var(--gold-500));
+    border-radius:50%;
+    box-shadow:0 0 10px 2px rgba(212,175,55,0.5);
+  }
+  .timeline-year{
+    font-family:'Cormorant SC', serif;
+    font-weight:600;
+    font-size:21px;
+    color:var(--gold-300);
+    line-height:1;
+  }
+  .timeline-label{
+    font-family:'Montserrat', sans-serif;
+    font-size:10px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--gold-400);
+    margin:5px 0 5px;
+  }
+  .timeline-text{
+    font-size:15px;
+    line-height:1.6;
+    color:var(--ink-dim);
+    font-style:italic;
+  }
+
+  /* ===== Фотографии (плейсхолдеры) ===== */
+  .gallery{ margin:40px auto; max-width:460px; padding:0 20px; }
+  .photos-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:12px;
+  }
+  .photo-card{
+    aspect-ratio:1;
+    border-radius:10px;
+    background:linear-gradient(160deg, rgba(212,175,55,0.16), rgba(122,20,32,0.4) 60%, rgba(42,5,9,0.5));
+    border:1px solid rgba(212,175,55,0.32);
+    box-shadow:0 12px 26px -14px rgba(0,0,0,0.6);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:8px;
+  }
+  .photo-card svg{ width:28px; height:28px; color:var(--gold-400); opacity:.85; }
+  .photo-caption{
+    font-family:'Montserrat', sans-serif;
+    font-size:8px;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--ink-dim);
+    text-align:center;
+    opacity:.75;
+    line-height:1.3;
+  }
+
   /* ===== Адаптивность ===== */
   @media (max-width: 480px){
     .invitation{ max-width:100%; }
@@ -372,6 +484,7 @@
     .details{ grid-template-columns:1fr; gap:14px; max-width:320px; }
     .corner{ width:56px; height:56px; }
     .rsvp-btn{ padding:14px 34px; font-size:12px; letter-spacing:2px; }
+    .photos-grid{ grid-template-columns:repeat(2, 1fr); }
   }
 
   /* ===== Уважение к prefers-reduced-motion ===== */
@@ -479,7 +592,7 @@
         <div class="detail">
           <span class="detail-icon">&#10022;</span>
           <div class="detail-title">Дата и время</div>
-          <div class="detail-text">3 октября 2026<br>пятница, 15:00</div>
+          <div class="detail-text">3 октября 2026<br>суббота, 15:00</div>
         </div>
         <div class="detail">
           <span class="detail-icon">&#10022;</span>
@@ -508,6 +621,68 @@
         <p style="text-align:center;margin:10px 0 0;">
           <a href="https://yandex.ru/maps/?ll=38.9756,45.0169&z=16&pt=38.9756,45.0169,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
         </p>
+      </div>
+
+      <div class="story">
+        <p class="section-heading">Наша история</p>
+        <p class="section-kicker">Путь длиной в восемь лет</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-year">2018</div>
+            <div class="timeline-label">Знакомство</div>
+            <p class="timeline-text">Взгляды встретились, как искры на закатном шёлке — и мир стал чуточку теплее.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-year">2020</div>
+            <div class="timeline-label">Первое свидание</div>
+            <p class="timeline-text">Вечер, что запомнился ароматом жасмина и негромким смехом до самого рассвета.</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-year">2023</div>
+            <div class="timeline-label">Предложение</div>
+            <p class="timeline-text">Кольцо блеснуло золотом под звёздами — и Анастасия ответила «да».</p>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-year">2026</div>
+            <div class="timeline-label">Свадьба</div>
+            <p class="timeline-text">Две судьбы сплетаются в один узор — начало нашей общей истории.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <p class="section-heading">Фотографии</p>
+        <p class="section-kicker">Георгий &amp; Анастасия</p>
+        <div class="photos-grid">
+          <div class="photo-card">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+            <span class="photo-caption">Здесь будут ваши фотографии</span>
+          </div>
+          <div class="photo-card">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+            <span class="photo-caption">Здесь будут ваши фотографии</span>
+          </div>
+          <div class="photo-card">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+            <span class="photo-caption">Здесь будут ваши фотографии</span>
+          </div>
+          <div class="photo-card">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+            <span class="photo-caption">Здесь будут ваши фотографии</span>
+          </div>
+          <div class="photo-card">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+            <span class="photo-caption">Здесь будут ваши фотографии</span>
+          </div>
+          <div class="photo-card">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="14" width="36" height="24" rx="4" stroke="currentColor" stroke-width="2"/><path d="M17 14L20 9H28L31 14" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="24" cy="26" r="7" stroke="currentColor" stroke-width="2"/><circle cx="35" cy="19" r="1.5" fill="currentColor"/></svg>
+            <span class="photo-caption">Здесь будут ваши фотографии</span>
+          </div>
+        </div>
       </div>
 
       <div class="rsvp">

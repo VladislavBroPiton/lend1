@@ -4,6 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий &amp; Анастасия • 3 октября</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+<meta name="description" content="Свадебное приглашение в стиле «Горное озеро» — Георгий и Анастасия, 3 октября 2026, оз. Кардывач, Сочи. Зеркальная гладь озера, туман, тишина заповедника.">
+<link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style25-lake-kardyvach.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Горное озеро»">
+<meta property="og:description" content="Свадебное приглашение в стиле «Горное озеро», оз. Кардывач, Сочи. Зеркальная гладь озера, туман, тишина заповедника.">
+<meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style25-lake-kardyvach.html">
+<meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style25-lake-kardyvach.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Горное озеро»">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Горное озеро», оз. Кардывач, Сочи. Зеркальная гладь озера, туман, тишина заповедника.">
+<meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style25-lake-kardyvach.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -386,6 +399,84 @@
     margin:0;
   }
 
+  /* ---------- Наша история ---------- */
+  .timeline{
+    position:relative;
+    max-width:640px;
+    margin:0 auto;
+    padding-left:32px;
+    text-align:left;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:7px;top:6px;bottom:6px;
+    width:1px;
+    background:linear-gradient(180deg, transparent, var(--mist-500), transparent);
+  }
+  .tl-item{position:relative;padding-bottom:36px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{
+    position:absolute;
+    left:-32px;top:4px;
+    width:14px;height:14px;
+    border-radius:50%;
+    background:var(--ochre-300);
+    border:3px solid var(--forest-950);
+    box-shadow:0 0 0 2px var(--mist-500);
+  }
+  .tl-year{
+    font-family:'Cormorant Garamond', serif;
+    font-size:24px;
+    font-weight:600;
+    color:var(--ochre-300);
+    margin-bottom:4px;
+  }
+  .tl-role{
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--mist-300);
+    margin-bottom:8px;
+  }
+  .tl-text{
+    font-family:'Cormorant Garamond', serif;
+    font-size:17px;
+    line-height:1.6;
+    color:var(--fog-200);
+  }
+
+  /* ---------- Фотографии ---------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+  }
+  .g-card{
+    aspect-ratio:1;
+    border-radius:16px;
+    background:radial-gradient(circle at 35% 30%, var(--mist-700), var(--forest-900) 78%);
+    border:1px solid rgba(216,227,221,.2);
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .g-card:hover{transform:translateY(-4px);}
+  .g-icon{width:30px;height:30px;color:var(--ochre-300);opacity:.85;}
+  .g-icon svg{width:100%;height:100%;}
+  .g-cap{
+    font-family:'Cormorant Garamond', serif;
+    font-style:italic;
+    font-size:13px;
+    color:var(--mist-300);
+    text-align:center;
+    padding:0 10px;
+  }
+
   /* ---------- RSVP ---------- */
   .rsvp{
     text-align:center;
@@ -451,6 +542,8 @@
     .count-box span{font-size:27px;}
     .pine-tree{width:24px;height:46px;}
     .sun-glow{width:220px;height:220px;}
+    .gallery-grid{grid-template-columns:repeat(2, 1fr);}
+    .timeline{padding-left:26px;}
   }
 
   /* ---------- Уважение к prefers-reduced-motion ---------- */
@@ -517,7 +610,7 @@
     <div class="hero-content">
       <p class="pre-title">Среди хвои и тишины заповедника</p>
       <h1 class="names">Георгий<span class="amp">&amp;</span>Анастасия</h1>
-      <p class="subtitle">3 октября 2026 · пятница · 11:00</p>
+      <p class="subtitle">3 октября 2026 · суббота · 11:00</p>
       <div class="divider-line"></div>
       <p class="venue-note">У подножия хребта, там, где озеро <b>Кардывач</b> замирает зеркалом, а тишина заповедника слышна отчётливее любых слов, — приглашаем вас разделить с нами этот день.</p>
     </div>
@@ -543,7 +636,7 @@
       <div class="detail-card">
         <div class="medallion">🌄</div>
         <h3>Когда</h3>
-        <p>3 октября 2026, пятница<br>начало в 11:00, пока туман ещё держится над водой</p>
+        <p>3 октября 2026, суббота<br>начало в 11:00, пока туман ещё держится над водой</p>
       </div>
       <div class="detail-card">
         <div class="medallion">📍</div>
@@ -569,6 +662,56 @@
       <a href="https://yandex.ru/maps/?ll=40.5975,43.5069&z=12&pt=40.5975,43.5069,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
     </p>
   </div>
+
+  <div class="mist-divider"><span class="mark"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></span></div>
+
+  <section id="story">
+    <h2 class="section-title">Наша история</h2>
+    <p class="section-sub">Несколько вех на пути, который привёл нас к берегу озера Кардывач</p>
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-year">2018</div>
+        <div class="tl-role">Знакомство</div>
+        <div class="tl-text">Георгий и Анастасия познакомились в одном из горных походов — общая любовь к тишине заповедных мест сблизила их сразу.</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-year">2020</div>
+        <div class="tl-role">Первое свидание</div>
+        <div class="tl-text">Первая совместная тропа к горному озеру — с тех пор путешествия в горы стали их общей страстью.</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-year">2023</div>
+        <div class="tl-role">Предложение</div>
+        <div class="tl-text">Предложение прозвучало на рассвете у зеркальной глади Кардывача, когда над водой ещё стелился туман.</div>
+      </div>
+      <div class="tl-item">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-year">2026</div>
+        <div class="tl-role">Свадьба</div>
+        <div class="tl-text">3 октября — свадьба у подножия хребта, там, где для них началась эта история.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mist-divider"><span class="mark"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></span></div>
+
+  <section id="gallery">
+    <h2 class="section-title">Фотографии</h2>
+    <p class="section-sub">Совсем скоро здесь появятся кадры нашего дня среди хвои и тишины заповедника</p>
+    <div class="gallery-grid">
+      <div class="g-card"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+      <div class="g-card"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+      <div class="g-card"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+      <div class="g-card"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+      <div class="g-card"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+      <div class="g-card"><div class="g-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 8h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="14" r="4"/></svg></div><div class="g-cap">Здесь будут ваши фотографии</div></div>
+    </div>
+  </section>
+
+  <div class="mist-divider"><span class="mark"><svg viewBox="0 0 40 70"><use href="#pine"/></svg></span></div>
 
   <section class="rsvp">
     <h2 class="section-title">Будем ждать вас у озера</h2>
