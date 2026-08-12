@@ -345,6 +345,54 @@
 
   /* ---------- RSVP ---------- */
   .rsvp-sheet{padding:52px 38px;text-align:center;}
+
+  /* ---------- форма RSVP ---------- */
+  .rsvp-form{max-width:430px;margin:30px auto 0;text-align:left;}
+  .f-row{margin-bottom:22px;}
+  .f-label{
+    display:block;font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--muted);margin-bottom:8px;
+  }
+  .rsvp-form input[type=text],
+  .rsvp-form input[type=number],
+  .rsvp-form select,
+  .rsvp-form textarea{
+    width:100%;font-family:inherit;font-size:14px;font-weight:300;color:var(--ink);
+    background:transparent;border:0;border-bottom:1px solid var(--hair);
+    padding:8px 2px;transition:border-color .3s ease;
+  }
+  .rsvp-form input:focus,
+  .rsvp-form select:focus,
+  .rsvp-form textarea:focus{outline:none;border-bottom-color:var(--ink);}
+  .rsvp-form textarea{resize:vertical;min-height:56px;}
+
+  .f-choice{display:flex;gap:10px;}
+  .f-choice label{
+    flex:1;position:relative;cursor:pointer;
+    border:1px solid var(--hair);padding:13px 8px;text-align:center;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+    transition:border-color .3s ease,color .3s ease,background .3s ease;
+  }
+  .f-choice input{position:absolute;opacity:0;pointer-events:none;}
+  .f-choice input:checked + span{color:#fff;}
+  .f-choice label:has(input:checked){background:var(--ink);border-color:var(--ink);color:#fff;}
+  .f-choice label:hover{border-color:var(--ink);}
+
+  .rsvp-form .btn{width:100%;margin-top:8px;cursor:pointer;font-family:inherit;}
+  .rsvp-form .btn[disabled]{opacity:.45;cursor:default;}
+  .rsvp-form .btn[disabled]:hover{background:transparent;color:var(--ink);}
+
+  .f-status{margin-top:16px;font-size:12px;line-height:1.6;min-height:18px;}
+  .f-status.err{color:#A6392B;}
+  .f-status.ok{color:var(--accent);}
+
+  .rsvp-done{display:none;}
+  .rsvp-done.show{display:block;}
+  .rsvp-done .tick{
+    width:46px;height:46px;margin:0 auto 20px;border:1px solid var(--accent);
+    border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--accent);
+  }
+  .form-hidden{display:none !important;}
   .btn{
     display:inline-block;
     margin-top:10px;
@@ -662,14 +710,64 @@
     <div class="layer" data-px="0.25">
       <div class="reveal">
         <div class="sheet deep rsvp-sheet corner-tr" style="--rot:-1.3deg">
-          <p class="kicker">Подтверждение</p>
-          <h2>Придёте?</h2>
-          <p class="small muted" style="max-width:440px;margin:0 auto 26px;">
-            Нам важно знать заранее, чтобы у воды нашлось место именно для вас.
-            Пожалуйста, ответьте до <strong style="color:var(--ink);font-weight:400;">20 сентября</strong>.
-          </p>
-          <a class="btn" href="https://t.me/" target="_blank" rel="noopener">Подтвердить участие</a>
-          <p class="deadline">Ответ ждём до 20 сентября 2026</p>
+          <div id="rsvpBlock">
+            <p class="kicker">Подтверждение</p>
+            <h2>Придёте?</h2>
+            <p class="small muted" style="max-width:440px;margin:0 auto 6px;">
+              Нам важно знать заранее, чтобы у воды нашлось место именно для вас.
+              Пожалуйста, ответьте до <strong style="color:var(--ink);font-weight:400;">20 сентября</strong>.
+            </p>
+
+            <form class="rsvp-form" id="rsvpForm" novalidate>
+              <div class="f-row">
+                <label class="f-label" for="rName">Имя и фамилия</label>
+                <input type="text" id="rName" name="name" autocomplete="name" required>
+              </div>
+
+              <div class="f-row">
+                <span class="f-label">Придёте?</span>
+                <div class="f-choice">
+                  <label><input type="radio" name="coming" value="yes" checked><span>Буду</span></label>
+                  <label><input type="radio" name="coming" value="no"><span>Не смогу</span></label>
+                </div>
+              </div>
+
+              <div class="f-row" id="guestsRow">
+                <label class="f-label" for="rGuests">Сколько человек придёт</label>
+                <input type="number" id="rGuests" name="guests" min="1" max="10" value="1">
+              </div>
+
+              <div class="f-row" id="menuRow">
+                <label class="f-label" for="rMenu">Пожелания по меню</label>
+                <select id="rMenu" name="menu">
+                  <option value="Без ограничений">Без ограничений</option>
+                  <option value="Вегетарианское">Вегетарианское</option>
+                  <option value="Без глютена">Без глютена</option>
+                  <option value="Аллергия — напишу ниже">Аллергия — напишу ниже</option>
+                </select>
+              </div>
+
+              <div class="f-row">
+                <label class="f-label" for="rComment">Комментарий (по желанию)</label>
+                <textarea id="rComment" name="comment" rows="2"></textarea>
+              </div>
+
+              <button class="btn" type="submit" id="rsvpSubmit">Отправить ответ</button>
+              <p class="f-status" id="rsvpStatus"></p>
+            </form>
+
+            <p class="deadline">Ответ ждём до 20 сентября 2026</p>
+          </div>
+
+          <div class="rsvp-done" id="rsvpDone">
+            <div class="tick">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M4 12.5l5 5L20 6.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h2 id="doneTitle">Спасибо!</h2>
+            <p class="small muted" style="max-width:400px;margin:14px auto 0;" id="doneText"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -752,6 +850,89 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     paint();
+  }
+
+  /* ---------- отправка формы RSVP ---------- */
+
+  // Сюда вставьте адрес своего веб-приложения Google Apps Script.
+  // Инструкция — в файле RSVP-НАСТРОЙКА.md. Пока адрес не указан,
+  // форма работает в демо-режиме: ничего не отправляет, но показывает благодарность.
+  var RSVP_ENDPOINT = '';
+
+  var form = document.getElementById('rsvpForm');
+  if (form) {
+    var statusEl = document.getElementById('rsvpStatus');
+    var submitBtn = document.getElementById('rsvpSubmit');
+    var guestsRow = document.getElementById('guestsRow');
+    var menuRow = document.getElementById('menuRow');
+
+    // «Не смогу» — прячем поля про количество гостей и меню
+    form.addEventListener('change', function(e){
+      if (e.target.name !== 'coming') return;
+      var coming = e.target.value === 'yes';
+      guestsRow.classList.toggle('form-hidden', !coming);
+      menuRow.classList.toggle('form-hidden', !coming);
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      var name = document.getElementById('rName').value.trim();
+      if (!name) {
+        statusEl.textContent = 'Пожалуйста, укажите имя.';
+        statusEl.className = 'f-status err';
+        document.getElementById('rName').focus();
+        return;
+      }
+
+      var coming = form.querySelector('input[name=coming]:checked').value;
+      var payload = {
+        action: 'submit',
+        name: name,
+        coming: coming,
+        guests: coming === 'yes' ? document.getElementById('rGuests').value : 0,
+        menu: coming === 'yes' ? document.getElementById('rMenu').value : '',
+        comment: document.getElementById('rComment').value.trim(),
+        style: 'Бумажный коллаж'
+      };
+
+      submitBtn.disabled = true;
+      statusEl.textContent = 'Отправляем…';
+      statusEl.className = 'f-status';
+
+      function showThanks(){
+        var text = coming === 'yes'
+          ? 'Мы очень рады! Будем ждать вас 3 октября на берегу.'
+          : 'Спасибо, что дали знать. Будем скучать — обнимаем вас!';
+        document.getElementById('doneText').textContent = text;
+        document.getElementById('rsvpBlock').style.display = 'none';
+        document.getElementById('rsvpDone').classList.add('show');
+      }
+
+      // Демо-режим: адрес не настроен
+      if (!RSVP_ENDPOINT) {
+        setTimeout(showThanks, 400);
+        return;
+      }
+
+      // Content-Type: text/plain — чтобы браузер не слал предварительный
+      // CORS-запрос, который Apps Script не обрабатывает.
+      fetch(RSVP_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(res){
+        if (res && res.ok) { showThanks(); }
+        else { throw new Error((res && res.error) || 'Не удалось отправить'); }
+      })
+      .catch(function(err){
+        submitBtn.disabled = false;
+        statusEl.textContent = 'Не получилось отправить: ' + err.message + '. Попробуйте ещё раз или напишите нам напрямую.';
+        statusEl.className = 'f-status err';
+      });
+    });
   }
 })();
 </script>

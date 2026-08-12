@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Список гостей</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📋</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #FAF8F5; --surface: #FFFFFF; --ink: #201C18; --muted: #756D64;
+    --line: #E7E1D8; --accent: #B5451B; --ok: #2F7A3E; --no: #A6392B;
+    --shadow: 0 10px 30px rgba(32,28,24,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16140F; --surface: #1E1B15; --ink: #F2EEE6; --muted: #A79E90;
+      --line: #332E25; --accent: #E0855A; --ok: #7FBF8C; --no: #E58C7D;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+  }
+  body { background: var(--bg); color: var(--ink); font-family: 'Manrope', sans-serif; min-height: 100vh; }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(28px, 5vw, 40px); }
+  .sub { color: var(--muted); font-size: 14px; margin-top: 8px; font-weight: 300; }
+
+  /* ── Экран входа ── */
+  .login { max-width: 380px; margin: 60px auto; background: var(--surface); border-radius: 18px; padding: 32px; box-shadow: var(--shadow); text-align: center; }
+  .login h2 { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 6px; }
+  .login p { font-size: 13px; color: var(--muted); margin-bottom: 22px; }
+  input[type=password] {
+    width: 100%; font-family: inherit; font-size: 15px; color: var(--ink); background: var(--bg);
+    border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 14px;
+  }
+  input[type=password]:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .btn {
+    width: 100%; padding: 13px 20px; border: 0; border-radius: 999px; cursor: pointer;
+    background: var(--accent); color: #fff; font-family: inherit; font-size: 14px; font-weight: 600;
+  }
+  .btn:hover { filter: brightness(0.92); }
+  .btn[disabled] { opacity: .5; cursor: default; }
+  .msg { font-size: 13px; margin-top: 14px; min-height: 18px; }
+  .msg.err { color: var(--no); }
+
+  /* ── Панель ── */
+  .panel { display: none; }
+  .panel.show { display: block; }
+
+  .totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 28px 0; }
+  .tot { background: var(--surface); border-radius: 16px; padding: 20px; box-shadow: var(--shadow); }
+  .tot-num { font-family: 'Cormorant Garamond', serif; font-size: 40px; line-height: 1; }
+  .tot-num.ok { color: var(--ok); }
+  .tot-num.no { color: var(--no); }
+  .tot-lbl { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+  .bar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+  .chip {
+    font-family: inherit; font-size: 13px; background: var(--surface); color: var(--ink);
+    border: 1px solid var(--line); padding: 9px 16px; border-radius: 999px; cursor: pointer;
+  }
+  .chip.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .bar .spacer { flex: 1; }
+
+  .table-wrap { background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 720px; }
+  th, td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line); }
+  th { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover { background: var(--bg); }
+  .yes { color: var(--ok); font-weight: 600; }
+  .no { color: var(--no); font-weight: 600; }
+  .cmt { color: var(--muted); max-width: 280px; }
+  tfoot td { font-weight: 700; border-top: 2px solid var(--ink); border-bottom: 0; padding-top: 16px; }
+
+  .empty { padding: 48px 20px; text-align: center; color: var(--muted); font-size: 14px; }
+  .note { margin-top: 20px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .back { font-size: 13px; color: var(--muted); text-decoration: none; }
+  .back:hover { color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Назад в каталог</a>
+
+  <div class="login" id="loginCard">
+    <h2>Список гостей</h2>
+    <p>Страница защищена паролем</p>
+    <input type="password" id="pwd" placeholder="Введите пароль" autocomplete="current-password">
+    <button class="btn" id="loginBtn">Войти</button>
+    <p class="msg" id="loginMsg"></p>
+  </div>
+
+  <div class="panel" id="panel">
+    <h1>Кто придёт на свадьбу</h1>
+    <p class="sub" id="updated"></p>
+
+    <div class="totals">
+      <div class="tot"><div class="tot-num ok" id="tPeople">0</div><div class="tot-lbl">Человек придёт</div></div>
+      <div class="tot"><div class="tot-num" id="tYes">0</div><div class="tot-lbl">Подтвердили</div></div>
+      <div class="tot"><div class="tot-num no" id="tNo">0</div><div class="tot-lbl">Отказались</div></div>
+      <div class="tot"><div class="tot-num" id="tAll">0</div><div class="tot-lbl">Всего ответов</div></div>
+    </div>
+
+    <div class="bar">
+      <button class="chip active" data-f="all">Все</button>
+      <button class="chip" data-f="yes">Только придут</button>
+      <button class="chip" data-f="no">Только отказы</button>
+      <span class="spacer"></span>
+      <button class="chip" id="refreshBtn">Обновить</button>
+      <button class="chip" id="csvBtn">Выгрузить в Excel</button>
+    </div>
+
+    <div class="table-wrap">
+      <table id="tbl">
+        <thead>
+          <tr>
+            <th>Имя</th><th>Придёт</th><th>Гостей</th><th>Меню</th><th>Комментарий</th><th>Когда ответил</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+        <tfoot id="tfoot"></tfoot>
+      </table>
+      <div class="empty" id="emptyBox" style="display:none;">Ответов пока нет.</div>
+    </div>
+
+    <p class="note">
+      Данные подгружаются из вашей Google Таблицы. Пароль нигде на странице не хранится — он проверяется
+      на стороне Google, поэтому посторонний не увидит список, даже открыв исходный код страницы.
+    </p>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  // Сюда вставьте адрес своего веб-приложения Google Apps Script
+  // (тот же, что и в приглашении). Инструкция — в файле RSVP-НАСТРОЙКА.md.
+  var RSVP_ENDPOINT = '';
+
+  var loginCard = document.getElementById('loginCard');
+  var loginBtn = document.getElementById('loginBtn');
+  var loginMsg = document.getElementById('loginMsg');
+  var pwdInput = document.getElementById('pwd');
+  var panel = document.getElementById('panel');
+  var tbody = document.getElementById('tbody');
+  var tfoot = document.getElementById('tfoot');
+  var emptyBox = document.getElementById('emptyBox');
+
+  var password = '';
+  var allRows = [];
+  var filter = 'all';
+
+  function fmtDate(iso){
+    var d = new Date(iso);
+    if (isNaN(d)) return String(iso);
+    var p = function(n){ return (n < 10 ? '0' : '') + n; };
+    return p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear() + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
+  }
+
+  function esc(s){
+    return String(s).replace(/[&<>"]/g, function(c){
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function load(){
+    if (!RSVP_ENDPOINT) {
+      loginMsg.textContent = 'Не указан адрес Google Apps Script — откройте guests.html и впишите его в строку RSVP_ENDPOINT (см. RSVP-НАСТРОЙКА.md).';
+      loginMsg.className = 'msg err';
+      loginBtn.disabled = false;
+      return;
+    }
+
+    loginBtn.disabled = true;
+    loginMsg.textContent = 'Проверяем…';
+    loginMsg.className = 'msg';
+
+    fetch(RSVP_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'list', password: password })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(res){
+      loginBtn.disabled = false;
+      if (!res || !res.ok) throw new Error((res && res.error) || 'Ошибка загрузки');
+
+      allRows = res.rows || [];
+      loginCard.style.display = 'none';
+      panel.classList.add('show');
+      document.getElementById('tPeople').textContent = res.totals.comingPeople;
+      document.getElementById('tYes').textContent = res.totals.comingAnswers;
+      document.getElementById('tNo').textContent = res.totals.declined;
+      document.getElementById('tAll').textContent = res.totals.total;
+      document.getElementById('updated').textContent = 'Обновлено ' + fmtDate(new Date().toISOString());
+      render();
+    })
+    .catch(function(err){
+      loginBtn.disabled = false;
+      loginMsg.textContent = err.message;
+      loginMsg.className = 'msg err';
+    });
+  }
+
+  function visibleRows(){
+    if (filter === 'yes') return allRows.filter(function(r){ return r.coming; });
+    if (filter === 'no') return allRows.filter(function(r){ return !r.coming; });
+    return allRows;
+  }
+
+  function render(){
+    var rows = visibleRows();
+    emptyBox.style.display = rows.length ? 'none' : 'block';
+
+    tbody.innerHTML = rows.map(function(r){
+      return '<tr>' +
+        '<td>' + esc(r.name) + '</td>' +
+        '<td class="' + (r.coming ? 'yes' : 'no') + '">' + (r.coming ? 'Да' : 'Нет') + '</td>' +
+        '<td>' + (r.coming ? r.guests : '—') + '</td>' +
+        '<td>' + esc(r.menu || '—') + '</td>' +
+        '<td class="cmt">' + esc(r.comment || '') + '</td>' +
+        '<td>' + fmtDate(r.date) + '</td>' +
+      '</tr>';
+    }).join('');
+
+    var people = rows.reduce(function(s, r){ return s + (r.coming ? r.guests : 0); }, 0);
+    tfoot.innerHTML = rows.length
+      ? '<tr><td>Итого</td><td>' + rows.filter(function(r){ return r.coming; }).length + ' придут</td>' +
+        '<td>' + people + '</td><td colspan="3">человек на празднике</td></tr>'
+      : '';
+  }
+
+  loginBtn.addEventListener('click', function(){
+    password = pwdInput.value.trim();
+    if (!password) { loginMsg.textContent = 'Введите пароль.'; loginMsg.className = 'msg err'; return; }
+    load();
+  });
+  pwdInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') loginBtn.click(); });
+
+  document.querySelectorAll('.chip[data-f]').forEach(function(chip){
+    chip.addEventListener('click', function(){
+      document.querySelectorAll('.chip[data-f]').forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      filter = chip.dataset.f;
+      render();
+    });
+  });
+
+  document.getElementById('refreshBtn').addEventListener('click', load);
+
+  document.getElementById('csvBtn').addEventListener('click', function(){
+    var head = ['Имя', 'Придёт', 'Гостей', 'Меню', 'Комментарий', 'Когда ответил'];
+    var lines = [head.join(';')].concat(visibleRows().map(function(r){
+      return [r.name, r.coming ? 'Да' : 'Нет', r.coming ? r.guests : '', r.menu, r.comment, fmtDate(r.date)]
+        .map(function(v){ return '"' + String(v).replace(/"/g, '""') + '"'; }).join(';');
+    }));
+    // BOM — чтобы Excel правильно понял кириллицу
+    var blob = new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv;charset=utf-8;' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'gosti.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
+})();
+</script>
+</body>
+</html>
