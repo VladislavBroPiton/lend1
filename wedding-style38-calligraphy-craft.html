@@ -136,6 +136,10 @@
 
   /* ─── 1. обложка ─── */
   .cover { padding-top: 74px; padding-bottom: 40px; text-align: center; }
+  /* обложка проявляется каскадом сразу при загрузке */
+  .cover .caps.rv.on  { transition-delay: .15s; }
+  .cover .names.rv.on { transition-delay: .45s; }
+  .cover .cover-photo.rv.on { transition-delay: .75s; }
   .cover .names {
     font-family: 'Marck Script', cursive;
     font-size: clamp(38px, 8.4vw, 90px);
@@ -288,14 +292,26 @@
   .wish-text p { font-size: 16px; color: var(--ink); margin-bottom: 18px; }
   .wish-text p:last-child { margin-bottom: 0; color: var(--muted); font-size: 15px; }
 
-  /* ─── 10. отсчёт ─── */
-  .cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(6px, 1.6vw, 18px); margin-top: 48px; }
+  /* ─── 10. отсчёт (на полосе рваной бумаги) ─── */
+  .cd-band { position: relative; margin-top: 46px; }
+  .cd-band .torn-edge { display: block; width: 100%; height: 26px; }
+  .cd-band .torn-edge.bottom { transform: scaleY(-1); }
+  .cd-sheet {
+    background: #FCFBF9;
+    padding: 30px clamp(10px, 2.5vw, 30px) 34px;
+    box-shadow: 0 2px 22px rgba(70,64,55,0.07);
+  }
+  .cd { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(6px, 1.6vw, 18px); }
   .cd-cell { text-align: center; }
   .cd-num {
     font-family: 'Cormorant Garamond', serif; font-weight: 300;
     font-size: clamp(38px, 8vw, 82px); line-height: 1; color: var(--ink);
   }
-  .cd-lbl { font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-top: 10px; }
+  .cd-lbl {
+    font-family: 'Marck Script', cursive;
+    font-size: clamp(16px, 2.4vw, 26px); color: var(--ink);
+    margin-top: 4px; line-height: 1.2;
+  }
 
   /* ─── 11. анкета ─── */
   .rsvp-grid { display: grid; grid-template-columns: minmax(0,0.55fr) minmax(0,1.45fr); gap: clamp(24px, 5vw, 64px); margin-top: 54px; align-items: start; }
@@ -357,9 +373,23 @@
     font-size: clamp(26px, 4.6vw, 48px); line-height: 1.3; margin-top: -6px;
   }
 
-  /* ─── появление при скролле ─── */
-  .rv { opacity: 0; transform: translateY(22px); transition: opacity .9s ease, transform .9s ease; }
+  /* ─── появление при скролле ───
+     каждый элемент проявляется сам по себе, когда доходит до экрана */
+  .rv {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 1s cubic-bezier(.22,.7,.25,1), transform 1s cubic-bezier(.22,.7,.25,1);
+    will-change: opacity, transform;
+  }
   .rv.on { opacity: 1; transform: none; }
+
+  /* небольшой каскад внутри горизонтальных групп — они входят в экран одновременно */
+  .stagger > *:nth-child(1).rv.on { transition-delay: 0s; }
+  .stagger > *:nth-child(2).rv.on { transition-delay: .1s; }
+  .stagger > *:nth-child(3).rv.on { transition-delay: .2s; }
+  .stagger > *:nth-child(4).rv.on { transition-delay: .3s; }
+  .stagger > *:nth-child(5).rv.on { transition-delay: .4s; }
+  .stagger > *:nth-child(6).rv.on { transition-delay: .5s; }
 
   /* ─── адаптив ─── */
   @media (max-width: 900px) {
@@ -396,10 +426,10 @@
 <!-- ══════════ 1. ОБЛОЖКА ══════════ -->
 <section class="cover">
   <div class="inner">
-    <h1 class="caps">The Wedding Day</h1>
+    <h1 class="caps rv">The Wedding Day</h1>
     <hr class="rule">
-    <p class="names">Георгий<span class="amp">&amp;</span>Анастасия</p>
-    <div class="ph cover-photo">
+    <p class="names rv">Георгий<span class="amp">&amp;</span>Анастасия</p>
+    <div class="ph cover-photo rv">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
       <span>Здесь будет ваше фото</span>
     </div>
@@ -407,19 +437,19 @@
 </section>
 
 <!-- ══════════ 2. НАША ИСТОРИЯ ══════════ -->
-<section class="rv">
+<section>
   <div class="inner">
-    <div class="wm-wrap below">
+    <div class="wm-wrap below rv">
       <span class="wm below right">любви</span>
       <h2 class="caps">Наша история</h2>
     </div>
     <div class="story-grid">
-      <div class="story-text">
+      <div class="story-text rv">
         <p>Всё началось в институте. Мы были просто знакомыми — проходили мимо друг друга каждый день, здоровались и шли дальше.</p>
         <p>Однажды на одной из студенческих вечеринок мы случайно оказались в одной компании. Разговорились — и сразу почувствовали ту самую непринуждённость, будто знали друг друга всю жизнь.</p>
         <p>С тех пор мы стали проводить вместе всё больше времени: гуляли по вечернему городу, смотрели фильмы, спорили о музыке и делились планами на будущее. А потом просто поняли, что дальше — только вдвоём.</p>
       </div>
-      <div class="sheet">
+      <div class="sheet rv">
         <div class="ph">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
           <span>Здесь будет ваше фото</span>
@@ -431,27 +461,27 @@
 </section>
 
 <!-- ══════════ 3. МОЗАИКА ══════════ -->
-<section class="rv">
+<section>
   <div class="inner">
     <div class="mosaic">
-      <div class="ph m1">
+      <div class="ph m1 rv">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
         <span>Здесь будет ваше фото</span>
       </div>
-      <div class="mosaic-mid">
+      <div class="mosaic-mid rv">
         <span class="vtext">two became one</span>
         <span class="vline"></span>
         <p class="mosaic-names">Георгий &amp;<br>Анастасия</p>
       </div>
-      <div class="ph m4">
+      <div class="ph m4 rv">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
         <span>Здесь будет ваше фото</span>
       </div>
-      <div class="ph m2">
+      <div class="ph m2 rv">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
         <span>Здесь будет ваше фото</span>
       </div>
-      <div class="ph m3">
+      <div class="ph m3 rv">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
         <span>Здесь будет ваше фото</span>
       </div>
@@ -460,16 +490,16 @@
 </section>
 
 <!-- ══════════ 4. МЫ ЖДЁМ ══════════ -->
-<section class="side-lines rv">
+<section class="side-lines">
   <div class="inner">
-    <h2 class="caps" style="text-align:center">Мы ждём</h2>
+    <h2 class="caps rv" style="text-align:center">Мы ждём</h2>
     <div class="wait-grid">
-      <div class="bigdate">
+      <div class="bigdate rv">
         <div>03</div>
         <div>10</div>
         <div>26</div>
       </div>
-      <div class="cal">
+      <div class="cal rv">
         <p class="cal-month">Октябрь</p>
         <table class="cal-grid">
           <thead>
@@ -494,18 +524,18 @@
 </section>
 
 <!-- ══════════ 5. ЛОКАЦИЯ ══════════ -->
-<section class="kraft-bg rv">
+<section class="kraft-bg">
   <div class="inner">
-    <div class="wm-wrap above">
+    <div class="wm-wrap above rv">
       <span class="wm above">Локация</span>
       <h2 class="caps">Наша свадьба пройдёт в</h2>
     </div>
     <div class="venue-row">
-      <div class="ph venue-side left">
+      <div class="ph venue-side left rv">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
         <span>Здесь будет ваше фото</span>
       </div>
-      <div class="venue-card">
+      <div class="venue-card rv">
         <div class="ph">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
           <span>Здесь будет ваше фото</span>
@@ -513,14 +543,14 @@
         <p class="venue-name">«Оранжерея»</p>
         <p class="venue-addr">Загородный клуб, стеклянный павильон<br>в сосновом лесу · Краснодар</p>
       </div>
-      <div class="ph venue-side right">
+      <div class="ph venue-side right rv">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
         <span>Здесь будет ваше фото</span>
       </div>
     </div>
 
     <!-- ── карта ── -->
-    <div style="margin:40px auto;max-width:480px;padding:0 20px;">
+    <div class="rv" style="margin:40px auto;max-width:480px;padding:0 20px;">
       <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
       <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
         <iframe src="https://yandex.ru/map-widget/v1/?ll=39.0300,45.0400&z=14&l=map&pt=39.0300,45.0400,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: загородный клуб «Оранжерея»" style="display:block;border:0;"></iframe>
@@ -533,14 +563,14 @@
 </section>
 
 <!-- ══════════ 7. ТАЙМИНГ ══════════ -->
-<section class="rv">
+<section>
   <div class="inner narrow">
-    <div class="wm-wrap below">
+    <div class="wm-wrap below rv">
       <span class="wm below right">Дня</span>
       <h2 class="caps">Тайминг</h2>
     </div>
     <div class="timeline">
-      <div class="tl-item">
+      <div class="tl-item rv">
         <div class="tl-time">16:00</div>
         <div class="tl-ico">
           <svg viewBox="0 0 48 48"><path d="M24 44s14-12.4 14-23A14 14 0 1 0 10 21c0 10.6 14 23 14 23z"/><path d="M24 27.6c-3.7-2.6-6.2-4.5-6.2-7.2a3.4 3.4 0 0 1 6.2-1.9 3.4 3.4 0 0 1 6.2 1.9c0 2.7-2.5 4.6-6.2 7.2z"/></svg>
@@ -551,7 +581,7 @@
           <p class="tl-desc">Сбор гостей</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item rv">
         <div class="tl-time">16:30</div>
         <div class="tl-ico">
           <svg viewBox="0 0 48 48"><circle cx="19" cy="27" r="12"/><circle cx="30" cy="27" r="12"/></svg>
@@ -562,7 +592,7 @@
           <p class="tl-desc">Церемония регистрации</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item rv">
         <div class="tl-time">17:00</div>
         <div class="tl-ico">
           <svg viewBox="0 0 48 48"><path d="M6 34h36"/><path d="M9 34a15 15 0 0 1 30 0"/><path d="M24 19c-2.4-1.7-4-2.9-4-4.6a2.2 2.2 0 0 1 4-1.2 2.2 2.2 0 0 1 4 1.2c0 1.7-1.6 2.9-4 4.6z"/></svg>
@@ -573,7 +603,7 @@
           <p class="tl-desc">Начало банкета</p>
         </div>
       </div>
-      <div class="tl-item">
+      <div class="tl-item rv">
         <div class="tl-time">23:00</div>
         <div class="tl-ico">
           <svg viewBox="0 0 48 48"><path d="M24 8v7M24 33v7M9.5 24h7M31.5 24h7M13.7 13.7l5 5M29.3 29.3l5 5M34.3 13.7l-5 5M18.7 29.3l-5 5"/><circle cx="24" cy="24" r="4"/></svg>
@@ -589,25 +619,25 @@
 </section>
 
 <!-- ══════════ 8. DRESS CODE ══════════ -->
-<section class="rv">
+<section>
   <div class="inner">
-    <div class="wm-wrap below">
+    <div class="wm-wrap below rv">
       <span class="wm below">Attire</span>
       <h2 class="caps">Dress code</h2>
     </div>
-    <p style="text-align:center;color:var(--muted);font-size:15px;max-width:560px;margin:26px auto 0;">
+    <p class="rv" style="text-align:center;color:var(--muted);font-size:15px;max-width:560px;margin:26px auto 0;">
       Мы будем счастливы, если вы поддержите нас не только улыбками и объятиями,
       но и красивыми нарядами в палитре нашего торжества.
     </p>
-    <div class="swatches">
-      <div class="sw" style="background:#E8E3D6"></div>
-      <div class="sw" style="background:#F0DFE2"></div>
-      <div class="sw" style="background:#C4D2C6"></div>
-      <div class="sw" style="background:#8FA8A6"></div>
-      <div class="sw" style="background:#E5A176"></div>
+    <div class="swatches stagger">
+      <div class="sw rv" style="background:#E8E3D6"></div>
+      <div class="sw rv" style="background:#F0DFE2"></div>
+      <div class="sw rv" style="background:#C4D2C6"></div>
+      <div class="sw rv" style="background:#8FA8A6"></div>
+      <div class="sw rv" style="background:#E5A176"></div>
     </div>
     <div class="dc-cols">
-      <div>
+      <div class="rv">
         <p class="dc-title">Для девушек</p>
         <div class="dc-row">
           <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg><span>Фото</span></div>
@@ -615,7 +645,7 @@
           <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg><span>Фото</span></div>
         </div>
       </div>
-      <div>
+      <div class="rv">
         <p class="dc-title">Для мужчин</p>
         <div class="dc-row">
           <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg><span>Фото</span></div>
@@ -628,19 +658,19 @@
 </section>
 
 <!-- ══════════ 9. ПОЖЕЛАНИЯ ══════════ -->
-<section class="kraft-bg rv">
+<section class="kraft-bg">
   <div class="inner">
-    <p class="script" style="text-align:center;font-size:clamp(46px,10vw,110px);line-height:1;color:var(--ink)">Пожелания</p>
+    <p class="script rv" style="text-align:center;font-size:clamp(46px,10vw,110px);line-height:1;color:var(--ink)">Пожелания</p>
     <hr class="rule rule-short">
     <div class="wish-grid">
-      <div class="wish-ico">
+      <div class="wish-ico rv">
         <svg viewBox="0 0 200 150">
           <path d="M14 52l86 56 86-56"/>
           <rect x="14" y="40" width="172" height="100" rx="8"/>
           <path d="M74 44c-9-7-15-11-15-18a8.5 8.5 0 0 1 15-4.6A8.5 8.5 0 0 1 89 26c0 7-6 11-15 18z"/>
         </svg>
       </div>
-      <div class="wish-text">
+      <div class="wish-text rv">
         <p>Будем очень признательны, если вы воздержитесь от криков «Горько». Ведь поцелуй — это знак выражения чувств, и он не может быть по заказу.</p>
         <p>Самый лучший подарок для нас — ваше присутствие рядом. А если захотите дополнить его чем-то ещё, мы будем рады вкладу в наше свадебное путешествие. И, пожалуйста, без живых цветов — они не доживут до утра.</p>
       </div>
@@ -649,32 +679,42 @@
 </section>
 
 <!-- ══════════ 10. ОТСЧЁТ ══════════ -->
-<section class="side-lines rv">
+<section class="side-lines">
   <div class="inner narrow">
-    <h2 class="caps" style="text-align:center">До нашей свадьбы осталось</h2>
-    <div class="cd">
-      <div class="cd-cell"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">дней</div></div>
-      <div class="cd-cell"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">часов</div></div>
-      <div class="cd-cell"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">минут</div></div>
-      <div class="cd-cell"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">секунд</div></div>
+    <h2 class="caps rv" style="text-align:center">До нашей свадьбы осталось</h2>
+    <div class="cd-band rv">
+      <svg class="torn-edge" viewBox="0 0 1200 26" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#FCFBF9" d="M0,14 C46,6 92,20 138,15 C186,10 230,2 278,8 C328,14 368,24 418,19 C468,14 506,4 556,9 C608,14 646,24 696,20 C746,16 784,6 834,11 C886,16 926,25 976,21 C1024,17 1062,7 1112,12 C1152,16 1176,22 1200,18 L1200,26 L0,26 Z"/>
+      </svg>
+      <div class="cd-sheet">
+        <div class="cd stagger">
+          <div class="cd-cell rv"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Дней</div></div>
+          <div class="cd-cell rv"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Часов</div></div>
+          <div class="cd-cell rv"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Минут</div></div>
+          <div class="cd-cell rv"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Секунд</div></div>
+        </div>
+      </div>
+      <svg class="torn-edge bottom" viewBox="0 0 1200 26" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#FCFBF9" d="M0,14 C50,20 96,5 146,10 C198,15 240,24 292,19 C340,14 378,4 428,9 C482,14 522,24 574,20 C624,16 662,5 712,10 C766,15 806,25 858,21 C906,17 944,6 994,11 C1048,16 1090,24 1140,19 C1166,16 1184,12 1200,15 L1200,26 L0,26 Z"/>
+      </svg>
     </div>
   </div>
 </section>
 
 <!-- ══════════ 11. АНКЕТА ГОСТЯ ══════════ -->
-<section class="rv">
+<section>
   <div class="inner">
-    <div class="wm-wrap below">
+    <div class="wm-wrap below rv">
       <span class="wm below">Вас</span>
       <h2 class="caps">Будем рады видеть</h2>
     </div>
     <div class="rsvp-grid">
-      <div class="rsvp-date">
+      <div class="rsvp-date rv">
         <div>03</div>
         <div>10</div>
         <div>26</div>
       </div>
-      <form id="rsvpForm" novalidate>
+      <form id="rsvpForm" class="rv" novalidate>
         <div class="fld">
           <label class="q" for="g-name">Имя и фамилия</label>
           <input type="text" id="g-name" name="name" autocomplete="name">
@@ -710,22 +750,22 @@
 </section>
 
 <!-- ══════════ 12. КОНТАКТЫ ══════════ -->
-<section class="contacts rv">
+<section class="contacts">
   <div class="inner narrow">
-    <div class="wm-wrap above">
+    <div class="wm-wrap above rv">
       <span class="wm above">Наши</span>
       <h2 class="caps">Контакты</h2>
     </div>
-    <p style="color:var(--muted);font-size:14.5px;margin-top:26px;">По всем вопросам, связанным с мероприятием, вы можете связаться с нами:</p>
-    <div class="cts-row">
-      <div>
+    <p class="rv" style="color:var(--muted);font-size:14.5px;margin-top:26px;">По всем вопросам, связанным с мероприятием, вы можете связаться с нами:</p>
+    <div class="cts-row stagger">
+      <div class="rv">
         <p class="cts-name">Анастасия</p>
         <a class="cts-tel" href="tel:+79187778877">
           <svg viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5z"/></svg>
           +7 (918) 777-88-77
         </a>
       </div>
-      <div>
+      <div class="rv">
         <p class="cts-name">Георгий</p>
         <a class="cts-tel" href="tel:+79188887788">
           <svg viewBox="0 0 24 24"><path d="M6.5 3.5h3l1.5 4-2 1.5a12 12 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5z"/></svg>
@@ -733,14 +773,14 @@
         </a>
       </div>
     </div>
-    <a class="btn-dark" href="https://t.me/" target="_blank" rel="noopener">Связаться</a>
+    <a class="btn-dark rv" href="https://t.me/" target="_blank" rel="noopener">Связаться</a>
   </div>
 </section>
 
 <!-- ══════════ 13. ФИНАЛ ══════════ -->
 <div class="final-top">
   <div class="inner">
-    <h2 class="caps">До скорой встречи!</h2>
+    <h2 class="caps rv">До скорой встречи!</h2>
   </div>
 </div>
 <svg class="torn" viewBox="0 0 1200 58" preserveAspectRatio="none" aria-hidden="true">
@@ -748,8 +788,8 @@
 </svg>
 <div class="final-bottom kraft-bg">
   <div class="inner">
-    <p class="withlove">With Love</p>
-    <p class="final-names">Георгий &amp; Анастасия</p>
+    <p class="withlove rv">With Love</p>
+    <p class="final-names rv">Георгий &amp; Анастасия</p>
   </div>
 </div>
 
@@ -767,7 +807,7 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.05, rootMargin: '0px 0px -8% 0px' });
     items.forEach(function (el) { io.observe(el); });
   }
 
