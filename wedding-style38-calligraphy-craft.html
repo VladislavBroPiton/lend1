@@ -347,6 +347,8 @@
   }
   .fld input[type="text"]:focus { outline: none; border-bottom-color: var(--ink); }
   .fld input::placeholder { color: #A9A398; }
+  /* подсветка поля, заполненного неверно */
+  .fld input.invalid { border-bottom-color: #B4544F; border-bottom-width: 2px; }
   .opt { display: flex; align-items: center; gap: 11px; margin-bottom: 11px; font-size: 15px; color: var(--ink); cursor: pointer; }
   .opt input { width: 15px; height: 15px; accent-color: var(--ink); cursor: pointer; flex: none; }
   .checks { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 22px; }
@@ -716,7 +718,7 @@
       <form id="rsvpForm" class="rv" novalidate>
         <div class="fld">
           <label class="q" for="g-name">Имя и фамилия</label>
-          <input type="text" id="g-name" name="name" autocomplete="name">
+          <input type="text" id="g-name" name="name" autocomplete="name" placeholder="Например: Иван Петров">
         </div>
         <div class="fld">
           <span class="q">Планируете ли вы присутствовать на нашей свадьбе?</span>
@@ -848,6 +850,34 @@
     thanks.classList.add('on');
   }
 
+  /* Проверка имени: нужны и имя, и фамилия.
+     Возвращает текст ошибки или пустую строку, если всё в порядке. */
+  function checkName(value) {
+    var v = value.replace(/\s+/g, ' ').trim();
+
+    if (!v) return 'Пожалуйста, укажите имя и фамилию';
+
+    // только буквы, дефис и апостроф (Анна-Мария, О'Коннор)
+    if (!/^[A-Za-zА-Яа-яЁё'’\- ]+$/.test(v)) {
+      return 'Имя и фамилия должны состоять только из букв';
+    }
+
+    var parts = v.split(' ');
+    if (parts.length < 2) {
+      return 'Укажите, пожалуйста, и имя, и фамилию';
+    }
+
+    for (var i = 0; i < parts.length; i++) {
+      // считаем только буквы, чтобы «И.» или «-» не проходили
+      var letters = parts[i].replace(/[^A-Za-zА-Яа-яЁё]/g, '');
+      if (letters.length < 2) {
+        return 'Напишите имя и фамилию полностью, без сокращений';
+      }
+    }
+
+    return '';
+  }
+
   function collect() {
     var attendEl = form.querySelector('input[name="attend"]:checked');
     var stayEl = form.querySelector('input[name="stay"]:checked');
@@ -855,13 +885,19 @@
       .map(function (el) { return el.value; });
 
     return {
-      name: document.getElementById('g-name').value.trim(),
+      // лишние пробелы убираем, чтобы в таблице было опрятно
+      name: document.getElementById('g-name').value.replace(/\s+/g, ' ').trim(),
       attend: attendEl && attendEl.value === 'yes' ? 'Придёт' : 'Не сможет',
       stay: stayEl && stayEl.value === 'yes' ? 'Останется ночевать' : 'Уедет вечером',
       drinks: drinks.join(', '),
       page: 'Каллиграфия и крафт'
     };
   }
+
+  // как только гость начал править поле — снимаем подсветку ошибки
+  document.getElementById('g-name').addEventListener('input', function () {
+    this.classList.remove('invalid');
+  });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -871,11 +907,15 @@
 
     var data = collect();
 
-    if (!data.name) {
-      showMessage('Пожалуйста, укажите имя и фамилию', true);
-      document.getElementById('g-name').focus();
+    var nameEl = document.getElementById('g-name');
+    var nameError = checkName(nameEl.value);
+    if (nameError) {
+      nameEl.classList.add('invalid');
+      showMessage(nameError, true);
+      nameEl.focus();
       return;
     }
+    nameEl.classList.remove('invalid');
 
     // демо-режим: адрес таблицы ещё не подключён
     if (!SHEET_ENDPOINT) {
