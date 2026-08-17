@@ -503,6 +503,15 @@
     .city-lights span{animation:none !important; opacity:.75;}
     .rsvp-btn{transition:none;}
   }
+
+  /* ── адаптив: не даём имени распирать экран на телефоне ── */
+  .hero > * { min-width:0; }
+  .hero-inner{ min-width:0; max-width:100%; }
+  .names{ max-width:100%; overflow-wrap:break-word; }
+  @media (max-width:560px){
+    /* «&» на отдельной строке — имена переносятся аккуратно */
+    .names .amp{ display:block; padding:2px 0; }
+  }
 </style>
 </head>
 <body>

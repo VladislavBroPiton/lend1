@@ -437,8 +437,27 @@
     .vline { width: 70px; height: 1px; }
     .rsvp-date { display: flex; gap: 20px; align-items: baseline; }
   }
+  /* ─── удобство на телефоне ───
+     увеличиваем зоны нажатия и мелкие подписи */
+  @media (max-width: 760px) {
+    /* строки с галочками и переключателями — крупнее под палец */
+    .opt { padding: 10px 0; margin-bottom: 0; }
+    .opt input { width: 20px; height: 20px; }
+    .checks { gap: 0 22px; }
+
+    /* ссылки-действия */
+    .map-link { display: inline-block; padding: 12px 8px; }
+    .cts-tel { padding: 10px 0; }
+
+    /* подписи в заглушках фото были 9px — мелко для чтения */
+    .ph span { font-size: 10.5px; letter-spacing: 0.12em; }
+
+    /* поле ввода имени — крупнее, чтобы iOS не зумил при фокусе */
+    .fld input[type="text"] { font-size: 16px; padding: 12px 2px; }
+  }
+
   @media (max-width: 560px) {
-    .wm { font-size: clamp(42px, 17vw, 76px); }
+    .wm { font-size: clamp(38px, 15vw, 70px); }
     .sheet-back { left: -5%; width: 54%; transform: rotate(-8deg); }
     .checks { grid-template-columns: 1fr; }
     .cd { grid-template-columns: repeat(2, 1fr); gap: 22px 10px; }
@@ -583,7 +602,7 @@
         <iframe src="https://yandex.ru/map-widget/v1/?ll=39.0300,45.0400&z=14&l=map&pt=39.0300,45.0400,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: загородный клуб «Оранжерея»" style="display:block;border:0;"></iframe>
       </div>
       <p style="text-align:center;margin:10px 0 0;">
-        <a href="https://yandex.ru/maps/?ll=39.0300,45.0400&z=14&pt=39.0300,45.0400,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+        <a class="map-link" href="https://yandex.ru/maps/?ll=39.0300,45.0400&z=14&pt=39.0300,45.0400,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
       </p>
     </div>
   </div>
