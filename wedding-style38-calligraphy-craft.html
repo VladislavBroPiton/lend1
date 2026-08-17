@@ -364,6 +364,14 @@
     font-family: 'Marck Script', cursive; font-size: 24px; color: var(--ink);
   }
   .thanks.on { display: block; }
+  /* сообщение об ошибке отправки */
+  .thanks.err {
+    font-family: 'Montserrat', sans-serif; font-size: 14px; line-height: 1.6;
+    color: #8E3B3B; border-color: #D6B4B4; background: #FBF4F4;
+  }
+  .btn-dark[disabled] { opacity: .55; cursor: default; }
+  /* ловушка для спам-ботов — живой человек её не видит */
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
   /* ─── 12. контакты ─── */
   .contacts { text-align: center; }
@@ -733,7 +741,10 @@
             <label class="opt"><input type="checkbox" name="drink" value="Не пью алкоголь"> Не пью алкоголь</label>
           </div>
         </div>
-        <button type="submit" class="btn-dark">Отправить</button>
+        <div class="hp" aria-hidden="true">
+          <label>Не заполняйте это поле<input type="text" id="hp-field" name="website" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <button type="submit" class="btn-dark" id="rsvpBtn">Отправить</button>
         <p class="rsvp-note">Пожалуйста, подтвердите ваше присутствие до 20 сентября</p>
         <p class="thanks" id="thanks">Спасибо! Ваш ответ сохранён</p>
       </form>
@@ -815,10 +826,84 @@
   tick();
   setInterval(tick, 1000);
 
-  /* ── анкета: демо, никуда не отправляется ── */
-  document.getElementById('rsvpForm').addEventListener('submit', function (e) {
+  /* ═══════════════════════════════════════════════════════════
+     АНКЕТА ГОСТЯ → GOOGLE ТАБЛИЦА
+
+     Вставьте между кавычками адрес вашего веб-приложения Apps Script.
+     Он выглядит так:
+     https://script.google.com/macros/s/AKfycb...../exec
+
+     Пока строка пустая — форма работает в демо-режиме:
+     просто показывает «Спасибо», никуда ничего не отправляя.
+     ═══════════════════════════════════════════════════════════ */
+  var SHEET_ENDPOINT = '';
+
+  var form = document.getElementById('rsvpForm');
+  var btn = document.getElementById('rsvpBtn');
+  var thanks = document.getElementById('thanks');
+
+  function showMessage(text, isError) {
+    thanks.textContent = text;
+    thanks.classList.toggle('err', !!isError);
+    thanks.classList.add('on');
+  }
+
+  function collect() {
+    var attendEl = form.querySelector('input[name="attend"]:checked');
+    var stayEl = form.querySelector('input[name="stay"]:checked');
+    var drinks = [].slice.call(form.querySelectorAll('input[name="drink"]:checked'))
+      .map(function (el) { return el.value; });
+
+    return {
+      name: document.getElementById('g-name').value.trim(),
+      attend: attendEl && attendEl.value === 'yes' ? 'Придёт' : 'Не сможет',
+      stay: stayEl && stayEl.value === 'yes' ? 'Останется ночевать' : 'Уедет вечером',
+      drinks: drinks.join(', '),
+      page: 'Каллиграфия и крафт'
+    };
+  }
+
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
-    document.getElementById('thanks').classList.add('on');
+
+    // ловушка для ботов: у живого гостя это поле всегда пустое
+    if (document.getElementById('hp-field').value) return;
+
+    var data = collect();
+
+    if (!data.name) {
+      showMessage('Пожалуйста, укажите имя и фамилию', true);
+      document.getElementById('g-name').focus();
+      return;
+    }
+
+    // демо-режим: адрес таблицы ещё не подключён
+    if (!SHEET_ENDPOINT) {
+      showMessage('Спасибо! Ваш ответ сохранён', false);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Отправляем…';
+
+    fetch(SHEET_ENDPOINT, {
+      method: 'POST',
+      // text/plain — чтобы браузер не слал предварительный CORS-запрос,
+      // который Apps Script не умеет обрабатывать
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(data)
+    })
+      .then(function (r) { return r.text(); })
+      .then(function () {
+        form.querySelector('.fld').scrollIntoView({ block: 'nearest' });
+        showMessage('Спасибо! Ваш ответ сохранён', false);
+        btn.textContent = 'Ответ отправлен';
+      })
+      .catch(function () {
+        btn.disabled = false;
+        btn.textContent = 'Отправить ещё раз';
+        showMessage('Не удалось отправить ответ. Проверьте интернет и попробуйте ещё раз — либо позвоните Арине: +7 (989) 817-47-59', true);
+      });
   });
 })();
 </script>
