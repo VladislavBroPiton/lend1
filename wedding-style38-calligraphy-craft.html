@@ -139,7 +139,7 @@
   /* обложка проявляется каскадом сразу при загрузке */
   .cover .caps.rv.on  { transition-delay: .15s; }
   .cover .names.rv.on { transition-delay: .45s; }
-  .cover .cover-photo.rv.on { transition-delay: .75s; }
+  .cover .cover-photo-img.rv.on { transition-delay: .75s; }
   .cover .names {
     font-family: 'Marck Script', cursive;
     font-size: clamp(38px, 8.4vw, 90px);
@@ -148,7 +148,10 @@
     margin-top: 6px;
   }
   .cover .names .amp { color: var(--script); padding: 0 .18em; }
-  .cover-photo { width: 100%; aspect-ratio: 16 / 8.4; margin-top: 44px; }
+  /* настоящие фотографии: пропорции снимков совпадают с рамками,
+     поэтому height:auto — кадр показывается целиком, без обрезки */
+  .photo { display: block; width: 100%; height: auto; }
+  .cover-photo-img { margin-top: 44px; border: 1px solid rgba(120,112,100,0.18); }
 
   /* ─── 2. история ─── */
   .story-grid {
@@ -534,10 +537,10 @@
     <h1 class="caps rv">The Wedding Day</h1>
     <hr class="rule">
     <p class="names rv">Георгий<span class="amp">&amp;</span>Анастасия</p>
-    <div class="ph cover-photo rv">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
-      <span>Здесь будет ваше фото</span>
-    </div>
+    <img class="photo cover-photo-img rv"
+         src="photos/photo-main.jpg"
+         alt="Георгий и Анастасия"
+         width="1451" height="1084">
   </div>
 </section>
 
@@ -557,10 +560,10 @@
         <!-- наклонённый лист с тёмным снимком, выглядывающий из-под основного -->
         <div class="sheet-back" aria-hidden="true"><div class="dark"></div></div>
         <div class="sheet">
-          <div class="ph">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
-            <span>Здесь будет ваше фото</span>
-          </div>
+          <img class="photo"
+               src="photos/photo-second.jpg"
+               alt="Георгий и Анастасия"
+               width="1086" height="1448" loading="lazy">
           <p class="sheet-cap">мы</p>
         </div>
       </div>
