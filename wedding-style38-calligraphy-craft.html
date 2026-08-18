@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Георгий &amp; Анастасия • 3 октября</title>
-<meta name="description" content="Свадебное приглашение в стиле «Каллиграфия и крафт» — Георгий и Анастасия, 3 октября 2026, загородный клуб «Оранжерея», Краснодар.">
+<meta name="description" content="Свадебное приглашение в стиле «Каллиграфия и крафт» — Георгий и Анастасия, 3 октября 2026, база отдыха Kravchenko Place, Динской район.">
 <link rel="canonical" href="https://vladislavbropiton.github.io/lend1/wedding-style38-calligraphy-craft.html">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Георгий & Анастасия • 3 октября — приглашение «Каллиграфия и крафт»">
-<meta property="og:description" content="Свадебное приглашение в стиле «Каллиграфия и крафт», загородный клуб «Оранжерея», Краснодар.">
+<meta property="og:description" content="Свадебное приглашение в стиле «Каллиграфия и крафт», база отдыха Kravchenko Place, Динской район.">
 <meta property="og:url" content="https://vladislavbropiton.github.io/lend1/wedding-style38-calligraphy-craft.html">
 <meta property="og:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style38-calligraphy-craft.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Георгий & Анастасия • 3 октября — приглашение «Каллиграфия и крафт»">
-<meta name="twitter:description" content="Свадебное приглашение в стиле «Каллиграфия и крафт», загородный клуб «Оранжерея», Краснодар.">
+<meta name="twitter:description" content="Свадебное приглашение в стиле «Каллиграфия и крафт», база отдыха Kravchenko Place, Динской район.">
 <meta name="twitter:image" content="https://vladislavbropiton.github.io/lend1/og/wedding-style38-calligraphy-craft.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -189,19 +189,25 @@
   }
 
   /* ─── 3. мозаика ─── */
+  /* Две колонки снимков и вертикальная подпись между ними.
+     Высоту задают сами фотографии — кадры показываются целиком,
+     без обрезки под фиксированные пропорции. */
   .mosaic {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 16px;
+    grid-template-columns: 1fr minmax(120px, auto) 1fr;
+    gap: 22px 30px;
     align-items: center;
     margin-top: 46px;
   }
-  .m1 { grid-column: 1 / 5;  aspect-ratio: 3/4; }
-  .m2 { grid-column: 1 / 4;  aspect-ratio: 4/3; margin-top: -34px; }
-  .m3 { grid-column: 5 / 9;  aspect-ratio: 3/4; align-self: start; }
-  .m4 { grid-column: 9 / 13; aspect-ratio: 4/5; }
+  .m1 { grid-column: 1; grid-row: 1; align-self: end; }
+  .m2 { grid-column: 1; grid-row: 2; align-self: start; }
+  .m3 { grid-column: 3; grid-row: 1; align-self: end; }
+  .m4 { grid-column: 3; grid-row: 2; align-self: start; }
+  /* лёгкий сдвиг по вертикали — чтобы не читалось как строгая таблица */
+  .m1 { margin-bottom: 14px; }
+  .m4 { margin-top: 14px; }
   .mosaic-mid {
-    grid-column: 5 / 9;
+    grid-column: 2; grid-row: 1 / 3;
     display: flex; flex-direction: column; align-items: center; gap: 18px;
     padding: 8px 0;
   }
@@ -271,7 +277,7 @@
     background: #fff; padding: 22px 22px 30px; position: relative; z-index: 2;
     box-shadow: 0 18px 44px rgba(70,64,55,0.16);
   }
-  .venue-card .ph { aspect-ratio: 4/3; }
+
   .venue-name {
     margin-top: 22px; text-align: center;
     font-family: 'Cormorant Garamond', serif; font-weight: 300;
@@ -404,7 +410,20 @@
     letter-spacing: 0.08em; padding: 18px; transition: opacity .2s;
   }
   .btn-dark:hover { opacity: .87; }
-  .rsvp-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; }
+  .rsvp-note {
+    text-align: center; font-size: 14px; color: var(--ink);
+    margin-top: 18px; line-height: 1.7;
+  }
+  /* срок ответа — самое важное в анкете, поэтому крупнее и с рамкой */
+  .rsvp-note strong {
+    display: inline-block; margin-top: 6px;
+    font-weight: 600; font-size: 16px; letter-spacing: 0.04em;
+    color: var(--ink);
+    border-bottom: 2px solid var(--script);
+    padding: 0 2px 2px;
+  }
+  /* пояснение в скобках рядом с вопросом */
+  .q-note { font-weight: 400; color: var(--muted); }
   .thanks {
     display: none; margin-top: 18px; padding: 16px;
     border: 1px solid var(--line); text-align: center;
@@ -475,9 +494,14 @@
     .venue-row { grid-template-columns: 1fr; gap: 16px; }
     .venue-side { aspect-ratio: 16/9; }
     .venue-side.left, .venue-side.right { margin: 0; }
-    .mosaic { grid-template-columns: repeat(2, 1fr); }
-    .m1, .m2, .m3, .m4 { grid-column: auto; margin-top: 0; }
-    .mosaic-mid { grid-column: 1 / -1; flex-direction: column; }
+    .mosaic { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .m1 { grid-column: 1; grid-row: 1; }
+    .m2 { grid-column: 2; grid-row: 1; }
+    .m3 { grid-column: 1; grid-row: 3; }
+    .m4 { grid-column: 2; grid-row: 3; }
+    .m1, .m2, .m3, .m4 { margin: 0; align-self: center; }
+    /* подпись — отдельной строкой по центру между рядами снимков */
+    .mosaic-mid { grid-column: 1 / -1; grid-row: 2; padding: 6px 0; }
     .vtext { writing-mode: horizontal-tb; }
     .vline { width: 70px; height: 1px; }
     .rsvp-date { display: flex; gap: 20px; align-items: baseline; }
@@ -575,27 +599,15 @@
 <section>
   <div class="inner">
     <div class="mosaic">
-      <div class="ph m1 rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
-        <span>Здесь будет ваше фото</span>
-      </div>
+      <img class="photo m1 rv" src="photos/kolaz-1.jpg" alt="Георгий и Анастасия" width="1300" height="865" loading="lazy">
       <div class="mosaic-mid rv">
         <span class="vtext">two became one</span>
         <span class="vline"></span>
         <p class="mosaic-names">Георгий &amp;<br>Анастасия</p>
       </div>
-      <div class="ph m4 rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
-        <span>Здесь будет ваше фото</span>
-      </div>
-      <div class="ph m2 rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
-        <span>Здесь будет ваше фото</span>
-      </div>
-      <div class="ph m3 rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
-        <span>Здесь будет ваше фото</span>
-      </div>
+      <img class="photo m4 rv" src="photos/kolaz-2.jpg" alt="Георгий и Анастасия" width="1200" height="900" loading="lazy">
+      <img class="photo m2 rv" src="photos/kolaz-3.jpg" alt="Георгий и Анастасия" width="1200" height="900" loading="lazy">
+      <img class="photo m3 rv" src="photos/kolaz-4.jpg" alt="Георгий и Анастасия" width="968" height="960" loading="lazy">
     </div>
   </div>
 </section>
@@ -643,12 +655,9 @@
     </div>
     <div class="venue-row single">
       <div class="venue-card rv">
-        <div class="ph">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7.5h3.2L9 5.5h6l1.8 2H20v11H4z"/><circle cx="12" cy="13" r="3.4"/></svg>
-          <span>Здесь будет ваше фото</span>
-        </div>
-        <p class="venue-name">«Оранжерея»</p>
-        <p class="venue-addr">Загородный клуб, стеклянный павильон<br>в сосновом лесу · Краснодар</p>
+        <img class="photo" src="photos/venue.jpg" alt="База отдыха Kravchenko Place" width="698" height="680" loading="lazy">
+        <p class="venue-name">Kravchenko Place</p>
+        <p class="venue-addr">База отдыха · Динской район, село Первореченское,<br>ул. Восточная, 10</p>
       </div>
     </div>
 
@@ -656,10 +665,10 @@
     <div class="rv" style="margin:40px auto;max-width:480px;padding:0 20px;">
       <p style="font-size:11px;letter-spacing:.15em;text-transform:uppercase;opacity:.55;margin:0 0 10px;text-align:center;">Как добраться</p>
       <div style="border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,0.18);">
-        <iframe src="https://yandex.ru/map-widget/v1/?ll=39.0300,45.0400&z=14&l=map&pt=39.0300,45.0400,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: загородный клуб «Оранжерея»" style="display:block;border:0;"></iframe>
+        <iframe src="https://yandex.ru/map-widget/v1/?ll=39.323383%2C45.159813&z=16&l=map&pt=39.323383,45.159813,pm2rdm" width="100%" height="280" frameborder="0" loading="lazy" title="Карта: база отдыха Kravchenko Place" style="display:block;border:0;"></iframe>
       </div>
       <p style="text-align:center;margin:10px 0 0;">
-        <a class="map-link" href="https://yandex.ru/maps/?ll=39.0300,45.0400&z=14&pt=39.0300,45.0400,pm2rdm" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
+        <a class="map-link" href="https://yandex.ru/maps/-/CTg9UCNt" target="_blank" rel="noopener" style="font-size:13px;text-decoration:underline;opacity:.8;color:inherit;">Открыть маршрут в Яндекс.Картах →</a>
       </p>
     </div>
   </div>
@@ -808,6 +817,11 @@
           <label class="opt"><input type="radio" name="stay" value="no"> Нет, уеду вечером</label>
         </div>
         <div class="fld">
+          <span class="q">Будете ли на второй день? <span class="q-note">(локация та же)</span></span>
+          <label class="opt"><input type="radio" name="day2" value="yes" checked> Да, буду</label>
+          <label class="opt"><input type="radio" name="day2" value="no"> Нет, не смогу</label>
+        </div>
+        <div class="fld">
           <span class="q">Ваши предпочтения</span>
           <div class="checks">
             <label class="opt"><input type="checkbox" name="drink" value="Шампанское"> Шампанское</label>
@@ -815,8 +829,6 @@
             <label class="opt"><input type="checkbox" name="drink" value="Красное вино"> Красное вино</label>
             <label class="opt"><input type="checkbox" name="drink" value="Виски"> Виски</label>
             <label class="opt"><input type="checkbox" name="drink" value="Водка"> Водка</label>
-            <label class="opt"><input type="checkbox" name="drink" value="Джин"> Джин</label>
-            <label class="opt"><input type="checkbox" name="drink" value="Ром"> Ром</label>
             <label class="opt"><input type="checkbox" name="drink" value="Не пью алкоголь"> Не пью алкоголь</label>
           </div>
         </div>
@@ -824,7 +836,7 @@
           <label>Не заполняйте это поле<input type="text" id="hp-field" name="website" tabindex="-1" autocomplete="off"></label>
         </div>
         <button type="submit" class="btn-dark" id="rsvpBtn">Отправить</button>
-        <p class="rsvp-note">Пожалуйста, подтвердите ваше присутствие до 20 сентября</p>
+        <p class="rsvp-note">Пожалуйста, подтвердите ваше присутствие<br><strong>до 30 августа</strong></p>
         <p class="thanks" id="thanks">Спасибо! Ваш ответ сохранён</p>
       </form>
     </div>
@@ -1009,6 +1021,7 @@
   function collect() {
     var attendEl = form.querySelector('input[name="attend"]:checked');
     var stayEl = form.querySelector('input[name="stay"]:checked');
+    var day2El = form.querySelector('input[name="day2"]:checked');
     var drinks = [].slice.call(form.querySelectorAll('input[name="drink"]:checked'))
       .map(function (el) { return el.value; });
 
@@ -1017,6 +1030,7 @@
       name: document.getElementById('g-name').value.replace(/\s+/g, ' ').trim(),
       attend: attendEl && attendEl.value === 'yes' ? 'Придёт' : 'Не сможет',
       stay: stayEl && stayEl.value === 'yes' ? 'Останется ночевать' : 'Уедет вечером',
+      day2: day2El && day2El.value === 'yes' ? 'Будет на второй день' : 'Второй день пропустит',
       drinks: drinks.join(', '),
       page: 'Каллиграфия и крафт'
     };

@@ -17,8 +17,6 @@ var DRINKS = [
   'Красное вино',
   'Виски',
   'Водка',
-  'Джин',
-  'Ром',
   'Не пью алкоголь'
 ];
 
@@ -54,6 +52,7 @@ function doPost(e) {
       data.name || '',
       data.attend || '',
       data.stay || '',
+      data.day2 || '',
       data.drinks || '',
       data.page || ''
     ]]);
@@ -155,14 +154,16 @@ function getSheet() {
       'Имя и фамилия',
       'Придёт',
       'Ночёвка',
+      'Второй день',
       'Напитки',
       'Приглашение'
     ]);
     sheet.setFrozenRows(1);
     sheet.setColumnWidth(1, 150);
     sheet.setColumnWidth(2, 200);
-    sheet.setColumnWidth(5, 260);
-    sheet.setColumnWidth(6, 180);
+    sheet.setColumnWidth(5, 170);
+    sheet.setColumnWidth(6, 260);
+    sheet.setColumnWidth(7, 180);
   }
 
   return sheet;
@@ -175,13 +176,13 @@ function getSheet() {
 function writeSummary(sheet) {
   var last = getLastDataRow(sheet);
 
-  var total = 0, come = 0, cant = 0, stay = 0, leave = 0;
+  var total = 0, come = 0, cant = 0, stay = 0, leave = 0, day2 = 0;
   var drinkCount = {};
   for (var d = 0; d < DRINKS.length; d++) drinkCount[DRINKS[d]] = 0;
 
   if (last > 1) {
     // читаем колонки B..E (имя, придёт, ночёвка, напитки)
-    var rows = sheet.getRange(2, 2, last - 1, 4).getValues();
+    var rows = sheet.getRange(2, 2, last - 1, 5).getValues();
 
     for (var i = 0; i < rows.length; i++) {
       var name = String(rows[i][0]).trim();
@@ -198,9 +199,11 @@ function writeSummary(sheet) {
       if (night === 'Останется ночевать') stay++;
       else if (night === 'Уедет вечером') leave++;
 
+      if (String(rows[i][3]).trim() === 'Будет на второй день') day2++;
+
       // напитки считаем только у тех, кто придёт
       if (isComing) {
-        var drinks = String(rows[i][3]);
+        var drinks = String(rows[i][4]);
         for (var k = 0; k < DRINKS.length; k++) {
           if (drinks.indexOf(DRINKS[k]) !== -1) drinkCount[DRINKS[k]]++;
         }
@@ -215,6 +218,7 @@ function writeSummary(sheet) {
     ['Не смогут', cant],
     ['Остаются ночевать', stay],
     ['Уедут вечером', leave],
+    ['Будут на второй день', day2],
     ['', ''],
     ['НАПИТКИ (среди тех, кто придёт)', '']
   ];
@@ -232,7 +236,7 @@ function writeSummary(sheet) {
   sheet.setColumnWidth(9, 70);    // числа
 
   sheet.getRange('H1:I1').setFontWeight('bold').setBackground(C_HEAD).setFontColor(C_INK);
-  sheet.getRange('H8:I8').setFontWeight('bold').setBackground(C_HEAD).setFontColor(C_INK);
+  sheet.getRange('H9:I9').setFontWeight('bold').setBackground(C_HEAD).setFontColor(C_INK);
 
   sheet.getRange(2, 9, block.length - 1, 1)
     .setHorizontalAlignment('center')
@@ -357,7 +361,7 @@ function ensureCharts(sheet, force) {
   // 3. Горизонтальные полосы: напитки
   //    Ось делаем целочисленной: считаем максимум, чтобы вместо
   //    0,25 / 0,50 / 0,75 были ровные деления 0 / 1 / 2 …
-  var vals = sheet.getRange(9, 9, DRINKS.length, 1).getValues();
+  var vals = sheet.getRange(10, 9, DRINKS.length, 1).getValues();
   var maxDrink = 0;
   for (var v = 0; v < vals.length; v++) {
     var n = Number(vals[v][0]) || 0;
@@ -368,9 +372,9 @@ function ensureCharts(sheet, force) {
   sheet.insertChart(
     sheet.newChart()
       .setChartType(Charts.ChartType.BAR)
-      .addRange(sheet.getRange('H9:I16'))
+      .addRange(sheet.getRange('H10:I15'))
       .setNumHeaders(0)
-      .setPosition(29, 11, 0, 0)
+      .setPosition(30, 11, 0, 0)
       .setOption('title', 'Напитки — сколько закупать')
       .setOption('titleTextStyle', { fontSize: 14, bold: true, color: C_INK })
       .setOption('colors', [C_GREEN])
