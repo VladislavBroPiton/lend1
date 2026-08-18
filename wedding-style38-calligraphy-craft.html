@@ -512,9 +512,17 @@
     .tl-ico { display: none; }
     .side-lines::before, .side-lines::after { display: none; }
   }
+  /* Режим «уменьшение движения» (настройка телефона).
+     Убираем именно ДВИЖЕНИЕ — сдвиги, покачивания, параллакс:
+     оно и вызывает дискомфорт. Мягкое проявление оставляем,
+     иначе страница выглядит статичной у всех, у кого включена
+     эта настройка (а включают её часто). */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .rv { opacity: 1; transform: none; transition: none; }
+    .rv { opacity: 0; transform: none; transition: opacity .55s ease; }
+    .rv.on { opacity: 1; transform: none; }
+    /* каскад на обложке оставляем — он тоже только по прозрачности */
+    .sheet, .sheet-back, .polaroid { transform: none !important; }
   }
 </style>
 </head>
@@ -863,28 +871,46 @@
 <script>
 (function () {
   'use strict';
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* ── появление секций ──
+     Считаем положение блоков сами, а не через IntersectionObserver.
+     У наблюдателя здесь два изъяна:
+       1) блоки в самом низу страницы не успевают пересечь линию запуска
+          (дальше уже некуда прокручивать) и остаются невидимыми навсегда;
+       2) если до блока «перепрыгнули» — переход по якорю или браузер
+          восстановил позицию при обновлении — событие не приходит вовсе.
+     Проверка вручную закрывает оба случая. */
+  var pending = [].slice.call(document.querySelectorAll('.rv'));
 
-  /* ── появление секций ── */
-  var items = document.querySelectorAll('.rv');
-  if (reduce || !('IntersectionObserver' in window)) {
-    for (var i = 0; i < items.length; i++) items[i].classList.add('on');
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
-      });
-    }, {
-      threshold: 0.05,
-      // На телефоне экран узкий и высокий, а скролл быстрый: если запускать
-      // проявление у самого нижнего края, анимация успевает закончиться
-      // раньше, чем блок дойдёт до глаз. Поэтому там запускаем позже.
-      rootMargin: window.matchMedia('(max-width: 760px)').matches
-        ? '0px 0px -22% 0px'
-        : '0px 0px -8% 0px'
+  function revealVisible() {
+    if (!pending.length) return;
+
+    var vh = window.innerHeight;
+    // На телефоне линия запуска ниже: экран высокий, скролл быстрый,
+    // и проявление должно проходить прямо перед глазами.
+    var line = vh * (window.matchMedia('(max-width: 760px)').matches ? 0.78 : 0.92);
+    var atBottom = window.scrollY + vh >= document.body.scrollHeight - 4;
+
+    pending = pending.filter(function (el) {
+      var r = el.getBoundingClientRect();
+      var show =
+        r.top < line ||                 // дошёл до линии запуска
+        (atBottom && r.top < vh) ||     // страница домотана до конца
+        r.bottom < 0;                   // блок уже ушёл выше экрана
+      if (show) el.classList.add('on');
+      return !show;
     });
-    items.forEach(function (el) { io.observe(el); });
   }
+
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { ticking = false; revealVisible(); });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  revealVisible();
 
   /* ── обратный отсчёт ── */
   var target = new Date('2026-10-03T15:00:00');
